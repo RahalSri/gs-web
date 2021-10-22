@@ -1,0 +1,9 @@
+<mat-toolbar color="white" #toolbar>
+  <button *ngIf="isExpanded"
+    (click)="onLeftPanelClose()"
+    type="button"
+    mat-icon-button
+    title="Open sidenav">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>

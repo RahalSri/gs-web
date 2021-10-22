@@ -1,0 +1,38 @@
+<div>
+  <mat-toolbar>
+    <mat-toolbar-row *ngIf="isExpanded">
+      <h2>KIPSTOR</h2>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="!isExpanded">
+      <mat-icon mat-list-icon class="" (click)="onLeftPanelExpand()">clear</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-card class="result">
+    <mat-card-content>
+      <section class="example-section">
+        <mat-slide-toggle
+            class="example-margin"
+            [checked]="true"
+            [disabled]="false">
+          <span *ngIf="isExpanded">Admin mode</span>
+        </mat-slide-toggle>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <mat-nav-list>
+    <mat-list-item>
+      <mat-icon mat-list-icon class="">home</mat-icon>
+      <span *ngIf="isExpanded">Dashboard</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon class="">important_devices</mat-icon>
+      <span *ngIf="isExpanded">Home</span>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon class="">important_devices</mat-icon>
+      <span *ngIf="isExpanded">Query</span>
+    </mat-list-item>
+  </mat-nav-list>
+</div>
+
+
