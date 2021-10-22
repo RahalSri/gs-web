@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'space',
-    loadChildren: () => import('./view-gallery/view-gallery.module').then(m => m.ViewGalleryModule)
+    loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
   },
   {
     path: 'admin',

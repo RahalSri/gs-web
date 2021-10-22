@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ViewGalleryComponent } from './view-gallery.component';
+import { ViewGalleryComponent } from './view-gallery/view-gallery.component';
 
 
 const routes: Routes = [
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ViewGalleryRoutingModule { }
+export class PublicRoutingModule { }
