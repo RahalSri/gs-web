@@ -1,9 +1,10 @@
 
+<app-header [isExpanded]= "isLeftPanelExpanded" (leftPanelClosed)="onLeftPanelToggle($event)"></app-header>
 <mat-sidenav-container autosize>
   <mat-sidenav #sidenav mode="side" opened="true">
     <app-left-panel [isExpanded]= "isLeftPanelExpanded" (leftPanelOpened)="onLeftPanelToggle($event)"></app-left-panel>
   </mat-sidenav>
-  <app-header [isExpanded]= "isLeftPanelExpanded" (leftPanelClosed)="onLeftPanelToggle($event)"></app-header>
+  
   <div class="content" #main>
     <router-outlet></router-outlet>
   </div>

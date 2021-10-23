@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'space',
-    loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
+    loadChildren: () => import('./public/space/space.module').then(m => m.SpaceModule)
   },
   {
     path: 'admin',

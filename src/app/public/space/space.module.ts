@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PublicRoutingModule } from './public-routing.module';
-
-
-
+import { SpaceRoutingModule } from './space-routing.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +8,7 @@ import { PublicRoutingModule } from './public-routing.module';
   ],
   imports: [
     CommonModule,
-    PublicRoutingModule
+    SpaceRoutingModule
   ]
 })
-export class PublicModule { }
+export class SpaceModule { }

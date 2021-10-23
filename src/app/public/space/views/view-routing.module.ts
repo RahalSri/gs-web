@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ViewGalleryComponent } from './view-gallery/view-gallery.component';
+import { ListComponent } from './list/list.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: ViewGalleryComponent
+    component: ListComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PublicRoutingModule { }
+export class ViewRoutingModule { }
