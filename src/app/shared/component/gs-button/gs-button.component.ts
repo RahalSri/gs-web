@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'gs-button',
   template: './gs-button.component.html',
-  styles: ['./gs-button.component.css']
+  styleUrls: ['./gs-button.component.css']
 })
 export class GSButtonComponent {
   @Input() label?: string;

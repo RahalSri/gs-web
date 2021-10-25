@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'gs-check-box',
   template: './gs-check-box.component.html',
-  styles: ['./gs-check-box.component.css']
+  styleUrls: ['./gs-check-box.component.css']
 })
 export class GSCheckBoxComponent {
   @Input() label?: string;
