@@ -1,0 +1,21 @@
+<ul *ngIf="spaces.length > 0" style="list-style-type:none; display: inline-flex;" class="nav nav-horizontal mmenu">
+    <li class="dropdown space-selector-dropdown-header">
+        <a (click)="resetHover()" href="javascript:" id="layer-top" data-toggle="dropdown" data-hover="dropdown"
+            data-close-others="true" data-delay="100" class="dropdown-toggle space-selector-dropdown">
+            <i class="icon-layers " style="font-size: 20px; margin-right: 6px;" title="Library Space"></i>
+            <span>{{currentSpace?.shortTitle}}
+            </span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-submenu" [class.active]="lib == hoveredSpace" *ngFor="let lib of spaces">
+                <a class="parent-dropdown-menu" (mouseenter)="parentItemNaviagated(lib)"
+                    href="">{{lib.supShortTitle}}</a>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let spc of lib.spaces" class="dropdown-leaf">
+                        <a href="javascript:" data-lang="en" (click)="setSpace(spc.supGuid)">{{spc.supShortTitle}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

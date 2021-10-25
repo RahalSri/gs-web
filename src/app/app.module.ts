@@ -20,16 +20,23 @@ import {HttpClientModule} from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
-import { MatSnackBar, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CookieModule } from 'ngx-cookie';
+import { GlobalSearchComponent } from './layout/header/global-search/global-search.component';
+import { SpaceSelectorComponent } from './layout/header/space-selector/space-selector.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { PublicModule } from './public/public.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    GlobalSearchComponent,
+    SpaceSelectorComponent,
     LeftPanelComponent,
     FooterComponent,
-    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +55,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    CookieModule.forRoot(),
+    SharedModule,
+    MatMenuModule,
+    PublicModule,
+    NgbModule
   ],
   providers: [
     {

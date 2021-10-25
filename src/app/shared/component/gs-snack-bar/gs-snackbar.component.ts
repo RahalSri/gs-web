@@ -5,12 +5,12 @@ import {
 } from '@angular/material/snack-bar';
 @Component({
   selector: 'gs-snack-bar',
-  template: './gs-snackbar.component.html',
+  templateUrl: './gs-snackbar.component.html',
   styleUrls: ['./gs-snackbar.component.scss']
 })
 export class GSSnackBarComponent {
   constructor(
-    @Inject(MAT_SNACK_BAR_DATA) public data: string,
+    @Inject(MAT_SNACK_BAR_DATA) public data: any,
     private _snackRef: MatSnackBarRef<GSSnackBarComponent>
   ) {}
 
