@@ -8,7 +8,9 @@ import { GSIconInputBoxComponent } from './component/gs-icon-input-box/gs-icon-i
 import { GSLabelComponent } from './component/gs-label/gs-label.component';
 import { GSPasswordBoxComponent } from './component/gs-password-box/gs-password-box.component';
 import { GSSelectComponent } from './component/gs-select/gs-select.component';
-
+import { GSDialog } from './component/gs-confirmation-dialog/gs-dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,10 @@ import { GSSelectComponent } from './component/gs-select/gs-select.component';
     GSInputBoxComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    SelectDropDownModule,
+    FormsModule
   ],
   exports: [
     GSButtonComponent,
@@ -32,6 +37,9 @@ import { GSSelectComponent } from './component/gs-select/gs-select.component';
     GSPasswordBoxComponent,
     GSSelectComponent,
     GSInputBoxComponent
+  ],
+  providers: [
+    GSDialog
   ]
 })
 export class SharedModule { }

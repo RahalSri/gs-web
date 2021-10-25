@@ -11,7 +11,7 @@ import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'gs-input-box',
-  template: './gs-input-box.component.html',
+  templateUrl: './gs-input-box.component.html',
   styleUrls: ['./gs-input-box.component.css'],
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective }
@@ -42,7 +42,7 @@ export class GSInputBoxComponent {
     this.required = this.hasRequired(this.formControl);
   }
 
-  onTextChange() {
+  onTextChange(event: any) {
     this.textChanged.next(this.formControl.value);
   }
 

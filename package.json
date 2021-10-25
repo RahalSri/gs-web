@@ -22,6 +22,7 @@
     "@angular/router": "~12.1.0-",
     "keycloak-angular": "^8.4.0",
     "keycloak-js": "^15.0.2",
+    "ngx-select-dropdown": "^2.1.0",
     "ngx-skeleton-loader": "^4.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
