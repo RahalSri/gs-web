@@ -1,0 +1,9 @@
+<div class="form-group">
+  <label *ngIf="label !== undefined" class="col-sm-3 control-label">{{
+    label
+    }}</label>
+  <div class="col-sm-9 m-b-10" [ngClass]="styleClass">
+    <input [(ngModel)]="inputModel" #name="ngModel" (ngModelChange)="inputModelChange.emit(inputModel)" type="checkbox"
+      [ngModelOptions]="{ standalone: true }" (change)="selectionChanged()" />
+  </div>
+</div>

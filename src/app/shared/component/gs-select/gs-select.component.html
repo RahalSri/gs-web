@@ -1,0 +1,32 @@
+<div *ngIf="!labelTopPosition" [class.form-group]="isFormGroup">
+  <label *ngIf="label !== undefined" class="col-sm-3 control-label" [ngClass]="required ? 'required' : ''">{{ label
+    }}</label>
+  <div [ngClass]="styleClass == undefined ? 'col-sm-9 m-b-10' : styleClass">
+    <ngx-select-dropdown (click)="onDropDownClick()" (change)="selectionChanged($event)" (keyup)="onTextChange($event)"
+      (searchChange)="onSearched($event)" [formControl]="formControl" [config]="config" [(ngModel)]="selectedOptions"
+      [options]="list"></ngx-select-dropdown>
+    <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+      <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="labelTopPosition" class="form-group">
+  <div class="row">
+    <div class="col-sm-12">
+      <label *ngIf="label !== undefined" class="control-label" [ngClass]="required ? 'required' : ''">{{ label
+        }}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 m-b-10">
+      <ngx-select-dropdown (click)="onDropDownClick()" (change)="selectionChanged($event)" (keyup)="onTextChange($event)"
+        (searchChange)="onSearched($event)" [formControl]="formControl" [config]="config" [options]="list">
+      </ngx-select-dropdown>
+      <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+        <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+      </div>
+    </div>
+  </div>
+</div>
+

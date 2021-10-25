@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label *ngIf="label !== undefined" class="control-label" [ngClass]="labelClass">{{
+    label
+    }}</label>
+  <div *ngIf="value" class="m-b-10" [ngClass]="valueClass">
+    <label>{{ value }}</label>
+  </div>
+</div>

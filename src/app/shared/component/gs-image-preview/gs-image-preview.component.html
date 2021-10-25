@@ -1,0 +1,15 @@
+<div class="overlay-content">
+    <div class="d-flex flex-row">
+        <div class="d-flex flex-column">
+            <div class="d-flex justify-content-center">
+                <div style="float: right; margin-top: 5px;">
+                    <a [href]="image" download class="btn btn-primary" type="button">
+                        <i class="fa fa-download"></i>
+                    </a>
+                    <gs-button icon="fa fa-times" (onClickEvent)="dialogRef.close()"></gs-button>
+                </div>
+            </div>
+            <ngx-imageviewer [src]="image"></ngx-imageviewer>
+        </div>
+    </div>
+</div>

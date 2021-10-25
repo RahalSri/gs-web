@@ -1,0 +1,77 @@
+<div *ngIf="advanceOptions && !initNoContentFound" style="display: flex;align-items: center; justify-content: flex-end;"
+    class="no-print">
+    <div style="height: 100%; display: contents;">
+        <a href="javascript: void(0);" (click)="enableFilters()" class="fa fa-filter g_fr m-10"
+            [ngClass]=" filtersEnabled ? 'switch-enabled' : 'switch-disabled'" title="Enable Filters"></a>
+    </div>
+    <div style="height: 100%; display: contents;">
+        <a *ngIf="!addPageSizeEnable" href="javascript: void(0);" (click)="toggleAddCustomPageSize()"
+            class="fa fa-wrench g_fr m-10" [ngClass]=" addPageSizeEnable ? 'switch-enabled' : 'switch-disabled'"
+            title="Add page size"></a>
+        <div *ngIf="addPageSizeEnable" style="position: relative; border-radius: 6px; background-color: #ECEDEE;">
+            <input placeholder="Page size" *ngIf="addPageSizeEnable" style="width: 100px; border-radius: 6px;"
+                type="text" class="form-control" (keyup.enter)="addCustomPageSize($event.target.value)"
+                (keypress)="keyPress($event)" />
+            <button style="border-width: 0;" (click)="toggleAddCustomPageSize()"><i
+                    [ngClass]="'fa fa-close'"></i></button>
+
+        </div>
+
+    </div>
+    <mat-paginator #paginator [pageSize]="20" [length]="totalLength" [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true" (page)="pageChange($event)">
+    </mat-paginator>
+</div>
+<ngx-skeleton-loader *ngIf="loading" count="10" appearance="line" [theme]="{height: '30px'}"></ngx-skeleton-loader>
+<mat-table *ngIf="!loading && !initNoContentFound" [style.height]="advanceOptions ? 'calc(100% - 63px)' : '100%'" #table
+    [dataSource]="_dataSource" matSort matPaginator>
+    <ng-container [matColumnDef]="displayedColumn.columnName" *ngFor="let displayedColumn of _displayedColumns">
+        <mat-header-cell [style.width.%]="displayedColumn.styles.width_percentage" *matHeaderCellDef
+            [style.display]="filtersEnabled ? 'flex' : ''" [style.justify-content]="filtersEnabled ? 'flex-end' : ''"
+            [style.flex-direction]="filtersEnabled ? 'column' : ''" [style.align-items]="filtersEnabled ? 'start' : ''"
+            [mat-sort-header]="(advanceOptions && !filtersEnabled) ? displayedColumn.columnName : null"
+            [disabled]="(advanceOptions && !filtersEnabled) ? false : true">
+            <div>
+                <div> {{ displayedColumn.displayName }}</div>
+                <div><input style="margin-bottom: 20px;" *ngIf="filtersEnabled" type="text" class="form-control"
+                        (input)="applyFilters(displayedColumn.columnName, $event.target.value)" /></div>
+            </div>
+        </mat-header-cell>
+        <mat-cell class="gs-table-cell" [style.width.%]="displayedColumn.styles.width_percentage" style="outline: none;"
+            *matCellDef="let element; let i = index" (click)="rowSelected(element, i)" [attr.tabindex]="i"
+            (keyup.arrowup)="previousRowSelected(i)" (keyup.arrowdown)="nextRowSelected(i)"
+            [ngClass]="selectedRowIndex == i? 'selected-cell':''">
+            <div *ngIf="displayedColumn.type == 'text'">
+                <span
+                    *ngIf="i !== editableRowIndex || readOnlyColumnName === displayedColumn.columnName; else editableText">
+                    <span>{{ element[displayedColumn.columnName] }}</span>
+                </span>
+                <ng-template #editableText>
+                    <gs-input-box [name]="displayedColumn.columnName">
+                    </gs-input-box>
+                </ng-template>
+            </div>
+            <div *ngIf="displayedColumn.type == 'binary'">
+                <span *ngIf="element[displayedColumn.columnName] == true">
+                    {{ displayedColumn.booleanDefinitions[0] }}
+                </span>
+                <span *ngIf="element[displayedColumn.columnName] == false">
+                    {{ displayedColumn.booleanDefinitions[1] }}
+                </span>
+            </div>
+            <div *ngIf="displayedColumn.type == 'template'">
+                <ng-container [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{ templateElement: element }">
+                </ng-container>
+            </div>
+            <div *ngIf="displayedColumn.type == 'action'">
+                <ng-container [ngTemplateOutlet]="actionRef" [ngTemplateOutletContext]="{ element: element }">
+                </ng-container>
+            </div>
+            <i *ngIf="displayedColumn.showSelectionIcon" style="margin-right: 15px;"
+                class="fa fa-chevron-right fa-lg pull-right selection-icon"></i>
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="_columns"></mat-header-row>
+    <mat-row id="{{j}}" (click)="highlight(j)" [ngClass]="{'selected-row': selectedRowIndex == j}"
+        *matRowDef="let row; columns: _columns; let j = index"></mat-row>
+</mat-table>

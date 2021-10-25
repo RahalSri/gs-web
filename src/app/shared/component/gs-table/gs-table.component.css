@@ -1,0 +1,6 @@
+table{
+    width: 100%;
+}
+
+mat-table mat-row mat-cell i { display:none !important;}
+mat-table mat-row:hover mat-cell i { display:block !important;}

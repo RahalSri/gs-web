@@ -1,0 +1,33 @@
+<div *ngIf="!labelTopPosition" class="form-group">
+  <label *ngIf="label !== undefined" class="col-sm-3 control-label" [ngClass]="required ? 'required' : ''">{{ label
+    }}</label>
+  <div class="col-sm-9 m-b-10">
+    <input class="form-control input-sm" type="{{ type }}" (keyup)="onTextChange($event)" [formControl]="formControl"
+      placeholder="{{ placeholder }}" />
+    <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+      <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+      <div *ngIf="formControl.errors?.email">Invalid Email.</div>
+      <div *ngIf="formControl.errors?.pattern">Invalid format.</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="labelTopPosition" class="form-group">
+  <div class="row">
+    <div class="col-sm-12">
+      <label *ngIf="label !== undefined" class="control-label" [ngClass]="required ? 'required' : ''">{{ label
+        }}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 m-b-10">
+      <input class="form-control input-sm" type="{{ type }}" (keyup)="onTextChange($event)" [formControl]="formControl"
+             placeholder="{{ placeholder }}" />
+      <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+        <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+        <div *ngIf="formControl.errors?.email">Invalid Email.</div>
+        <div *ngIf="formControl.errors?.pattern">Invalid format.</div>
+      </div>
+    </div>
+  </div>
+</div>

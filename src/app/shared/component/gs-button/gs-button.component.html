@@ -1,0 +1,10 @@
+<button class="btn" [ngClass]="styleClass == undefined ? 'btn-primary' : styleClass" [disabled]="disabled || loading"
+  type="{{ type }}" (click)="onClickEvent.emit($event)">
+  <div *ngIf="icon == undefined && !loading">
+    {{ label }}
+  </div>
+  <div *ngIf="icon !== undefined && !loading">
+    <i [ngClass]="icon"></i>
+  </div>
+  <div *ngIf="loading">Loading</div>
+</button>

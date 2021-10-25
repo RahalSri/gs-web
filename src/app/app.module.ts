@@ -15,19 +15,30 @@ import { initializeKeycloak } from './core/auth/keycloak-config.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { AccountSettingsComponent } from './public/account-settings/account-settings.component';
+import {HttpClientModule} from '@angular/common/http';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LeftPanelComponent,
-    FooterComponent
+    FooterComponent,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
     KeycloakAngularModule,
+    HttpClientModule,
+    NgxSkeletonLoaderModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

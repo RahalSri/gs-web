@@ -1,0 +1,15 @@
+<div class="form-group">
+  <div class="col-sm-3 col-xs-3">
+    <label *ngIf="label !== undefined" class="control-label">{{ label }}</label>
+  </div>
+  <div class="col-sm-9 col-xs-9 m-b-10" style="float: left">
+    <div class="onoffswitch2 onoffswitchMY">
+      <input type="checkbox" id="{{ id }}" [formControl]="formControl" name="onoffswitch"
+        class="onoffswitch-checkbox" />
+      <label class="onoffswitch-label" for="{{ id }}">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+      </label>
+    </div>
+  </div>
+</div>

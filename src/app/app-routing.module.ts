@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountSettingsComponent } from './public/account-settings/account-settings.component';
 
 const routes: Routes = [
   {
     path: '', 
     redirectTo: '/space', 
     pathMatch: 'full'
+  },
+  {
+    path: 'account', 
+    component: AccountSettingsComponent
   },
   {
     path: 'space',

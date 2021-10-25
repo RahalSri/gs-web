@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill" class="tab-text-area">
+<!--      <label *ngIf="label !== undefined" class="col-sm-3 control-label" [ngClass]="required ? 'required' : ''">{{ label-->
+<!--        }}</label>-->
+    <textarea matInput class="textarea-min-height" [formControl]="formControl" placeholder="{{ placeholder }}"></textarea>
+    <div *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)" class="validation-alert">
+        <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+    </div>
+</mat-form-field>
