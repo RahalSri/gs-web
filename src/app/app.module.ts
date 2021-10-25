@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import {PermissionsModule} from "./core/permissions/permissions.module";
 
 @NgModule({
   declarations: [
@@ -44,15 +45,16 @@ import { SharedModule } from './shared/shared.module';
     MatListModule,
     MatToolbarModule,
     MatCardModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    PermissionsModule
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
-    }
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeKeycloak,
+    //   multi: true,
+    //   deps: [KeycloakService],
+    // }
   ],
   bootstrap: [AppComponent]
 })
