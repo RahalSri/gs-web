@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 
 @Component({
@@ -8,9 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() isExpanded: boolean = true;
-
-  @Output() leftPanelClosed = new EventEmitter<boolean>();
+  @Output() leftPanelOpened = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -18,7 +16,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLeftPanelToggle(): void {
-    this.isExpanded = !this.isExpanded;
-    this.leftPanelClosed.emit(this.isExpanded);
+    this.leftPanelOpened.emit();
   }
 }
