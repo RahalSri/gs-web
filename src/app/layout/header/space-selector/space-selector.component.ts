@@ -22,11 +22,12 @@ import { Space } from '../../../shared/model/space';
 })
 export class SpaceSelectorComponent implements OnInit, OnDestroy {
   navItems = [];
-  @Input() currentSpace: any;
-  @Output() onSpaceChanged: EventEmitter<any> = new EventEmitter<any>();
+  currentSpace: any;
   spaces: any[] = [];
   hoveredSpace?: Space;
   spaceSubscription?: Subscription;
+
+  @Output() onSpaceChanged: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private cookieService: CookieService,
@@ -41,6 +42,7 @@ export class SpaceSelectorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getLibSpacesByUser();
     this.spaceSubscription = this.appConfigService.currentSpace.subscribe((space) => {
+      console.log(space);
       if(space != null){
         this.currentSpace = space;
       }

@@ -4,7 +4,7 @@
     <button (click)="onLeftPanelToggle()" mat-icon-button type="button" title="Open sidenav">
         <mat-icon>menu</mat-icon>
     </button>
-    <space-selector [currentSpace]="globals?.currentUser.currentSpace" (onSpaceChanged)="spaceChanged($event)">
+    <space-selector (onSpaceChanged)="spaceChanged($event)">
     </space-selector>
     <span class="toolbar-spacer"></span>
     <global-search></global-search>

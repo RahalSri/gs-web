@@ -1,5 +1,6 @@
 <button mat-button [matMenuTriggerFor]="main_menu">
-    <mat-icon>layers</mat-icon>
+    {{currentSpace.shortTitle}}
+    <mat-icon>keyboard_arrow_down</mat-icon>
 </button>
 
 <mat-menu #main_menu="matMenu">

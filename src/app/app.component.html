@@ -1,6 +1,7 @@
 
-<app-header [isExpanded]= "isLeftPanelExpanded" (leftPanelClosed)="onLeftPanelToggle($event)"></app-header>
-<mat-sidenav-container autosize>
+<sa-spinner-round-filled class="spinner" [enabled]="loading"></sa-spinner-round-filled>
+<app-header *ngIf="!loading" [isExpanded]= "isLeftPanelExpanded" (leftPanelClosed)="onLeftPanelToggle($event)"></app-header>
+<mat-sidenav-container autosize *ngIf="!loading">
   <mat-sidenav #sidenav mode="side" opened="true">
     <app-left-panel [isExpanded]= "isLeftPanelExpanded" (leftPanelOpened)="onLeftPanelToggle($event)"></app-left-panel>
   </mat-sidenav>
