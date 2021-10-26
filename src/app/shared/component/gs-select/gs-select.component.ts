@@ -5,7 +5,7 @@ import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'gs-select',
-  template: './gs-select.component.html',
+  templateUrl: './gs-select.component.html',
   styleUrls: ['./gs-select.component.css']
 })
 export class GSSelectComponent implements OnInit {

@@ -9,7 +9,7 @@ import {
 
 @Component({
   selector: 'gs-button',
-  template: './gs-button.component.html',
+  templateUrl: './gs-button.component.html',
   styleUrls: ['./gs-button.component.css']
 })
 export class GSButtonComponent {

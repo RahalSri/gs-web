@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AgreementData } from '../../shared/model/AgreementData';
+import { AgreementData } from '../../shared/model/agreement-data';
 import { User } from '../../shared/model/user';
 import { environment} from "../../../environments/environment";
 import { HttpResponse } from 'src/app/shared/model/http-response';
