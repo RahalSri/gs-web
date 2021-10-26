@@ -15,8 +15,7 @@ import { initializeKeycloak } from './core/auth/keycloak-config.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { AccountSettingsComponent } from './public/account-settings/account-settings.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
@@ -67,7 +66,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
-      deps: [KeycloakService],
+      deps: [KeycloakService, HttpClient],
     },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
