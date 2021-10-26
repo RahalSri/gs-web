@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit {
   globals: any;
   @Output() onAdminModeChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() onSpaceChanged: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onSearchEnabled: EventEmitter<any> = new EventEmitter<any>();
 
   private globalSubscription?: Subscription;
 
@@ -68,9 +67,5 @@ export class HeaderComponent implements OnInit {
       this.currentUser,
       'template', 'adminpanel'
     );
-  }
-
-  showHideSearch(event: any){
-    this.onSearchEnabled.emit(event);
   }
 }

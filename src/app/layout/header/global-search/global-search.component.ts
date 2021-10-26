@@ -8,10 +8,9 @@ import { GSSnackBarComponent } from '../../../shared/component/gs-snack-bar/gs-s
   templateUrl: './global-search.component.html'
 })
 export class GlobalSearchComponent {
-  @Input() showGlobalSearch?: boolean ;
+  showGlobalSearch: boolean = false;
   searchText: string = '';
   @Output() onSearchInitiated: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onSearchEnabled: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('input', { static: false })
   set input(element: ElementRef<HTMLInputElement>) {
@@ -39,13 +38,13 @@ export class GlobalSearchComponent {
     }
   }
 
-  showHideGlobalSearch() {
+  onSearchEnabled() {
     this.searchText = "";
     this.showGlobalSearch = true;
-    this.onSearchEnabled.emit(true);
   }
 
-  clearSearch() {
-    this.searchText = '';
+  onSearchDisabled() {
+    this.searchText = "";
+    this.showGlobalSearch = false;
   }
 }

@@ -1,17 +1,14 @@
-<div style="display: inline-flex;">
-    <li *ngIf="showGlobalSearch" style="padding-right: 0; position: relative;" class="visible-lg">
-        <div style="display: inline-block">
-            <input (keyup.enter)="search()" type="text" placeholder="Your Search..." #input [(ngModel)]="searchText" class="form-control" />
-        </div>
-        <span class="inputtxt-delete" *ngIf="searchText.length > 0" (click)="clearSearch()">x</span>
-    </li>
-
-    <li style="padding-right: 5px;" class="visible-lg">
-        <i class="fa fa-search m-t-5" style="font-size: 18px" *ngIf="!showGlobalSearch"
-            (click)="showHideGlobalSearch()"></i>
-        <button class="btn btn-default" *ngIf="showGlobalSearch" type="button" (click)="search()"
-            style="padding: 0px 15px;">
-            <i class="fa fa-search"></i>
+<button *ngIf="!showGlobalSearch" (click)="onSearchEnabled()" mat-icon-button type="button" title="search">
+    <mat-icon>search</mat-icon>
+</button>
+<div *ngIf="showGlobalSearch">
+    <mat-form-field [floatLabel]="'never'" class="input">
+        <input type="text" matInput name="search" placeholder="Your Search..." [(ngModel)]="searchText" />
+        <button matSuffix mat-button (click)="onSearchDisabled()">
+            <mat-icon>close</mat-icon>
         </button>
-    </li>
+    </mat-form-field>
+    <button matSuffix mat-button (click)="search()">
+        <mat-icon>search</mat-icon>
+    </button>
 </div>

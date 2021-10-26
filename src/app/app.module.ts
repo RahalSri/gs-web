@@ -6,17 +6,17 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { LeftPanelComponent } from './layout/left-panel/left-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule} from '@angular/material/sidenav'
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatIconModule } from '@angular/material/icon';
+import { MatList, MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FooterComponent } from './layout/footer/footer.component';
 import { initializeKeycloak } from './core/auth/keycloak-config.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import {MatCardModule} from '@angular/material/card';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AccountSettingsComponent } from './public/account-settings/account-settings.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
@@ -27,7 +27,9 @@ import { GlobalSearchComponent } from './layout/header/global-search/global-sear
 import { SpaceSelectorComponent } from './layout/header/space-selector/space-selector.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { PublicModule } from './public/public.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     MatMenuModule,
     PublicModule,
-    NgbModule
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     {
