@@ -27,6 +27,7 @@ import { SpaceSelectorComponent } from './layout/header/space-selector/space-sel
 import { MatMenuModule } from '@angular/material/menu';
 import { PublicModule } from './public/public.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {PermissionsModule} from "./core/permissions/permissions.module";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GlobalSearchComponent,
     SpaceSelectorComponent,
     LeftPanelComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -56,10 +57,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSnackBarModule,
     MatDialogModule,
     CookieModule.forRoot(),
-    SharedModule,
     MatMenuModule,
     PublicModule,
-    NgbModule
+    NgbModule,
+    PermissionsModule
   ],
   providers: [
     {

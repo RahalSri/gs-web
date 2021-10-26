@@ -18,4 +18,3 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
     ]
   })
   export class PublicModule { }
-  

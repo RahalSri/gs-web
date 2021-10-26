@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { AppConfigService } from 'src/app/core/service/app-config.service';
-import { CookieService } from 'ngx-cookie';
-import { AuthenticationService } from 'src/app/core/auth/authentication.service';
-import { SecurityConfigService } from 'src/app/core/service/core.security-config.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Subscription} from "rxjs";
+import {CookieService} from "ngx-cookie";
+import {SecurityConfigService} from "../../core/service/core.security-config.service";
+import {AppConfigService} from "../../core/service/app-config.service";
+import {AuthenticationService} from "../../core/auth/authentication.service";
 
 
 @Component({
@@ -13,9 +13,7 @@ import { SecurityConfigService } from 'src/app/core/service/core.security-config
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() isExpanded: boolean = true;
-
-  @Output() leftPanelClosed = new EventEmitter<boolean>();
+  @Output() leftPanelOpened = new EventEmitter<boolean>();
 
   constructor(private cookieService: CookieService,
     private securityService: SecurityConfigService,
@@ -23,8 +21,7 @@ export class HeaderComponent implements OnInit {
     private authenticationService: AuthenticationService) { }
 
   onLeftPanelToggle(): void {
-    this.isExpanded = !this.isExpanded;
-    this.leftPanelClosed.emit(this.isExpanded);
+    this.leftPanelOpened.emit();
   }
 
   @Input() globalSearch?: boolean = true;
