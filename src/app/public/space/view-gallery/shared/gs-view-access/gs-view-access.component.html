@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <button (click)="onDismiss()" aria-hidden="true" class="close" data-dismiss="modal" type="button">
+        <i class="icons-office-52"></i>
+    </button>
+    <h4 class="modal-title">
+        <strong class="ng-binding">View Security</strong>
+    </h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="accessForm" class="form-validation">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <label>
+                        <strong>Please choose one of the existing views to define the view's security access:</strong>
+                        <br/>Unless you select a view below, this view will not be visible by you or others, until
+                        access rights are set by a Publication Administrator.
+                    </label>
+                </div>
+                <div *ngIf="accessList.length>0">
+                    <gs-select [key]="'viewTitle'"
+                               [list]="accessList"
+                               [name]="'viewTitle'"
+                               [placeholder]="'Select View...'"
+                               [value]="'viewSupGuid'">
+                    </gs-select>
+                </div>
+                <div *ngIf="accessList.length==0">
+                    <p class="text-center">
+                        <b>
+                            <span class="c-red">No views to copy permission</span>
+                        </b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer bg-dark">
+    <gs-button (click)="onDecline()" [label]="'No'" [styleClass]="'btn-white'" [type]="'button'">
+    </gs-button>
+    <gs-button [disabled]="!accessForm.valid" (onClickEvent)="onConfirm()" [label]="'Yes'" [type]="'button'"></gs-button>
+</div>

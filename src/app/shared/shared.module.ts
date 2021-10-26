@@ -11,6 +11,16 @@ import { GSSelectComponent } from './component/gs-select/gs-select.component';
 import { GSDialog } from './component/gs-confirmation-dialog/gs-dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { ViewFilterPipe } from './pipes/view-filter.pipe';
+import { GsImageUploadComponent } from './component/gs-image-upload/gs-image-upload.component';
+import { GsImageUploadDialogComponent } from './component/gs-image-upload-dialog/gs-image-upload-dialog.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { GsTextAreaComponent } from './component/gs-text-area/gs-text-area.component';
+import { GsMatTabTextAreaComponent } from './component/gs-mat-tab-text-area/gs-mat-tab-text-area.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -21,22 +31,38 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     GSLabelComponent,
     GSPasswordBoxComponent,
     GSSelectComponent,
-    GSInputBoxComponent
+    GSInputBoxComponent,
+    ViewFilterPipe,
+    GsImageUploadComponent,
+    GsImageUploadDialogComponent,
+    GsTextAreaComponent,
+    GsMatTabTextAreaComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SelectDropDownModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatInputModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatTabsModule
   ],
   exports: [
     GSButtonComponent,
     GSCheckBoxComponent,
     GSConfirmationDialogComponent,
+    GSIconInputBoxComponent,
     GSLabelComponent,
     GSPasswordBoxComponent,
     GSSelectComponent,
-    GSInputBoxComponent
+    GSInputBoxComponent,
+    ViewFilterPipe,
+    GsImageUploadComponent,
+    GsImageUploadDialogComponent,
+    GsTextAreaComponent,
+    GsMatTabTextAreaComponent,
   ],
   providers: [
     GSDialog

@@ -1,1 +1,57 @@
-<p>view-gallery works!</p>
+<div class="row" style="padding-top: 10px">
+
+    <div class="col-xs-9" id="crumb-tail">
+        <gs-search (performSearch)="searchText = $event"></gs-search>
+    </div>
+
+    <div class="right-header-menu col-xs-3" id="display-list" style="padding-right: 50px; text-align: right;">
+        <div class="dropdown stay-inline"
+             id="language-header">
+            <a data-close-others="true" data-hover="dropdown" data-toggle="dropdown"
+               style="padding-top: 0; padding-bottom: 0; cursor: pointer" title="Add view">
+                <i (click)="createView()" class="fa fa-plus-square"
+                   style="float: right; font-size: 25px; opacity: 1 !important"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-xs-12  p-t-20">
+        <div>
+            <div class="ng-scope chome p-b-20 elastic-box">
+                <div *ngIf="views.length==0 && loading == false" class="row" style="min-height: 350px;">
+                    <div class="text-center col-xs-12">
+                        <div class="error-container">
+                            <div class="error-main m-t-20">
+                                <h1 class="text-left"><span id="404">No views Found</span></h1>
+                                <p style="font-size:18px"><span id="404-txt">Sorry, this space does not have any available content. Please try another space</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="views.length>0" id="dashboard-main-panel"
+                     style="min-height: 350px; overflow-y:auto; padding-bottom:20px;">
+                    <div id="contentpanel">
+                        <div *ngIf="loading">
+                            <ngx-skeleton-loader [theme]="{ height: '189px', width: '247px', margin: '5px', 'background-color': '#e6e6e6'}"
+                                                 appearance="line" count="25">
+                            </ngx-skeleton-loader>
+                        </div>
+                        <div *ngFor="let view of views | viewFilter:searchText "
+                             class="tiles-div article_wrapper" isolate-click='!guestreadonly'
+                             style="margin-bottom: 10px;">
+                            <gs-tile (reloadViews)="refresh()"
+                                     (removeDeleteView)="removeDeleteView($event)"
+                                     [manageviews]=manageviews
+                                     [supguid]="supguid"
+                                     [view]="view">
+                            </gs-tile>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -4,8 +4,8 @@ import { GSSnackBarComponent } from '../gs-snack-bar/gs-snackbar.component';
 
 @Component({
   selector: 'gs-image-upload',
-  template: require('./gs-image-upload.component.html'),
-  styles: ['./gs-image-upload.component.css']
+  templateUrl: './gs-image-upload.component.html',
+  styleUrls: ['./gs-image-upload.component.css']
 })
 export class GsImageUploadComponent {
   @Input() label?: string;
@@ -13,12 +13,12 @@ export class GsImageUploadComponent {
   @Input() accept?: string;
   @Output() onChangeEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  error: string;
+  error?: string;
 
   constructor(private _snackbar: MatSnackBar) {}
 
-  onFileChanged(event) {
-    this.error = null;
+  onFileChanged(event: any) {
+    this.error = undefined;
     const file = event.target.files[0];
 
     if (file) {
@@ -28,7 +28,7 @@ export class GsImageUploadComponent {
 
       if (this.accept && this.accept.toLowerCase() != '.') {
         if (this.accept.toLowerCase().includes(ext.toLowerCase())) {
-          this.error = null;
+          this.error = undefined;
         } else {
           this.error = 'This type of file is not allowed to upload for tiles';
           this._snackbar.openFromComponent(GSSnackBarComponent, {
@@ -49,7 +49,7 @@ export class GsImageUploadComponent {
           ext.toLowerCase() == 'jpg' ||
           ext.toLowerCase() == 'jpeg'
         ) {
-          this.error = null;
+          this.error = undefined;
         } else {
           this.error = 'This type of file is not allowed to upload for tiles';
           this._snackbar.openFromComponent(GSSnackBarComponent, {
@@ -70,9 +70,9 @@ export class GsImageUploadComponent {
   }
 
   //ignoring by purpose
-  validateSize(event): boolean {
+  validateSize(event: any): boolean {
     if (event.target.files[0].size <= 1000000) {
-      this.error = null;
+      this.error = undefined;
       return true;
     } else {
       this.error = 'File size exceeded';

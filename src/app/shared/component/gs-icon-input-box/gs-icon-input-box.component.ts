@@ -10,7 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'gs-icon-input-box',
-  template: './gs-icon-input-box.component.html',
+  templateUrl: './gs-icon-input-box.component.html',
   styleUrls: ['./gs-icon-input-box.component.css'],
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective }
@@ -42,7 +42,7 @@ export class GSIconInputBoxComponent {
     this.required = this.formControl.validator === Validators.required;
   }
 
-  onTextChange(): void {
+  onTextChange(event: any): void {
     this.textChanged.next(this.formControl.value);
   }
 }

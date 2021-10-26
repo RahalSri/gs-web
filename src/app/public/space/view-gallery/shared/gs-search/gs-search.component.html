@@ -1,0 +1,9 @@
+<div>
+    <div class="append-icon" style="width: 80%">
+        <form [formGroup]="searchForm" class="form-validation">
+            <input (keyup)="search()" [formControlName]="'viewSearch'" [placeholder]="'Filter your view...'"
+                   class="form-control" type="text"/>
+            <i class="icon-magnifier"></i>
+        </form>
+    </div>
+</div>

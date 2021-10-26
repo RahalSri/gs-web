@@ -6,10 +6,10 @@
     </div>
     <div class="row">
         <div class="col-sm-12 p-0">
-            <textarea [formControl]="formControl" class="form-control input-sm textarea-min-height"
+            <textarea [formControl]="formControl!" class="form-control input-sm textarea-min-height"
                       placeholder="{{ placeholder }}"></textarea>
-            <div *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)" class="validation-alert">
-                <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+            <div *ngIf="formControl?.invalid && (formControl?.dirty || formControl?.touched)" class="validation-alert">
+                <div *ngIf="formControl?.errors?.required">{{ label }} is required.</div>
             </div>
         </div>
     </div>

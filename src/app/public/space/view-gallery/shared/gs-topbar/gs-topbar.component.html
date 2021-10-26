@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-xs-9">
+        <!--        breadcrumb-->
+    </div>
+    <div class="right-header-menu col-xs-3" style="padding-right: 50px; text-align: right;">
+        <div class="row">
+            <div class="header-menu nav navbar-nav title-icons m-0 child-inline" style="float: right">
+
+                <div *ngIf="guestReadOnly || altviews.length>0"  class="child">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <i class="icon-eye child-icon"></i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngFor="let altview of altviews" (click)="navigate(altview)">
+                            <span>{{altview.altViewDisplayTitle}}</span>
+                        </button>
+                    </mat-menu>
+                </div>
+                <div *ngIf="guestReadOnly || hideExportIcon" class="child">
+                    <button mat-icon-button (click)="export()">
+                        <i class="icon-share-alt child-icon"></i>
+                    </button>
+                </div>
+                <div *ngIf="guestReadOnly || hidePrintIcon" class="child">
+                    <button mat-icon-button (click)="print()">
+                        <i class="icon-printer child-icon"></i>
+                    </button>
+                </div>
+                <div *ngIf="guestReadOnly || hideShareIcon" class="child">
+                    <button mat-icon-button (click)="share()">
+                        <i class="icon-share child-icon"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

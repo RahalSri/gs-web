@@ -8,24 +8,24 @@ import {
 
 @Component({
   selector: 'gs-text-area',
-  template: require('./gs-text-area.component.html'),
-  styles: ['./gs-text-area.component.css'],
+  templateUrl: './gs-text-area.component.html',
+  styleUrls: ['./gs-text-area.component.css'],
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective }
   ]
 })
 export class GsTextAreaComponent {
-  @Input() label?: string;
-  @Input() placeholder?: string;
-  required: boolean;
+  @Input() label: string = ""
+  @Input() placeholder: string = ""
+  required: boolean = false
   @Output() onChangeEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  formControl: FormControl;
+  formControl: FormControl = new FormControl();
 
   constructor(private parentFormGroupDirective: FormGroupDirective) {}
 
   @Input()
-  set name(value) {
+  set name(value: any) {
     this.formControl = this.parentFormGroupDirective.form.get(
       value
     ) as FormControl;

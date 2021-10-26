@@ -8,20 +8,20 @@ import {
 @Component({
   selector: 'gs-switch',
   template: require('./gs-switch.component.html'),
-  styles: ['./gs-switch.component.css'],
+  styleUrls: ['./gs-switch.component.css'],
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective }
   ]
 })
 export class GSSwitchComponent {
   @Input() label?: string;
-  @Input() id: string;
-  formControl: FormControl;
+  @Input() id?: string;
+  formControl?: FormControl;
 
   constructor(private parentFormGroupDirective: FormGroupDirective) {}
 
   @Input()
-  set name(value) {
+  set name(value: any) {
     this.formControl = this.parentFormGroupDirective.form.get(
       value
     ) as FormControl;

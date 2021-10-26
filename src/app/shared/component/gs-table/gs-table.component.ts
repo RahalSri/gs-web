@@ -22,15 +22,15 @@ import { TableHeader } from '../../model/table-header';
 export class GSTableComponent {
   @Input() set displayedColumns(displayedColumns: TableHeader[]) {
     this._displayedColumns = displayedColumns;
-    this._columns = displayedColumns.map((i) => i.columnName);
+    this._columns = displayedColumns.map((i) => i.columnName) ?? [];
   }
 
-  @Input() _dataSource: MatTableDataSource<any>;
+  @Input() _dataSource?: MatTableDataSource<any>;
   @Input() editableRowIndex: number | undefined;
   @Input() readOnlyColumnName: string | undefined;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort?: MatSort;
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   @Input() advanceOptions = false;
   @Output()
@@ -48,13 +48,13 @@ export class GSTableComponent {
   skipItems: number = 0;
   pageSizeOptions: number[] = [5, 10, 20, 40, 60, 80, 100];
   selectedRowIndex = -1;
-  _totalLength: number;
+  _totalLength?: number;
 
-  _displayedColumns: TableHeader[];
-  _columns: string[];
+  _displayedColumns?: TableHeader[];
+  _columns?: any;
 
-  @ContentChild('actionRef') actionRef: TemplateRef<any>;
-  @ContentChild('templateRef') templateRef: TemplateRef<any>;
+  @ContentChild('actionRef') actionRef?: TemplateRef<any>;
+  @ContentChild('templateRef') templateRef?: TemplateRef<any>;
 
   textChanged: Subject<any> = new Subject<any>();
 
@@ -62,26 +62,26 @@ export class GSTableComponent {
   set dataSource(value: any) {
     this._dataSource = value;
     if (value && value.data.length === 1 && value.data[0].supId == "") {
-      this._dataSource.data = [];
+      this._dataSource!.data = [];
     }
     if (this._dataSource) {
-      this._dataSource.sort = this.sort;
+      this._dataSource!.sort = this.sort!;
     }
   }
 
-  @Input() totalLength: number;
-  @Input() loading: boolean;
+  @Input() totalLength?: number;
+  @Input() loading?: boolean;
   @Input() initNoContentFound: boolean = false;
 
   constructor() {
     this.textChanged.pipe(debounceTime(500)).subscribe((model) => {
       this.selectedRowIndex = -1;
-      for (var column of this._displayedColumns) {
+      for (var column of this._displayedColumns!) {
         if (column.columnName == model.displayColumn) {
           column.filterValue = model.searchValue;
         }
       }
-      this.paginator.pageIndex = 0;
+      this.paginator!.pageIndex = 0;
       this.filterData.emit({
         skipItems: 0,
         pageSize: this.pageSize,
@@ -98,7 +98,7 @@ export class GSTableComponent {
     });
   }
 
-  pageChange(ev) {
+  pageChange(ev: any) {
     this.skipItems = ev.pageIndex;
     this.pageSize = ev.pageSize;
     this.pageData.emit({
@@ -108,14 +108,14 @@ export class GSTableComponent {
     });
   }
 
-  applyFilters(displayColumn, searchValue) {
+  applyFilters(displayColumn: any, searchValue: string) {
     this.textChanged.next({
       displayColumn: displayColumn,
       searchValue: searchValue
     });
   }
 
-  rowSelected(element, i) {
+  rowSelected(element: any, i: any) {
     this.selectedRowIndex = i;
     this.onRowSelected.emit({
       element: element,
@@ -123,7 +123,7 @@ export class GSTableComponent {
     });
   }
 
-  highlight(row) {
+  highlight(row: any) {
     this.selectedRowIndex = row;
   }
 
@@ -144,13 +144,13 @@ export class GSTableComponent {
       this.addPageSizeEnable = false;
     } else {
       this.pageSizeOptions.push(parseInt(pageSize));
-      this.paginator.pageSizeOptions = this.pageSizeOptions;
+      this.paginator!.pageSizeOptions = this.pageSizeOptions;
     }
 
-    if (this.paginator.pageSize != pageSize) {
-      this.paginator._changePageSize(parseInt(pageSize));
+    if (this.paginator!.pageSize != pageSize) {
+      this.paginator!._changePageSize(parseInt(pageSize));
       this.addPageSizeEnable = false;
-      this.paginator.pageIndex = 0;
+      this.paginator!.pageIndex = 0;
 
       this.pageData.emit({
         skipItems: 0,
@@ -160,7 +160,7 @@ export class GSTableComponent {
     }
   }
 
-  previousRowSelected(i) {
+  previousRowSelected(i: any) {
     if (this.selectedRowIndex == null) {
       this.selectedRowIndex = i - 1;
     }
@@ -169,24 +169,24 @@ export class GSTableComponent {
     }
     if (this.selectedRowIndex > -1) {
       var elmnt = document.getElementById(this.selectedRowIndex.toString());
-      elmnt.scrollIntoView(false);
+      elmnt!.scrollIntoView(false);
       this.onRowSelected.emit({
-        element: this._dataSource.data[this.selectedRowIndex],
+        element: this._dataSource!.data[this.selectedRowIndex],
         index: this.selectedRowIndex
       });
     }
     else {
-      this.selectedRowIndex = this._dataSource.data.length - 1;
+      this.selectedRowIndex = this._dataSource!.data.length - 1;
       var elmnt = document.getElementById(this.selectedRowIndex.toString());
-      elmnt.scrollIntoView(false);
+      elmnt!.scrollIntoView(false);
       this.onRowSelected.emit({
-        element: this._dataSource.data[this.selectedRowIndex],
+        element: this._dataSource!.data[this.selectedRowIndex],
         index: this.selectedRowIndex
       });
     }
   }
 
-  nextRowSelected(i) {
+  nextRowSelected(i: any) {
     if (this.selectedRowIndex == null) {
       this.selectedRowIndex = i + 1;
     }
@@ -196,18 +196,18 @@ export class GSTableComponent {
 
     if (this.selectedRowIndex < this.pageSize) {
       var elmnt = document.getElementById(this.selectedRowIndex.toString());
-      elmnt.scrollIntoView(false);
+      elmnt!.scrollIntoView(false);
       this.onRowSelected.emit({
-        element: this._dataSource.data[this.selectedRowIndex],
+        element: this._dataSource!.data[this.selectedRowIndex],
         index: this.selectedRowIndex
       });
     }
     else {
       this.selectedRowIndex = 0;
       var elmnt = document.getElementById(this.selectedRowIndex.toString());
-      elmnt.scrollIntoView(false);
+      elmnt!.scrollIntoView(false);
       this.onRowSelected.emit({
-        element: this._dataSource.data[this.selectedRowIndex],
+        element: this._dataSource!.data[this.selectedRowIndex],
         index: this.selectedRowIndex
       });
     }

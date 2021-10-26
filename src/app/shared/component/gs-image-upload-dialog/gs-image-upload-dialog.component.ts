@@ -12,8 +12,8 @@ export interface GSDialogData {
 
 @Component({
     selector: 'gs-image-upload-dialog',
-    template: require('./gs-image-upload-dialog.component.html'),
-    styles: ['./gs-image-upload-dialog.component.css']
+    templateUrl: './gs-image-upload-dialog.component.html',
+    styleUrls: ['./gs-image-upload-dialog.component.css']
 })
 export class GsImageUploadDialogComponent {
 
@@ -37,7 +37,7 @@ export class GsImageUploadDialogComponent {
         this.dialogRef.close(this.fileData);
     }
 
-    mediaImageChange(event): void {
+    mediaImageChange(event: any): void {
         this.fileData = event;
     }
 }

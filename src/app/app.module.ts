@@ -31,6 +31,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SpinnersAngularModule } from 'spinners-angular';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +71,10 @@ import { SpinnersAngularModule } from 'spinners-angular';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    SpinnersAngularModule
+    SpinnersAngularModule,
+    MatProgressBarModule,
+    MatTableModule, 
+    MatFormFieldModule
   ],
   providers: [
     {

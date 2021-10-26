@@ -30,7 +30,6 @@ export class SpaceSelectorComponent implements OnInit, OnDestroy {
   @Output() onSpaceChanged: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private cookieService: CookieService,
     private catalogueSerice: CatalogueService,
     private appConfigService: AppConfigService
   ) {}
@@ -42,7 +41,6 @@ export class SpaceSelectorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getLibSpacesByUser();
     this.spaceSubscription = this.appConfigService.currentSpace.subscribe((space) => {
-      console.log(space);
       if(space != null){
         this.currentSpace = space;
       }
@@ -50,20 +48,11 @@ export class SpaceSelectorComponent implements OnInit, OnDestroy {
   }
 
   getLibSpacesByUser() {
-    var allowedLibSpaces =
-      JSON.stringify(this.cookieService.get('allowedLibSpaces')) || [];
-    if (allowedLibSpaces.length == 0) {
-      this.catalogueSerice.getLibSpacesByUser().subscribe((response) => {
-        if (response !== null && allowedLibSpaces != null) {
-          this.spaces = response;
-          // this.navItems = [
-          //   {
-          //     children: this.spaces
-          //   }
-          // ];
-        }
-      });
-    }
+    this.catalogueSerice.getLibSpacesByUser().subscribe((response) => {
+      if (response !== null) {
+        this.spaces = response;
+      }
+    });
   }
 
   setSpace(guid: string) {
