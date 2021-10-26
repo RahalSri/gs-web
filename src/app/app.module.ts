@@ -15,8 +15,8 @@ import { initializeKeycloak } from './core/auth/keycloak-config.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { AccountSettingsComponent } from './public/account-settings/account-settings.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
@@ -34,6 +34,7 @@ import { SpinnersAngularModule } from 'spinners-angular';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 
+import {PermissionsModule} from "./core/permissions/permissions.module";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { MatTableModule } from '@angular/material/table';
     GlobalSearchComponent,
     SpaceSelectorComponent,
     LeftPanelComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +64,6 @@ import { MatTableModule } from '@angular/material/table';
     MatSnackBarModule,
     MatDialogModule,
     CookieModule.forRoot(),
-    SharedModule,
     MatMenuModule,
     PublicModule,
     MatListModule,
@@ -74,14 +74,15 @@ import { MatTableModule } from '@angular/material/table';
     SpinnersAngularModule,
     MatProgressBarModule,
     MatTableModule, 
-    MatFormFieldModule
+    MatFormFieldModule,
+    PermissionsModule
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
-      deps: [KeycloakService],
+      deps: [KeycloakService, HttpClient],
     },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

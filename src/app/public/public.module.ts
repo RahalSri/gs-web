@@ -40,4 +40,3 @@ import { ViewService } from "./space/view-gallery/view-service";
     providers: [ViewService]
   })
   export class PublicModule { }
-  

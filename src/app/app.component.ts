@@ -12,6 +12,7 @@ export class AppComponent implements OnInit{
   isLeftPanelExpanded = true;
   loading = true;
   title = 'gs-web';
+  showFiller = false;
 
   constructor(private authenticationService: AuthenticationService, private appConfigService: AppConfigService){}
 

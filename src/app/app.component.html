@@ -1,3 +1,12 @@
+<app-header (leftPanelOpened)="drawer.toggle()"></app-header>
+<mat-drawer-container class="left-container" autosize>
+  <mat-drawer #drawer class="left-sidenav" mode="side" opened>
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
 
 <sa-spinner-round-filled class="spinner" [enabled]="loading"></sa-spinner-round-filled>
 <app-header *ngIf="!loading" [isExpanded]= "isLeftPanelExpanded" (leftPanelClosed)="onLeftPanelToggle($event)"></app-header>
@@ -11,5 +20,4 @@
   </div>
 
   <app-footer></app-footer>
-</mat-sidenav-container>
-
+</mat-drawer-container>

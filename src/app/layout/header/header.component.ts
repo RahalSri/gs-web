@@ -14,9 +14,7 @@ import { KeycloakService } from 'keycloak-angular';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() isExpanded: boolean = true;
-
-  @Output() leftPanelClosed = new EventEmitter<boolean>();
+  @Output() leftPanelOpened = new EventEmitter<boolean>();
 
   constructor(private cookieService: CookieService,
     private keycloakService: KeycloakService,
@@ -25,8 +23,7 @@ export class HeaderComponent implements OnInit {
     private authenticationService: AuthenticationService) { }
 
   onLeftPanelToggle(): void {
-    this.isExpanded = !this.isExpanded;
-    this.leftPanelClosed.emit(this.isExpanded);
+    this.leftPanelOpened.emit();
   }
 
   @Input() globalSearch?: boolean = true;

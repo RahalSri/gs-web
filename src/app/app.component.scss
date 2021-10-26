@@ -1,4 +1,5 @@
-mat-sidenav-container {
+.left-container {
+  width: 100%;
   height: 100%;
 }
 
@@ -6,4 +7,15 @@ mat-sidenav-container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.left-sidenav-content {
+  //display: flex;
+  //height: 100%;
+  //align-items: center;
+  //justify-content: center;
+}
+
+.left-sidenav {
+  padding: 20px;
 }
