@@ -1,4 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Subscription} from "rxjs";
+import {CookieService} from "ngx-cookie";
+import {SecurityConfigService} from "../../core/service/core.security-config.service";
+import {AppConfigService} from "../../core/service/app-config.service";
+import {AuthenticationService} from "../../core/auth/authentication.service";
 
 
 @Component({
