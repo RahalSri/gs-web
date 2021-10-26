@@ -1,3 +1,30 @@
+<mat-toolbar color="white" #toolbar>
+    <button (click)="onLeftPanelToggle()" type="button" mat-icon-button title="Open sidenav">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span></span>
+    <h1>
+        <a href="#" style="color: #ffffff; font-weight: normal; font-size: 24px; text-decoration: none;">
+            <img src="../../../assets/logo.png" style="width: 25%; margin-right: 5px; margin-top: -10px" />KIPSTOR</a>
+    </h1>
+    <global-search (onSearchEnabled)="showHideSearch($event)" [showGlobalSearch]="globalSearch">
+    </global-search>
+    <space-selector [currentSpace]="globals?.currentUser.currentSpace" (onSpaceChanged)="spaceChanged($event)">
+    </space-selector>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <span class="username hidden-xs">{{givenName}}</span>
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>accout_circle</mat-icon>
+            <span>Account Settings</span>
+        </button>
+        <button mat-menu-item disabled>
+            <mat-icon>logout</mat-icon>
+            <span>Sign Out</span>
+        </button>
+    </mat-menu>
 <mat-toolbar #toolbar class="header-nav">
     <button (click)="onLeftPanelToggle()" mat-icon-button title="Open sidenav" type="button">
         <mat-icon>menu</mat-icon>

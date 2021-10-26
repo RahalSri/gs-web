@@ -20,12 +20,22 @@ import {HttpClientModule} from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CookieModule } from 'ngx-cookie';
+import { GlobalSearchComponent } from './layout/header/global-search/global-search.component';
+import { SpaceSelectorComponent } from './layout/header/space-selector/space-selector.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { PublicModule } from './public/public.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PermissionsModule} from "./core/permissions/permissions.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    GlobalSearchComponent,
+    SpaceSelectorComponent,
     LeftPanelComponent,
     FooterComponent,
     AccountSettingsComponent
@@ -46,15 +56,31 @@ import {PermissionsModule} from "./core/permissions/permissions.module";
     MatToolbarModule,
     MatCardModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    CookieModule.forRoot(),
+    SharedModule,
+    MatMenuModule,
+    PublicModule,
+    NgbModule
+    MatSlideToggleModule,
     PermissionsModule
   ],
   providers: [
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initializeKeycloak,
-    //   multi: true,
-    //   deps: [KeycloakService],
-    // }
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 5000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      }
+    },
   ],
   bootstrap: [AppComponent]
 })
