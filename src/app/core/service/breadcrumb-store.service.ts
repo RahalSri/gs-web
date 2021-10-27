@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { BreadcrumbNode } from "src/app/shared/model/breadcrumb-node";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class BreadcrumbStoreService {
 
     private static _eventSubject = new BehaviorSubject<BreadcrumbNode[]>([]);

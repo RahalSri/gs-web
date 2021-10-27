@@ -1,15 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import * as go from 'gojs';
 import { Diagram } from "gojs";
 import { CatalogueService } from "src/app/core/service/catalogue.service";
 import { GraphDataService } from "src/app/core/service/graph-data.service";
 
-
 @Component({
   selector: 'hierarchy',
-  templateUrl: './hierarchy.component.html',
+  templateUrl: './hierarchy.component.html'
 })
-export class HeirarchyComponent implements OnInit {
+export class HierarchyComponent implements OnInit {
   public diagram?: Diagram;
   public convertedDataModel:any[] = [];
   public defaultHLlevel: number = 2;

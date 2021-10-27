@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogueService } from 'src/app/core/service/catalogue.service';
 import { GSConfirmationDialogComponent } from 'src/app/shared/component/gs-confirmation-dialog/gs-confirmation-dialog.component';
 import { GSDialog } from 'src/app/shared/component/gs-confirmation-dialog/gs-dialog';
@@ -24,7 +25,9 @@ export class GsTileComponent implements OnInit {
     public dialog: GSDialog,
     private _snackbar: MatSnackBar,
     private catalogueService: CatalogueService,
-    private viewService: ViewService
+    private viewService: ViewService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void { }
@@ -37,13 +40,8 @@ export class GsTileComponent implements OnInit {
       this.viewService.spcSupGuId = this.supguid;
       this.viewService.datViewSupGuId = this.view!.supGuid;
       this.viewService.viewType = this.view!.viewMaskLabel;
-      window.location.href =
-        '#/space/' +
-        this.supguid +
-        '/dataview/' +
-        this.view!.supGuid +
-        '/' +
-        this.view!.viewMaskLabel;
+
+      this.router.navigate(['views', this.view!.supGuid, this.view!.viewMaskLabel], {relativeTo: this.route});
     }
   }
 

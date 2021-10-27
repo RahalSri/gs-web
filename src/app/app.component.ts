@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './core/auth/authentication.service';
 import { AppConfigService } from './core/service/app-config.service';
-import { CatalogueService } from './core/service/catalogue.service';
 
 @Component({
   selector: 'app-root',

@@ -15,7 +15,6 @@ import { initializeKeycloak } from './core/auth/keycloak-config.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { AccountSettingsComponent } from './public/account-settings/account-settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +25,6 @@ import { CookieModule } from 'ngx-cookie';
 import { GlobalSearchComponent } from './layout/header/global-search/global-search.component';
 import { SpaceSelectorComponent } from './layout/header/space-selector/space-selector.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { PublicModule } from './public/public.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -68,7 +66,6 @@ import { SpaceModule } from './public/space/space.module';
     CookieModule.forRoot(),
     SharedModule,
     MatMenuModule,
-    PublicModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,

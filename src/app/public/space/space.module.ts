@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpaceRoutingModule } from './space-routing.module';
 import { ViewGalleryComponent } from './view-gallery/view-gallery.component';
-import { HeirarchyComponent } from './views/hierarchy/hierarchy.component';
+import { HierarchyComponent } from './views/hierarchy/hierarchy.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,8 +16,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { ViewTypeHeaderComponent } from './header/view-type-header.component';
 import { RHSPanelComponent } from './rhs-panel/rhs-panel.component';
-
+import { ListComponent } from './views/list/list.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,13 @@ import { RHSPanelComponent } from './rhs-panel/rhs-panel.component';
     GsViewComponent,
     GsViewAccessComponent,
     ViewGalleryComponent,
-    HeirarchyComponent,
-
+    HierarchyComponent,
+    RHSPanelComponent,
+    ViewTypeHeaderComponent,
+    ListComponent
   ],
   imports: [
-    CommonModule,
+    // CommonModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
@@ -42,9 +45,6 @@ import { RHSPanelComponent } from './rhs-panel/rhs-panel.component';
     MatMenuModule,
     MatIconModule,
     MatExpansionModule
-  ],
-  exports: [
-    RHSPanelComponent
   ]
 })
 export class SpaceModule { }
