@@ -23,6 +23,7 @@ import { GeneralViewComponent } from './views/general-veiw.component';
 import { GojsAngularModule } from 'gojs-angular';
 import { GSTableComponent } from 'src/app/shared/component/gs-table/gs-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatIconModule,
     MatExpansionModule,
     GojsAngularModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    MatCardModule
   ]
 })
 export class SpaceModule { }
