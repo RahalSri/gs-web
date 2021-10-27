@@ -14,7 +14,7 @@ import { KeycloakService } from 'keycloak-angular';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() isExpanded: Boolean = false;
+  @Input() isExpanded: Boolean = true;
   @Output() leftPanelOpened = new EventEmitter<boolean>();
 
   constructor(private cookieService: CookieService,

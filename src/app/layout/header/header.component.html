@@ -1,11 +1,10 @@
 <mat-toolbar color="primary">
-    <img *ngIf="isExpanded" src="../../../assets/logo.png" class="headingImg" />
-    <span *ngIf="isExpanded">KIPSTOR</span>
     <button (click)="onLeftPanelToggle()" mat-icon-button type="button" title="Open sidenav">
         <mat-icon>menu</mat-icon>
     </button>
-    <space-selector (onSpaceChanged)="spaceChanged($event)">
-    </space-selector>
+    <img *ngIf="isExpanded" src="../../../assets/logo.png" class="headingImg" />
+    <span *ngIf="isExpanded">KIPSTOR</span>
+    <space-selector (onSpaceChanged)="spaceChanged($event)"></space-selector>
     <span class="toolbar-spacer"></span>
     <global-search></global-search>
     <button mat-button [matMenuTriggerFor]="menu">
