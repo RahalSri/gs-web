@@ -1,31 +1,29 @@
-<div id="viewdetail-wrapper" #fullScreen class="fullheight">
-    <div tabindex="0"
-        id="datview_bodypanel" class="panel general-panel panel_dataview fullheight">
-
-        <div class="panel-header">
-            <view-type-header [viewType]="viewType" [viewTitle]="viewTitle" [viewSubTitle]="vieSubTitle"
-                [description]="description" [fullScreenIconVisible]="fullScreenIconVisible"
-                (onFullScreenChange)="changeFullScreenView($event);" [viewNarrativeInlead]="vieNarrativeInlead"
-                [viewNarrative]="vieNarrative" [viewNarrativeLeadOut]="vieNarrativeLeadOut"
-                (imageColumnLayoutChange)="onImageColumnLayoutChange($event)">
-            </view-type-header>
-        </div>
-        <!-- <media-view *ngIf="viewType == 'MM'" [supGuid]="datViewSupGuId" (onMediaDataLoad)="onViewDataLoad($event)"
-            [oneColumnLayout]="oneColumnLayout">
-        </media-view> -->
-        <div class="row stationlist m-0 general-view-content" *ngIf="viewType!='MM'" style="overflow-y: hidden;">
-            <div id="dataView_maincontainer" class="col-sm-12 p-20 fullheight"
-                [ngClass]="{'col-sm-8' : openRHS, 'col-sm-12':!openRHS }">
+<mat-card>
+    <mat-card-title>
+        <view-type-header [viewType]="viewType" [viewTitle]="viewTitle" [viewSubTitle]="vieSubTitle"
+            [description]="description" [fullScreenIconVisible]="fullScreenIconVisible"
+            (onFullScreenChange)="changeFullScreenView($event);" [viewNarrativeInlead]="vieNarrativeInlead"
+            [viewNarrative]="vieNarrative" [viewNarrativeLeadOut]="vieNarrativeLeadOut"
+            (imageColumnLayoutChange)="onImageColumnLayoutChange($event)">
+        </view-type-header>
+    </mat-card-title>
+    <mat-card-content>
+        <list *ngIf="viewType=='LS'" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
+            (selected)=rowSelected($event); (onListViewLoad)="onViewDataLoad($event)"></list>
+        <hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"
+            [datViewSupGuId]="datViewSupGuId" (rightClick)="hlRightClick($event)"></hierarchy>
+        <!-- <mat-grid-list cols="4" rowHeight="fit">>
+            <mat-grid-tile [colspan]="openRHS ? '3' : 4" >
                 <hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"
                     [datViewSupGuId]="datViewSupGuId" (rightClick)="hlRightClick($event)"></hierarchy>
-                <!-- <table-view *ngIf="viewType=='TB'" [datViewSupGuId]="datViewSupGuId" (selected)="rowSelected($event)"
-                    (onTableDataLoad)="onViewDataLoad($event)"></table-view> -->
                 <list *ngIf="viewType=='LS'" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
                     (selected)=rowSelected($event); (onListViewLoad)="onViewDataLoad($event)"></list>
-            </div>
-            <rhs-panel [openRHS]="openRHS" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
-                [supGuId]="supGuId" (onRHSToggle)="toggleRHS($event)">
-            </rhs-panel>
-        </div>
-    </div>
-</div>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="openRHS" [colspan]="'1'">
+                <rhs-panel [openRHS]="openRHS" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
+                    [supGuId]="supGuId" (onRHSToggle)="toggleRHS($event)">
+                </rhs-panel>
+            </mat-grid-tile>
+        </mat-grid-list> -->
+    </mat-card-content>
+</mat-card>

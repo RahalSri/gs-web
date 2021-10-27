@@ -3,10 +3,9 @@ import { ActivatedRoute } from "@angular/router";
 import { AppConfigService } from "src/app/core/service/app-config.service";
 import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.service";
 import { CatalogueService } from "src/app/core/service/catalogue.service";
-import { ViewService } from "../view-gallery/view-service";
 
 @Component({
-    selector: 'sample',
+    selector: 'general-view',
     templateUrl: './general-view.component.html',
   })
   export class GeneralViewComponent {

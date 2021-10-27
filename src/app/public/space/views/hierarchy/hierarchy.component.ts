@@ -135,12 +135,12 @@ export class HierarchyComponent implements OnInit {
   private imageConverter(prop: any, picture: any) {
     var node = picture.part;
     if (node.isTreeLeaf) {
-      return "img/gojs/document.png";
+      return "assets/img/gojs/document.png";
     } else {
       if (node.isTreeExpanded) {
-        return "img/gojs/openFolder.png";
+        return "assets/img/gojs/openFolder.png";
       } else {
-        return "img/gojs/closedFolder.png";
+        return "assets/img/gojs/closedFolder.png";
       }
     }
   }

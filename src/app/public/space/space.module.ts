@@ -21,8 +21,8 @@ import { RHSPanelComponent } from './rhs-panel/rhs-panel.component';
 import { ListComponent } from './views/list/list.component';
 import { GeneralViewComponent } from './views/general-veiw.component';
 import { GojsAngularModule } from 'gojs-angular';
-import { GSTableComponent } from 'src/app/shared/component/gs-table/gs-table.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTabsModule,
     MatMenuModule,
     MatIconModule,
+    MatCardModule,
     MatExpansionModule,
+    MatGridListModule,
     GojsAngularModule,
     NgxSkeletonLoaderModule
   ]
