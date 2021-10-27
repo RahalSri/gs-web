@@ -37,8 +37,4 @@ export class AppConfigService {
     setGlobals(globals: any){
         this.currentGlobalsSource.next(globals);
     }
-
-    getUniViewURL(spcGuid: string,viewId: string, objId: string,defDatasheetGuid: string){
-        return  "#/space/"+spcGuid+"/dataview/"+viewId+"/datasheet/"+objId+"?defaultDatasheetSupguId="+defDatasheetGuid;
-    }	
 }

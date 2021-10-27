@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GeneralViewComponent } from './views/general-veiw.component';
 import { ViewGalleryComponent } from './view-gallery/view-gallery.component';
-import { GeneralViewComponent } from './views/general-view.component';
-import { ListComponent } from './views/list/list.component';
-
 
 const routes: Routes = [
   {

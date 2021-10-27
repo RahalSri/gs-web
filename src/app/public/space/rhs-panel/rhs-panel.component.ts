@@ -64,8 +64,7 @@ export class RHSPanelComponent implements OnInit, OnChanges {
         this.catalogueService.getDefaultDataSheet(objId).subscribe(
             result => {
                 if (result != null) {
-                    var url = this.appConfigService.getUniViewURL(result.spaceSupguid, this.datViewSupGuId, objId, result.defaultSupGuid);
-                    window.location.href = url;
+                  
                 }
             }
         );

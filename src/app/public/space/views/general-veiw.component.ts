@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AppConfigService } from "src/app/core/service/app-config.service";
 import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.service";
@@ -6,10 +6,10 @@ import { CatalogueService } from "src/app/core/service/catalogue.service";
 import { ViewService } from "../view-gallery/view-service";
 
 @Component({
-    selector: 'general-view',
-    templateUrl: './general-view.component.html'
-})
-export class GeneralViewComponent implements OnInit {
+    selector: 'sample',
+    templateUrl: './general-view.component.html',
+  })
+  export class GeneralViewComponent {
     viewType: string = "";
     datViewSupGuId: string = "";
     spcSupGuId: string = "";
@@ -33,8 +33,7 @@ export class GeneralViewComponent implements OnInit {
 
     @ViewChild('fullScreen') divRef: any;
 
-    constructor(private viewService: ViewService,
-        private route: ActivatedRoute,
+    constructor(private route: ActivatedRoute,
         private breadcrumbStoreService: BreadcrumbStoreService,
         private catalogueService: CatalogueService,
         private appConfigService: AppConfigService) { }
@@ -43,6 +42,7 @@ export class GeneralViewComponent implements OnInit {
         this.viewType = this.route.snapshot.paramMap.get('viewType')!;
         this.datViewSupGuId = this.route.snapshot.paramMap.get('viewGuid')!;
         this.spcSupGuId = this.route.snapshot.paramMap.get('spaceGuid')!;
+        console.log(this.datViewSupGuId);
         this.fetchAlternateViews();
     }
 
@@ -119,4 +119,4 @@ export class GeneralViewComponent implements OnInit {
     onImageColumnLayoutChange(data:any) {
         this.oneColumnLayout = data.oneColumnLayout;
     }
-}
+  }

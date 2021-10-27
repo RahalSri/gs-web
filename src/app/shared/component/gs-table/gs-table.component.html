@@ -25,16 +25,14 @@
 <ngx-skeleton-loader *ngIf="loading" count="10" appearance="line" [theme]="{height: '30px'}"></ngx-skeleton-loader>
 <mat-table *ngIf="!loading && !initNoContentFound" [style.height]="advanceOptions ? 'calc(100% - 63px)' : '100%'" #table
     [dataSource]="_dataSource" matSort matPaginator>
-    <ng-container [matColumnDef]="displayedColumn.columnName" *ngFor="let displayedColumn of _displayedColumns">
+    <ng-container [matColumnDef]="displayedColumn.columnName!!" *ngFor="let displayedColumn of _displayedColumns">
         <mat-header-cell [style.width.%]="displayedColumn.styles.width_percentage" *matHeaderCellDef
             [style.display]="filtersEnabled ? 'flex' : ''" [style.justify-content]="filtersEnabled ? 'flex-end' : ''"
-            [style.flex-direction]="filtersEnabled ? 'column' : ''" [style.align-items]="filtersEnabled ? 'start' : ''"
-            [mat-sort-header]="(advanceOptions && !filtersEnabled) ? displayedColumn.columnName : null"
-            [disabled]="(advanceOptions && !filtersEnabled) ? false : true">
+            [style.flex-direction]="filtersEnabled ? 'column' : ''" [style.align-items]="filtersEnabled ? 'start' : ''">
             <div>
                 <div> {{ displayedColumn.displayName }}</div>
                 <div><input style="margin-bottom: 20px;" *ngIf="filtersEnabled" type="text" class="form-control"
-                        (input)="applyFilters(displayedColumn.columnName, $event.target.value)" /></div>
+                        (input)="applyFilters(displayedColumn.columnName!!, $event.target.value)" /></div>
             </div>
         </mat-header-cell>
         <mat-cell class="gs-table-cell" [style.width.%]="displayedColumn.styles.width_percentage" style="outline: none;"
@@ -43,20 +41,20 @@
             [ngClass]="selectedRowIndex == i? 'selected-cell':''">
             <div *ngIf="displayedColumn.type == 'text'">
                 <span
-                    *ngIf="i !== editableRowIndex || readOnlyColumnName === displayedColumn.columnName; else editableText">
-                    <span>{{ element[displayedColumn.columnName] }}</span>
+                    *ngIf="i !== editableRowIndex || readOnlyColumnName === displayedColumn.columnName!; else editableText">
+                    <span>{{ element[displayedColumn.columnName!] }}</span>
                 </span>
                 <ng-template #editableText>
-                    <gs-input-box [name]="displayedColumn.columnName">
+                    <gs-input-box [name]="displayedColumn.columnName!">
                     </gs-input-box>
                 </ng-template>
             </div>
             <div *ngIf="displayedColumn.type == 'binary'">
-                <span *ngIf="element[displayedColumn.columnName] == true">
-                    {{ displayedColumn.booleanDefinitions[0] }}
+                <span *ngIf="element[displayedColumn.columnName!] == true">
+                    {{ displayedColumn.booleanDefinitions![0] }}
                 </span>
-                <span *ngIf="element[displayedColumn.columnName] == false">
-                    {{ displayedColumn.booleanDefinitions[1] }}
+                <span *ngIf="element[displayedColumn.columnName!] == false">
+                    {{ displayedColumn.booleanDefinitions![1] }}
                 </span>
             </div>
             <div *ngIf="displayedColumn.type == 'template'">

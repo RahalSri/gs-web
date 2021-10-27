@@ -19,6 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { ViewTypeHeaderComponent } from './header/view-type-header.component';
 import { RHSPanelComponent } from './rhs-panel/rhs-panel.component';
 import { ListComponent } from './views/list/list.component';
+import { GeneralViewComponent } from './views/general-veiw.component';
+import { GojsAngularModule } from 'gojs-angular';
+import { GSTableComponent } from 'src/app/shared/component/gs-table/gs-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { ListComponent } from './views/list/list.component';
     HierarchyComponent,
     RHSPanelComponent,
     ViewTypeHeaderComponent,
-    ListComponent
+    ListComponent,
+    GeneralViewComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +49,9 @@ import { ListComponent } from './views/list/list.component';
     MatTabsModule,
     MatMenuModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    GojsAngularModule,
+    NgxSkeletonLoaderModule
   ]
 })
 export class SpaceModule { }

@@ -16,16 +16,21 @@ import { TableHeader } from '../../model/table-header';
 
 @Component({
   selector: 'gs-table',
-  template: require('./gs-table.component.html'),
-  styles: ['./gs-table.component.css']
+  templateUrl: './gs-table.component.html',
+  styleUrls: ['./gs-table.component.css']
 })
 export class GSTableComponent {
   @Input() set displayedColumns(displayedColumns: TableHeader[]) {
-    this._displayedColumns = displayedColumns;
-    this._columns = displayedColumns.map((i) => i.columnName) ?? [];
+    if (displayedColumns == null) {
+      this._displayedColumns = [];
+    }
+    else {
+      this._displayedColumns = displayedColumns;
+      this._columns = displayedColumns.map((i) => i.columnName) ?? [];
+    }
   }
 
-  @Input() _dataSource?: MatTableDataSource<any>;
+  @Input() _dataSource!: MatTableDataSource<any>;
   @Input() editableRowIndex: number | undefined;
   @Input() readOnlyColumnName: string | undefined;
 
@@ -50,11 +55,11 @@ export class GSTableComponent {
   selectedRowIndex = -1;
   _totalLength?: number;
 
-  _displayedColumns?: TableHeader[];
-  _columns?: any;
+  _displayedColumns!: TableHeader[];
+  _columns!: any;
 
-  @ContentChild('actionRef') actionRef?: TemplateRef<any>;
-  @ContentChild('templateRef') templateRef?: TemplateRef<any>;
+  @ContentChild('actionRef') actionRef!: TemplateRef<any>;
+  @ContentChild('templateRef') templateRef!: TemplateRef<any>;
 
   textChanged: Subject<any> = new Subject<any>();
 

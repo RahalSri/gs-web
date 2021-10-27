@@ -24,7 +24,9 @@ const DEFAULT_CONFIG: PreviewDialogConfig = {
     image: undefined
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class PreviewOverlayService {
 
     constructor(

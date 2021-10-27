@@ -1,1 +1,21 @@
-<p>list works!</p>
+<div class="list-view-container elastic-container elastic-box">
+    <no-content-banner *ngIf="!loading && !initialLoad && !disableNoContent && _totalRecordLength == 0">
+    </no-content-banner>
+    <gs-table (filterData)="applyFilters($event)" (pageData)="pageChange($event)" [loading]="loading"
+        [dataSource]="dataSource" [initNoContentFound]="!disableNoContent" [advanceOptions]="true"
+        [totalLength]="_totalRecordLength" (onRowSelected)="rowSelected($event)" [displayedColumns]="displayedColumns"
+        (onFiltersEnabledChanged)="onFiltersEnabledChanged($event)">
+        <ng-template #templateRef let-element="templateElement">
+            <a *ngIf="element.defaultDatasheetSupguId!=null && element.defaultDatasheetSupguId!=''"
+                class="wordwrap text_shorten datobj_title"
+                href="#/space/{{spcSupGuId}}/dataview/{{datViewSupGuId}}/datasheet/{{element.supGuId}}?defaultDatasheetSupguId={{element.defaultDatasheetSupguId}}"
+                (click)="title_clicked($event)">
+                {{element.displayTitle}}
+            </a>
+            <span *ngIf="element.defaultDatasheetSupguId==null || element.defaultDatasheetSupguId==''"
+                class="text_shorten">
+                {{element.displayTitle}}
+            </span>
+        </ng-template>
+    </gs-table>
+</div>

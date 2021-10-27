@@ -1,4 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlternateView } from 'src/app/shared/model/alternate-view';
 
 @Component({
@@ -14,25 +15,17 @@ export class GsTopbarComponent implements OnInit {
   hidePrintIcon: boolean = true;
   hideShareIcon: boolean = true;
 
+  constructor(private router: Router){}
+
   ngOnInit(): void {
     //load alt views
   }
 
   navigate(altview: AlternateView) {
-    console.log('inside navigate');
-    window.location.href =
-      '#/space/' +
-      altview.spaceSupguid +
-      '/dataview/' +
-      altview.supGuid +
-      (altview.refDatObjectSupGuid
-        ? (altview.uniViewFormat == 'Subject Network'
-            ? '/sng/'
-            : '/datasheet/') +
-          altview.refDatObjectSupGuid +
-          '/?defaultDatasheetSupguId=' +
-          altview.supGuid
-        : '');
+    var type = altview.uniViewFormat == 'Subject Network'
+    ? 'sng'
+    : 'datasheet';
+    this.router.navigate(['space', altview.spaceSupguid, 'dataview', altview.supGuid, type, ]);
   }
 
   export() {

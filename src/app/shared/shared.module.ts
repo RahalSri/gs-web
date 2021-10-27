@@ -25,6 +25,10 @@ import { ImageViewerModule } from '@emazv72/ngx-imageviewer';
 import { GsImagePreviewComponent } from './component/gs-image-preview/gs-image-preview.component';
 import { NoContentBannerComponent } from './component/no-content-banner/no-content-banner.component';
 import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
+import { GSTableComponent } from './component/gs-table/gs-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +47,8 @@ import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spi
     GsMatTabTextAreaComponent,
     GsImagePreviewComponent,
     LoadingSpinnerComponent,
-    NoContentBannerComponent
+    NoContentBannerComponent,
+    GSTableComponent
   ],
   imports: [
     CommonModule,
@@ -56,6 +61,8 @@ import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spi
     MatProgressBarModule,
     MatTabsModule,
     ImageViewerModule,
+    MatPaginatorModule,
+    NgxSkeletonLoaderModule
   ],
   exports: [
     GSButtonComponent,
@@ -66,6 +73,7 @@ import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spi
     GSPasswordBoxComponent,
     GSSelectComponent,
     GSInputBoxComponent,
+    GSTableComponent,
     ViewFilterPipe,
     GsImageUploadComponent,
     GsImageUploadDialogComponent,
