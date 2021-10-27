@@ -28,6 +28,9 @@ import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spi
 import { GSTableComponent } from './component/gs-table/gs-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleto
     MatTabsModule,
     ImageViewerModule,
     MatPaginatorModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
   ],
   exports: [
     GSButtonComponent,

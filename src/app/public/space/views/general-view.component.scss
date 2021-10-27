@@ -1,0 +1,11 @@
+.rhsOpen {
+  display: grid;
+  grid-template-areas: "table table table rhs";
+  grid-column-gap: 16px;
+}
+
+.rhsClosed {
+  display: grid;
+  grid-template-areas: "table table table table";
+  grid-column-gap: 16px;
+}

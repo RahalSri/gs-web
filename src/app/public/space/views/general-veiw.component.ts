@@ -6,10 +6,12 @@ import { CatalogueService } from "src/app/core/service/catalogue.service";
 import { ViewService } from "../view-gallery/view-service";
 
 @Component({
-    selector: 'sample',
+    selector: 'general-view',
     templateUrl: './general-view.component.html',
-  })
-  export class GeneralViewComponent {
+    styleUrls: ['./general-view.component.scss']
+
+})
+export class GeneralViewComponent {
     viewType: string = "";
     datViewSupGuId: string = "";
     spcSupGuId: string = "";
@@ -116,7 +118,7 @@ import { ViewService } from "../view-gallery/view-service";
             });
     }
 
-    onImageColumnLayoutChange(data:any) {
+    onImageColumnLayoutChange(data: any) {
         this.oneColumnLayout = data.oneColumnLayout;
     }
-  }
+}

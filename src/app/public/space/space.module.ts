@@ -23,8 +23,9 @@ import { GeneralViewComponent } from './views/general-veiw.component';
 import { GojsAngularModule } from 'gojs-angular';
 import { GSTableComponent } from 'src/app/shared/component/gs-table/gs-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatCardModule} from '@angular/material/card';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     GsTileComponent,
@@ -53,7 +54,10 @@ import {MatCardModule} from '@angular/material/card';
     MatExpansionModule,
     GojsAngularModule,
     NgxSkeletonLoaderModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    FlexLayoutModule,
   ]
 })
 export class SpaceModule { }
