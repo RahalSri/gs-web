@@ -33,7 +33,9 @@ import { MatInputModule } from '@angular/material/input';
 import { SpinnersAngularModule } from 'spinners-angular';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
-
+import { ImageViewerModule } from '@emazv72/ngx-imageviewer';
+import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
+import { SpaceModule } from './public/space/space.module';
 
 @NgModule({
   declarations: [
@@ -42,9 +44,10 @@ import { MatTableModule } from '@angular/material/table';
     GlobalSearchComponent,
     SpaceSelectorComponent,
     LeftPanelComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
+    SpaceModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -74,7 +77,8 @@ import { MatTableModule } from '@angular/material/table';
     SpinnersAngularModule,
     MatProgressBarModule,
     MatTableModule, 
-    MatFormFieldModule
+    MatFormFieldModule,
+    ImageViewerModule
   ],
   providers: [
     {
@@ -90,6 +94,10 @@ import { MatTableModule } from '@angular/material/table';
         horizontalPosition: 'right',
         verticalPosition: 'top'
       }
+    },
+    {
+      provide: OverlayContainer,
+      useClass: FullscreenOverlayContainer
     },
   ],
   bootstrap: [AppComponent]

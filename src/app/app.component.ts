@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from './core/auth/authentication.service';
 import { AppConfigService } from './core/service/app-config.service';
 import { CatalogueService } from './core/service/catalogue.service';
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit{
   loading = true;
   title = 'gs-web';
 
-  constructor(private authenticationService: AuthenticationService, private appConfigService: AppConfigService){}
+  constructor(private authenticationService: AuthenticationService, private appConfigService: AppConfigService, private router: Router){}
 
   ngOnInit(): void {
     this.authenticationService.init().then(token =>{
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit{
           var defaultSpace = response["defaultSpace"];
           localStorage.setItem("defaultSpace", defaultSpace);
           this.appConfigService.setCurrentSpace(defaultSpace);
+          this.router.navigate(['space', defaultSpace.supGuid]);
           this.loading = false;
       });
     })

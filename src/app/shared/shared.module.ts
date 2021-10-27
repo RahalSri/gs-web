@@ -20,7 +20,11 @@ import { GsMatTabTextAreaComponent } from './component/gs-mat-tab-text-area/gs-m
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ImageViewerModule } from '@emazv72/ngx-imageviewer';
+import { GsImagePreviewComponent } from './component/gs-image-preview/gs-image-preview.component';
+import { NoContentBannerComponent } from './component/no-content-banner/no-content-banner.component';
+import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     GsImageUploadDialogComponent,
     GsTextAreaComponent,
     GsMatTabTextAreaComponent,
+    GsImagePreviewComponent,
+    LoadingSpinnerComponent,
+    NoContentBannerComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +54,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatInputModule,
     MatMenuModule,
     MatProgressBarModule,
-    MatTabsModule
+    MatTabsModule,
+    ImageViewerModule,
   ],
   exports: [
     GSButtonComponent,
@@ -63,6 +71,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     GsImageUploadDialogComponent,
     GsTextAreaComponent,
     GsMatTabTextAreaComponent,
+    GsImagePreviewComponent,
+    LoadingSpinnerComponent,
+    NoContentBannerComponent
   ],
   providers: [
     GSDialog

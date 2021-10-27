@@ -16,7 +16,6 @@ import { GsViewComponent } from './shared/gs-view/gs-view.component';
 export class ViewGalleryComponent implements OnInit {
   @Input() supguid: string = ""
   @Input() manageviews: boolean = false;
-  @Input() myswitch: boolean = false;
 
   views: Array<View> = [];
   space: any;

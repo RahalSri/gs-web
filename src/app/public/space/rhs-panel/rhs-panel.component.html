@@ -1,0 +1,65 @@
+<div id="dataView_propertyInspect_wrapper" class="fullheight col-sm-4"
+    [ngClass]="{'col-sm-4': openRHS, 'ng-hide' : !openRHS }">
+    <div id="dataView_propertyInspect" class="detailpage list-scroll fullheight">
+        <div id="rhs_pi"
+            style="display: inline-block; width: 100%; margin-top: 0px !important; height: calc(100% - 20px);">
+            <div class="modal-header p-t-0">
+                <button class="close" type="button" (click)="toggleRHS(false)">
+                    <i class="icons-office-52"></i>
+                </button>
+            </div>
+            <div *ngIf="rhsLoading"
+                style="display: flex; justify-content: center; height: inherit; align-items: center;">
+                <loading-spinner></loading-spinner>
+            </div>
+            <mat-accordion *ngIf="!rhsLoading" multi #accordion="matAccordion">
+                <mat-expansion-panel *ngFor="let view of localPropertyValueList" [expanded]="view.selected"
+                    (opened)="openedGroup(view.groupSeq)" (closed)="closedGroup(view.groupSeq)"
+                    style="margin-bottom: 0; margin-top: 0; color:#5b5b5b !important">
+                    <mat-expansion-panel-header style="background-color: #eaeaea; height: 40px;">
+                        <mat-panel-title>
+                            <b style="color: #5b5b5b; text-transform: uppercase;">{{view.group}}</b>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <table class="table table-striped m-b-0">
+                        <tbody>
+                            <tr *ngFor="let keyValView of view?.keyValue; let i = index">
+                                <td class="accordianChange"
+                                    *ngIf="(i == 0 || view.keyValue[i-1].key!=keyValView.key) && !isMergeColumn(keyValView.key)"
+                                    style="width: 40%; padding-left: 28px; font-weight: bold; color:#5b5b5b !important"
+                                    [attr.rowspan]="rowspanLength(view.keyValue, keyValView.key)">
+                                    {{keyValView.key}}
+                                </td>
+                                <td style="width: 60%;"
+                                    *ngIf="keyValView.typeOfValue=='media' && keyValView.typeOfValue!='nonLink' && keyValView.typeOfValue !=''">
+                                    <img (click)="showImage(keyValView.value.split('|')[0])" class="zoomimg"
+                                        *ngIf="keyValView.value!=''" style="display: block;" width="40px" height="40px"
+                                        [src]="iconURL" image-modal />
+                                </td>
+                                <td [style.width.%]="isMergeColumn(keyValView.key) ? '100' : '60'"
+                                    [attr.colspan]="isMergeColumn(keyValView.key) ? 2 : undefined"
+                                    *ngIf="keyValView.typeOfValue=='nonLink' && keyValView.typeOfValue!='media'  ">
+                                    <div *ngIf="isMergeColumn(keyValView.key)" class="rhs_merged_col"
+                                        style="padding-left: 20px; color:#5b5b5b !important">
+                                        <div class="rhskey m-b-5">{{keyValView.key}}</div>
+                                        {{keyValView.value}}
+                                    </div>
+                                    <span *ngIf="!isMergeColumn(keyValView.key)"
+                                        style="color:#5b5b5b !important">{{keyValView.value}}</span>
+                                </td>
+                                <td style="width: 60%"
+                                    *ngIf="keyValView.typeOfValue != 'nonLink' || keyValView.typeOfValue=='media'">
+                                    <a *ngIf="keyValView.value.datasheet" class="ng-binding p-0"
+                                        (click)="goToURL('nonhl',keyValView.typeOfValue)" style="padding-left: 24px;"
+                                        href="javascript:void(0)">{{keyValView.value.displayLinkVal?.split('@#$')[0]}}</a>
+                                    <span class="ng-binding p-0" *ngIf="!keyValView.value.datasheet"
+                                        style="padding-left: 28px; color:#5b5b5b !important">{{keyValView.value.displayLinkVal?.split('@#$')[0]}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>

@@ -29,7 +29,10 @@
     "rxjs": "~6.6.0",
     "spinners-angular": "0.0.5",
     "tslib": "^2.2.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@emazv72/ngx-imageviewer": "^2.3.0",
+    "gojs": "^2.1.50",
+    "gojs-angular": "^1.0.19"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.1.3",

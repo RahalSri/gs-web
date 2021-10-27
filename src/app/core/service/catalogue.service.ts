@@ -220,7 +220,7 @@ export class CatalogueService {
     );
   }
 
-  fetchAlternateViews(spaceSupId:string, viewSupId:string, objSupId:string) {
+  fetchAlternateViews(spaceSupId:string, viewSupId:string, objSupId?:string) {
     return this.http.get<any[]>(
       `${this.apiEndpoint}/datView/getAlternativeViews/${spaceSupId}/${viewSupId}/${objSupId}`
     );
