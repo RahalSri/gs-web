@@ -7,7 +7,7 @@
     <ng-container *ngFor="let mainItem of spaces">
         <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{ mainItem.supShortTitle }}</button>
         <mat-menu #sub_menu="matMenu">
-            <button *ngFor="let subItem of mainItem.spaces" mat-menu-item>{{ subItem.supShortTitle }}</button>
+            <button *ngFor="let subItem of mainItem.spaces" (click)="setSpace(subItem.supGuid)" mat-menu-item>{{ subItem.supShortTitle }}</button>
         </mat-menu>
     </ng-container>
 </mat-menu>

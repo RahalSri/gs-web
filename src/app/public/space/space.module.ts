@@ -23,6 +23,7 @@ import { GeneralViewComponent } from './views/general-veiw.component';
 import { GojsAngularModule } from 'gojs-angular';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MediaComponent } from './views/media/media.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatCardModule } from '@angular/material/card';
     ViewTypeHeaderComponent,
     ListComponent,
     GeneralViewComponent,
+    MediaComponent
   ],
   imports: [
     CommonModule,

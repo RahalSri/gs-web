@@ -8,22 +8,12 @@
         </view-type-header>
     </mat-card-title>
     <mat-card-content>
+        <media *ngIf="viewType == 'MM'" [supGuid]="datViewSupGuId" (onMediaDataLoad)="onViewDataLoad($event)"
+            [oneColumnLayout]="oneColumnLayout">
+        </media>
         <list *ngIf="viewType=='LS'" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
             (selected)=rowSelected($event); (onListViewLoad)="onViewDataLoad($event)"></list>
         <hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"
             [datViewSupGuId]="datViewSupGuId" (rightClick)="hlRightClick($event)"></hierarchy>
-        <!-- <mat-grid-list cols="4" rowHeight="fit">>
-            <mat-grid-tile [colspan]="openRHS ? '3' : 4" >
-                <hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"
-                    [datViewSupGuId]="datViewSupGuId" (rightClick)="hlRightClick($event)"></hierarchy>
-                <list *ngIf="viewType=='LS'" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
-                    (selected)=rowSelected($event); (onListViewLoad)="onViewDataLoad($event)"></list>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="openRHS" [colspan]="'1'">
-                <rhs-panel [openRHS]="openRHS" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
-                    [supGuId]="supGuId" (onRHSToggle)="toggleRHS($event)">
-                </rhs-panel>
-            </mat-grid-tile>
-        </mat-grid-list> -->
     </mat-card-content>
 </mat-card>
