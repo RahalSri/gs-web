@@ -34,7 +34,7 @@ import { ListComponent } from './views/list/list.component';
     ListComponent
   ],
   imports: [
-    // CommonModule,
+    CommonModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
