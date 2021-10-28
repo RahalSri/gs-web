@@ -38,6 +38,7 @@ import { ActionComponent } from './layout/action-bar/action-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxPrintModule } from 'ngx-print';
 import { ContentSearchComponent } from './layout/content-search/content-search.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ContentSearchComponent } from './layout/content-search/content-search.c
     MatSlideToggleModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatDividerModule,
     CookieModule.forRoot(),
     SharedModule,
     MatMenuModule,
@@ -78,11 +80,11 @@ import { ContentSearchComponent } from './layout/content-search/content-search.c
     MatInputModule,
     SpinnersAngularModule,
     MatProgressBarModule,
-    MatTableModule, 
+    MatTableModule,
     MatFormFieldModule,
     ImageViewerModule,
     FlexLayoutModule,
-    NgxPrintModule
+    NgxPrintModule,
   ],
   providers: [
     {
