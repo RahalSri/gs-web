@@ -1,10 +1,24 @@
 <div *ngIf="advanceOptions && !initNoContentFound" style="display: flex;align-items: center; justify-content: flex-end;"
     class="no-print">
-    <div style="height: 100%; display: contents;">
+    <button (click)="enableFilters()" mat-icon-button title="Enable Filters"
+        [ngClass]="filtersEnabled ? 'switch-enabled' : 'switch-disabled'">
+        <mat-icon>filter_list</mat-icon>
+    </button>
+    <button *ngIf="!addPageSizeEnable" (click)="toggleAddCustomPageSize()" mat-icon-button title="Add page size">
+        <mat-icon>settings</mat-icon>
+    </button>
+    <mat-form-field *ngIf="addPageSizeEnable" [floatLabel]="'never'" class="input">
+        <input type="text" matInput name="pageSize" placeholder="Page size"
+            (keyup.enter)="addCustomPageSize($event.target.value)" (keypress)="keyPress($event)" />
+        <button matSuffix mat-button (click)="toggleAddCustomPageSize()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <!-- <div style="height: 100%; display: contents;">
         <a href="javascript: void(0);" (click)="enableFilters()" class="fa fa-filter g_fr m-10"
             [ngClass]=" filtersEnabled ? 'switch-enabled' : 'switch-disabled'" title="Enable Filters"></a>
-    </div>
-    <div style="height: 100%; display: contents;">
+    </div> -->
+    <!-- <div style="height: 100%; display: contents;">
         <a *ngIf="!addPageSizeEnable" href="javascript: void(0);" (click)="toggleAddCustomPageSize()"
             class="fa fa-wrench g_fr m-10" [ngClass]=" addPageSizeEnable ? 'switch-enabled' : 'switch-disabled'"
             title="Add page size"></a>
@@ -17,13 +31,13 @@
 
         </div>
 
-    </div>
+    </div> -->
     <mat-paginator #paginator [pageSize]="20" [length]="totalLength" [pageSizeOptions]="pageSizeOptions"
         [showFirstLastButtons]="true" (page)="pageChange($event)">
     </mat-paginator>
 </div>
 <ngx-skeleton-loader *ngIf="loading" count="10" appearance="line" [theme]="{height: '30px'}"></ngx-skeleton-loader>
-<mat-table *ngIf="!loading && !initNoContentFound" [style.height]="advanceOptions ? 'calc(100% - 63px)' : '100%'" #table
+<mat-table *ngIf="!loading && !initNoContentFound" [style.height]="'59vh'" style="overflow: auto;" #table
     [dataSource]="_dataSource" matSort matPaginator>
     <ng-container [matColumnDef]="displayedColumn.columnName!!" *ngFor="let displayedColumn of _displayedColumns">
         <mat-header-cell [style.width.%]="displayedColumn.styles.width_percentage" *matHeaderCellDef
@@ -35,10 +49,10 @@
                         (input)="applyFilters(displayedColumn.columnName!!, $event.target.value)" /></div>
             </div>
         </mat-header-cell>
-        <mat-cell class="gs-table-cell" [style.width.%]="displayedColumn.styles.width_percentage" style="outline: none;"
-            *matCellDef="let element; let i = index" (click)="rowSelected(element, i)" [attr.tabindex]="i"
-            (keyup.arrowup)="previousRowSelected(i)" (keyup.arrowdown)="nextRowSelected(i)"
-            [ngClass]="selectedRowIndex == i? 'selected-cell':''">
+        <mat-cell class="gs-table-cell" [style.width.%]="displayedColumn.styles.width_percentage"
+            style="outline: none; justify-content: space-between;" *matCellDef="let element; let i = index"
+            (click)="rowSelected(element, i)" [attr.tabindex]="i" (keyup.arrowup)="previousRowSelected(i)"
+            (keyup.arrowdown)="nextRowSelected(i)" [ngClass]="selectedRowIndex == i? 'selected-cell':''">
             <div *ngIf="displayedColumn.type == 'text'">
                 <span
                     *ngIf="i !== editableRowIndex || readOnlyColumnName === displayedColumn.columnName!; else editableText">
@@ -65,8 +79,11 @@
                 <ng-container [ngTemplateOutlet]="actionRef" [ngTemplateOutletContext]="{ element: element }">
                 </ng-container>
             </div>
-            <i *ngIf="displayedColumn.showSelectionIcon" style="margin-right: 15px;"
-                class="fa fa-chevron-right fa-lg pull-right selection-icon"></i>
+            <mat-icon *ngIf="displayedColumn.showSelectionIcon" aria-hidden="false" aria-label="RHS open">
+                keyboard_arrow_right
+            </mat-icon>
+            <!-- <i *ngIf="displayedColumn.showSelectionIcon" style="margin-right: 15px;"
+                class="fa fa-chevron-right fa-lg pull-right selection-icon"></i> -->
         </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="_columns"></mat-header-row>

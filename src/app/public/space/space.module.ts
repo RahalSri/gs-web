@@ -21,10 +21,11 @@ import { RHSPanelComponent } from './rhs-panel/rhs-panel.component';
 import { ListComponent } from './views/list/list.component';
 import { GeneralViewComponent } from './views/general-veiw.component';
 import { GojsAngularModule } from 'gojs-angular';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { GSTableComponent } from 'src/app/shared/component/gs-table/gs-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
-import { MediaComponent } from './views/media/media.component';
-
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     GsTileComponent,
@@ -55,7 +56,11 @@ import { MediaComponent } from './views/media/media.component';
     MatExpansionModule,
     MatGridListModule,
     GojsAngularModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    FlexLayoutModule,
   ]
 })
 export class SpaceModule { }

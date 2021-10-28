@@ -1,18 +1,21 @@
-<div id="dataView_propertyInspect_wrapper" class="fullheight col-sm-4"
+<div id="dataView_propertyInspect_wrapper" class="fullheight col-sm-4" style="height: 71vh; overflow:auto"
     [ngClass]="{'col-sm-4': openRHS, 'ng-hide' : !openRHS }">
     <div id="dataView_propertyInspect" class="detailpage list-scroll fullheight">
-        <div id="rhs_pi"
-            style="display: inline-block; width: 100%; margin-top: 0px !important; height: calc(100% - 20px);">
-            <div class="modal-header p-t-0">
-                <button class="close" type="button" (click)="toggleRHS(false)">
+        <div id="rhs_pi">
+            <!-- <div class="modal-header p-t-0"> -->
+            <!-- <button class="close" type="button" (click)="toggleRHS(false)">
                     <i class="icons-office-52"></i>
-                </button>
-            </div>
+                </button> -->
+
+            <!-- </div> -->
             <div *ngIf="rhsLoading"
-                style="display: flex; justify-content: center; height: inherit; align-items: center;">
+                style="width: 27vw; display: flex; justify-content: center; height: inherit; align-items: center;">
                 <loading-spinner></loading-spinner>
             </div>
             <mat-accordion *ngIf="!rhsLoading" multi #accordion="matAccordion">
+                <button (click)="toggleRHS(false)" mat-icon-button title="Close RHS panel">
+                    <mat-icon>close</mat-icon>
+                </button>
                 <mat-expansion-panel *ngFor="let view of localPropertyValueList" [expanded]="view.selected"
                     (opened)="openedGroup(view.groupSeq)" (closed)="closedGroup(view.groupSeq)"
                     style="margin-bottom: 0; margin-top: 0; color:#5b5b5b !important">

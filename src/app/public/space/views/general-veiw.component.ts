@@ -7,8 +7,10 @@ import { CatalogueService } from "src/app/core/service/catalogue.service";
 @Component({
     selector: 'general-view',
     templateUrl: './general-view.component.html',
-  })
-  export class GeneralViewComponent {
+    styleUrls: ['./general-view.component.scss']
+
+})
+export class GeneralViewComponent {
     viewType: string = "";
     datViewSupGuId: string = "";
     spcSupGuId: string = "";
@@ -115,7 +117,7 @@ import { CatalogueService } from "src/app/core/service/catalogue.service";
             });
     }
 
-    onImageColumnLayoutChange(data:any) {
+    onImageColumnLayoutChange(data: any) {
         this.oneColumnLayout = data.oneColumnLayout;
     }
-  }
+}

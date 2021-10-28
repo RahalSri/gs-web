@@ -1,6 +1,10 @@
-table{
-    width: 100%;
+table {
+  width: 100%;
 }
 
-mat-table mat-row mat-cell i { display:none !important;}
-mat-table mat-row:hover mat-cell i { display:block !important;}
+mat-table mat-row mat-cell mat-icon {
+  display: none !important;
+}
+mat-table mat-row:hover mat-cell mat-icon {
+  display: block !important;
+}
