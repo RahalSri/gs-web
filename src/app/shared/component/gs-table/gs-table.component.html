@@ -37,7 +37,7 @@
     </mat-paginator>
 </div>
 <ngx-skeleton-loader *ngIf="loading" count="10" appearance="line" [theme]="{height: '30px'}"></ngx-skeleton-loader>
-<mat-table *ngIf="!loading && !initNoContentFound" [style.height]="'59vh'" style="overflow: auto;" #table
+<mat-table id="print-section" *ngIf="!loading && !initNoContentFound" [style.height]="'59vh'" style="overflow: auto;" #table
     [dataSource]="_dataSource" matSort matPaginator>
     <ng-container [matColumnDef]="displayedColumn.columnName!!" *ngFor="let displayedColumn of _displayedColumns">
         <mat-header-cell [style.width.%]="displayedColumn.styles.width_percentage" *matHeaderCellDef

@@ -28,6 +28,7 @@
     "keycloak-angular": "^8.4.0",
     "keycloak-js": "^15.0.2",
     "ngx-cookie": "^5.0.2",
+    "ngx-print": "^1.2.1",
     "ngx-select-dropdown": "^2.1.0",
     "ngx-skeleton-loader": "^4.0.0",
     "rxjs": "~6.6.0",

@@ -5,4 +5,5 @@ export class AlternateView {
   supGuid?: string;
   uniViewFormat?: any;
   refDatObjectSupGuid?: any;
+  refDataObjectDisplayTitle?: string;
 }

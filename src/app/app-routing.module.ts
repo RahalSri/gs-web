@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '', 
     redirectTo: '/space', 
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'space',

@@ -25,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MediaComponent } from './views/media/media.component';
+import { AlternativeViewComponent } from './views/alternative-view/alternative-view.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MediaComponent } from './views/media/media.component';
     ViewTypeHeaderComponent,
     ListComponent,
     GeneralViewComponent,
-    MediaComponent
+    MediaComponent,
+    AlternativeViewComponent
   ],
   imports: [
     CommonModule,
@@ -60,6 +62,9 @@ import { MediaComponent } from './views/media/media.component';
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
+  ],
+  exports: [
+    AlternativeViewComponent
   ]
 })
 export class SpaceModule { }

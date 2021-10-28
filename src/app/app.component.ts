@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
         var defaultSpace = response["defaultSpace"];
         localStorage.setItem("defaultSpace", defaultSpace);
         this.appConfigService.setCurrentSpace(defaultSpace);
-        // this.router.navigate(['space', defaultSpace.supGuid]);
+        this.router.navigate(['space', defaultSpace.supGuid]);
         this.loading = false;
       });
     })

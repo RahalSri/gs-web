@@ -43,7 +43,6 @@ export class GeneralViewComponent {
         this.viewType = this.route.snapshot.paramMap.get('viewType')!;
         this.datViewSupGuId = this.route.snapshot.paramMap.get('viewGuid')!;
         this.spcSupGuId = this.route.snapshot.paramMap.get('spaceGuid')!;
-        console.log(this.datViewSupGuId);
         this.fetchAlternateViews();
     }
 

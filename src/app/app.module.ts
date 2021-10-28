@@ -36,6 +36,7 @@ import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overl
 import { SpaceModule } from './public/space/space.module';
 import { ActionComponent } from './layout/action-bar/action-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTableModule, 
     MatFormFieldModule,
     ImageViewerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxPrintModule
   ],
   providers: [
     {
