@@ -26,8 +26,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MediaComponent } from './views/media/media.component';
 import { AlternativeViewComponent } from './views/alternative-view/alternative-view.component';
-import { MatTableModule } from '@angular/material/table';
 import { TableComponent } from './views/table/table.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DatasheetMainComponent } from './datasheet/datasheet-main.component';
+import { GsTdLabelComponent } from './datasheet/shared/gs-td-label/gs-td-label.component';
+import { GsTdHierarchyComponent } from './datasheet/shared/gs-td-hierarchy/gs-td-hierarchy.component';
+import { GsTdMediaComponent } from './datasheet/shared/gs-td-media/gs-td-media.component';
+import { GsTdLabelTblComponent } from './datasheet/shared/gs-td-label-tbl/gs-td-label-tbl.component';
+import { DescFilterPipe } from 'src/app/shared/pipes/desc-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +51,13 @@ import { TableComponent } from './views/table/table.component';
     GeneralViewComponent,
     MediaComponent,
     AlternativeViewComponent,
-    TableComponent
+    TableComponent,
+    DatasheetMainComponent,
+    GsTdLabelComponent,
+    GsTdHierarchyComponent,
+    GsTdLabelTblComponent,
+    GsTdMediaComponent,
+    DescFilterPipe
   ],
   imports: [
     CommonModule,
@@ -52,7 +65,6 @@ import { TableComponent } from './views/table/table.component';
     FormsModule,
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,
-    MatProgressBarModule,
     SpaceRoutingModule,
     MatTabsModule,
     MatMenuModule,
@@ -65,6 +77,9 @@ import { TableComponent } from './views/table/table.component';
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatProgressBarModule
   ],
   exports: [
     AlternativeViewComponent

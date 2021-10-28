@@ -5,8 +5,8 @@
         [dataSource]="dataSource" [advanceOptions]="true" [totalLength]="_totalRecordLength"
         (onRowSelected)="rowSelected($event)" [displayedColumns]="displayedColumns">
         <ng-template #templateRef let-element="templateElement">
-            <a class="wordwrap text_shorten datobj_title" [attr.href]="getDefDatasheetData(element.supGuid)"
-                (click)="title_clicked($event)">
+            <a class="wordwrap text_shorten datobj_title"
+                (click)="titleClicked(element.supGuid)">
                 {{element[element.key]}}
             </a>
         </ng-template>

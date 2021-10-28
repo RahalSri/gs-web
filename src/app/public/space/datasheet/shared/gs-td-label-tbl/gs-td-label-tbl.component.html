@@ -1,0 +1,28 @@
+<ng-container *ngFor="let key of keyValue; let i = index">
+    <tr>
+        <td [attr.rowspan]="rowspanLengthKey(keyValue, key.key)" *ngIf="(i == 0 || keyValue[i-1].key!=key.key)"
+            class="accordianChange" style="width: 20%; padding-left: 16px; font-weight:bold">
+            {{key.key}}
+        </td>
+        <td [attr.rowspan]="rowspanLengthTooShortTitle(keyValue, key.key, key.tooShortTitle)"
+            *ngIf="(i == 0 || (keyValue[i-1].tooShortTitle!=key.tooShortTitle || keyValue[i-1].key!=key.key))"
+            style="width: 10%; text-align: right; font-size: 75%; padding: 10px;">
+            {{key.tooShortTitle}}
+        </td>
+        <td *ngIf="isObject(key.value) && key.value.datasheet">
+            <a href="javascript:void(0)" (click)="goToURL(key.typeOfValue)">
+                {{key.value.displayLinkVal.split('@#$')[0]}}
+            </a>
+            <span *ngIf="this.datasheetInternalService.onSwitchDescription && _getDescription(key.typeOfValue).length>0 && _getDescription(key.typeOfValue)[0].description != null && _getDescription(key.typeOfValue)[0].description != ''"
+                  class="object_description"> - {{_getDescription(key.typeOfValue)[0].description | descFilter : '140'}}
+                <span *ngIf="_getDescription(key.typeOfValue)[0].description.length>140">...</span>
+             </span>
+        </td>
+        <td *ngIf="isObject(key.value) && !key.value.datasheet">
+            {{key.value.displayLinkVal.split('@#$')[0]}}
+        </td>
+        <td *ngIf="!isObject(key.value)">
+            {{key.value}}
+        </td>
+    </tr>
+</ng-container>

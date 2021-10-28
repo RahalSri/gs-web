@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CatalogueService } from "src/app/core/service/catalogue.service";
 import { TableHeader } from "src/app/shared/model/table-header";
 
@@ -14,9 +15,9 @@ export class TableComponent implements OnInit {
 
     skipNum = 0;
     qryIsHeaderMerged?: any;
-    defDatasheetData? : any;
+    defDatasheetData?: any;
     dataObjectsList = [];
-    tblHeadings? : any;
+    tblHeadings?: any;
 
     selectedRowIndex: any = -1;
     titleFilter: string = "";
@@ -37,7 +38,7 @@ export class TableComponent implements OnInit {
     @Output()
     selected = new EventEmitter();
 
-    constructor(private catalogueService: CatalogueService) { }
+    constructor(private catalogueService: CatalogueService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
         this.fetchTableData();
@@ -172,8 +173,9 @@ export class TableComponent implements OnInit {
 
     }
 
-    title_clicked(ev: Event) {
-        ev.stopImmediatePropagation();
+    titleClicked(tableObjGuid: string) {
+        var returnDefData = this.defDatasheetData.find((i: { objSupguid: any; }) => i.objSupguid == tableObjGuid);
+        this.router.navigate(['object', tableObjGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: returnDefData.defDatasheetId } })
     }
 
     applyFilters(data: any) {
@@ -195,6 +197,6 @@ export class TableComponent implements OnInit {
 
 }
 
-export class SortFilter{
-    
+export class SortFilter {
+
 }

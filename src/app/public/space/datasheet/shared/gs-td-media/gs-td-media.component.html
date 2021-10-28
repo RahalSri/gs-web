@@ -1,0 +1,36 @@
+<tr>
+    <td style="width: 100%">
+        <ng-container *ngIf="keyValView.value!=''">
+            <div>
+                <span style="float: right">
+                <i (click)="uploadImage(keyValView.met_prop_Id)" class="icon-note" style="cursor: pointer"></i>
+            </span>
+                <span style="float: right">
+                <i (click)="removeImage()" class="glyphicon glyphicon-trash" style="cursor: pointer"></i>
+            </span>
+                <div>
+                    <span class="accordianChange" style="padding-left: 6px; font-weight:bold">
+                        {{keyValView.key}}
+                    </span>
+                    <div style="text-align: center">
+                        <img (click)="showImage(keyValView.value.split('|')[0])" [src]="keyValView.value.split('|')[1]"
+                             alt="image loading failed" class="zoomimg m-b-10 m-t-10" style="vertical-align: middle">
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="keyValView.value==''">
+            <div>
+                <span class="accordianChange" style="padding-left: 6px; font-weight:bold">
+                    {{keyValView.key}}
+                </span>
+                <div style="float: right; display: inline-block">
+                    <gs-button (onClickEvent)="uploadImage(keyValView.met_prop_Id)"
+                               [label]="'Upload'"
+                               [type]="'button'">
+                    </gs-button>
+                </div>
+            </div>
+        </ng-container>
+    </td>
+</tr>
