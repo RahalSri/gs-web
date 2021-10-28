@@ -5,11 +5,9 @@
     <loading-spinner *ngIf="loading"></loading-spinner>
     <div class="row ro-media fullheight" style="margin: 0px" *ngIf="oneColumnLayout">
 
-        <div id="dataView_maincontainer1" class="col-md-12 text-center fullheight" style="padding: 10px;"
-            *ngIf="mediaFileType=='Image'">
-            <img (click)="showImage(mediaOriginalPath)" class="zoomimg" src="{{mediaLargePath}}" image-modal
-                element-dimension="imgSize" element-callback="setImageDimension(imginfo)" element-index="1"
-                [style.width.px]="dynamicWidth" [style.height.px]="dynamicHeight" />
+        <div [style.height]="'59vh'" id="dataView_maincontainer1" class="col-md-12 text-center fullheight"
+            style="padding: 10px;" *ngIf="mediaFileType=='Image'">
+            <img style="cursor: pointer" (click)="showImage(mediaOriginalPath)" src="{{mediaLargePath}}" image-modal />
         </div>
         <div class="col-md-12 media-nr" *ngIf="mediaFileExt=='PDF' || mediaFileExt=='DOCX' || mediaFileExt=='PPTX'"
             style="width:auto;">
@@ -18,17 +16,14 @@
         </div>
     </div>
 
-    <div class="row ro-media fullheight" style="margin: 0px" *ngIf="!oneColumnLayout">
-        <div class="col-sm-4 p-b-10 line-separator">
+    <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!oneColumnLayout">
+        <div>
             <div class="panel-content media-nr p-t-0">{{vieNarrativeInlead}}</div>
             <div class="panel-content media-nr p-t-0">{{vieNarrative}}</div>
             <div class="panel-content media-nr p-t-0">{{vieNarrativeLeadOut}}</div>
         </div>
-
-        <div id="dataView_maincontainer1" class="col-sm-8 p-b-10 text-left fullheight" *ngIf="mediaFileType=='Image'">
-            <img class="zoomimg" (click)="showImage(mediaOriginalPath)" src="{{mediaLargePath}}" image-modal
-                element-dimension="imgSize" element-callback=".setImageDimension(imginfo)" element-index="1"
-                [style.width.px]="dynamicWidth" [style.height.px]="dynamicHeight" />
+        <div [style.height]="'59vh'" id="dataView_maincontainer1" *ngIf="mediaFileType=='Image'">
+            <img style="cursor: pointer" (click)="showImage(mediaOriginalPath)" src="{{mediaLargePath}}" image-modal />
         </div>
         <div id="dataView_maincontainer2" class="col-sm-8 p-l-30"
             *ngIf="mediaFileExt=='PDF' || mediaFileExt=='DOCX' || mediaFileExt=='PPTX'">

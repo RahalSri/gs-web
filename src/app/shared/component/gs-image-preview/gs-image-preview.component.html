@@ -1,15 +1,13 @@
 <div class="overlay-content">
-    <div class="d-flex flex-row">
-        <div class="d-flex flex-column">
-            <div class="d-flex justify-content-center">
-                <div style="float: right; margin-top: 5px;">
-                    <a [href]="image" download class="btn btn-primary" type="button">
-                        <i class="fa fa-download"></i>
-                    </a>
-                    <gs-button icon="fa fa-times" (onClickEvent)="dialogRef.close()"></gs-button>
-                </div>
-            </div>
-            <ngx-imageviewer [src]="image"></ngx-imageviewer>
-        </div>
+    <div style="display: flex; grid-gap: 15px; float: right; padding: 10px;">
+        <a style="text-decoration: none;" [href]="image" type="button">
+            <button mat-icon-button mat-flat-button title="download image">
+                <mat-icon>download</mat-icon>
+            </button>
+        </a>
+        <button mat-icon-button (click)="dialogRef.close()" mat-flat-button title="close image">
+            <mat-icon>close</mat-icon>
+        </button>
     </div>
+    <ngx-imageviewer [src]="image"></ngx-imageviewer>
 </div>
