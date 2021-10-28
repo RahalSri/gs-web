@@ -9,9 +9,9 @@
         (imageColumnLayoutChange)="onImageColumnLayoutChange($event)">
     </view-type-header>
     <!-- </div> -->
-    <!-- <media-view *ngIf="viewType == 'MM'" [supGuid]="datViewSupGuId" (onMediaDataLoad)="onViewDataLoad($event)"
-            [oneColumnLayout]="oneColumnLayout">
-        </media-view> -->
+    <media-view *ngIf="viewType == 'MM'" [supGuid]="datViewSupGuId" (onMediaDataLoad)="onViewDataLoad($event)"
+        [oneColumnLayout]="oneColumnLayout">
+    </media-view>
     <div [ngClass]="{'rhsOpen' : openRHS, 'rhsClosed':!openRHS }">
         <div [style.grid-area]="'table'">
             <hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"

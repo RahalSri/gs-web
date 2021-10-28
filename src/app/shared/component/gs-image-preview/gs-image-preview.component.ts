@@ -5,7 +5,7 @@ import { PREVIEW_DIALOG_DATA } from "src/app/core/service/preview-overlay.token"
 
 const GS_IMAGEVIEWER_CONFIG: ImageViewerConfig = {
     width: window.screen.width,
-    height: window.screen.height - 300,
+    height: window.screen.height - 150,
     buttonStyle: {
         iconFontFamily: 'Material Icons', // font used to render the button icons
         alpha: 1, // buttons' transparence value
@@ -42,6 +42,5 @@ export class GsImagePreviewComponent {
         public dialogRef: PreviewOverlayRef,
         @Inject(IMAGEVIEWER_CONFIG) private config: ImageViewerConfig,
         @Inject(PREVIEW_DIALOG_DATA) public image: any) {
-        console.log("image passed " + image);
     }
 }

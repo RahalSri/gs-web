@@ -4,7 +4,7 @@ import { PreviewOverlayRef } from "src/app/core/service/preview-overlay.ref";
 import { PreviewOverlayService } from "src/app/core/service/preview-overlay.service";
 
 @Component({
-    selector: 'media',
+    selector: 'media-view',
     templateUrl: './media.component.html'
 })
 export class MediaComponent implements OnInit {
@@ -53,23 +53,6 @@ export class MediaComponent implements OnInit {
                 this.loading = false;
             });
     }
-
-    setImageDimension(imgInfo: any) {
-        if (imgInfo.imgSize.containerWidth >= 50) {
-            imgInfo.imgSize.containerWidth = imgInfo.imgSize.containerWidth - 50;
-            imgInfo.imgSize.containerHeight = imgInfo.imgSize.containerHeight - 20;
-            var newsize = this.calculateAspectRatio(imgInfo.imgSize.width, imgInfo.imgSize.height, imgInfo.imgSize.containerWidth, imgInfo.imgSize.containerHeight);
-            this.dynamicWidth = Math.ceil(newsize.width);
-            this.dynamicHeight = Math.ceil(newsize.height);
-
-        }
-    }
-
-    calculateAspectRatio(srcWidth: number, srcHeight: number, maxWidth: number, maxHeight: number) {
-        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-        return { width: srcWidth * ratio, height: srcHeight * ratio };
-    }
-
     downloadMediaFile(fileExt: string) {
         if (fileExt == 'PDF') {
             window.open(this.mediaFilePath);

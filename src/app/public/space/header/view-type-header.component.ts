@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, Output, ViewChild } from "@angular/core
 
 @Component({
     selector: 'view-type-header',
-    templateUrl: './view-type-header.component.html'
+    templateUrl: './view-type-header.component.html',
+    styleUrls: ['./view-type-header.component.scss']
 })
 export class ViewTypeHeaderComponent {
     showDescription: boolean = false;

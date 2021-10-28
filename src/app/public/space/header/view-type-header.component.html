@@ -1,13 +1,10 @@
 <div class="row" *ngIf="viewType!='MM' && viewTitle != ''">
-    <div style="display: flex;
-    justify-content: space-between;
-    align-items: center;">
-        <div style="    display: flex;
-        align-items: center;">
+    <div class="headerRow">
+        <div class="headerIcon">
             <button (click)="showDescription = !showDescription;" mat-icon-button title="Page description">
                 <mat-icon>{{showDescription ? 'expand_more' : 'chevron_right'}}</mat-icon>
             </button>
-            <h2 id="page_header" style="display:inline; margin: 0;">
+            <h2 id="page_header" class="headerTitle">
                 {{viewTitle}}
             </h2>
         </div>
@@ -15,43 +12,45 @@
             <mat-icon>{{fullScreenEnabled ? 'fullscreen_exit' : 'fullscreen'}}</mat-icon>
         </button>
     </div>
-    <h4 class="p-l-20" id="showdesc" *ngIf="showDescription" style="white-space:pre-line;
-			word-break:break-word;margin: 0;padding:0">{{description}}
+    <h4 id="showdesc" *ngIf="showDescription" class="headerDes">{{description}}
     </h4>
 </div>
 <div class="row" *ngIf="viewType=='MM' && viewTitle != ''">
-    <div class="col-sm-12">
-        <h2 id="page_header">
-            <i class="fa" (click)="showDescription = !showDescription"
-                [ngClass]="showDescription ? 'fa-chevron-circle-down' : 'fa-chevron-circle-right'"></i>
-            {{viewTitle}}
-        </h2>
+    <div class="headerRow">
+        <div class="headerIcon">
+            <button (click)="showDescription = !showDescription;" mat-icon-button title="Page description">
+                <mat-icon>{{showDescription ? 'expand_more' : 'chevron_right'}}</mat-icon>
+            </button>
+            <h2 id="page_header" class="headerTitle">
+                {{viewTitle}}
+            </h2>
+        </div>
     </div>
-    <div class="col-sm-12 p-l-40">
+    <div>
         <h3 id="showTitle" *ngIf="showDescription">{{viewSubTitle}}</h3>
         <h3 id="showdesc" *ngIf="showDescription">{{description}}</h3>
     </div>
-    <div class="col-sm-12 screen">
+    <div>
         <h3 id="page_header">
-            <a href="javascript:void(0);" *ngIf="oneColumnLayout && showNarratives" (click)="showImageWithNarrative();">
-                <img height="15" width="15" src="./img/two_column_layout.svg" />
-            </a>
-            <a href="javascript:void(0);" *ngIf="!oneColumnLayout && showNarratives" (click)="removeImageNarrative();">
-                <img height="15" width="15" src="./img/one_column_layout.svg" />
-            </a>
-            <a style="margin-left: 8px" href="javascript:void(0);"
-                (click)="showNarratives= ! showNarratives; removeImageNarrative();" *ngIf="showNarratives">Hide
-                Narrative</a>
-            <a style="padding-left: 25px;" href="javascript:void(0);" (click)="showNarratives= ! showNarratives;"
-                *ngIf="!showNarratives">Show
-                Narrative</a>
-
+            <button *ngIf="oneColumnLayout && showNarratives" (click)="showImageWithNarrative();" mat-icon-button
+                title="show image with narrative">
+                <mat-icon>view_column</mat-icon>
+            </button>
+            <button *ngIf="!oneColumnLayout && showNarratives" (click)="removeImageNarrative();" mat-icon-button
+                title="remove image with narrative">
+                <mat-icon>view_agenda</mat-icon>
+            </button>
+            <button mat-button (click)="showNarratives= ! showNarratives; removeImageNarrative();"
+                *ngIf="showNarratives">Hide
+                Narrative</button>
+            <button mat-button (click)="showNarratives= ! showNarratives;" *ngIf="!showNarratives">Show
+                Narrative</button>
         </h3>
 
-        <div class="col-md-12 p-r-30" *ngIf="oneColumnLayout && showNarratives">
-            <div class="panel-content media-nr-cl p-t-0">{{viewNarrativeInlead}}</div>
-            <div class="panel-content media-nr-cl p-t-0">{{viewNarrative}}</div>
-            <div class="panel-content media-nr-cl p-t-0">{{viewNarrativeLeadOut}}</div>
+        <div *ngIf="oneColumnLayout && showNarratives">
+            <div class="panel-content">{{viewNarrativeInlead}}</div>
+            <div class="panel-content">{{viewNarrative}}</div>
+            <div class="panel-content">{{viewNarrativeLeadOut}}</div>
         </div>
     </div>
 </div>
