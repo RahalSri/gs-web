@@ -1,0 +1,35 @@
+.search_heading {
+  display: flex;
+}
+.search_result {
+  padding: 12px;
+  color: #5b5b5b;
+  &:hover {
+    background-color: #f5f5f5;
+    color: #000000;
+  }
+  .search_subtitle {
+    color: #6877ca;
+    cursor: pointer;
+    &:hover {
+      color: #535fa1;
+    }
+  }
+  .search_line1 {
+    font-size: 18px;
+    .search_location {
+      text-transform: lowercase;
+      font-size: 15px;
+    }
+    .search_space {
+      font-size: 15px;
+    }
+    .search_value {
+      font-size: 14px;
+    }
+  }
+}
+
+.divider {
+  margin-top: 12px;
+}

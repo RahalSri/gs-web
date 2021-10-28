@@ -3,7 +3,8 @@
 </button>
 <div *ngIf="showGlobalSearch">
     <mat-form-field [floatLabel]="'never'" class="input">
-        <input #searchTextField type="text" matInput name="search" matInput autofocus placeholder="Your Search..." [(ngModel)]="searchText" />
+        <input #searchTextField type="text" matInput name="search" (keyup.enter)="search()" matInput autofocus
+            placeholder="Your Search..." [(ngModel)]="searchText" />
         <button matSuffix mat-button (click)="onSearchDisabled()">
             <mat-icon>close</mat-icon>
         </button>
