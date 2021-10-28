@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { AppConfigService } from "src/app/core/service/app-config.service";
 import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.service";
 
 @Component({
@@ -13,15 +14,15 @@ import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.se
     showShare: boolean = false;
 
 
-    constructor(private breadcrumbStoreService: BreadcrumbStoreService, private route: ActivatedRoute){
-        
+    constructor(private breadcrumbStoreService: BreadcrumbStoreService, private appConfigService: AppConfigService){
+        this.appConfigService.actionMenu.subscribe(response => {
+            this.showAltView = response.altView;
+            this.showPrint = response.print;
+            this.showShare = response.share;
+        });
     }
 
     ngOnInit(): void {
-        this.route.data.subscribe(data => console.log(data));
-        this.showAltView = this.route.snapshot.data['altView'];
-        this.showPrint = this.route.snapshot.data['print'];
-        this.showShare = this.route.snapshot.data["share"];
     }
 
     homeSelected(){

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { ActionMenu } from "src/app/core/model/action-menu";
 import { AppConfigService } from "src/app/core/service/app-config.service";
 import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.service";
 import { CatalogueService } from "src/app/core/service/catalogue.service";
@@ -37,7 +38,13 @@ export class GeneralViewComponent {
     constructor(private route: ActivatedRoute,
         private breadcrumbStoreService: BreadcrumbStoreService,
         private catalogueService: CatalogueService,
-        private appConfigService: AppConfigService) { }
+        private appConfigService: AppConfigService) { 
+            var actionMenu = new ActionMenu();
+            actionMenu.altView = true;
+            actionMenu.print = true;
+            actionMenu.share = true;
+            this.appConfigService.setActionMenu(actionMenu)
+        }
 
     ngOnInit(): void {
         this.viewType = this.route.snapshot.paramMap.get('viewType')!;

@@ -27,8 +27,9 @@ export class ViewGalleryComponent implements OnInit {
   constructor(
     private appConfigService: AppConfigService,
     private dialog: GSDialog,
-    private catalogueService: CatalogueService
+    private catalogueService: CatalogueService,
   ) {
+    this.appConfigService.resetActionMenu();
   }
 
   ngOnDestroy(): void {
