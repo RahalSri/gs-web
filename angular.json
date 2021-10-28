@@ -65,6 +65,20 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "dev": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -77,6 +91,9 @@
             },
             "development": {
               "browserTarget": "gs-web:build:development"
+            },
+            "dev": {
+              "browserTarget": "gs-web:build:dev"
             }
           },
           "defaultConfiguration": "development",
