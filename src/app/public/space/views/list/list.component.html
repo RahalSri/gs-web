@@ -7,8 +7,7 @@
     <ng-template #templateRef let-element="templateElement">
         <a *ngIf="element.defaultDatasheetSupguId!=null && element.defaultDatasheetSupguId!=''"
             class="wordwrap text_shorten datobj_title"
-            href="#/space/{{spcSupGuId}}/dataview/{{datViewSupGuId}}/datasheet/{{element.supGuId}}?defaultDatasheetSupguId={{element.defaultDatasheetSupguId}}"
-            (click)="title_clicked($event)">
+            (click)="titleClicked(element)">
             {{element.displayTitle}}
         </a>
         <span *ngIf="element.defaultDatasheetSupguId==null || element.defaultDatasheetSupguId==''"

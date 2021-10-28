@@ -175,7 +175,7 @@ export class TableComponent implements OnInit {
 
     titleClicked(tableObjGuid: string) {
         var returnDefData = this.defDatasheetData.find((i: { objSupguid: any; }) => i.objSupguid == tableObjGuid);
-        this.router.navigate(['object', tableObjGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: returnDefData.defDatasheetId } })
+        this.router.navigate(['object', tableObjGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: returnDefData.defDatasheetId } });
     }
 
     applyFilters(data: any) {

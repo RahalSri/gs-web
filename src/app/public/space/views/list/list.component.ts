@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild, Input, Output, EventEmitter }
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogueService } from 'src/app/core/service/catalogue.service';
 import { TableHeader } from 'src/app/shared/model/table-header';
 @Component({
@@ -50,7 +51,9 @@ export class ListComponent implements OnInit {
     disableNoContent: boolean = false;
 
     constructor(
-        private catalogueService: CatalogueService
+        private catalogueService: CatalogueService,
+        private router: Router,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
@@ -84,8 +87,8 @@ export class ListComponent implements OnInit {
         this.getPaginatedFilteredListData(data)
     }
 
-    title_clicked(ev: Event) {
-        ev.stopImmediatePropagation();
+    titleClicked(element: any) {
+        this.router.navigate(['object', element.supGuId], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: element.defaultDatasheetSupguId } });
     }
 
     applyFilters(data: any) {
