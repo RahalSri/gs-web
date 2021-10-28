@@ -7,7 +7,7 @@ import { ContentSearchService } from 'src/app/core/service/content-search.servic
 @Component({
   selector: 'content-search',
   templateUrl: './content-search.component.html',
-  styleUrls: ['./content-search.component.css'],
+  styleUrls: ['./content-search.component.scss'],
 })
 export class ContentSearchComponent implements OnInit {
   searchText: string = "";
@@ -23,13 +23,13 @@ export class ContentSearchComponent implements OnInit {
     private catalogueService: CatalogueService,
     private appConfigService: AppConfigService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     console.log("ABC");
     this.searchText = this.route.snapshot.paramMap.get('searchText')!;
     this.searchContent();
-    
+
 
     this.breadcrumbStoreService.pushToOrigin(
       BreadcrumbStoreService.PAGE_CONSTS.GLOBAL_SEARCH,
@@ -76,23 +76,23 @@ export class ContentSearchComponent implements OnInit {
     var truncated_str = '';
 
     let pattern = new RegExp('<em>(.*)</em>', 'gi');
-    var keywords = searchText.match(pattern);
-    // for (const [key, value] of Object.entries(keywords)) {
-    //   let searchVal: string = value as string;
-    //   searchVal = searchVal.replace(/[^\w\s]/gi, '');
-    //   var regex = new RegExp(searchVal, 'gi');
-    //   var arr = searchText.split(regex);
-    //   for (const [splitKey, splitValue] of Object.entries(arr)) {
-    //     let value: string = splitValue as string;
-    //     if (value.length > 10 && value.indexOf('<em>') == -1) {
-    //       var array_elem = parseInt(splitKey + 1);
-    //       if (array_elem % 2 > 0) arr[splitKey] = '...' + value.substr(-10);
-    //       else arr[splitKey] = value.substr(0, 10) + '...';
-    //     }
-    //   }
-    //   truncated_str = arr.join(searchVal);
-    // }
-    // return truncated_str;
+    var keywords = searchText.match(pattern) || {};
+    for (const [key, value] of Object.entries(keywords)) {
+      let searchVal: string = value as string;
+      searchVal = searchVal.replace(/[^\w\s]/gi, '');
+      var regex = new RegExp(searchVal, 'gi');
+      var arr = searchText.split(regex);
+      for (const [splitKey, splitValue] of Object.entries(arr)) {
+        let value: string = splitValue as string;
+        if (value.length > 10 && value.indexOf('<em>') == -1) {
+          var array_elem = parseInt(splitKey + 1);
+          if (array_elem % 2 > 0) arr[splitKey] = '...' + value.substr(-10);
+          else arr[splitKey] = value.substr(0, 10) + '...';
+        }
+      }
+      truncated_str = arr.join(searchVal);
+    }
+    return truncated_str;
   }
 
   getSearchObject(result: any, type: any) {
