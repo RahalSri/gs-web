@@ -27,10 +27,8 @@ export class ContentSearchComponent implements OnInit {
 
   ngOnInit() {
     console.log("ABC");
-    this.route.queryParams.subscribe(params =>{
-      this.searchText = params.searchText;
-      this.searchContent();
-    });
+    this.searchText = this.route.snapshot.paramMap.get('searchText')!;
+    this.searchContent();
     
 
     this.breadcrumbStoreService.pushToOrigin(

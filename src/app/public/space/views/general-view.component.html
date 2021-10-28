@@ -16,8 +16,8 @@
         <div [style.grid-area]="'table'">
             <hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"
                 [datViewSupGuId]="datViewSupGuId" (rightClick)="hlRightClick($event)"></hierarchy>
-            <!-- <table-view *ngIf="viewType=='TB'" [datViewSupGuId]="datViewSupGuId" (selected)="rowSelected($event)"
-                (onTableDataLoad)="onViewDataLoad($event)"></table-view> -->
+            <table-view *ngIf="viewType=='TB'" [datViewSupGuId]="datViewSupGuId" (selected)="rowSelected($event)"
+                (onTableDataLoad)="onViewDataLoad($event)"></table-view>
             <list *ngIf="viewType=='LS'" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
                 (selected)=rowSelected($event); (onListViewLoad)="onViewDataLoad($event)"></list>
         </div>
@@ -29,3 +29,5 @@
     </div>
     <!-- </div> -->
 </mat-card>
+<hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"
+                [datViewSupGuId]="datViewSupGuId" (rightClick)="hlRightClick($event)"></hierarchy>

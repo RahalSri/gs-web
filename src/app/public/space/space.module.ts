@@ -26,6 +26,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MediaComponent } from './views/media/media.component';
 import { AlternativeViewComponent } from './views/alternative-view/alternative-view.component';
+import { MatTableModule } from '@angular/material/table';
+import { TableComponent } from './views/table/table.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { AlternativeViewComponent } from './views/alternative-view/alternative-v
     ListComponent,
     GeneralViewComponent,
     MediaComponent,
-    AlternativeViewComponent
+    AlternativeViewComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,

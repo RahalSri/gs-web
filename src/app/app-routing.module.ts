@@ -9,7 +9,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'search',
+    path: 'search/:searchText',
     component: ContentSearchComponent,
   },
   {

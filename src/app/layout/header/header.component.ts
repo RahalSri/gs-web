@@ -71,4 +71,8 @@ export class HeaderComponent implements OnInit {
       'template', 'adminpanel'
     );
   }
+
+  navigateToHome(){
+    
+  }
 }

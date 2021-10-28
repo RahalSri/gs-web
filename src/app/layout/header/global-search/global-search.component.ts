@@ -32,10 +32,7 @@ export class GlobalSearchComponent {
       });
     }
     else{
-      console.log("navigating");
-      this.router.navigate(['/search'], {queryParams: { 
-        "searchText": this.searchText
-      }});
+      this.router.navigate(['search', this.searchText]);
     }
   }
 

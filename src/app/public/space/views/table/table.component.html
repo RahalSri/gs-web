@@ -1,0 +1,15 @@
+<div class="list-view-container elastic-container elastic-box">
+    <no-content-banner *ngIf="!loading && !initialLoad && !disableNoContent && _totalRecordLength == 0">
+    </no-content-banner>
+    <gs-table *ngIf="disableNoContent" (filterData)="applyFilters($event)" (pageData)="pageChange($event)"
+        [dataSource]="dataSource" [advanceOptions]="true" [totalLength]="_totalRecordLength"
+        (onRowSelected)="rowSelected($event)" [displayedColumns]="displayedColumns">
+        <ng-template #templateRef let-element="templateElement">
+            <a class="wordwrap text_shorten datobj_title" [attr.href]="getDefDatasheetData(element.supGuid)"
+                (click)="title_clicked($event)">
+                {{element[element.key]}}
+            </a>
+        </ng-template>
+    </gs-table>
+    <ngx-skeleton-loader *ngIf="loading" count="10" appearance="line" [theme]="{height: '30px'}"></ngx-skeleton-loader>
+</div>
