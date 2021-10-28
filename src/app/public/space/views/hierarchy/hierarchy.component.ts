@@ -5,7 +5,7 @@ import { CatalogueService } from "src/app/core/service/catalogue.service";
 import { GraphDataService } from "src/app/core/service/graph-data.service";
 
 @Component({
-  selector: 'hl',
+  selector: 'hierarchy',
   templateUrl: './hierarchy.component.html'
 })
 export class HierarchyComponent implements OnInit {

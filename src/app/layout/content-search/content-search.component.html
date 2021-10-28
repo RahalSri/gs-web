@@ -1,13 +1,27 @@
-<!-- Commented out to implement infinity scroll after the pagination-->
-<!-- <div infiniteScroll [infiniteScrollDistance]="5" (scrolled)="onScroll()" class="main_container search_page"> -->
-
+<mat-card #fullScreen class="fullheight">
+    <mat-card-title> <mat-icon>search</mat-icon>"{{searchText}}"</mat-card-title>
+  <mat-card-subtitle>Search Results </mat-card-subtitle>
+  <mat-card-content>
+    <div *ngFor="let result of resultList" class="search_result">
+        <div class="search_line1">
+            <a (click)="getSearchObject(result,result.NodeType);">{{result.SUPtitle
+                ||''}}</a>&nbsp;&nbsp;<span class="search_space">in {{result.SPCShortTitle
+                ||''}}</span>&nbsp;&nbsp;<span class="search_location">{{result.key
+                ||''}}</span>&nbsp;&nbsp;<span class="search_value"
+                [innerHTML]="searchTruncate(result.value)"></span>
+        </div>
+        <div class="search_line2">{{result.METSupShortTitle ||''}}</div>
+        <div class="search_line3">{{result.SUPdescription ||''}}</div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!-- 
 <div class="main_container search_page">
     <div class="panel general-panel">
         <div class="panel-header">
             <div class="row">
                 <h2 class="col-xs-12">
-                    <i class="icon-magnifier"></i>Search Results for
-                    "{{searchText}}"
+                    <i class="icon-magnifier"></i>
                 </h2>
             </div>
         </div>
@@ -40,8 +54,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <!--  <span ng-hide="vm.searchEmptyResults" style="color:black"  >Search - Empty Results</span> -->
             </div>
         </div>
     </div>
-</div>
+</div> -->

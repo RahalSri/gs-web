@@ -6,8 +6,8 @@ import { CatalogueService } from 'src/app/core/service/catalogue.service';
 import { ContentSearchService } from 'src/app/core/service/content-search.service';
 @Component({
   selector: 'content-search',
-  template: require('./content-search.component.html'),
-  styles: ['./content-search.component.css'],
+  templateUrl: './content-search.component.html',
+  styleUrls: ['./content-search.component.css'],
 })
 export class ContentSearchComponent implements OnInit {
   searchText: string = "";
@@ -26,6 +26,7 @@ export class ContentSearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("ABC");
     this.route.queryParams.subscribe(params =>{
       this.searchText = params.searchText;
       this.searchContent();
