@@ -39,6 +39,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxPrintModule } from 'ngx-print';
 import { ContentSearchComponent } from './layout/content-search/content-search.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { QueryModule } from './public/query/query.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatDividerModule } from '@angular/material/divider';
   ],
   imports: [
     SpaceModule,
+    QueryModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -5,9 +5,9 @@
     <span *ngIf="isExpanded">Admin mode</span>
   </mat-slide-toggle>
   <mat-divider style="margin-bottom: 15px;"></mat-divider>
-  <mat-list-item [routerLink]="['/tasks', {outlets: {side: ['create']}}]" style="margin-bottom: 10px;
+  <mat-list-item [routerLink]="menuItem.path" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}" style="margin-bottom: 10px;
   border-radius: 3px;" *ngFor="let menuItem of menuItems">
-    <mat-icon mat-list-icon class="">{{menuItem.icon}}</mat-icon>
+    <mat-icon mat-list-icon>{{menuItem.icon}}</mat-icon>
     <span *ngIf="isExpanded">{{menuItem.title}}</span>
   </mat-list-item>
 </mat-nav-list>
