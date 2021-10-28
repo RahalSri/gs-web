@@ -10,12 +10,7 @@ const routes: Routes = [
   },
   {
     path: ':spaceGuid/views/:viewGuid/:viewType',
-    component: GeneralViewComponent,
-    data: {
-      altView: true,
-      print: true,
-      share: true
-    }
+    component: GeneralViewComponent
   }
 ];
 

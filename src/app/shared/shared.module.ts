@@ -32,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
+import { GSUnsuccessMsgComponent } from './component/gs-unsuccess-msg/gs-unsuccess-msg.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component
     LoadingSpinnerComponent,
     NoContentBannerComponent,
     GSTableComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    GSUnsuccessMsgComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +92,8 @@ import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component
     GsImagePreviewComponent,
     LoadingSpinnerComponent,
     NoContentBannerComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    GSUnsuccessMsgComponent
   ],
   providers: [
     GSDialog

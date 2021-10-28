@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ContentSearchService } from 'src/app/core/service/content-search.service';
+import { Router } from '@angular/router';
 import { GSSnackBarComponent } from '../../../shared/component/gs-snack-bar/gs-snackbar.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class GlobalSearchComponent {
     }
   }
 
-  constructor(private contentSearchService: ContentSearchService, private snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar, private router: Router) {}
 
   search() {
     this.onSearchInitiated.emit();
@@ -32,9 +32,10 @@ export class GlobalSearchComponent {
       });
     }
     else{
-      this.contentSearchService.searchText = this.searchText;
-      const location = '#/content-search/' + this.searchText;
-      window.location.href = location;
+      console.log("navigating");
+      this.router.navigate(['/search'], {queryParams: { 
+        "searchText": this.searchText
+      }});
     }
   }
 

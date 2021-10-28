@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContentSearchComponent } from './layout/content-search/content-search.component';
 
 const routes: Routes = [
   {
     path: '', 
     redirectTo: '/space', 
     pathMatch: 'full',
+  },
+  {
+    path: 'search',
+    component: ContentSearchComponent,
   },
   {
     path: 'space',

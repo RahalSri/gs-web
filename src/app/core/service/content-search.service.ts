@@ -7,7 +7,6 @@ import { environment } from "src/environments/environment";
   })
 export class ContentSearchService {
     apiEndpoint = environment.gsApiUrl;
-    searchText?: string;
 
     constructor(private http: HttpClient) { }
 

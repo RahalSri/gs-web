@@ -37,6 +37,7 @@ import { SpaceModule } from './public/space/space.module';
 import { ActionComponent } from './layout/action-bar/action-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxPrintModule } from 'ngx-print';
+import { ContentSearchComponent } from './layout/content-search/content-search.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NgxPrintModule } from 'ngx-print';
     SpaceSelectorComponent,
     LeftPanelComponent,
     FooterComponent,
-    ActionComponent
+    ActionComponent,
+    ContentSearchComponent
   ],
   imports: [
     SpaceModule,
