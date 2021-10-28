@@ -6,7 +6,8 @@ import { GraphDataService } from "src/app/core/service/graph-data.service";
 
 @Component({
   selector: 'hierarchy',
-  templateUrl: './hierarchy.component.html'
+  templateUrl: './hierarchy.component.html',
+  styleUrls: ['./hierarchy.component.scss']
 })
 export class HierarchyComponent implements OnInit {
   public diagram?: Diagram;
@@ -122,6 +123,7 @@ export class HierarchyComponent implements OnInit {
       this.convertedDataModel
     );
     this.setDefaultExpandLevel(this.diagram, this.defaultHLlevel);
+    this.diagram.initialContentAlignment = new go.Spot(0,0);
   }
 
   private setDefaultExpandLevel(diagram: any, HLLevel: any) {
