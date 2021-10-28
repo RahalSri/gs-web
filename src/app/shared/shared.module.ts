@@ -31,6 +31,7 @@ import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleto
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     GsImagePreviewComponent,
     LoadingSpinnerComponent,
     NoContentBannerComponent,
-    GSTableComponent
+    GSTableComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -87,7 +89,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     GsMatTabTextAreaComponent,
     GsImagePreviewComponent,
     LoadingSpinnerComponent,
-    NoContentBannerComponent
+    NoContentBannerComponent,
+    BreadcrumbComponent
   ],
   providers: [
     GSDialog

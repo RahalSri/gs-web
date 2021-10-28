@@ -6,7 +6,7 @@
     <app-left-panel [isExpanded]="isLeftPanelExpanded" (leftPanelOpened)="onLeftPanelToggle($event)"></app-left-panel>
   </mat-sidenav>
 
-  <div style="height: 55px;"></div>
+  <action-bar></action-bar>
   <div class="content" #main>
     <router-outlet></router-outlet>
   </div>

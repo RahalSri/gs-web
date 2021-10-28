@@ -1,0 +1,12 @@
+<ol class="breadcrumb">
+    <li *ngFor="let element of breadcrumbNodes">
+        <span [ngSwitch]="element.displayText">
+            <span *ngSwitchCase="'...'">
+                {{element.displayText}}
+            </span>
+            <span *ngSwitchDefault>
+                <a href="{{element.url}}" (click)="handleDefaultClick(element.displayText)">{{element.displayText}}</a>
+            </span>
+        </span>
+    </li>
+</ol>

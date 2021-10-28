@@ -34,6 +34,8 @@ import { MatTableModule } from '@angular/material/table';
 import { ImageViewerModule } from '@emazv72/ngx-imageviewer';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { SpaceModule } from './public/space/space.module';
+import { ActionComponent } from './layout/action-bar/action-bar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { SpaceModule } from './public/space/space.module';
     GlobalSearchComponent,
     SpaceSelectorComponent,
     LeftPanelComponent,
-    FooterComponent
+    FooterComponent,
+    ActionComponent
   ],
   imports: [
     SpaceModule,
@@ -51,7 +54,6 @@ import { SpaceModule } from './public/space/space.module';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
     KeycloakAngularModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
@@ -75,7 +77,8 @@ import { SpaceModule } from './public/space/space.module';
     MatProgressBarModule,
     MatTableModule, 
     MatFormFieldModule,
-    ImageViewerModule
+    ImageViewerModule,
+    FlexLayoutModule
   ],
   providers: [
     {
