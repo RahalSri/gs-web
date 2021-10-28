@@ -1,22 +1,23 @@
-<div *ngIf="viewTitle == ''"
-    style="width: 100%; display: flex; justify-content: center; margin-top: calc(50vh - 100px);">
-    <loading-spinner></loading-spinner>
-</div>
-
 <div class="row" *ngIf="viewType!='MM' && viewTitle != ''">
-    <div class="col-sm-12">
-        <h2 id="page_header" style="display:inline">
-            <i class="fa" (click)="showDescription = !showDescription;"
-                [ngClass]="showDescription ? 'fa-chevron-circle-down' : 'fa-chevron-circle-right'"></i>{{viewTitle}}
-        </h2>
-        <a href="javascript:void(0)" class="g_fr m-10" (click)="changeFullScreenView()">
-            <i [ngClass]="fullScreenEnabled ? 'icon-size-actual' : 'icon-size-fullscreen'" *ngIf="fullScreenIconVisible"
-                class="icon-size-fullscreen" style="font-size: 15px;"></i>
-        </a>
+    <div style="display: flex;
+    justify-content: space-between;
+    align-items: center;">
+        <div style="    display: flex;
+        align-items: center;">
+            <button (click)="showDescription = !showDescription;" mat-icon-button title="Page description">
+                <mat-icon>{{showDescription ? 'expand_more' : 'chevron_right'}}</mat-icon>
+            </button>
+            <h2 id="page_header" style="display:inline; margin: 0;">
+                {{viewTitle}}
+            </h2>
+        </div>
+        <button *ngIf="fullScreenIconVisible" (click)="changeFullScreenView()" mat-icon-button title="Full screen">
+            <mat-icon>{{fullScreenEnabled ? 'fullscreen_exit' : 'fullscreen'}}</mat-icon>
+        </button>
     </div>
-    <h3 class="p-l-20" id="showdesc" *ngIf="showDescription" style="white-space:pre-line;
+    <h4 class="p-l-20" id="showdesc" *ngIf="showDescription" style="white-space:pre-line;
 			word-break:break-word;margin: 0;padding:0">{{description}}
-    </h3>
+    </h4>
 </div>
 <div class="row" *ngIf="viewType=='MM' && viewTitle != ''">
     <div class="col-sm-12">

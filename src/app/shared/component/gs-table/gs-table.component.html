@@ -2,7 +2,7 @@
     class="no-print">
     <button (click)="enableFilters()" mat-icon-button title="Enable Filters"
         [ngClass]="filtersEnabled ? 'switch-enabled' : 'switch-disabled'">
-        <mat-icon>filter_list</mat-icon>
+        <mat-icon class="mat-icon">filter_list</mat-icon>
     </button>
     <button *ngIf="!addPageSizeEnable" (click)="toggleAddCustomPageSize()" mat-icon-button title="Add page size">
         <mat-icon>settings</mat-icon>
@@ -14,24 +14,6 @@
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
-    <!-- <div style="height: 100%; display: contents;">
-        <a href="javascript: void(0);" (click)="enableFilters()" class="fa fa-filter g_fr m-10"
-            [ngClass]=" filtersEnabled ? 'switch-enabled' : 'switch-disabled'" title="Enable Filters"></a>
-    </div> -->
-    <!-- <div style="height: 100%; display: contents;">
-        <a *ngIf="!addPageSizeEnable" href="javascript: void(0);" (click)="toggleAddCustomPageSize()"
-            class="fa fa-wrench g_fr m-10" [ngClass]=" addPageSizeEnable ? 'switch-enabled' : 'switch-disabled'"
-            title="Add page size"></a>
-        <div *ngIf="addPageSizeEnable" style="position: relative; border-radius: 6px; background-color: #ECEDEE;">
-            <input placeholder="Page size" *ngIf="addPageSizeEnable" style="width: 100px; border-radius: 6px;"
-                type="text" class="form-control" (keyup.enter)="addCustomPageSize($event.target.value)"
-                (keypress)="keyPress($event)" />
-            <button style="border-width: 0;" (click)="toggleAddCustomPageSize()"><i
-                    [ngClass]="'fa fa-close'"></i></button>
-
-        </div>
-
-    </div> -->
     <mat-paginator #paginator [pageSize]="20" [length]="totalLength" [pageSizeOptions]="pageSizeOptions"
         [showFirstLastButtons]="true" (page)="pageChange($event)">
     </mat-paginator>
@@ -45,8 +27,10 @@
             [style.flex-direction]="filtersEnabled ? 'column' : ''" [style.align-items]="filtersEnabled ? 'start' : ''">
             <div>
                 <div> {{ displayedColumn.displayName }}</div>
-                <div><input style="margin-bottom: 20px;" *ngIf="filtersEnabled" type="text" class="form-control"
-                        (input)="applyFilters(displayedColumn.columnName!!, $event.target.value)" /></div>
+                <mat-form-field *ngIf="filtersEnabled" [floatLabel]="'never'">
+                    <input type="text" matInput name="pageSize"
+                        (input)="applyFilters(displayedColumn.columnName!!, $event.target.value)" />
+                </mat-form-field>
             </div>
         </mat-header-cell>
         <mat-cell class="gs-table-cell" [style.width.%]="displayedColumn.styles.width_percentage"
