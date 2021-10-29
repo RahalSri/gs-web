@@ -31,6 +31,12 @@
   margin: 5px 17px 0px 0px;
   padding: 5px 10px 5px 10px;
 }
+.gen_border {
+  border: 1px solid #6e62b5 !important;
+}
+.gen_title {
+  color: #6e62b5 !important;
+}
 .dd3-handle {
   background: #fff;
   border-bottom-right-radius: 0;
@@ -90,9 +96,12 @@
   width: 100%;
   float: left;
   margin: 0;
-  a {
+  font-weight: normal;
+  a,
+  span {
     text-decoration: none;
     color: #319db5;
+    cursor: pointer;
     &:hover {
       color: #535fa1;
     }

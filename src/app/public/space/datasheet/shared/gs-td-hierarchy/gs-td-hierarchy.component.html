@@ -6,14 +6,15 @@
 <ng-template #categoryTree let-datObj>
     <ol class="dd-list">
         <li class="dd-item">
-            <div class="item-with-icon">
+            <div class="item-with-icon" [ngClass]="datObj.target ? 'gen_border' : ''">
                 <mat-icon class="icon">view_headline</mat-icon>
-                <div [ngClass]="datObj.target ? 'gen_border' : ''" class="dd3-content">
+                <div class="dd3-content">
                     <p class="content_title">
                         <a (click)="goToURL(datObj.value)" *ngIf="datObj.value.datasheet" class="datasheet_text_shorten"
-                            href="javascript:void(0)">{{datObj.value.displayValByPrecedence}}</a>
-                        <span *ngIf="!datObj.value.datasheet"
-                            class="datasheet_text_shorten">{{datObj.value.displayValByPrecedence}}</span>
+                            href="javascript:void(0)"
+                            [ngClass]="datObj.target ? 'gen_title' : ''">{{datObj.value.displayValByPrecedence}}</a>
+                        <span *ngIf="!datObj.value.datasheet" class="datasheet_text_shorten"
+                            [ngClass]="datObj.target ? 'gen_title' : ''">{{datObj.value.displayValByPrecedence}}</span>
                         <span
                             *ngIf="this.datasheetInternalService.onSwitchDescription && _getDescription(datObj).length>0 && _getDescription(datObj)[0].description != null && _getDescription(datObj)[0].description != ''"
                             class="object_description"> - {{_getDescription(datObj)[0].description | descFilter :
