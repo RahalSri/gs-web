@@ -11,7 +11,7 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
     selector: 'datasheet-main',
     templateUrl: './datasheet-main.component.html',
-    styleUrls: ['./datasheet-main.component.css'
+    styleUrls: ['./datasheet-main.component.scss'
     ]
 })
 export class DatasheetMainComponent implements OnInit {

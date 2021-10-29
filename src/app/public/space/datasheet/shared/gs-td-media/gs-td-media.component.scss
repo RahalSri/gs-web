@@ -1,0 +1,26 @@
+.media-container {
+  width: 100%;
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .header {
+      padding-left: 16px;
+      font-weight: bold;
+    }
+  }
+  .icon-container {
+    display: flex;
+  }
+  .icons {
+    float: right;
+  }
+  .image-container {
+    text-align: center;
+    padding: 10px;
+    .image {
+      vertical-align: middle;
+      width: 100%;
+    }
+  }
+}

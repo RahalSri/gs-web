@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from "@angular/core";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {CookieService} from "ngx-cookie";
-import {DOCUMENT} from "@angular/common";
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { CookieService } from "ngx-cookie";
+import { DOCUMENT } from "@angular/common";
 import { GSDialog } from "src/app/shared/component/gs-confirmation-dialog/gs-dialog";
 import { PreviewOverlayService } from "src/app/core/service/preview-overlay.service";
 import { GsImageUploadDialogComponent } from "src/app/shared/component/gs-image-upload-dialog/gs-image-upload-dialog.component";
@@ -25,7 +25,7 @@ export interface UploadData {
 @Component({
     selector: '[gs-td-media]',
     templateUrl: './gs-td-media.component.html',
-    styleUrls: ['./gs-td-media.component.css']
+    styleUrls: ['./gs-td-media.component.scss']
 })
 export class GsTdMediaComponent implements OnInit, OnDestroy {
 
@@ -44,20 +44,20 @@ export class GsTdMediaComponent implements OnInit, OnDestroy {
     spaceSubscription?: Subscription;
 
     constructor(private dialog: GSDialog,
-                private _snackbar: MatSnackBar,
-                private previewDialog: PreviewOverlayService,
-                private fileService: FileService,
-                private appConfigService: AppConfigService,
-                @Inject(DOCUMENT) private document: Document) {
+        private _snackbar: MatSnackBar,
+        private previewDialog: PreviewOverlayService,
+        private fileService: FileService,
+        private appConfigService: AppConfigService,
+        @Inject(DOCUMENT) private document: Document) {
     }
 
     ngOnInit(): void {
         this._loc();
         this.spaceSubscription = this.appConfigService.currentSpace.subscribe((space) => {
-            if(space != null){
-              this.space = space;
+            if (space != null) {
+                this.space = space;
             }
-          });
+        });
     }
 
     ngOnDestroy(): void {
@@ -71,7 +71,7 @@ export class GsTdMediaComponent implements OnInit, OnDestroy {
         this.defDatasheetGuid = this.document.location.href.split('/')[9].split('=')[1];
     }
 
-    uploadImage(metPropId: string) : void {
+    uploadImage(metPropId: string): void {
         const dialogRef = this.dialog.open(GsImageUploadDialogComponent, {
             panelClass: 'gs-image-upload-dialog-container',
             data: {
@@ -97,7 +97,7 @@ export class GsTdMediaComponent implements OnInit, OnDestroy {
                 this.uploadData.fileName = result.fileName;
 
                 this.fileService.uploadMediaProperty(result.file, this.uploadData)
-                    .subscribe((result:any)=>{
+                    .subscribe((result: any) => {
                         if (result.success) {
                             this._snackbar.openFromComponent(GSSnackBarComponent, {
                                 data: {
@@ -120,7 +120,7 @@ export class GsTdMediaComponent implements OnInit, OnDestroy {
         });
     }
 
-    removeImage() : void {
+    removeImage(): void {
         const message = 'Are you sure, you want to delete this media property?';
 
         const dialogRef = this.dialog.open(GSConfirmationDialogComponent, {

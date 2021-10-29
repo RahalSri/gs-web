@@ -1,13 +1,13 @@
-import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from "@angular/core";
-import {DOCUMENT} from "@angular/common";
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
 import { DatasheetInternalService } from "../datasheet-internal.service";
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 import { CatalogueService } from "src/app/core/service/catalogue.service";
 
 @Component({
     selector: '[gs-td-hierarchy]',
     templateUrl: './gs-td-hierarchy.component.html',
-    styleUrls: ['./gs-td-hierarchy.component.css']
+    styleUrls: ['./gs-td-hierarchy.component.scss']
 })
 export class GsTdHierarchyComponent implements OnInit, OnDestroy {
 
@@ -29,8 +29,8 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
     defDatasheetGuid: string = "";
 
     constructor(private catalogueService: CatalogueService,
-                @Inject(DOCUMENT) private document: Document,
-                public datasheetInternalService: DatasheetInternalService) {
+        @Inject(DOCUMENT) private document: Document,
+        public datasheetInternalService: DatasheetInternalService) {
     }
 
     //TODO router replacement required
@@ -41,7 +41,7 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.subscription.unsubscribe();
     }
 
@@ -55,15 +55,15 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
 
     setAncestor(arrayIndex: any, orderno: any, id: any, target: any) {
         this.datasheetInternalService.pushToGuidArray(id);
-		if (target && this.propertyValueListForDataSheet[arrayIndex].TOPgroupDefaultDisplayStyle == this.HIERARCHY_GENERALISATION) {
-			if(!this.datasheetInternalService.getAncestorArray(this.view.group).includes(id)){
+        if (target && this.propertyValueListForDataSheet[arrayIndex].TOPgroupDefaultDisplayStyle == this.HIERARCHY_GENERALISATION) {
+            if (!this.datasheetInternalService.getAncestorArray(this.view.group).includes(id)) {
                 this.datasheetInternalService.pushToAncestorArray(this.view.group, id);
                 this.datasheetInternalService.pushToAncestorArrayByIndex(this.view.group, { "index": arrayIndex, "orderNo": orderno, "id": id });
             }
-		}
-	}
+        }
+    }
 
-    _getDescription(datObj:any): any[] {
+    _getDescription(datObj: any): any[] {
         return this.desc.filter((desc) => (desc.supGuId == datObj.value.SUPguId));
     }
 
@@ -72,12 +72,12 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
         this._disableSlideToggles();
         this.datasheetInternalService.setDecendents(this.view.group, []);
         this.datasheetInternalService.setDescendantsArray(this.view.group, []);
-		var distinctIds: any[] = [];
+        var distinctIds: any[] = [];
         this.datasheetInternalService.getAncestorArray(this.view.group).forEach(anc => {
             if (distinctIds.indexOf(anc) == -1) {
-				this.datasheetInternalService.pushToDecendentsArray(this.view.group, anc);
-			}
-			distinctIds.push(anc);
+                this.datasheetInternalService.pushToDecendentsArray(this.view.group, anc);
+            }
+            distinctIds.push(anc);
         });
         if (this.datasheetInternalService.onSwitchDescendants && this.datasheetInternalService.onSwitchAncestors) {
             this.catalogueService.getDataForRelatedObjectsBySwitch(this.datasheetInternalService.getDistinctAncArray(this.view.group), "ancestors", this.spcSupGuId)
@@ -89,7 +89,7 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
                             this._enabledSlideToggles();
                             this.datasheetInternalService.setSwitchDesResultList(this.view.group, result.data);
                             this.datasheetInternalService.getAncestorArrayByIndex(this.view.group).forEach(obj => {
-                                let serachArr = {childrens: undefined, target: undefined};
+                                let serachArr = { childrens: undefined, target: undefined };
                                 let newvalueDes = this.datasheetInternalService.getSwitchDesResultList(this.view.group).filter((element) => (element.searchedSupGuid == obj.id));
                                 let newvalueAnc = this.datasheetInternalService.getSwitchAncResultList(this.view.group).filter((element) => (element.searchedSupGuid == obj.id));
                                 if (newvalueAnc.length > 0) {
@@ -186,12 +186,12 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
         this.loading = true;
         this._disableSlideToggles();
         this.datasheetInternalService.setDistinctAncArray(this.view.group, []);
-		var distinctIds: any[] = [];
+        var distinctIds: any[] = [];
         this.datasheetInternalService.getAncestorArray(this.view.group).forEach(anc => {
             if (distinctIds.indexOf(anc) == -1) {
-				this.datasheetInternalService.getDistinctAncArray(this.view.group).push(anc);
-			}
-			distinctIds.push(anc);
+                this.datasheetInternalService.getDistinctAncArray(this.view.group).push(anc);
+            }
+            distinctIds.push(anc);
         });
         if (this.datasheetInternalService.onSwitchAncestors && this.datasheetInternalService.onSwitchDescendants) {
             this.catalogueService.getDataForRelatedObjectsBySwitch(this.datasheetInternalService.getDistinctAncArray(this.view.group), "ancestors", this.spcSupGuId)
@@ -279,22 +279,22 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
 
     _recursive(datObj: any): void {
         this.datasheetInternalService.pushToGuidArray(datObj.value.SUPguId);
-        if(datObj.childrens != null && datObj.childrens?.length > 0) {
+        if (datObj.childrens != null && datObj.childrens?.length > 0) {
             datObj.childrens.forEach((child: any) => {
                 this._recursive(child);
             });
         }
     }
 
-    _refreshDescriptions() : void {
+    _refreshDescriptions(): void {
         let tempHierarchy = this.propertyValueListForDataSheet.filter(value => value.group == this.view.group)[0].keyValue[0];
         this._recursive(tempHierarchy.value);
-        if(tempHierarchy.decendents != null && tempHierarchy.decendents?.length > 0 && tempHierarchy.decendents[0].childrens != null && tempHierarchy.decendents[0].childrens.length > 0) {
+        if (tempHierarchy.decendents != null && tempHierarchy.decendents?.length > 0 && tempHierarchy.decendents[0].childrens != null && tempHierarchy.decendents[0].childrens.length > 0) {
             tempHierarchy.decendents[0].childrens.forEach((child: any) => {
                 this.datasheetInternalService.pushToGuidArray(child.value.SUPguId);
             });
         }
-        if(this.datasheetInternalService.onSwitchDescription){
+        if (this.datasheetInternalService.onSwitchDescription) {
             this._disableSlideToggles();
             this.catalogueService.getDataForRelatedObjectsBySwitch(Array.from(this.datasheetInternalService.getGuidArray()), "description", this.spcSupGuId)
                 .subscribe(result => {
@@ -304,21 +304,21 @@ export class GsTdHierarchyComponent implements OnInit, OnDestroy {
         }
     }
 
-    goToURL(objId: any) : void {
+    goToURL(objId: any): void {
         this.catalogueService.getDefaultDataSheet(objId.SUPguId)
             .subscribe(result => {
                 if (result != null) {
-                    window.location.href = "#/space/"+result.spaceSupguid+"/dataview/"+this.viewSupGuId+"/datasheet/"+objId.SUPguId+"?defaultDatasheetSupguId="+result.defaultSupGuid;
+                    window.location.href = "#/space/" + result.spaceSupguid + "/dataview/" + this.viewSupGuId + "/datasheet/" + objId.SUPguId + "?defaultDatasheetSupguId=" + result.defaultSupGuid;
                 }
             });
     }
 
-    getChildren(keyValView: any, dataObj: any){
+    getChildren(keyValView: any, dataObj: any) {
         this.setAncestor(this.arrOffset, this.orderOffset, dataObj.value.SUPguId, dataObj.target);
-        if(dataObj.target && keyValView.decendents != null && keyValView.decendents.length > 0){
+        if (dataObj.target && keyValView.decendents != null && keyValView.decendents.length > 0) {
             return this.datasheetInternalService.getDecendents(this.view.group);
         }
-        else{
+        else {
             return dataObj.childrens;
         }
     }

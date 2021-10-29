@@ -1,36 +1,35 @@
-<tr>
-    <td style="width: 100%">
-        <ng-container *ngIf="keyValView.value!=''">
-            <div>
-                <span style="float: right">
-                <i (click)="uploadImage(keyValView.met_prop_Id)" class="icon-note" style="cursor: pointer"></i>
+<div class="media-container">
+    <ng-container *ngIf="keyValView.value!=''">
+        <div class="header-container">
+            <span class="header">
+                {{keyValView.key}}
             </span>
-                <span style="float: right">
-                <i (click)="removeImage()" class="glyphicon glyphicon-trash" style="cursor: pointer"></i>
+            <div class="icon-container">
+                <button class="icons" (click)="uploadImage(keyValView.met_prop_Id)" mat-icon-button type="button"
+                    title="Upload image">
+                    <mat-icon>cloud_upload</mat-icon>
+                </button>
+                <button class="icons" (click)="removeImage()" mat-icon-button type="button" title="Delete image">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="image-container">
+            <img (click)="showImage(keyValView.value.split('|')[0])" [src]="keyValView.value.split('|')[1]"
+                alt="image loading failed" class="image">
+        </div>
+    </ng-container>
+    <ng-container *ngIf="keyValView.value==''">
+        <div class="header-container">
+            <span class="header">
+                {{keyValView.key}}
             </span>
-                <div>
-                    <span class="accordianChange" style="padding-left: 6px; font-weight:bold">
-                        {{keyValView.key}}
-                    </span>
-                    <div style="text-align: center">
-                        <img (click)="showImage(keyValView.value.split('|')[0])" [src]="keyValView.value.split('|')[1]"
-                             alt="image loading failed" class="zoomimg m-b-10 m-t-10" style="vertical-align: middle">
-                    </div>
-                </div>
+            <div class="icon-container">
+                <button class="icons" (click)="uploadImage(keyValView.met_prop_Id)" mat-icon-button type="button"
+                    title="Upload image">
+                    <mat-icon>cloud_upload</mat-icon>
+                </button>
             </div>
-        </ng-container>
-        <ng-container *ngIf="keyValView.value==''">
-            <div>
-                <span class="accordianChange" style="padding-left: 6px; font-weight:bold">
-                    {{keyValView.key}}
-                </span>
-                <div style="float: right; display: inline-block">
-                    <gs-button (onClickEvent)="uploadImage(keyValView.met_prop_Id)"
-                               [label]="'Upload'"
-                               [type]="'button'">
-                    </gs-button>
-                </div>
-            </div>
-        </ng-container>
-    </td>
-</tr>
+        </div>
+    </ng-container>
+</div>

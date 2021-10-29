@@ -1,103 +1,89 @@
-<div style="min-height: 4px">
+<div class="uploading-progress">
     <mat-progress-bar *ngIf="uploading" mode="indeterminate"></mat-progress-bar>
 </div>
-<div id="datasheetpage">
-    <div class="panel general-panel datasheet-parent" id="parent_container" style="height: 85vh">
-        <div class="panel-header">
-            <div *ngIf="loading">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <ngx-skeleton-loader [theme]="{ width: '80px', height: '80px' }" appearance="circle">
-                        </ngx-skeleton-loader>
-                    </div>
-                    <div class="col-sm-11 p-15">
-                        <div>
-                            <ngx-skeleton-loader [theme]="{width: '200px', borderRadius: '0','margin-bottom': '10px' }">
-                            </ngx-skeleton-loader>
-                        </div>
-                        <div>
-                            <ngx-skeleton-loader [theme]="{ width: '170px', borderRadius: '0' }">
-                            </ngx-skeleton-loader>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ngx-skeleton-loader
-                                [theme]="{ width: '130px', height: '35px', borderRadius: '0', float: 'right', marginRight: '10px' }"
-                                count="3">
-                        </ngx-skeleton-loader>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ngx-skeleton-loader
-                                [theme]="{width: '100%', borderRadius: '0',height: '30px',marginBottom: '10px' }"
-                                count="20">
-                        </ngx-skeleton-loader>
-                    </div>
-                </div>
+<mat-card id="datasheetpage" class="datasheet-card">
+    <div *ngIf="loading">
+        <div class="row">
+            <div class="col-sm-1">
+                <ngx-skeleton-loader [theme]="{ width: '80px', height: '80px' }" appearance="circle">
+                </ngx-skeleton-loader>
             </div>
-            <div *ngIf="!loading" class="row c_switch_container">
-                <h2 class="col-sm-12" id="page_header">
-                    <i class="icon-layers p-l-10"></i>{{objTitle}}
-                    <div style="padding-left: 37px; font-size: 15px;">{{viewTitle}}</div>
-                </h2>
-
-                <div *ngIf="datasheetInternalService.showToggles" class="col-sm-12 datasheet_switches no-print">
-                    <mat-slide-toggle (change)="onDataForDesSwitch()"
-                                      [checked]="datasheetInternalService.onSwitchDescription"
-                                      [disabled]="datasheetInternalService.decsDisabled" color="primary"
-                                      style="float: right; padding: 5px">Descriptions
-                    </mat-slide-toggle>
-                    <mat-slide-toggle (change)="onDataForDescendantsSwitch()"
-                                      [checked]="datasheetInternalService.onSwitchDescendants"
-                                      [disabled]="datasheetInternalService.decDisabled" color="primary"
-                                      style="float: right; padding: 5px">Descendants
-                    </mat-slide-toggle>
-                    <mat-slide-toggle (change)="onDataForAncSwitch()"
-                                      [checked]="datasheetInternalService.onSwitchAncestors"
-                                      [disabled]="datasheetInternalService.ancDisabled" color="primary"
-                                      style="float: right; padding: 5px">Ancestors
-                    </mat-slide-toggle>
+            <div class="col-sm-11 p-15">
+                <div>
+                    <ngx-skeleton-loader [theme]="{width: '200px', borderRadius: '0','margin-bottom': '10px' }">
+                    </ngx-skeleton-loader>
+                </div>
+                <div>
+                    <ngx-skeleton-loader [theme]="{ width: '170px', borderRadius: '0' }">
+                    </ngx-skeleton-loader>
                 </div>
             </div>
         </div>
-
-        <div class="panel-content p-t-0" id="print-section">
-            <div *ngIf="!loading" class="row">
-                <div class="col-sm-12 detailpage">
-                    <div *ngFor="let view of propertyValueListForDataSheet; let arrOffset = index">
-                        <div class="datasheet_grp_header" style="height: 37px;">
-                            <label id="dashboard_tbl_lbl">{{view.group}} </label>
-                        </div>
-                        <div>
-                            <table class="table table-striped p-b-0 m-b-0" style="background-color: #f6f6f6">
-                                <ng-container *ngFor="let keyValView of view.keyValue; let orderOffset = index">
-                                    <tbody *ngIf="isLabelValue(view, keyValView)" [keyValView]="keyValView"
-                                           [orderOffset]="orderOffset" [view]="view" gs-td-label>
-                                    </tbody>
-                                    <tbody (onUpload)="onUpload($event)" *ngIf="isMedia(view, keyValView)"
-                                           [keyValView]="keyValView" [orderOffset]="orderOffset" [view]="view"
-                                           gs-td-media>
-                                    </tbody>
-                                    <tbody (onPropertyChange)="onPropertyChange($event)" *ngIf="isHierarchy(view)"
-                                           [arrOffset]="arrOffset"
-                                           [keyValView]="keyValView" [orderOffset]="orderOffset"
-                                           [propertyValueListForDataSheet]="propertyValueListForDataSheet"
-                                           [spcSupGuId]="spcSupGuId"
-                                           [view]="view" gs-td-hierarchy>
-                                    </tbody>
-                                </ng-container>
-                                <ng-container *ngIf="isLabelTbl(view)">
-                                    <tbody [keyValue]="view.keyValue" [view]="view" gs-td-label-tbl>
-                                    </tbody>
-                                </ng-container>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ngx-skeleton-loader
+                    [theme]="{ width: '130px', height: '35px', borderRadius: '0', float: 'right', marginRight: '10px' }"
+                    count="3">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ngx-skeleton-loader [theme]="{width: '100%', borderRadius: '0',height: '30px',marginBottom: '10px' }"
+                    count="20">
+                </ngx-skeleton-loader>
             </div>
         </div>
     </div>
-</div>
+    <div *ngIf="!loading">
+        <h2 class="header-container" id="page_header">
+            <div class="title">
+                <mat-icon class="icon">layers</mat-icon>{{objTitle}}
+            </div>
+            <div class="view-title">{{viewTitle}}</div>
+        </h2>
+
+        <div *ngIf="datasheetInternalService.showToggles">
+            <mat-slide-toggle (change)="onDataForDesSwitch()" [checked]="datasheetInternalService.onSwitchDescription"
+                [disabled]="datasheetInternalService.decsDisabled" color="primary" class="toggles">
+                Descriptions
+            </mat-slide-toggle>
+            <mat-slide-toggle (change)="onDataForDescendantsSwitch()"
+                [checked]="datasheetInternalService.onSwitchDescendants"
+                [disabled]="datasheetInternalService.decDisabled" color="primary" class="toggles">
+                Descendants
+            </mat-slide-toggle>
+            <mat-slide-toggle (change)="onDataForAncSwitch()" [checked]="datasheetInternalService.onSwitchAncestors"
+                [disabled]="datasheetInternalService.ancDisabled" color="primary" class="toggles">
+                Ancestors
+            </mat-slide-toggle>
+        </div>
+    </div>
+
+    <div id="print-section" *ngIf="!loading" class="data-container">
+        <div *ngFor="let view of propertyValueListForDataSheet; let arrOffset = index" class="section">
+            <div class="group-title">
+                <label id="dashboard_tbl_lbl">{{view.group}} </label>
+            </div>
+            <div class="group">
+                <ng-container *ngFor="let keyValView of view.keyValue; let orderOffset = index">
+                    <div *ngIf="isLabelValue(view, keyValView)" [keyValView]="keyValView" [orderOffset]="orderOffset"
+                        [view]="view" gs-td-label class="label">
+                    </div>
+                    <div (onUpload)="onUpload($event)" *ngIf="isMedia(view, keyValView)" [keyValView]="keyValView"
+                        [orderOffset]="orderOffset" [view]="view" gs-td-media class="media">
+                    </div>
+                    <div (onPropertyChange)="onPropertyChange($event)" *ngIf="isHierarchy(view)" [arrOffset]="arrOffset"
+                        [keyValView]="keyValView" [orderOffset]="orderOffset"
+                        [propertyValueListForDataSheet]="propertyValueListForDataSheet" [spcSupGuId]="spcSupGuId"
+                        [view]="view" gs-td-hierarchy class="hierarchy">
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="isLabelTbl(view)">
+                    <div [keyValue]="view.keyValue" [view]="view" gs-td-label-tbl class="label-tbl">
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</mat-card>

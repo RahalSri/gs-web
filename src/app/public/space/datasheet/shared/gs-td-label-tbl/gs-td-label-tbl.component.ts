@@ -1,14 +1,14 @@
-import {Component, Inject, Input, OnDestroy, OnInit} from "@angular/core";
-import {DOCUMENT} from "@angular/common";
-import {DatasheetInternalService} from "../datasheet-internal.service";
-import {Subscription} from "rxjs";
+import { Component, Inject, Input, OnDestroy, OnInit } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { DatasheetInternalService } from "../datasheet-internal.service";
+import { Subscription } from "rxjs";
 import { DatasheetElementData } from "src/app/shared/model/datasheet-element-data";
 import { CatalogueService } from "src/app/core/service/catalogue.service";
 
 @Component({
     selector: '[gs-td-label-tbl]',
     templateUrl: './gs-td-label-tbl.component.html',
-    styleUrls: ['./gs-td-label-tbl.component.css']
+    styleUrls: ['./gs-td-label-tbl.component.scss']
 })
 export class GsTdLabelTblComponent implements OnInit, OnDestroy {
 
@@ -26,12 +26,12 @@ export class GsTdLabelTblComponent implements OnInit, OnDestroy {
     defDatasheetGuid: string = "";
 
     constructor(private catalogueService: CatalogueService,
-                @Inject(DOCUMENT) private document: Document,
-                public datasheetInternalService: DatasheetInternalService) {
+        @Inject(DOCUMENT) private document: Document,
+        public datasheetInternalService: DatasheetInternalService) {
     }
 
     //TODO router replacement required
-    ngOnInit() : void {
+    ngOnInit(): void {
         this._loc();
         this.keyValue.forEach(keyVal => {
             this.datasheetInternalService.pushToGuidArray(keyVal.typeOfValue);
@@ -41,7 +41,7 @@ export class GsTdLabelTblComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.subscription.unsubscribe();
     }
 
@@ -69,27 +69,27 @@ export class GsTdLabelTblComponent implements OnInit, OnDestroy {
         this.datasheetInternalService.decsDisabled = true;
     }
 
-    isObject(element: any){
+    isObject(element: any) {
         return typeof element === 'object';
     }
 
-    goToURL(objId: any) : void {
+    goToURL(objId: any): void {
         this.catalogueService.getDefaultDataSheet(objId)
             .subscribe(result => {
                 if (result != null) {
-                    window.location.href = "#/space/"+result.spaceSupguid+"/dataview/"+this.viewSupGuId+"/datasheet/"+objId+"?defaultDatasheetSupguId="+result.defaultSupGuid;
+                    window.location.href = "#/space/" + result.spaceSupguid + "/dataview/" + this.viewSupGuId + "/datasheet/" + objId + "?defaultDatasheetSupguId=" + result.defaultSupGuid;
                 }
             });
     }
 
 
     rowspanLengthKey(viewKeyValue: any, key: any) {
-        let rowSpanLength = viewKeyValue.filter((x:any) => x.key == key).length;
+        let rowSpanLength = viewKeyValue.filter((x: any) => x.key == key).length;
         return rowSpanLength > 1 ? rowSpanLength : null;
     }
 
     rowspanLengthTooShortTitle(viewKeyValue: any, key: any, tooShortTitle: any) {
-        let rowSpanLength = viewKeyValue.filter((x:any) => x.key == key && x.tooShortTitle == tooShortTitle).length;
+        let rowSpanLength = viewKeyValue.filter((x: any) => x.key == key && x.tooShortTitle == tooShortTitle).length;
         return rowSpanLength > 1 ? rowSpanLength : null;
     }
 }
