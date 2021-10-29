@@ -23,7 +23,7 @@ export interface UploadData {
 @Component({
     selector: '[gs-td-media]',
     templateUrl: './gs-td-media.component.html',
-    styleUrls: ['./gs-image-upload-dialog.component.css']
+    styleUrls: ['./gs-td-media.component.css']
 })
 export class GsTdMediaComponent implements OnInit {
 
