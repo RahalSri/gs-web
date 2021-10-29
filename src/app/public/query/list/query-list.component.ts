@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTableDataSource } from "@angular/material/table";
 import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.service";
 import { QueryService } from "src/app/core/service/query.service";
 import { GSConfirmationDialogComponent } from "src/app/shared/component/gs-confirmation-dialog/gs-confirmation-dialog.component";
@@ -16,6 +17,8 @@ import { AttachViewComponent } from "./attach-view/attach-view.component";
 export class QueryListComponent {
     constructor(private queryService: QueryService, public dialog: GSDialog, private _snackbar: MatSnackBar,) { }
 
+    displayedColumns: string[] = ['id', 'title', 'description', 'type', 'limit', 'publicationStatus', 'view', 'action1', 'action2',  'action3',  'action4', 'action5'];
+    dataSource: MatTableDataSource<any> = new MatTableDataSource();
     queryList: any[] = [];
     savedQueryId = "";
     pubStatus = [{ id: 1, name: "Draft" }, { id: 2, name: "Published" }, { id: 3, name: "Reviewed" }];
@@ -33,6 +36,8 @@ export class QueryListComponent {
         },
     }
 
+    qryPublicationStatus: any;
+
     ngOnInit(): void {
         this.getAllQueryList();
         BreadcrumbStoreService.pushToOrigin(
@@ -47,6 +52,7 @@ export class QueryListComponent {
     getAllQueryList() {
         this.queryService.fetchAllQueryList().subscribe((response: any) => {
             this.queryList = response;
+            this.dataSource = new MatTableDataSource(response);
         });
     }
 

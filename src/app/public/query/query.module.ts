@@ -9,6 +9,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MatTableModule } from '@angular/material/table';
     NgxSkeletonLoaderModule,
     MatProgressBarModule,
     SelectDropDownModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatCardModule
   ]
 })
 export class QueryModule { }
