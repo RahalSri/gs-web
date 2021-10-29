@@ -1,24 +1,21 @@
 .breadcrumb {
-    background: none;
-    display: inline-block;
-    padding: 0;
-    li {
-        font-family: 'Lato', arial, sans-serif;
-        list-style-type: none;
-        font-weight:700;
-        font-size: 12px;
-        text-transform: uppercase;
-        a {
-            color: #319DB5;
-        }
+  background: none;
+  display: flex;
+  div {
+    list-style-type: none;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  div .item {
+    margin-right: 5px;
+    a {
+      color: #6c757d;
+      text-decoration: none;
     }
-    li.active {
-        color: #333333;
-    }
-}
-.breadcrumb>li+li {
-    &:before {
-        content: "\2022";
-        padding: 0 8px 0 5px;
-    }
+  }
+  .divider {
+    color: #cfd8dc;
+    margin-right: 5px;
+  }
 }

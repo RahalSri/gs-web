@@ -1,7 +1,7 @@
-<div id="dataView_propertyInspect_wrapper" class="fullheight col-sm-4" style="height: 71vh; overflow:auto"
-    [ngClass]="{'col-sm-4': openRHS, 'ng-hide' : !openRHS }">
+<div id="dataView_propertyInspect_wrapper" class="fullheight col-sm-4"
+    style="height: 71vh; overflow:auto; padding-top: 8px;" [ngClass]="{'col-sm-4': openRHS, 'ng-hide' : !openRHS }">
     <div id="dataView_propertyInspect" class="detailpage list-scroll fullheight">
-        <div id="rhs_pi" style="display: grid; justify-items: flex-end">
+        <div id="rhs_pi" style="display: grid; justify-items: flex-start">
             <div *ngIf="rhsLoading"
                 style="width: 27vw; display: flex; justify-content: center; height: inherit; align-items: center;">
                 <loading-spinner></loading-spinner>
