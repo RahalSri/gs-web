@@ -22,6 +22,7 @@ export class AppConfigService {
     constructor(private catalogueService: CatalogueService, ) { }
 
     setCurrentSpaceByGuid(spaceGuId: string) {
+        localStorage.setItem("currentSpaceGuid", spaceGuId);
         this.catalogueService.getSpaceByGuId(spaceGuId).subscribe(
             (response: any) => {
                 this.currentSpaceSource.next(response);

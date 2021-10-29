@@ -30,6 +30,5 @@ import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.se
     }
 
     popCrumbTrailStack(event: any){
-
     }
   }

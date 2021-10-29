@@ -21,18 +21,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ImageViewerModule } from '@emazv72/ngx-imageviewer';
 import { GsImagePreviewComponent } from './component/gs-image-preview/gs-image-preview.component';
 import { NoContentBannerComponent } from './component/no-content-banner/no-content-banner.component';
 import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 import { GSTableComponent } from './component/gs-table/gs-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 import { GSUnsuccessMsgComponent } from './component/gs-unsuccess-msg/gs-unsuccess-msg.component';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
 
 
 @NgModule({
@@ -67,12 +67,12 @@ import { GSUnsuccessMsgComponent } from './component/gs-unsuccess-msg/gs-unsucce
     MatMenuModule,
     MatProgressBarModule,
     MatTabsModule,
-    ImageViewerModule,
     MatPaginatorModule,
     NgxSkeletonLoaderModule,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
+    PinchZoomModule
   ],
   exports: [
     GSButtonComponent,

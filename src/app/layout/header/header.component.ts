@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() leftPanelClosed = new EventEmitter<boolean>();
 
-  constructor(private cookieService: CookieService,
+  constructor(private keycloakService: KeycloakService,
     private router: Router,
     private securityService: SecurityConfigService,
     private appConfigService: AppConfigService,
@@ -76,5 +76,10 @@ export class HeaderComponent implements OnInit {
   navigateToHome(){
     var currentSpaceId = localStorage.getItem('currentSpaceGuid');
     this.router.navigate(['space', currentSpaceId])
+  }
+
+  logout(){
+    localStorage.clear();
+    this.keycloakService.logout();
   }
 }
