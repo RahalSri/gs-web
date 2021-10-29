@@ -7,7 +7,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/', title: 'Home', icon: 'home', class: '' },
-  { path: '/user-profile', title: 'Queries', icon: 'important_devices', class: '' },
+  { path: '/query/list', title: 'Query List', icon: 'view_list', class: '' },
 ];
 @Component({
   selector: 'app-left-panel',

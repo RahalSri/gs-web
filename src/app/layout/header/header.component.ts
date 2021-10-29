@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie';
 import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 import { SecurityConfigService } from 'src/app/core/service/core.security-config.service';
 import { KeycloakService } from 'keycloak-angular';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   @Output() leftPanelClosed = new EventEmitter<boolean>();
 
   constructor(private cookieService: CookieService,
-    private keycloakService: KeycloakService,
+    private router: Router,
     private securityService: SecurityConfigService,
     private appConfigService: AppConfigService,
     private authenticationService: AuthenticationService) { }
@@ -73,6 +74,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToHome(){
-    
+    var currentSpaceId = localStorage.getItem('currentSpaceGuid');
+    this.router.navigate(['space', currentSpaceId])
   }
 }

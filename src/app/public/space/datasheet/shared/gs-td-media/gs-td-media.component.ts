@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from "@angular/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CookieService} from "ngx-cookie";
 import {DOCUMENT} from "@angular/common";
@@ -9,6 +9,8 @@ import { GSSnackBarComponent } from "src/app/shared/component/gs-snack-bar/gs-sn
 import { GSConfirmationDialogComponent } from "src/app/shared/component/gs-confirmation-dialog/gs-confirmation-dialog.component";
 import { PreviewOverlayRef } from "src/app/core/service/preview-overlay.ref";
 import { FileService } from "src/app/core/service/file.service";
+import { Subscription } from "rxjs";
+import { AppConfigService } from "src/app/core/service/app-config.service";
 
 export interface UploadData {
     spaceTitle?: string;
@@ -23,16 +25,15 @@ export interface UploadData {
 @Component({
     selector: '[gs-td-media]',
     templateUrl: './gs-td-media.component.html',
-    styleUrls: ['./gs-image-upload-dialog.component.css']
+    styleUrls: ['./gs-td-media.component.css']
 })
-export class GsTdMediaComponent implements OnInit {
+export class GsTdMediaComponent implements OnInit, OnDestroy {
 
     @Input() keyValView: any;
     @Input() view: any;
     @Input() orderOffset: any;
     @Output() onUpload: EventEmitter<any> = new EventEmitter<any>();
 
-    globals: any;
     space: any;
     uploadData: UploadData = {};
 
@@ -40,20 +41,27 @@ export class GsTdMediaComponent implements OnInit {
     spcSupGuId: string = "";
     datObjSupGuId: string = "";
     defDatasheetGuid: string = "";
+    spaceSubscription?: Subscription;
 
     constructor(private dialog: GSDialog,
                 private _snackbar: MatSnackBar,
                 private previewDialog: PreviewOverlayService,
-                private cookieService: CookieService,
                 private fileService: FileService,
+                private appConfigService: AppConfigService,
                 @Inject(DOCUMENT) private document: Document) {
-        this.globals = JSON.parse(cookieService.get('globals'));
     }
 
-    //TODO router replacement required
     ngOnInit(): void {
         this._loc();
-        this.space = this.globals.currentUser.currentSpace;
+        this.spaceSubscription = this.appConfigService.currentSpace.subscribe((space) => {
+            if(space != null){
+              this.space = space;
+            }
+          });
+    }
+
+    ngOnDestroy(): void {
+        this.spaceSubscription?.unsubscribe();
     }
 
     //TODO router replacement required

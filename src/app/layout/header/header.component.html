@@ -1,6 +1,5 @@
 <mat-toolbar color="primary">
-    <img *ngIf="isExpanded" src="../../../assets/logo.png" class="headingImg" />
-    <span class="app-name" (click)="navigateToHome()" *ngIf="isExpanded">KIPSTOR</span>
+    <img *ngIf="isExpanded" (click)="navigateToHome()" src="../../../assets/img/logo.png" class="headingImg" />
     <button (click)="onLeftPanelToggle()" mat-icon-button type="button" title="Open sidenav">
         <mat-icon>menu</mat-icon>
     </button>

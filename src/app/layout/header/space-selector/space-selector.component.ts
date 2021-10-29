@@ -7,6 +7,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -31,7 +32,8 @@ export class SpaceSelectorComponent implements OnInit, OnDestroy {
 
   constructor(
     private catalogueSerice: CatalogueService,
-    private appConfigService: AppConfigService
+    private appConfigService: AppConfigService,
+    private router: Router
   ) {}
   
   ngOnDestroy(): void {
@@ -58,6 +60,7 @@ export class SpaceSelectorComponent implements OnInit, OnDestroy {
   setSpace(guid: string) {
     this.appConfigService.setCurrentSpaceByGuid(guid);
     this.onSpaceChanged.emit(guid);
+    this.router.navigate(['space', guid]);
   }
 
   parentItemNaviagated(space: Space) {
