@@ -76,6 +76,7 @@ export class GeneralViewComponent {
     }
 
     rowSelected(data: any) {
+        console.log(data);
         if (data.index != -1) {
             this.openRHS = true;
             this.supGuId = data.supGuId;
@@ -85,7 +86,6 @@ export class GeneralViewComponent {
             this.openRHS = false;
             this.supGuId = "";
             this.selectedIndex = -1;
-            console.log("chaning rhs " + this.openRHS);
         }
     }
 

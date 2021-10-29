@@ -1,1 +1,100 @@
-<h1>Welcome to Query List</h1>
+<div class="row" class="querybuilder" style="height: 100%;">
+    <div class="panel general-panel elastic-box">
+        <div class="panel-header">
+            <div class="row">
+                <h2 class="col-xs-10">
+                    <i class="icon-grid"></i>Query List
+                </h2>
+                <div style="float:right; text-align:right;" class="col-xs-2 ph_rhs noprint">
+                    <a class="page-scroll m-r-10" title="New Query" href="#/admin/querybuilder"> <i
+                            class="fa fa-plus-square"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row stationlist" style="flex-grow:1; overflow-y:auto;">
+            <div class="col-md-12 p-20">
+                <table class="table table-hover" align="center">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Results Limit</th>
+                            <th>Publication Status</th>
+                            <th>View</th>
+                            <th class="noprint"></th>
+                            <th class="noprint"></th>
+                            <th class="noprint"></th>
+                            <th class="noprint"></th>
+                            <th class="noprint"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let query of queryList; let i = index" (click)="savedQueryId=query.queryGuid;"
+                            [ngClass]="query.queryGuid==savedQueryId ? 'active' : ''">
+                            <td>{{i + 1}}</td>
+                            <td>{{query.queryTitle}}</td>
+                            <td>{{query.queryDescription}}</td>
+                            <td>{{query.queryType}}</td>
+                            <td>{{query.queryLimit}}</td>
+                            <td *ngIf="query.queryState">Private</td>
+                            <td *ngIf="!query.queryState">
+
+                                <ngx-select-dropdown [options]="pubStatus" [config]="publicationStatusConfig"
+                                    [(ngModel)]="query.qryPublicationStatus">
+                                </ngx-select-dropdown>
+                                <!-- <ui-select style="width: 100%;" search-enabled="false"
+                                    on-select="vm.changePublicationStatus(query)" ng-model="query.qryPublicationStatus"
+                                    theme="select2" title="Status" class="m-b-10" append-to-body="true">
+                                    <ui-select-match placeholder="--Select Status--">{{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                        repeat="pubState.name as pubState in vm.pubStatus | filter: {'name':$select.search}">
+                                        <div ng-bind-html="pubState.name"></div>
+                                    </ui-select-choices>
+                                </ui-select> -->
+                            </td>
+                            <td>
+                                <ngx-select-dropdown *ngIf="query.viewLinkRslt.length>1" [options]="query.viewLinkRslt"
+                                    [config]="linkResultConfig">
+                                </ngx-select-dropdown>
+                                <!-- <ui-select search-enabled="false" ng-show="query.viewLinkRslt.length>1"
+                                    style="width: 100%;" ng-model="query.currentView" theme="select2" title="Status"
+                                    class="m-b-10" append-to-body="true">
+                                    <ui-select-match placeholder="--Select Library--">{{$select.selected.libShortTitle
+                                        + '_' + $select.selected.spaceShortTitle + '_' +
+                                        $select.selected.viewShortTitle}}</ui-select-match>
+                                    <ui-select-choices repeat="view in query.viewLinkRslt">
+                                        <div
+                                            ng-bind-html="view.libShortTitle + '_' + view.spaceShortTitle + '_' + view.viewShortTitle">
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select> -->
+                                <p *ngIf="query.viewLinkRslt.length==1">{{(query.viewLinkRslt[0].viewShortTitle
+                                    == null ? "-" : query.viewLinkRslt[0].libShortTitle + '_' +
+                                    query.viewLinkRslt[0].spaceShortTitle + '_' +
+                                    query.viewLinkRslt[0].viewShortTitle)}}</p>
+                            </td>
+                            <td class="noprint"><a href="javascript: void(0)" title="Preview your view"
+                                    (click)="viewPreview(query)" *ngIf="query.viewLinkRslt[0].viewGuid!=null"><i
+                                        class="fa fa-eye"></i></a></td>
+                            <td class="noprint"><a href="javascript: void(0)" title="Edit Query"
+                                    (click)="editQueryInBuild(query)"><i class="fa fa-edit"></i></a></td>
+                            <td class="noprint"><a href="javascript: void(0)" title="Attach to a view"
+                                    (click)="openAttachViewModal(query)"><i class="fa fa-paperclip"></i></a></td>
+                            <td class="noprint"><a href="javascript: void(0)" title="Detach your view"
+                                    (click)="detachQuery(query)" *ngIf="query.viewLinkRslt[0].viewGuid!=null"><i
+                                        class="fa fa-chain-broken"></i></a></td>
+                            <td class="noprint"><a href="javascript: void(0)" title="Delete Query" class="c-red"
+                                    (click)="discardQuery(query)"><i class="fa fa-close"></i></a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

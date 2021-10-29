@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import * as go from 'gojs';
 import { Diagram } from "gojs";
 import { CatalogueService } from "src/app/core/service/catalogue.service";
@@ -27,7 +28,9 @@ export class HierarchyComponent implements OnInit {
 
   public constructor(
     private graphDataService: GraphDataService,
-    private catalogueService: CatalogueService
+    private catalogueService: CatalogueService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -80,8 +83,7 @@ export class HierarchyComponent implements OnInit {
       $(go.Node, {
         selectionAdorned: false,
         click: (e:any, node: any) => {
-          var redURL = '#/space/' + this.spcSupGuId + '/dataview/' + this.datViewSupGuId + '/datasheet/' + (node as any).ob.supGuid + '?defaultDatasheetSupguId=' + (node as any).ob.dataSheet;
-          window.location.href = redURL;
+          this.router.navigate(['object', (node as any).ob.supGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: (node as any).ob.dataSheet } });
         },
         contextClick: (e: any, node: any) => {
           this.rightClick.emit((node as any).ob.supGuid);
