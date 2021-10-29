@@ -2,7 +2,7 @@
     <button (click)="onLeftPanelToggle()" mat-icon-button type="button" title="Open sidenav">
         <mat-icon>menu</mat-icon>
     </button>
-    <img src="../../../assets/graphshare_logo.png" class="headingImg" />
+    <img (click)="navigateToHome()"  src="../../../assets/graphshare_logo.png" class="headingImg" />
     
     <space-selector (onSpaceChanged)="spaceChanged($event)">
     </space-selector>

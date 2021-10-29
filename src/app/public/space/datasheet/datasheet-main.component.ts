@@ -7,7 +7,6 @@ import { CatalogueService } from "src/app/core/service/catalogue.service";
 import { AppConfigService } from "src/app/core/service/app-config.service";
 import { DatasheetElement } from "src/app/shared/model/datasheet-element";
 import { ActivatedRoute } from "@angular/router";
-import { query } from "@angular/animations";
 
 @Component({
     selector: 'datasheet-main',
@@ -41,7 +40,7 @@ export class DatasheetMainComponent implements OnInit {
         @Inject(DOCUMENT) private document: Document,
         public datasheetInternalService: DatasheetInternalService) {
     }
-    
+
     ngOnInit(): void {
         this.loading = true;
         this.spcSupGuId = this.route.snapshot.paramMap.get('spaceGuid')!;

@@ -31,6 +31,7 @@ export class AppConfigService {
 
     setCurrentSpace(space: Space) {
         this.currentSpaceSource.next(space);
+        localStorage.setItem("currentSpaceGuid", space.supGuid);
     }
 
     setCurrentAltViews(altViews: AlternateView[]){

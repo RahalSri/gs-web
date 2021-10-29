@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./public/space/space.module').then(m => m.SpaceModule)
   },
   {
+    path: 'query',
+    loadChildren: () => import('./public/query/query.module').then(m => m.QueryModule)
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
