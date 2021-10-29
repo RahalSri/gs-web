@@ -49,3 +49,27 @@ mat-row.selected-row {
 .mat-icon {
   font-size: 20px !important;
 }
+
+tr {
+  vertical-align: middle;
+}
+
+.icon-view {
+  display: none;
+}
+
+tr:hover {
+  .icon-view {
+    display: block;
+  }
+}
+
+.dynamic-row {
+  width: 30%;
+}
+
+tr:hover {
+  .dynamic-row {
+    width: 25%;
+  }
+}

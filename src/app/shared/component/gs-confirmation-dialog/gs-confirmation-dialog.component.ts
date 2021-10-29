@@ -12,7 +12,7 @@ export interface GSDialogData {
 
 @Component({
   selector: 'gs-confirmation-dialog',
-  template: './gs-confirmation-dialog.component.html',
+  templateUrl: './gs-confirmation-dialog.component.html',
   styleUrls: ['./gs-confirmation-dialog.component.scss']
 })
 export class GSConfirmationDialogComponent {

@@ -89,35 +89,35 @@
         </div>
         <mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let element"> </td>
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> ID </th>
+                <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
             </ng-container>
 
             <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef> Title </th>
-                <td mat-cell *matCellDef="let element"> {{element.queryTitle}} </td>
+                <th mat-header-cell *matHeaderCellDef style="width: 30%;"> Title </th>
+                <td mat-cell *matCellDef="let element" class="dynamic-row"> {{element.queryTitle}} </td>
             </ng-container>
 
             <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 10%;"> Description </th>
                 <td mat-cell *matCellDef="let element"> {{element.queryDescription}} </td>
             </ng-container>
 
             <ng-container matColumnDef="type">
-                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Type </th>
                 <td mat-cell *matCellDef="let element"> {{element.queryType}} </td>
             </ng-container>
 
             <ng-container matColumnDef="limit">
-                <th mat-header-cell *matHeaderCellDef> Result Limit </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Result Limit </th>
                 <td mat-cell *matCellDef="let element"> {{element.queryLimit}} </td>
             </ng-container>
 
             <ng-container matColumnDef="publicationStatus">
-                <th mat-header-cell *matHeaderCellDef> Publication Status </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;"> Publication Status </th>
                 <td mat-cell *matCellDef="let element">
                     <div *ngIf="element.queryState">Private</div>
-                    <div *ngIf="!element.queryState">
+                    <div *ngIf="!element.queryState" style="width: 85%;">
                         <ngx-select-dropdown [options]="pubStatus" [config]="publicationStatusConfig"
                             [(ngModel)]="qryPublicationStatus">
                         </ngx-select-dropdown>
@@ -126,8 +126,8 @@
             </ng-container>
 
             <ng-container matColumnDef="view">
-                <th mat-header-cell *matHeaderCellDef> View </th>
-                <td mat-cell *matCellDef="let element">
+                <th mat-header-cell *matHeaderCellDef style="width: 30%;"> View </th>
+                <td mat-cell *matCellDef="let element" class="dynamic-row">
                     <ngx-select-dropdown *ngIf="element.viewLinkRslt.length>1" [options]="element.viewLinkRslt"
                         [config]="linkResultConfig">
                     </ngx-select-dropdown>
@@ -137,32 +137,18 @@
                         element.viewLinkRslt[0].viewShortTitle)}}</p>
                 </td>
             </ng-container>
-
             <ng-container matColumnDef="action1">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> </td>
+                <td mat-cell *matCellDef="let element">
+                    <div style="display: flex;">
+                        <mat-icon (click)="viewPreview(element)" class="icon-view">visibility</mat-icon>
+                        <mat-icon (click)="editQueryInBuild(element)" class="icon-view">edit</mat-icon>
+                        <mat-icon (click)="openAttachViewModal(element)" class="icon-view">insert_link</mat-icon>
+                        <mat-icon (click)="detachQuery(element)" class="icon-view">link_off</mat-icon>
+                        <mat-icon (click)="discardQuery(element)" class="icon-view">delete</mat-icon>
+                    </div>
+                </td>
             </ng-container>
-
-            <ng-container matColumnDef="action2">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> </td>
-            </ng-container>
-
-            <ng-container matColumnDef="action3">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> </td>
-            </ng-container>
-
-            <ng-container matColumnDef="action4">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> </td>
-            </ng-container>
-
-            <ng-container matColumnDef="action5">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> </td>
-            </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </mat-table>

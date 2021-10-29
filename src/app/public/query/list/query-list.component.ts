@@ -17,7 +17,7 @@ import { AttachViewComponent } from "./attach-view/attach-view.component";
 export class QueryListComponent {
     constructor(private queryService: QueryService, public dialog: GSDialog, private _snackbar: MatSnackBar,) { }
 
-    displayedColumns: string[] = ['id', 'title', 'description', 'type', 'limit', 'publicationStatus', 'view', 'action1', 'action2',  'action3',  'action4', 'action5'];
+    displayedColumns: string[] = ['id', 'title', 'description', 'type', 'limit', 'publicationStatus', 'view', 'action1'];
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
     queryList: any[] = [];
     savedQueryId = "";
