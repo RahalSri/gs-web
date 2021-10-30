@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: ':spaceGuid/views/:viewGuid/:viewType/object/:dataGuid',
     component: DatasheetMainComponent
+  },
+  {
+    path: ':spaceGuid/views/:viewGuid/:viewType/sng/:dataGuid',
+    component: DatasheetMainComponent
   }
 ];
 
