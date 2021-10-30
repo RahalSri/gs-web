@@ -29,6 +29,7 @@ export class GlobalSearchComponent {
     this.onSearchInitiated.emit();
     if(this.searchText == null || this.searchText == ""){
       this.snackBar.openFromComponent(GSSnackBarComponent, {
+        horizontalPosition: 'center',
         data: {
           message: 'Please enter a valid keyword'
         },
