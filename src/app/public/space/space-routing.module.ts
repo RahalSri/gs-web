@@ -15,11 +15,11 @@ const routes: Routes = [
     component: GeneralViewComponent
   },
   {
-    path: ':spaceGuid/views/:viewGuid/:viewType/object/:dataGuid',
+    path: ':spaceGuid/views/:viewGuid/:viewType/objects/:dataGuid',
     component: DatasheetMainComponent
   },
   {
-    path: ':spaceGuid/views/:viewGuid/SNG/:dataGuid',
+    path: ':spaceGuid/views/:viewGuid/objects/:dataGuid/sng',
     component: SngViewComponent
   }
 ];

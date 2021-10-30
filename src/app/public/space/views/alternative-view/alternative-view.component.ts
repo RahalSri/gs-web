@@ -28,10 +28,10 @@ export class AlternativeViewComponent implements OnInit, OnDestroy {
     navigateToViews(altView: AlternateView) {
         console.log(altView);
         if (altView.uniViewFormat == 'Subject Network') {
-            this.router.navigate(['space', altView.spaceSupguid, 'views', altView.supGuid, 'SNG', '096c09cf-79fa-4072-9d96-99f3103f16cc'], { queryParams: { defaultDatasheetSupguId: altView.refDatObjectSupGuid } });
+            this.router.navigate(['space', altView.spaceSupguid, 'views', altView.supGuid, 'objects', altView.refDatObjectSupGuid, 'sng'], { queryParams: { defaultDatasheetSupguId: altView.refDatObjectSupGuid } });
         }
         else {
-            this.router.navigate(['space', altView.spaceSupguid, 'views', altView.supGuid, 'object', altView.refDatObjectSupGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: altView.refDatObjectSupGuid } })
+            this.router.navigate(['space', altView.spaceSupguid, 'views', altView.supGuid, 'objects', altView.refDatObjectSupGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: altView.refDatObjectSupGuid } })
         }
     }
 }
