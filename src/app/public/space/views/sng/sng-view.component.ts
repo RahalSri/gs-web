@@ -68,7 +68,7 @@ export class SngViewComponent implements OnInit {
                     console.log(result);
                     this.topologyData = result;
                     this._processData();
-                    this._setTopology();
+                    this._verifyPathSupportive();
                     this._setBreadcrumb();
                     this._getAlternateViews();
                 });
@@ -77,8 +77,6 @@ export class SngViewComponent implements OnInit {
     }
 
     _processData() {
-        let linksFromNode: any[] = [];
-        let linksToNode: any[] = [];
         this.isPathSupportive = ((this.topologyData.topology == 'Network' || this.topologyData.topology == 'Path') ? true : false);
 
         this.subjectId = this.topologyData!.graph!.subjectId!;
@@ -98,7 +96,6 @@ export class SngViewComponent implements OnInit {
                                 from: relationship.startNode,
                                 text: tempNodeLink.text
                             });
-                            linksFromNode.push(relationship.startNode);
                         }
                     }
                 } else if (relationship.startNode == tempNodeLink.id) {
@@ -113,26 +110,38 @@ export class SngViewComponent implements OnInit {
                                 to: relationship.endNode,
                                 text: tempNodeLink.text
                             });
-                            linksToNode.push(relationship.endNode);
                         }
                     }
                 }
             });
         });
 
-        /* Topology switch icon (for Path) is available
-            If each node in graph has one inbound and/or one outbound link.
-        */
-        if (typeof linksToNode != 'undefined' && linksToNode.length > 1) {
-            this.isPathSupportive = false;
-        }
-        if (typeof linksFromNode != 'undefined' && linksFromNode.length > 1) {
-            this.isPathSupportive = false;
-        }
-
         this.tempDiagramLinkDataMap.forEach((linkData: any) => {
             this.state.diagramLinkData.push(linkData);
         })
+    }
+
+    _verifyPathSupportive() {
+        this.topologyData.graph!.nodes!.forEach((node: any) => {
+            let linksFromNode: any[] = [];
+            let linksToNode: any[] = [];
+            /* Topology switch icon (for Path) is available
+                If each node in graph has one inbound and/or one outbound link.
+            */
+            if(node.label == 'DATobject'){
+                this.topologyData.graph!.relationships!.forEach((link: any) => {
+                    if(link.endNode == node.id) {
+                        linksToNode.push(link);
+                    }
+                    if(link.startNode == node.id){
+                        linksFromNode.push(link);
+                    }
+                });
+                if (linksToNode.length > 1 || linksFromNode.length > 1) {
+                    this.isPathSupportive = false;
+                }
+            }
+        });
     }
 
     _setTopology(): void {

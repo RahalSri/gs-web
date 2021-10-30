@@ -28,7 +28,7 @@
                         zoom_out
                     </mat-icon>
                 </button>
-                <button [disabled]="isPathSupportive" (click)="_setTopology()" mat-icon-button>
+                <button [disabled]="!isPathSupportive" (click)="_setTopology()" mat-icon-button>
                     <mat-icon>
                         account_tree
                     </mat-icon>
