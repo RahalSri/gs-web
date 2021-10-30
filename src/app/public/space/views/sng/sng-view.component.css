@@ -14,3 +14,11 @@
 .rhsOpenPanel {
   max-width: 35%;
 }
+
+.view-fullscreen {
+  height: 100vh;
+}
+
+.view-normal {
+  height: 73vh;
+}

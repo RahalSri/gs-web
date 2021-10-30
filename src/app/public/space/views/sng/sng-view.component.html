@@ -10,7 +10,7 @@
 </div>
 
 <div #fullScreen>
-    <mat-card>
+    <mat-card [ngClass]="{'view-fullscreen' : fullScreenEnabled, 'view-normal':!fullScreenEnabled }">
         <div class="action-bar">
             <view-type-header [viewType]="'SNG'" [viewTitle]="topologyData.objTitle!"
                 [viewSubTitle]="topologyData.viewDisplayTitle!" [description]="topologyData.viewDisplayDesc!"
