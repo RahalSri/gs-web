@@ -23,6 +23,7 @@ export class SngViewComponent implements OnInit {
     openRHS: boolean = false;
     zoomIn: number = 0;
     zoomOut: number = 0;
+    supGuId: string = "";
 
     topologyData: TopologyData = new TopologyData();
     showDescription: boolean = false;
@@ -166,7 +167,13 @@ export class SngViewComponent implements OnInit {
             });
     }
 
-    _loadDatViewDetails(SUPguId: string): void {
+    _loadDatViewDetails(supGuid: string): void {
+        this.openRHS = true;
+        this.supGuId = supGuid;
+    }
+
+    toggleRHS(rhsStatus: any) {
+        this.openRHS = rhsStatus;
     }
 
     changeFullScreenView() {

@@ -61,6 +61,11 @@
                 </gs-sng-path-topology>
             </div>
         </div>
+        <div *ngIf="openRHS" class="flex-item rhsOpenPanel">
+            <rhs-panel [openRHS]="openRHS" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="viewGuid"
+                [supGuId]="supGuId" (onRHSToggle)="toggleRHS($event)">
+            </rhs-panel>
+        </div>
     </mat-card>
 </div>
 
