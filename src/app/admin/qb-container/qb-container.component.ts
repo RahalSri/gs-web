@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from "@angular/core";
-import { QueryBuilderService } from "../../../services/query-builder.service";
+import { QueryBuilderService } from "src/app/core/service/query-builder.service";
+
 @Component({
   selector: 'qb-container',
   template: require('./qb-container.component.html'),
@@ -10,21 +11,21 @@ import { QueryBuilderService } from "../../../services/query-builder.service";
 })
 export class QBContainerComponent implements OnInit {
 
-  public editQueryId;
+  public editQueryId = undefined;
   public selectTopicModel: any = {};
   private completeModel: any = {};
-  public editableQBParams;
-  public editableObj;
-  public execQuery;
-  public resultHedaingMapping;
-  public isSavingInprogress = false;
+  public editableQBParams: any = undefined;
+  public editableObj: any = undefined;
+  public execQuery: any = undefined;
+  public resultHedaingMapping: any = undefined;
+  public isSavingInprogress: any = false;
   public graphModel = {
     model: {},
     linkConsidered: []
   };
-  public collectedSelectedPropAry;
+  public collectedSelectedPropAry: any = undefined;
 
-  private refineModel;
+  private refineModel: any = undefined;
   private qryGuid = '';
 
   public stepValidity = {
@@ -44,7 +45,7 @@ export class QBContainerComponent implements OnInit {
     if (this.editableQBParams) {
       this.queryBuilderService.editQueryInBuild(this.editableQBParams.queryGuid).subscribe((response: any) => {
         if (response != null) {
-          const entryObj = response.datQueryObjects.filter(qo => qo.qobIsStartObject)[0]; //, { "qobIsStartObject": true })[0];
+          const entryObj = response.datQueryObjects.filter((qo: any) => qo.qobIsStartObject)[0]; //, { "qobIsStartObject": true })[0];
           const canvasData = JSON.parse(response.qryCanvas);
 
           this.editableObj = {
@@ -70,7 +71,7 @@ export class QBContainerComponent implements OnInit {
     }
   }
 
-  public handleQueryChange(data) {
+  public handleQueryChange(data: any) {
     this.execQuery = data.query;
     this.resultHedaingMapping = data.resultHedaingMapping;
     this.graphModel.model = data.model;
@@ -78,17 +79,17 @@ export class QBContainerComponent implements OnInit {
     this.graphModel.linkConsidered = data.linkConsidered;
   }
 
-  public handleSelectTopicChange(data) {
+  public handleSelectTopicChange(data: any) {
     this.selectTopicModel = data;
     this.stepValidity.selectTopic = data.validity;
   }
 
-  public handleCompleteChange(data) {
+  public handleCompleteChange(data: any) {
     this.completeModel = data;
     this.stepValidity.complete = data.validity;
   }
 
-  public handleRefineChage(data) {
+  public handleRefineChage(data: any) {
     this.refineModel = data;
   }
 
@@ -97,15 +98,15 @@ export class QBContainerComponent implements OnInit {
   }
 
   public getStoredColumnWidth() {
-    var object = localStorage.getItem('ngColumnResize.resultTbl.FixedResizer');
+    const object: any = localStorage.getItem('ngColumnResize.resultTbl.FixedResizer');
     return JSON.parse(object);
   }
 
   public saveData() {
     this.isSavingInprogress = true;
-    const spcList = [];
+    const spcList: any = [];
 
-    this.selectTopicModel?.spaceList?.forEach(element => {
+    this.selectTopicModel?.spaceList?.forEach((element: any) => {
       spcList.push(element.spaceSUPguid);
     });
 
@@ -114,10 +115,10 @@ export class QBContainerComponent implements OnInit {
     const qryTitle = this.completeModel.qryTitle ?? '';
     const qryShortTitle = this.completeModel.supShortTitle ?? '';
 
-    var queryArry = this.execQuery.split("RETURN");
-    var queryWithGuidreturn = queryArry[0] + " RETURN " + "on1.SUPguId," + queryArry[1];
-    var colWidths = this.getStoredColumnWidth();
-    var saveQry = {
+    const queryArry = this.execQuery.split("RETURN");
+    const queryWithGuidreturn = queryArry[0] + " RETURN " + "on1.SUPguId," + queryArry[1];
+    const colWidths = this.getStoredColumnWidth();
+    const saveQry = {
       selctedSpcList: spcList,
       spaceGuid: this.completeModel.space.spaceSUPguid ?? '',
       spaceSupid: this.completeModel.space.spaceSUPid ?? '',
@@ -148,9 +149,9 @@ export class QBContainerComponent implements OnInit {
     };
     var countProperty = 1;
     var propExistForFirstNode = false;
-    this.resultHedaingMapping.forEach((node, keyNode) => {
-      var properties = [];
-      node.objMap?.forEach((property, key) => {
+    this.resultHedaingMapping.forEach((node: any, keyNode: any) => {
+      var properties: any = [];
+      node.objMap?.forEach((property: any) => {
         if (keyNode == 0 && property != 'undefined') {
           propExistForFirstNode = true;
         }
@@ -173,12 +174,19 @@ export class QBContainerComponent implements OnInit {
       //   if (!property.isInReturnString)
       //     properties.push({ 'operator': "CONTAINS", 'inputVal': property.inputVal, 'isSelected': false, 'propId': property.supGuid, 'propType': property.propType });
       // })
-      node.filterAttributes.forEach(property => {
+      node.filterAttributes.forEach((property: any) => {
         if (!property.isInReturnString)
           properties.push({ 'operator': "CONTAINS", 'inputVal': property.inputVal, 'isSelected': false, 'propId': property.supGuid, 'propType': property.propType });
       })
-
-      saveQry.nodes.push({ "metObjId": node.metGuid, "alias": node.diaplayAlias, "variableAssignment": node.alias, 'properties': properties });
+      
+      const qr: any ={ 
+        metObjId: node.metGuid, 
+        alias: node.diaplayAlias, 
+        variableAssignment: node.alias,
+        properties: properties 
+      };
+      // @ts-ignore
+      saveQry.nodes.push(qr);
 
     });
 
@@ -186,8 +194,16 @@ export class QBContainerComponent implements OnInit {
       saveQry.queryData.cypherString = queryWithGuidreturn;
     }
 
-    this.graphModel.linkConsidered.forEach((lnk, key) => {
-      saveQry.links.push({ "metLnkId": lnk.id, "qlkVariableAssignment": lnk.lnkAlias, "qlkTypeOfJoin": lnk.lnkType });
+    this.graphModel.linkConsidered.forEach((lnk: any) => {
+ 
+      const qryLinks: any = { 
+        metLnkId: lnk.id, 
+        qlkVariableAssignment: lnk.lnkAlias,
+        qlkTypeOfJoin: lnk.lnkType
+      };   
+      // @ts-ignore
+      saveQry.links.push(qryLinks);
+
     });
 
     this.queryBuilderService.saveQuery(saveQry).subscribe((response: any) => {

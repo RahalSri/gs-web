@@ -102,7 +102,7 @@ export class QueryBuilderService {
     );
   }
 
-  public saveQuery(saveQry: string) {
+  public saveQuery(saveQry: any) {
     return this.http.post<HttpResponse>(
       `${this.apiEndpoint}/queryBuider/saveQuery`,
       saveQry
