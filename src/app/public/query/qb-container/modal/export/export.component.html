@@ -21,7 +21,7 @@
                                 </select> -->
                                 <form [formGroup]="exportForm">
                                     <gs-select style="z-index: 3;" [list]="exportTypesList" [key]="'label'"
-                                        [value]="'label'" [name]="'exportTypesList'" [styleClass]="col-sm-12"
+                                        [value]="'label'" [name]="'exportTypesList'"
                                         [placeholder]="'--Select Export Type--'" [selectedOptions]="selectedExportType"
                                         (onChangeEvent)="handleExportTypeChange($event)" [isFormGroup]="false">
                                     </gs-select>

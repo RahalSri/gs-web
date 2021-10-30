@@ -22,6 +22,8 @@ import { PropertiesComponet } from './qb-container/modal/properties/properties.c
 import { WarnComponent } from './qb-container/modal/warn/warn.component';
 import { LinksComponent } from './qb-container/modal/links/links.component';
 import { LinkTypeComponent } from './qb-container/modal/link-type/link-type.component';
+import { QbTableComponent } from './qb-container/refine/qb-table/qb-table.component';
+import { ExportComponent } from './qb-container/modal/export/export.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { LinkTypeComponent } from './qb-container/modal/link-type/link-type.comp
     PropertiesComponet, 
     WarnComponent,
     LinksComponent,
-    LinkTypeComponent
+    LinkTypeComponent,
+    QbTableComponent,
+    ExportComponent
   ],
   imports: [
     CommonModule,

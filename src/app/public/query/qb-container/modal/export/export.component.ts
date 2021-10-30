@@ -16,7 +16,7 @@ export class ExportComponent implements OnInit {
     public includeIdentifier = false;
     public selectedExportType: any;
     public exportTypesList = [{ label: 'Excel' }, { label: 'Word' }, { label: 'CSV' }];
-    public exportForm: FormGroup|undefined;
+    public exportForm: any;
 
     public constructor(
         private formBuilder: FormBuilder,

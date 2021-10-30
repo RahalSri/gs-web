@@ -16,7 +16,7 @@ export class QbCompleteComponent implements OnInit {
   };
 
   public discardPopup: any = undefined;
-  public completeForm: FormGroup| undefined;
+  public completeForm: any;
   public exportModel: any = undefined;
 
   @Input() selectTopicModel: any;
