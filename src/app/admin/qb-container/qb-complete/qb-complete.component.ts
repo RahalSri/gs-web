@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { QueryBuilderService } from "../../../services/query-builder.service";
+import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 
 
 @Component({
@@ -18,16 +18,16 @@ export class QbCompleteComponent implements OnInit {
     space: ''
   };
 
-  public discardPopup = undefined;
-  public completeForm: FormGroup;
-  public exportModel = undefined;
+  public discardPopup: any = undefined;
+  public completeForm: FormGroup| undefined;
+  public exportModel: any = undefined;
 
-  @Input() selectTopicModel;
-  @Input() metLanguage;
-  @Input() editableObj;
-  @Input() execQuery;
-  @Input() graphModel;
-  @Input() resultHedaingMapping;
+  @Input() selectTopicModel: any;
+  @Input() metLanguage: any
+  @Input() editableObj: any
+  @Input() execQuery: any
+  @Input() graphModel: any
+  @Input() resultHedaingMapping: any
 
   @Output() onExport = new EventEmitter<any>();
   @Output() onDiscard = new EventEmitter<any>();
@@ -47,7 +47,7 @@ export class QbCompleteComponent implements OnInit {
     if (this.selectTopicModel && this.editableObj?.qrySavedSpace) {
       this.model.qryTitle = this.editableObj.supTitle;
       this.model.qryDescription = this.editableObj.supDescription;
-      this.model.space = this.selectTopicModel?.spaceList?.find(spc => spc.spaceSUPguid === this.editableObj.qrySavedSpace.spaceSUPguid);
+      this.model.space = this.selectTopicModel?.spaceList?.find((spc: any) => spc.spaceSUPguid === this.editableObj.qrySavedSpace.spaceSUPguid);
       this.emitChanges();
     }
   }
@@ -103,7 +103,7 @@ export class QbCompleteComponent implements OnInit {
     if (!this?.selectTopicModel?.spaceList) {
       return [];
     }
-    const list = this.selectTopicModel.spaceList.map(spc => {
+    const list = this.selectTopicModel.spaceList.map((spc: any) => {
       spc.displayTitle = `${spc.libTitle}/${spc.spaceSUPtitle}`;
       return spc;
     });
