@@ -14,14 +14,16 @@ import {
 })
 export class GSButtonComponent {
   @Input() label?: string;
-  @Input() loading?: boolean;
+  @Input() loading?: boolean = false;
   @Input() type?: string;
   @Input() disabled = false;
+  @Input() color?: string = '';
   @Output() onClickEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() styleClass?: string;
   @Input() icon?: string;
 
+
   @ContentChild('iconRef') actionRef?: TemplateRef<any>;
 
-  constructor() {}
+  constructor() { }
 }

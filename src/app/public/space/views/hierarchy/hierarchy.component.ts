@@ -83,7 +83,7 @@ export class HierarchyComponent implements OnInit {
       $(go.Node, {
         selectionAdorned: false,
         click: (e:any, node: any) => {
-          this.router.navigate(['object', (node as any).ob.supGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: (node as any).ob.dataSheet } });
+          this.router.navigate(['objects', (node as any).ob.supGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: (node as any).ob.dataSheet } });
         },
         contextClick: (e: any, node: any) => {
           this.rightClick.emit((node as any).ob.supGuid);

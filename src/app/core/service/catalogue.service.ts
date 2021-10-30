@@ -221,6 +221,9 @@ export class CatalogueService {
   }
 
   fetchAlternateViews(spaceSupId:string, viewSupId:string, objSupId?:string) {
+    if(!objSupId){
+      objSupId = "";
+    }
     return this.http.get<any[]>(
       `${this.apiEndpoint}/datView/getAlternativeViews/${spaceSupId}/${viewSupId}/${objSupId}`
     );

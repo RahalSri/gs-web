@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.service";
 import { QueryService } from "src/app/core/service/query.service";
 import { GSConfirmationDialogComponent } from "src/app/shared/component/gs-confirmation-dialog/gs-confirmation-dialog.component";
@@ -15,9 +16,9 @@ import { AttachViewComponent } from "./attach-view/attach-view.component";
     ]
 })
 export class QueryListComponent {
-    constructor(private queryService: QueryService, public dialog: GSDialog, private _snackbar: MatSnackBar,) { }
+    constructor(private queryService: QueryService, public dialog: GSDialog, private _snackbar: MatSnackBar, private router: Router, private route: ActivatedRoute) { }
 
-    displayedColumns: string[] = ['id', 'title', 'description', 'type', 'limit', 'publicationStatus', 'view', 'action1'];
+    displayedColumns: string[] = ['id', 'title', 'description', 'type', 'limit', 'publicationStatus', 'view'];
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
     queryList: any[] = [];
     savedQueryId = "";
@@ -37,6 +38,7 @@ export class QueryListComponent {
     }
 
     qryPublicationStatus: any;
+    dialogRef: any;
 
     ngOnInit(): void {
         this.getAllQueryList();
@@ -62,7 +64,8 @@ export class QueryListComponent {
 
     viewPreview(query: any) {
         var view = query.viewLinkRslt[0];
-        window.location.href = '#/space/' + view.spaceSUPguid + '/dataview/' + view.viewGuid + '/query/' + query.queryGuid + '/TB';
+        this.router.navigate(['space', view.spaceSUPguid, 'dataview', view.viewGuid, 'query', query.queryGuid, 'TB'])
+        // window.location.href = '#/space/' + view.spaceSUPguid + '/dataview/' + view.viewGuid + '/query/' + query.queryGuid + '/TB';
     }
 
     detachQuery(query: any) {
@@ -170,9 +173,9 @@ export class QueryListComponent {
     }
 
     openAttachViewModal(query: any) {
-        const dialogRef = this.dialog.open(AttachViewComponent, {
+        this.dialogRef = this.dialog.open(AttachViewComponent, {
             panelClass: 'gs-view-dialog-container',
-            data: { query: query }
+            data: { query: query },
         });
     }
 }

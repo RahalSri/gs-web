@@ -1,11 +1,11 @@
 .rhsOpen {
-  display: grid;
-  grid-template-areas: "table table table rhs";
-  grid-column-gap: 16px;
+  width: 65%;
 }
 
 .rhsClosed {
-  display: grid;
-  grid-template-areas: "table table table table";
-  grid-column-gap: 16px;
+  width: 100%;
+}
+
+.rhsOpenPanel {
+  max-width: 35%;
 }

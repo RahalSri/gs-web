@@ -11,9 +11,18 @@
   display: inline;
   margin: 0;
 }
+.headerSubTitle {
+  display: inline;
+  margin: 0;
+}
 .headerDes {
   white-space: pre-line;
   word-break: break-word;
   margin: 0;
   padding: 0;
+}
+
+.multi-title{
+  display: flex;
+  flex-direction: column;
 }

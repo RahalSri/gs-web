@@ -30,7 +30,12 @@ export class GsTileComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    //Temp code
+    if (this.view.tileFileName!.includes("RMF")) {
+      this.view.viewDownloadLink = "assets/" + this.view.viewDownloadLink;
+    }
+  }
 
   goToDataView() {
     if (this.view!.viewMaskLabel == 'BM') {
@@ -41,7 +46,7 @@ export class GsTileComponent implements OnInit {
       this.viewService.datViewSupGuId = this.view!.supGuid;
       this.viewService.viewType = this.view!.viewMaskLabel;
 
-      this.router.navigate(['views', this.view!.supGuid, this.view!.viewMaskLabel], {relativeTo: this.route});
+      this.router.navigate(['views', this.view!.supGuid, this.view!.viewMaskLabel], { relativeTo: this.route });
     }
   }
 

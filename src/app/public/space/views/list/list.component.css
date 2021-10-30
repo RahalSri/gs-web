@@ -99,3 +99,6 @@ mat-row.selected-row {
   padding-left: 32px;
   float: left;
 }
+.datobj_title {
+  text-decoration: none;
+}

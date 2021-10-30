@@ -1,0 +1,24 @@
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rhsOpen {
+  width: 65%;
+}
+
+.rhsClosed {
+  width: 100%;
+}
+
+.rhsOpenPanel {
+  max-width: 35%;
+}
+
+.view-fullscreen {
+  height: 100vh;
+}
+
+.view-normal {
+  height: 71vh;
+}

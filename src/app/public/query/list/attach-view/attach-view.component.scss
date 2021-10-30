@@ -1,0 +1,27 @@
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  .modal-title {
+    margin: 0;
+  }
+}
+
+.modal-content {
+  margin: 0;
+  margin-top: 10px;
+  .row {
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.modal-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+}

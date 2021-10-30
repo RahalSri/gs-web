@@ -88,7 +88,7 @@ export class ListComponent implements OnInit {
     }
 
     titleClicked(element: any) {
-        this.router.navigate(['object', element.supGuId], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: element.defaultDatasheetSupguId } });
+        this.router.navigate(['objects', element.supGuId], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: element.defaultDatasheetSupguId } });
     }
 
     applyFilters(data: any) {

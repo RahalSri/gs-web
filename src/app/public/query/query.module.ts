@@ -24,7 +24,10 @@ import { LinksComponent } from './qb-container/modal/links/links.component';
 import { LinkTypeComponent } from './qb-container/modal/link-type/link-type.component';
 import { QbTableComponent } from './qb-container/refine/qb-table/qb-table.component';
 import { ExportComponent } from './qb-container/modal/export/export.component';
-
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     QueryListComponent,
@@ -55,7 +58,12 @@ import { ExportComponent } from './qb-container/modal/export/export.component';
     MatCardModule,
     MatStepperModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    MatCardModule,
+    MatRadioModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class QueryModule { }

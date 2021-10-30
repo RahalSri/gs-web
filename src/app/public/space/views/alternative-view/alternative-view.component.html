@@ -2,7 +2,7 @@
     <mat-icon class="action-icon">visibility</mat-icon>
 </button>
 <mat-menu #menu="matMenu" xPosition="before" class="alt-menu">
-    <button mat-menu-item *ngFor="let altview of altViews">{{altview.refDataObjectDisplayTitle
+    <button (click)="navigateToViews(altview);" mat-menu-item *ngFor="let altview of altViews">{{altview.refDataObjectDisplayTitle
         ? altview.altViewDisplayTitle + ':' +
         altview.refDataObjectDisplayTitle : altview.altViewDisplayTitle |
         slice:0:60 }}</button>

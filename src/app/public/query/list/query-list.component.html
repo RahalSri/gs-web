@@ -80,12 +80,10 @@
 <div #fullScreen>
     <mat-card>
         <div class="headerRow">
-            <div class="headerIcon">
-                <mat-icon>view_comfy</mat-icon>
-                <h2 id="page_header" class="headerTitle">
-                    Query List
-                </h2>
-            </div>
+            <mat-icon class="headerIcon">view_comfy</mat-icon>
+            <h2 id="page_header" class="headerTitle">
+                Query List
+            </h2>
         </div>
         <mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
@@ -94,7 +92,7 @@
             </ng-container>
 
             <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef style="width: 30%;"> Title </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Title </th>
                 <td mat-cell *matCellDef="let element" class="dynamic-row"> {{element.queryTitle}} </td>
             </ng-container>
 
@@ -126,26 +124,24 @@
             </ng-container>
 
             <ng-container matColumnDef="view">
-                <th mat-header-cell *matHeaderCellDef style="width: 30%;"> View </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 40%;"> View </th>
                 <td mat-cell *matCellDef="let element" class="dynamic-row">
                     <ngx-select-dropdown *ngIf="element.viewLinkRslt.length>1" [options]="element.viewLinkRslt"
                         [config]="linkResultConfig">
                     </ngx-select-dropdown>
-                    <p *ngIf="element.viewLinkRslt.length==1">{{(element.viewLinkRslt[0].viewShortTitle
-                        == null ? "-" : element.viewLinkRslt[0].libShortTitle + '_' +
-                        element.viewLinkRslt[0].spaceShortTitle + '_' +
-                        element.viewLinkRslt[0].viewShortTitle)}}</p>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="action1">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element">
-                    <div style="display: flex;">
-                        <mat-icon (click)="viewPreview(element)" class="icon-view">visibility</mat-icon>
-                        <mat-icon (click)="editQueryInBuild(element)" class="icon-view">edit</mat-icon>
-                        <mat-icon (click)="openAttachViewModal(element)" class="icon-view">insert_link</mat-icon>
-                        <mat-icon (click)="detachQuery(element)" class="icon-view">link_off</mat-icon>
-                        <mat-icon (click)="discardQuery(element)" class="icon-view">delete</mat-icon>
+                    <div style="display: flex; grid-gap: 2px; align-items: center;">
+                        <p class="view-link" style="margin: 0;" *ngIf="element.viewLinkRslt.length==1">
+                            {{(element.viewLinkRslt[0].viewShortTitle
+                            == null ? "-" : element.viewLinkRslt[0].libShortTitle + '_' +
+                            element.viewLinkRslt[0].spaceShortTitle + '_' +
+                            element.viewLinkRslt[0].viewShortTitle)}}</p>
+                        <div style="display: flex; margin-left: 5px;">
+                            <mat-icon (click)="viewPreview(element)" class="icon-view">visibility</mat-icon>
+                            <mat-icon (click)="editQueryInBuild(element)" class="icon-view">edit</mat-icon>
+                            <mat-icon (click)="openAttachViewModal(element)" class="icon-view">insert_link</mat-icon>
+                            <mat-icon (click)="detachQuery(element)" class="icon-view">link_off</mat-icon>
+                            <mat-icon (click)="discardQuery(element)" class="icon-view">delete</mat-icon>
+                        </div>
                     </div>
                 </td>
             </ng-container>
