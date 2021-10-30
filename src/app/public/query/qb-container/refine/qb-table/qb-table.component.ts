@@ -3,7 +3,7 @@ import { MatTable } from '@angular/material/table';
 
 @Component({
     selector: 'qb-table',
-    template: './qb-table.component.html',
+    templateUrl: './qb-table.component.html',
     styleUrls: ['./qb-table.component.scss']
 })
 export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {

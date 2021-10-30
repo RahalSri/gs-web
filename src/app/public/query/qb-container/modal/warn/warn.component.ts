@@ -3,12 +3,10 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 @Component({
     selector: 'warn',
     template: require('./warn.component.html'),
-    styles: [
-        require('./warn.component.css').toString()
-    ]
+    styleUrls: ['./warn.component.scss']
 })
 export class WarnComponet {
-    @Input() templateModel;
+    @Input() templateModel: any;
     // @Output() onOk: EventEmitter<any> = new EventEmitter<any>();
     // @Output() onCancel: EventEmitter<any> = new EventEmitter<any>();
 

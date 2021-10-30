@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 
 @Component({
     selector: 'links',
-    template: './links.component.html',
+    templateUrl: './links.component.html',
     styleUrls: ['./links.component.scss']
 })
 export class LinksComponet {

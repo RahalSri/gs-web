@@ -9,7 +9,7 @@
                         <div class="col-sm-9 control-value">
                             <gs-select style="z-index: 3;" [list]="metLanguageList" [key]="'supShortTitle'"
                                 [selectedOptions]="model.metLanguage" [value]="'supGuid'" [name]="'metLanguage'"
-                                [styleClass]="col-sm-12" (onChangeEvent)="getSpacesWithMetLanguages($event.value)"
+                                 (onChangeEvent)="getSpacesWithMetLanguages($event.value)"
                                 [placeholder]="'--Select Modelling Language--'" [isFormGroup]="false">
                             </gs-select>
                         </div>
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"></label>
                         <div class="col-sm-9 control-value">
-                            <div class="input-group spc_list" *ngIf="!allSpacesSelected">
+                            <div class="input-group spc_list" *ngIf="!isAllSpacesSelected">
                                 <div class="icheck-list">
                                     <label *ngFor="let space of spaces">
                                         <input [checked]="selectedSpacesCheckBoxes[space.spaceSUPguid]" type="checkbox"
@@ -86,7 +86,7 @@
 
                             <gs-select *ngIf="!isLoadingTopics" style="z-index: 3;" [list]="topicList"
                                 [selectedOptions]="model.topic" [key]="'metObjSupTitle'" [value]="'metObjSupTitle'"
-                                [name]="'topic'" [styleClass]="col-sm-12" [placeholder]="'--Select Topic--'"
+                                [name]="'topic'"  [placeholder]="'--Select Topic--'"
                                 (onChangeEvent)="handleTopicChange($event.value)" [isFormGroup]="false">
                             </gs-select>
 

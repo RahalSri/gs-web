@@ -3,20 +3,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 @Component({
   selector: 'select-topic',
-  template: './select-topic.component.html',
+  templateUrl: './select-topic.component.html',
   styleUrls: ['./select-topic.component.scss']
 })
 export class SelectTopicComponent implements OnInit {
 
   metLanguageList: Array<any> = [];
   spaces: Array<any> = [];
-  selectTopicForm: FormGroup|undefined;
+  selectTopicForm: FormGroup;
   showObjList = false;
   topicList = [];
   isLoadingTopics = true;
   selectedSpacesCheckBoxes = {};
 
-  private model: any = { metLanguage: undefined, spaceList: [], tooType: '', topic: undefined, allSpacesSelected: false, allObjectsSelected: false, queryLimit: 0, isTableView: true, qryGuid: undefined };
+  public model: any = { metLanguage: undefined, spaceList: [], tooType: '', topic: undefined, allSpacesSelected: false, allObjectsSelected: false, queryLimit: 0, isTableView: true, qryGuid: undefined };
 
   @Input() editableObj: any;
   @Output() onChange = new EventEmitter<any>();
@@ -24,7 +24,9 @@ export class SelectTopicComponent implements OnInit {
   public constructor(
     private queryBuilderService: QueryBuilderService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    this.selectTopicForm = this.formBuilder.group(this.model);
+   }
 
   private emitChanges() {
     this.onChange.emit({ ...this.model, validity: this.getFormValidity() });

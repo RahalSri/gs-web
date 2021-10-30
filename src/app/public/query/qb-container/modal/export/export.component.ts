@@ -4,7 +4,7 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
 
 @Component({
     selector: 'export',
-    template: './export.component.html',
+    templateUrl: './export.component.html',
     styleUrls: ['./export.component.scss']
 })
 export class ExportComponent implements OnInit {

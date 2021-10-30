@@ -2,10 +2,8 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
     selector: 'properties',
-    template: require('./properties.component.html'),
-    styles: [
-        require('./properties.component.css').toString()
-    ]
+    templateUrl: './properties.component.html',
+    styleUrls: ['./properties.component.scss']
 })
 export class PropertiesComponet {
     @Input() model: any; //localPropertyValueList //header //hidePublicUrlInput

@@ -15,7 +15,7 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
 const bigfont = "bold 13pt Helvetica, Arial, sans-serif";
 @Component({
   selector: "qb-graph",
-  template: "./qb-graph.component.html",
+  templateUrl: "./qb-graph.component.html",
   styleUrls: ["./qb-graph.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })

@@ -4,7 +4,7 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
 
 @Component({
   selector: 'qb-complete',
-  template: './qb-complete.component.html',
+  templateUrl: './qb-complete.component.html',
   styleUrls: ['./qb-complete.component.scss']
 })
 export class QbCompleteComponent implements OnInit {

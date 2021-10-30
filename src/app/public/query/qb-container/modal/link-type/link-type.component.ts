@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 @Component({
     selector: 'link-type',
-    template: './link-type.component.html',
+    templateUrl: './link-type.component.html',
     styleUrls: ['./link-type.component.scss']
 })
 export class LinkTypeComponet implements OnInit {
