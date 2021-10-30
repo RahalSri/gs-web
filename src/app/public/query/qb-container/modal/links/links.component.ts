@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
     templateUrl: './links.component.html',
     styleUrls: ['./links.component.scss']
 })
-export class LinksComponet {
+export class LinksComponent {
 
     @Input() model: any; //localPropertyValueList //header //hidePublicUrlInput
     @Output() loadEndNode = new EventEmitter();

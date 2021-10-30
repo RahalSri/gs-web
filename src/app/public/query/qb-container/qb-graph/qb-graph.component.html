@@ -1,9 +1,13 @@
-  <!-- <div id="graph-container" class="step">
-    <warn [templateModel]="templateModel"></warn>
-    <properties *ngIf="propertyModel" [model]="propertyModel" (onPropChange)="refreshCanvas($event)"></properties>
-    <links *ngIf="linksModel" [model]="linksModel" (loadEndNode)="loadEndNode($event)"></links>
-    <link-type *ngIf="linkTypeModel" [model]="linkTypeModel" (onLinkTypeChange)="onLinkChanged($event)">
-    </link-type>
+ <warn [templateModel]="templateModel"></warn> 
+
+ <properties *ngIf="propertyModel" [model]="propertyModel" (onPropChange)="refreshCanvas($event)"></properties> 
+
+ <links *ngIf="linksModel" [model]="linksModel" (loadEndNode)="loadEndNode($event)"></links>
+
+ <link-type *ngIf="linkTypeModel" [model]="linkTypeModel" (onLinkTypeChange)="onLinkChanged()"></link-type>
+  
+  
+  <div id="graph-container" class="step">
     <div class="col-lg-12">
         <div class="panel only-hide-btn m-b-0">
             <div class="panel-header panel-controls only-hide-btn custom-hide-btn">
@@ -41,4 +45,4 @@
             </div>
         </div>
     </div>
-</div>   -->
+</div>  

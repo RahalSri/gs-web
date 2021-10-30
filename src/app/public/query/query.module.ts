@@ -18,11 +18,10 @@ import { RefineComponent } from 'src/app/public/query/qb-container/refine/refine
 import { QbCompleteComponent } from 'src/app/public/query/qb-container/qb-complete/qb-complete.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
-import { ExportComponent } from './qb-container/modal/export/export.component';
-import { LinkTypeComponet } from './qb-container/modal/link-type/link-type.component';
-import { LinksComponet } from './qb-container/modal/links/links.component';
-import { WarnComponent } from './qb-container/modal/warn/warn.component';
 import { PropertiesComponet } from './qb-container/modal/properties/properties.component';
+import { WarnComponent } from './qb-container/modal/warn/warn.component';
+import { LinksComponent } from './qb-container/modal/links/links.component';
+import { LinkTypeComponent } from './qb-container/modal/link-type/link-type.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +32,10 @@ import { PropertiesComponet } from './qb-container/modal/properties/properties.c
     QBGraphComponent,
     RefineComponent,
     QbCompleteComponent,
-    // ExportComponent,
-    // LinkTypeComponet,
-    // LinksComponet,
-    // WarnComponent,
-    // PropertiesComponet
+    PropertiesComponet, 
+    WarnComponent,
+    LinksComponent,
+    LinkTypeComponent
   ],
   imports: [
     CommonModule,

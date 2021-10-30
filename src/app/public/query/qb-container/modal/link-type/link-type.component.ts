@@ -5,9 +5,9 @@ import { FormBuilder, FormGroup } from "@angular/forms";
     templateUrl: './link-type.component.html',
     styleUrls: ['./link-type.component.scss']
 })
-export class LinkTypeComponet implements OnInit {
+export class LinkTypeComponent implements OnInit {
 
-    public form: FormGroup |undefined;
+    public form: any;
     public selectedLinkDirection: any;
     @Input() model: any;
     @Output() onLinkTypeChange = new EventEmitter<any>();
@@ -30,7 +30,7 @@ export class LinkTypeComponet implements OnInit {
         this.model = undefined;
     }
 
-    public handleMandatoryChanged(value: string) {
+    public handleMandatoryChanged(value: any) {
         this.model.selecetedLink.type = value;
     }
 

@@ -122,7 +122,7 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     // }
   }
 
-  private refreshCanvas(editedLocalPropertyValueList?: any) {
+  public refreshCanvas(editedLocalPropertyValueList?: any) {
     if (editedLocalPropertyValueList) {
       this.localPropertyValueList = editedLocalPropertyValueList;
     }
