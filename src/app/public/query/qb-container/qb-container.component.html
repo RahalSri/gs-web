@@ -8,8 +8,8 @@
                 <mat-step>
                     <form>
                         <ng-template matStepLabel>Select Topic</ng-template>
-                        <select-topic [editableObj]="editableObj" (onChange)="handleSelectTopicChange($event)">
-                        </select-topic>
+                        <!-- <select-topic [editableObj]="editableObj" (onChange)="handleSelectTopicChange($event)">
+                        </select-topic> -->
                         <div class="stepper-button-container">
                             <button type="button" [disabled]="!stepValidity.selectTopic"
                                 mat-raised-button matStepperNext>Next</button>
@@ -19,9 +19,9 @@
                 <mat-step>
                     <form>
                         <ng-template matStepLabel>Configure</ng-template>
-                        <qb-graph [editableObj]="editableObj" [selectTopicModel]="selectTopicModel"
+                        <!-- <qb-graph [editableObj]="editableObj" [selectTopicModel]="selectTopicModel"
                             (onQueryChange)="handleQueryChange($event)">
-                        </qb-graph>
+                        </qb-graph> -->
                         <div class="stepper-button-container">
                             <button class="stepper-button" mat-raised-button matStepperPrevious>Back</button>
                             <button class="stepper-button" mat-raised-button matStepperNext>Next</button>
@@ -31,9 +31,9 @@
                 <mat-step>
                     <form>
                         <ng-template matStepLabel>Refine</ng-template>
-                        <refine (onChange)="handleRefineChage($event)" [editableObj]="editableObj"
+                        <!-- <refine (onChange)="handleRefineChage($event)" [editableObj]="editableObj"
                             [resultHedaingMapping]="resultHedaingMapping" [execQuery]="execQuery"
-                            [selectTopicModel]="selectTopicModel"></refine>
+                            [selectTopicModel]="selectTopicModel"></refine> -->
                         <div class="stepper-button-container">
                             <button class="stepper-button" mat-raised-button matStepperPrevious>Back</button>
                             <button class="stepper-button" mat-raised-button matStepperNext>Next</button>
@@ -43,9 +43,9 @@
                 <mat-step>
                     <form>
                         <ng-template matStepLabel>Complete</ng-template>
-                        <qb-complete [resultHedaingMapping]="resultHedaingMapping" [execQuery]="execQuery"
+                        <!-- <qb-complete [resultHedaingMapping]="resultHedaingMapping" [execQuery]="execQuery"
                             [graphModel]="graphModel" [editableObj]="editableObj" [selectTopicModel]="selectTopicModel"
-                            (onChange)="handleCompleteChange($event)"></qb-complete>
+                            (onChange)="handleCompleteChange($event)"></qb-complete> -->
                         <div class="stepper-button-container">
                             <button type="button" class="stepper-button" mat-raised-button
                                 matStepperPrevious>Back</button>
