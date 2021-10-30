@@ -9,8 +9,8 @@
         <media-view *ngIf="viewType == 'MM'" [supGuid]="datViewSupGuId" (onMediaDataLoad)="onViewDataLoad($event)"
             [oneColumnLayout]="oneColumnLayout">
         </media-view>
-        <div [ngClass]="{'rhsOpen' : openRHS, 'rhsClosed':!openRHS }">
-            <div [style.grid-area]="'table'">
+        <div class="flex-container content" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="flex-item" [ngClass]="{'rhsOpen' : openRHS, 'rhsClosed':!openRHS }">
                 <hierarchy *ngIf="viewType=='HL'" (onHLDataLoad)="onViewDataLoad($event)" [spcSupGuId]="spcSupGuId"
                     [datViewSupGuId]="datViewSupGuId" (rightClick)="hlRightClick($event)"></hierarchy>
                 <table-view *ngIf="viewType=='TB'" [datViewSupGuId]="datViewSupGuId" (selected)="rowSelected($event)"
@@ -18,7 +18,7 @@
                 <list *ngIf="viewType=='LS'" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
                     (selected)=rowSelected($event); (onListViewLoad)="onViewDataLoad($event)"></list>
             </div>
-            <div *ngIf="openRHS" [style.grid-area]="'rhs'">
+            <div *ngIf="openRHS" class="flex-item rhsOpenPanel">
                 <rhs-panel [openRHS]="openRHS" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="datViewSupGuId"
                     [supGuId]="supGuId" (onRHSToggle)="toggleRHS($event)">
                 </rhs-panel>
