@@ -15,7 +15,8 @@ import { GsViewComponent } from './shared/gs-view/gs-view.component';
 })
 export class ViewGalleryComponent implements OnInit {
   @Input() supguid: string = ""
-  @Input() manageviews: boolean = false;
+  //TODO set permission module
+  @Input() manageviews: boolean = true;
 
   views: Array<View> = [];
   space: any;

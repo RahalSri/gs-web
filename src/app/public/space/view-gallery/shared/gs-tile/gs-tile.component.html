@@ -60,22 +60,25 @@
 <!--    <div class="spacer_1px"></div>-->
 <!--</div>-->
 
-<mat-card class="tile-card p-0 article"
+<mat-card (click)="goToDataView()" class="tile-card p-0 article"
           style="background: #ffffff url('{{view.viewDownloadLink}}'); background-size: cover;">
     <div *ngIf="view.viewMaskLabel!=null && !(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)"
          class="triangle-topleft">
         <label>{{view.viewMaskLabel}}</label>
     </div>
-    <div class="artical-title">
+    <div class="artical-title" *ngIf="!(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)">
         <h3> {{view.title}}</h3>
     </div>
     <div class="hover-content parent">
         <div class="action-icons-container child-btn">
-            <div class="action-icon">
+            <div class="action-icon" *ngIf="manageviews">
+                <mat-icon (click)="deleteView(); $event.stopPropagation();">delete</mat-icon>
+            </div>
+            <div class="action-icon" *ngIf="manageviews">
                 <mat-icon (click)="editView(); $event.stopPropagation();">edit_note</mat-icon>
             </div>
-            <div class="action-icon">
-                <mat-icon (click)="deleteView(); $event.stopPropagation();">delete</mat-icon>
+            <div class="action-icon" *ngIf="manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null">
+                <mat-icon>build</mat-icon>
             </div>
         </div>
         <div class="hover-desc child-desc">{{view.description}}</div>
