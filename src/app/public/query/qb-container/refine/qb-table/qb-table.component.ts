@@ -36,7 +36,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     private _editlabels: any;
-    private displayedColumns: string[] = [];
+    public displayedColumns: string[] = [];
     private pressed = false;
     private currentResizeIndex: any;
     private startX: any;
@@ -44,7 +44,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
     private isResizingRight: any;
     private resizableMousemove: any;
     private resizableMouseup: any;
-    private columns: any[] = [];
+    public columns: any[] = [];
 
     constructor(
         private renderer: Renderer2
@@ -101,7 +101,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
         });
     }
 
-    private onResizeColumn(event: any, index: number) {
+    public onResizeColumn(event: any, index: number) {
         if (!this.editlabels) {
             this.checkResizing(event, index);
             this.currentResizeIndex = index;
