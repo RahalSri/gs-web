@@ -1,0 +1,90 @@
+<div class="row" style="height:100%">
+    <div class="col-lg-12" style="height:100%">
+        <div id="footerpanel" class="panel m-b-0 elastic-box" style="height: 450px;">
+            <div class="panel-header only-hide-btn custom-hide-btn">
+                <div style="display: inline">
+                    <span class="p-10"> Show:
+                        <input class="form-control" [ngClass]="invalidErrorLimit ? 'error' : ''" name="pageSize"
+                            type="number" [value]="model.pageSize" style="width: 80px"
+                            (change)="changeQryResult($event)" [min]="1" [max]="100" required />
+                        &nbsp;entries
+                    </span>
+                    <div class="form-error" *ngIf="invalidErrorLimit" style="display: inline">Valid Range: 1-100
+                    </div>
+                    <a href="javascript: void(0);" title="{{editLabels ? 'Save Labels' : 'Edit Labels'}}"
+                        (click)="editLabels=!editLabels" class="g_fr" title="undo"
+                        [ngClass]="editLabels ? 'adminmode_enabled' : 'adminmode_disabled'" style="font-size: 20px"><i
+                            class="fa fa-edit"></i></a>
+                </div>
+            </div>
+            <div class="panel-content" style="height:100%; overflow:auto;" *ngIf="dataArray.length>0">
+                <div class="row">
+                    <div *ngIf="!isResultLoading" class="col-md-12 m-t-10">
+                        <div style="width: 100%; padding: 10px; ">
+                            <qb-table [data]="dataArray" [(srow)]="resultHedaingMapping" [qryProperties]="qryProperties"
+                                [editlabels]="editLabels" [(colwidths)]="model.colWidthArr">
+                            </qb-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-content p-5 p-l-10" *ngIf="isResultLoading">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <p class="font-animation" style="display: inline">
+                                            <a href="#"> <i class="fa fa-spinner faa-spin animated"></i>
+                                            </a>&nbsp;&nbsp;Loading results..
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-content p-5 p-l-10 text-center" *ngIf="!isResultLoading && isEnablePaging">
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-transparent" type="button" [disabled]="curPage == 0"
+                        (click)="executeQueryWithPagination('prev');">
+                        <i class="fa fa-angle-left"></i>
+                    </button>
+                    <label class="g_fl m-r-20 p-10">Page {{curPage +
+                        1}} of {{ numberOfPages }}</label>
+                    <button class="btn btn-primary btn-transparent" type="button"
+                        [disabled]="curPage >= numberOfPages-1" (click)="executeQueryWithPagination('next');">
+                        <i class="fa fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-content p-5 p-l-10" *ngIf="!isResultLoading && dataArray.length==0">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">No Result</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

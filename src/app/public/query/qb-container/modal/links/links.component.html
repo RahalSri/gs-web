@@ -1,0 +1,52 @@
+<div *ngIf="model?.endObjList" id='qbpopup' class="popup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="handleClose()" aria-hidden="true">
+                    <i class="icons-office-52"></i>
+                </button>
+                <h4 class="modal-title">
+                    <strong ng-hide="vm.hidePublicUrlInput">{{model.header}}</strong>
+                </h4><br />
+            </div>
+            <div class="modal-body p-0">
+                <div class="p-l-10" *ngIf="!isAllNodeUsed()">
+                    <label style="display: inline; float: left; margin-right: 10px;">Link Type </label>
+                    <div class="input-group">
+                        <div class="icheck-inline">
+                            <label><input type="radio" name="radio4" data-radio="iradio_minimal-blue"
+                                    [checked]="model.linktype == 'mandatory'"
+                                    (change)="handleMandatoryChanged('mandatory')">Mandatory</label>
+                            <label>
+                                <input type="radio" name="radio4" [checked]="model.linktype != 'mandatory'"
+                                    (change)="handleMandatoryChanged('optional')"
+                                    data-radio="iradio_minimal-blue">Optional</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="LinkObjects">
+                    <table *ngIf="model.endObjList.length>0" class="table table-hover" align="center">
+                        <tbody>
+                            <tr *ngFor="let metEndObj of model.endObjList">
+                                <td [ngClass]="isLinkUsedInCanvas(metEndObj) ? 'table-hover-selected' : ''"
+                                    (click)="selectEndNode(metEndObj)">
+                                    {{metEndObj.endMetObjTitle}}
+                                    ({{metEndObj.metLinkTitle}})</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p *ngIf="model.endObjList.length==0" class="m-l-10">Sorry, there is
+                        no end object</p>
+                    <p class="p-20" *ngIf="model.endObjList.length>0 && isAllNodeUsed()">All links have already been
+                        used in
+                        canvas
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer bg-dark p-0 ng-scope">
+                <button type="button" class="btn btn-white ng-binding" (click)="handleOk()"
+                    style="height: 55%; margin:1%">Refresh Canvas</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/space/' + localStorage.getItem('currentSpaceGuid'), title: 'Home', icon: 'home', class: '' },
   { path: '/query/list', title: 'Query List', icon: 'view_list', class: '' },
+  { path: '/query/builder', title: 'Query Builder', icon: 'view_list', class: '' },
 ];
 @Component({
   selector: 'app-left-panel',
