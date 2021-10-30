@@ -56,3 +56,19 @@ em {
   height: 70vh;
 }
 
+.gs-view-dialog-container {
+  width: calc(100vw / 3);
+}
+
+gs-select {
+  width: 100%;
+}
+
+gs-input-box {
+  width: 100%;
+}
+
+.control-label {
+  font-size: 14px;
+  font-weight: 400;
+}

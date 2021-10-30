@@ -40,6 +40,8 @@ import { GsSngHierarchyTopologyComponent } from './views/sng/shared/gs-sng-hiera
 import { GsSngNetworkTopologyComponent } from './views/sng/shared/gs-sng-network-topology/gs-sng-network-topology.component';
 import { GsSngPathTopologyComponent } from './views/sng/shared/gs-sng-path-topology/gs-sng-path-topology.component';
 import { GsSngRadialTopologyComponent } from './views/sng/shared/gs-sng-radial-topology/gs-sng-radial-topology.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,9 @@ import { GsSngRadialTopologyComponent } from './views/sng/shared/gs-sng-radial-t
     FlexLayoutModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     AlternativeViewComponent
