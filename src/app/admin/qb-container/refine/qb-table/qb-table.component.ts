@@ -9,16 +9,16 @@ import { MatTable } from '@angular/material/table';
     ]
 })
 export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
-    @ViewChild(MatTable, { read: ElementRef }) private matTableRef: ElementRef;
+    @ViewChild(MatTable, { read: ElementRef }) private matTableRef: any;
 
     @Input()
     data: any;
 
     @Input()
-    srow: any[];
+    srow: any;
 
     @Input()
-    colwidths: number[];
+    colwidths: any;
 
     @Output()
     onColwidthsChange: EventEmitter<number[]> = new EventEmitter<number[]>();
@@ -37,15 +37,15 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
         }
     }
 
-    private _editlabels: boolean;
+    private _editlabels: any;
     private displayedColumns: string[] = [];
     private pressed = false;
-    private currentResizeIndex: number;
-    private startX: number;
-    private startWidth: number;
-    private isResizingRight: boolean;
-    private resizableMousemove: () => void;
-    private resizableMouseup: () => void;
+    private currentResizeIndex: any;
+    private startX: any;
+    private startWidth: any;
+    private isResizingRight: any;
+    private resizableMousemove: any;
+    private resizableMouseup: any;
     private columns: any[] = [];
 
     constructor(
@@ -54,7 +54,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
 
 
     @HostListener('window:resize', ['$event'])
-    onResize(event) {
+    onResize(event: any) {
         this.setTableResize(this.matTableRef.nativeElement.clientWidth);
     }
 
@@ -113,7 +113,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
         }
     }
 
-    private checkResizing(event, index) {
+    private checkResizing(event: any, index: number) {
         const cellData = this.getCellData(index);
         if ((index === 0) || (Math.abs(event.pageX - cellData.right) < cellData.width / 2)) {
             this.isResizingRight = true;
@@ -168,7 +168,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
         this.columns.forEach((column) => {
             totWidth += column.width;
         });
-        const table = document.getElementById("result-table");
+        const table: any = document.getElementById("result-table");
         table.style.width = totWidth + 'px';
         return totWidth;
     }
@@ -177,7 +177,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
         let clName: string = (cacheField === '') ? column.field.replace(/ /g, "-") : cacheField.replace(/ /g, "-");
         clName = clName.replace(/\.|\?|\:|\*/g, "-");
         const columnEls = Array.from(document.getElementsByClassName('mat-column-' + clName));
-        columnEls.forEach((el: HTMLDivElement) => {
+        columnEls.forEach((el: any) => {
             el.style.width = column.width + 'px';
         });
     }
@@ -185,10 +185,10 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
     private generateHeaders(srow: any, qryproperties: any) {
         let columns: any[] = [];
         let columnCount = 0;
-        srow.forEach((element, index) => {
+        srow.forEach((element: any, index: number) => {
             let propertiesPerNode: number = (element.objMap != 'undefined' && element.objMap != null) ? element.objMap.length : 0;
             if (propertiesPerNode > 0) {
-                element.objMap.forEach((obj, i) => {
+                element.objMap.forEach((obj: any, i: number) => {
                     //if adding columns to a saved query
                     if (this.colwidths.length !== 0 && this.colwidths.length <= i + columnCount + 1) {
                         this.colwidths.push(150);
@@ -202,7 +202,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
                 columnCount += index;
             }
         });
-        qryproperties.forEach((element, index) => {
+        qryproperties.forEach((element: number, index: number) => {
             columns[index]["qryproperty"] = element;
         });
         if (columns.length < this.colwidths.length - 1) {
@@ -218,10 +218,10 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
     private updateLabelsToExport() {
         //assign changed headers back to the original structure
         let columnCount = 0;
-        this.srow.forEach((element, index) => {
+        this.srow.forEach((element: any, index: number) => {
             let propertiesPerNode: number = (element.objMap != 'undefined' && element.objMap != null) ? element.objMap.length : 0;
             if (propertiesPerNode > 0) {
-                element.objMap.forEach((obj, i) => {
+                element.objMap.forEach((obj: any, i: number) => {
                     let displayAliasArr = this.columns[i + columnCount].displayLabel.split(".");
                     if (displayAliasArr.length === 1) {
                         obj.displayAlias = displayAliasArr[0];
@@ -239,7 +239,7 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
         });
     }
 
-    formatValue(value) {
+    formatValue(value: any) {
         var valType = typeof value;
         var retStr;
         switch (valType) {
