@@ -4,7 +4,7 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
 @Component({
   selector: 'refine',
   template: './refine.component.html',
-  styles: ['./refine.component.css']
+  styles: ['./refine.component.scss']
 })
 export class RefineComponent implements OnInit, OnChanges {
 

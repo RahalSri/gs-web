@@ -5,7 +5,7 @@ import { MatTable } from '@angular/material/table';
     selector: 'qb-table',
     template: require('./qb-table.component.html'),
     styles: [
-        require('./qb-table.component.css').toString()
+        require('./qb-table.component.scss').toString()
     ]
 })
 export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {

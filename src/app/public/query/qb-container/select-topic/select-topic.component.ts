@@ -3,10 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 @Component({
   selector: 'select-topic',
-  template: require('./select-topic.component.html'),
-  styles: [
-    require('./select-topic.component.css').toString()
-  ]
+  template: './select-topic.component.html',
+  styles: ['./select-topic.component.scss']
 })
 export class SelectTopicComponent implements OnInit {
 
