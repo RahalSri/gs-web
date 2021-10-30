@@ -1,7 +1,7 @@
 <div id="contextMenu">
     <ul style="max-width: 450px !important;">
         <li *ngFor="let altview of alternateViews" style="width: 100%;">
-            <a href="#/space/{{altview.spaceSupguid}}/dataview/{{altview.supGuid}}{{(altview.refDatObjectSupGuid ? (altview.uniViewFormat=='Subject Network' ? '/sng/' : '/datasheet/') + altview.refDatObjectSupGuid + '/?defaultDatasheetSupguId=' + altview.supGuid : '')}}"
+            <a (click)="navigateToViews(altview)"
                 style="overflow-wrap:break-word; white-space: normal;  font-weight:normal;"
                 target="_self">{{altview.refDataObjectDisplayTitle?altview.shortTitle+':'+altview.refDataObjectDisplayTitle:altview.shortTitle
                 | descFilter : '120'}}</a>

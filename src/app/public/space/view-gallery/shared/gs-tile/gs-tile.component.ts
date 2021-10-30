@@ -32,9 +32,7 @@ export class GsTileComponent implements OnInit {
 
   ngOnInit(): void {
     //Temp code
-    console.log(this.view.tileFileName!.includes("RMF"));
     if (this.view.tileFileName!.includes("RMF")) {
-      console.log("found");
       this.view.viewDownloadLink = "assets/" + this.view.viewDownloadLink;
     }
   }
