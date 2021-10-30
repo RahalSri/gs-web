@@ -2,16 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 @Component({
     selector: 'link-type',
-    template: require('./link-type.component.html'),
-    styles: [
-        require('./link-type.component.css').toString()
-    ]
+    template: './link-type.component.html',
+    styleUrls: ['./link-type.component.scss']
 })
 export class LinkTypeComponet implements OnInit {
 
-    public form: FormGroup;
-    public selectedLinkDirection;
-    @Input() model;
+    public form: FormGroup |undefined;
+    public selectedLinkDirection: any;
+    @Input() model: any;
     @Output() onLinkTypeChange = new EventEmitter<any>();
 
     public constructor(
@@ -24,7 +22,7 @@ export class LinkTypeComponet implements OnInit {
         this.form = this.formBuilder.group({
             linkDirection: this.model.linkDirections[0]
         });
-        this.selectedLinkDirection = this.model.linkDirections.find(s => s.id === this.model.selecetedLink.direction);
+        this.selectedLinkDirection = this.model.linkDirections.find((s: any) => s.id === this.model.selecetedLink.direction);
     }
 
 
@@ -36,7 +34,7 @@ export class LinkTypeComponet implements OnInit {
         this.model.selecetedLink.type = value;
     }
 
-    public changeDirection(selectedDirection) {
+    public changeDirection(selectedDirection: any) {
         if (this.model.selecetedLink.direction !== selectedDirection.id) {
             const e_from = this.model.selecetedLink.from;
             this.model.selecetedLink.from = this.model.selecetedLink.to;
@@ -55,7 +53,7 @@ export class LinkTypeComponet implements OnInit {
         this.handleClose();
     }
 
-    public isMandatory(type) {
+    public isMandatory(type: any) {
         if (!type) {
             return true;
         }

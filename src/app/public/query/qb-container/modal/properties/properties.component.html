@@ -16,7 +16,7 @@
                             *ngFor="let view of model.localPropertyValueList">
                             <div class="panel-header">
                                 <h3 class="panel-title" style="display:inline"><strong>{{view.group}}</strong></h3>
-                                <input class="m-10 qb-checkbox" [value]="view.isAllSelected" type="checkbox"
+                                <input placeholder="All Selected" class="m-10 qb-checkbox" [value]="view.isAllSelected" type="checkbox"
                                     (change)="selectAllProperties(view, view.isAllSelected)"
                                     data-checkbox="icheckbox_minimal-blue" />
                             </div>

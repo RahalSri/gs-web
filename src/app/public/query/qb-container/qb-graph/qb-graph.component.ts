@@ -16,7 +16,7 @@ const bigfont = "bold 13pt Helvetica, Arial, sans-serif";
 @Component({
   selector: "qb-graph",
   template: "./qb-graph.component.html",
-  styles: ["./qb-graph.component.scss"],
+  styleUrls: ["./qb-graph.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
 export class QBGraphComponent implements AfterViewInit, OnChanges {

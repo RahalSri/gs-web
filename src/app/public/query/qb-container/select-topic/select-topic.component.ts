@@ -4,7 +4,7 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
 @Component({
   selector: 'select-topic',
   template: './select-topic.component.html',
-  styles: ['./select-topic.component.scss']
+  styleUrls: ['./select-topic.component.scss']
 })
 export class SelectTopicComponent implements OnInit {
 

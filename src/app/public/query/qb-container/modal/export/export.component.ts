@@ -1,30 +1,26 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { PopupService } from "../../../../services/popup.service";
-import { QueryBuilderService } from "../../../../services/query-builder.service";
+import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 
 @Component({
     selector: 'export',
-    template: require('./export.component.html'),
-    styles: [
-        require('./export.component.css').toString()
-    ]
+    template: './export.component.html',
+    styleUrls: ['./export.component.scss']
 })
 export class ExportComponent implements OnInit {
 
-    @Input() model;
+    @Input() model: any;
     @Output() onOk: EventEmitter<any> = new EventEmitter<any>();
     @Output() onCancel: EventEmitter<any> = new EventEmitter<any>();
 
     public includeIdentifier = false;
-    public selectedExportType;
+    public selectedExportType: any;
     public exportTypesList = [{ label: 'Excel' }, { label: 'Word' }, { label: 'CSV' }];
-    public exportForm: FormGroup;
+    public exportForm: FormGroup|undefined;
 
     public constructor(
         private formBuilder: FormBuilder,
         private queryBuilderService: QueryBuilderService,
-        private popupService: PopupService
     ) { }
 
     ngOnInit() {
@@ -42,23 +38,23 @@ export class ExportComponent implements OnInit {
         this.onCancel.emit();
     }
 
-    public handleIdentifierChange(val) {
+    public handleIdentifierChange(val: any) {
         this.includeIdentifier = val;
     }
 
-    public handleExportTypeChange(e) {
+    public handleExportTypeChange(e: any) {
         this.selectedExportType = e.value;
     }
 
     public export() {
-        const entityList = [];
-        let propertyTitleList = [];
-        const indexArr = [];
+        const entityList: any = [];
+        let propertyTitleList: any = [];
+        const indexArr: any = [];
         let qryIdentifier = "";
         let exportQry = this.model.query;
 
 
-        this.model.resultHedaingMapping.forEach(node => {
+        this.model.resultHedaingMapping.forEach((node: any) => {
             let propCount = 0;
             const entity: any = {};
             if (this.includeIdentifier) {
@@ -66,7 +62,7 @@ export class ExportComponent implements OnInit {
                 indexArr.push(nodeDisplayAlias + '.SUPguId');
                 qryIdentifier = qryIdentifier + node.alias + '.SUPguId,';
             }
-            node.objMap?.forEach((property) => {
+            node.objMap?.forEach((property: any) => {
                 propertyTitleList.push(property.displayAlias);
                 propCount++;
             })
@@ -90,7 +86,7 @@ export class ExportComponent implements OnInit {
                 if (response?.downloadLink) {
                     window.location.href = response.downloadLink;
                 } else {
-                    this.popupService.load("error", "Fail to generate CSV file")
+                    // this.popupService.load("error", "Fail to generate CSV file")
                 }
             });
         this.model = undefined;

@@ -3,10 +3,8 @@ import { MatTable } from '@angular/material/table';
 
 @Component({
     selector: 'qb-table',
-    template: require('./qb-table.component.html'),
-    styles: [
-        require('./qb-table.component.scss').toString()
-    ]
+    template: './qb-table.component.html',
+    styleUrls: ['./qb-table.component.scss']
 })
 export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
     @ViewChild(MatTable, { read: ElementRef }) private matTableRef: any;

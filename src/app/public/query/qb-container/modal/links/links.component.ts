@@ -2,18 +2,16 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 
 @Component({
     selector: 'links',
-    template: require('./links.component.html'),
-    styles: [
-        require('./links.component.css').toString()
-    ]
+    template: './links.component.html',
+    styleUrls: ['./links.component.scss']
 })
 export class LinksComponet {
 
-    @Input() model; //localPropertyValueList //header //hidePublicUrlInput
+    @Input() model: any; //localPropertyValueList //header //hidePublicUrlInput
     @Output() loadEndNode = new EventEmitter();
     @Output() onLinkTypeChange = new EventEmitter<any>();
 
-    public isPropertyFilterEnabled(dataType) {
+    public isPropertyFilterEnabled(dataType: any) {
         if (dataType === 'Boolean' || dataType === 'Timestamp' || dataType === 'Integer')
             return false;
         else
@@ -24,7 +22,7 @@ export class LinksComponet {
         this.model = undefined;
     }
 
-    public selectEndNode(metEndObj) {
+    public selectEndNode(metEndObj: any) {
         if (!this.isLinkUsedInCanvas(metEndObj)) {
             metEndObj.linktype = this.model.linktype;
             this.loadEndNode.emit(metEndObj);
@@ -37,7 +35,7 @@ export class LinksComponet {
     }
 
     public isAllNodeUsed() {
-        var objFound = this.model.endObjList.filter(element => !element.isUsedAlready);
+        var objFound = this.model.endObjList.filter((element: any) => !element.isUsedAlready);
         return (objFound.length > 0 ? false : true);
     }
 
@@ -46,13 +44,13 @@ export class LinksComponet {
         this.handleClose();
     }
 
-    public isLinkUsedInCanvas(obj) {
+    public isLinkUsedInCanvas(obj: any) {
         const links = this.model.linkDataArray ?? [];
         const nodes = this.model.nodeDataArray;
         const selectedNode = this.model.currentNode
         // var ret;
 
-        const exists = links.filter(link => (link.from === selectedNode.key && link.to === obj.endMetObjGuid)
+        const exists = links.filter((link: any) => (link.from === selectedNode.key && link.to === obj.endMetObjGuid)
             || link.to === selectedNode.key && link.from === obj.endMetObjGuid);
 
         // const isLinkFound = links.filter(link => link.metLinkGuId === obj.metLinkGuId);

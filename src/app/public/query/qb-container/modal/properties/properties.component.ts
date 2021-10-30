@@ -8,10 +8,10 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
     ]
 })
 export class PropertiesComponet {
-    @Input() model; //localPropertyValueList //header //hidePublicUrlInput
+    @Input() model: any; //localPropertyValueList //header //hidePublicUrlInput
     @Output() onPropChange = new EventEmitter<any>();
 
-    public isPropertyFilterEnabled(dataType) {
+    public isPropertyFilterEnabled(dataType: any) {
         if (dataType === 'Boolean' || dataType === 'Timestamp' || dataType === 'Integer')
             return false;
         else
@@ -22,17 +22,17 @@ export class PropertiesComponet {
         this.model = undefined;
     }
 
-    public clickFilterExpand(keyValView) {
+    public clickFilterExpand(keyValView: any) {
         keyValView.filter = !keyValView.filter
     }
 
-    public changeContainBox(value, keyValView) {
+    public changeContainBox(value: any, keyValView: any) {
         keyValView.inputVal = value;
         keyValView.filter = keyValView.inputVal.length > 0;
     }
 
-    public selectAllProperties(view, isAllSelected) {
-        let setVal;
+    public selectAllProperties(view: any, isAllSelected: any) {
+        let setVal: any;
         if (isAllSelected) {
             setVal = false;
         }
@@ -40,13 +40,13 @@ export class PropertiesComponet {
             setVal = true;
         }
 
-        view.keyValue.forEach(keyValView => {
+        view.keyValue.forEach((keyValView: any) => {
             keyValView.isSelected = setVal;
         });
         view.isAllSelected = !isAllSelected;
     }
 
-    public selectProperty(keyValView) {
+    public selectProperty(keyValView: any) {
         keyValView.isSelected = !keyValView.isSelected;
     }
 
