@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
-import { data } from "jquery";
-import { QueryBuilderService } from "../../../services/query-builder.service";
+import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 
 @Component({
   selector: 'refine',
@@ -11,14 +10,14 @@ import { QueryBuilderService } from "../../../services/query-builder.service";
 })
 export class RefineComponent implements OnInit, OnChanges {
 
-  @Input() selectTopicModel;
-  @Input() editableObj;
-  @Input() resultHedaingMapping;
-  public qryProperties;
+  @Input() selectTopicModel: any;
+  @Input() editableObj: any;
+  @Input() resultHedaingMapping: any;
+  public qryProperties: any;
   public editLabels = false;
 
-  @Input() execQuery;
-  public executedQuery;
+  @Input() execQuery: any;
+  public executedQuery: any;
   public isResultLoading = false;
 
   public dataArray = [];
@@ -29,13 +28,23 @@ export class RefineComponent implements OnInit, OnChanges {
     colWidthArr: [],
   };
 
-  public qryLimit;
+  public qryLimit: any;
   private skipAmount = 0;
   public curPage = 0;
   public numberOfPages = 1;
-  public queryCount;
+  public queryCount: any;
   public isEnablePaging = false;
   // public colWidthArr = [];
+  public pageButtonList: any;
+  public isHeaderToggle: any;
+  public isOnParentHeader: any;
+  public isMergedHeader: any;
+  isInitialQuery: any;
+  operation: any;
+  allSpacesSelected: any;
+  spcForView: any;
+  visibleQryResultSize: any;
+  selectedSpaces: any;
 
   @Output() onChange = new EventEmitter();
 
@@ -58,17 +67,6 @@ export class RefineComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     // console.log('--------------------Refine init', this.execQuery);
   }
-
-  public pageButtonList;
-  public isHeaderToggle;
-  public isOnParentHeader;
-  public isMergedHeader;
-  isInitialQuery;
-  operation;
-  allSpacesSelected;
-  spcForView;
-  visibleQryResultSize;
-  selectedSpaces;
 
   private executeQuery() {
     this.skipAmount = 0;
@@ -140,7 +138,7 @@ export class RefineComponent implements OnInit, OnChanges {
     return true;
   }
 
-  public executeQueryWithPagination(clickType) {
+  public executeQueryWithPagination(clickType: string) {
     this.dataArray = [];
     if (clickType === 'prev') {
       this.curPage = this.curPage - 1;
@@ -155,7 +153,7 @@ export class RefineComponent implements OnInit, OnChanges {
     //   this.spcForView = this.allSpacesSelected ? null : this.selectedSpaces[0];
     // }
 
-    let queryForOffset;
+    let queryForOffset: any;
 
     if (typeof this.qryLimit != 'undefined' && !isNaN(this.qryLimit) && this.qryLimit < this.queryCount && (this.qryLimit - skipNum) < this.model.pageSize) {
       queryForOffset = this.execQuery.split(" limit ")[0] + " SKIP " + skipNum + " LIMIT " + (this.qryLimit - skipNum);
