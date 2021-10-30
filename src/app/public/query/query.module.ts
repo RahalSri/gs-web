@@ -16,8 +16,13 @@ import { SelectTopicComponent } from 'src/app/public/query/qb-container/select-t
 import { QBGraphComponent } from 'src/app/public/query/qb-container/qb-graph/qb-graph.component';
 import { RefineComponent } from 'src/app/public/query/qb-container/refine/refine.component';
 import { QbCompleteComponent } from 'src/app/public/query/qb-container/qb-complete/qb-complete.component';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatButtonModule} from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
+import { ExportComponent } from './qb-container/modal/export/export.component';
+import { LinkTypeComponet } from './qb-container/modal/link-type/link-type.component';
+import { LinksComponet } from './qb-container/modal/links/links.component';
+import { WarnComponent } from './qb-container/modal/warn/warn.component';
+import { PropertiesComponet } from './qb-container/modal/properties/properties.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import {MatButtonModule} from '@angular/material/button';
     SelectTopicComponent,
     QBGraphComponent,
     RefineComponent,
-    QbCompleteComponent
+    QbCompleteComponent,
+    // ExportComponent,
+    // LinkTypeComponet,
+    // LinksComponet,
+    // WarnComponent,
+    // PropertiesComponet
   ],
   imports: [
     CommonModule,
@@ -42,7 +52,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatIconModule,
     MatCardModule,
     MatStepperModule,
-    MatButtonModule
+    MatButtonModule,
+    SharedModule
   ]
 })
 export class QueryModule { }

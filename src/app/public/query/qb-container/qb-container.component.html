@@ -1,7 +1,4 @@
 <div class="container" class="querybuilder">
-    <div ng-include="template"></div>
-    <div ng-include="isfullscreen ? null : vm.popupInludepath"></div>
-    <div ng-include="vm.exportpopupIncludePath"></div>
     <div class="col">
         <div>
             <mat-stepper linear #stepper>
@@ -23,8 +20,8 @@
                             (onQueryChange)="handleQueryChange($event)">
                         </qb-graph> -->
                         <div class="stepper-button-container">
-                            <button class="stepper-button" mat-raised-button matStepperPrevious>Back</button>
-                            <button class="stepper-button" mat-raised-button matStepperNext>Next</button>
+                            <button  mat-button matStepperPrevious>Back</button>
+                            <button   mat-button matStepperNext>Next</button>
                         </div>
                     </form>
                 </mat-step>
