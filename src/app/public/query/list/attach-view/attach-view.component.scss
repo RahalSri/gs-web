@@ -2,22 +2,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
   .modal-title {
     margin: 0;
-    margin-right: 10px;
   }
 }
 
 .modal-content {
   margin: 0;
+  margin-top: 10px;
   .row {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     width: 100%;
     justify-content: space-between;
-    .control-label {
-      font-size: 14px;
-      font-weight: 400;
-    }
   }
+}
+
+.modal-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: right;
+  gap: 10px;
 }

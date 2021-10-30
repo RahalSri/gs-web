@@ -6,16 +6,15 @@
         <mat-icon>close</mat-icon>
     </button>
 </div>
+<mat-divider></mat-divider>
 <div mat-dialog-content class="modal-content">
     <form [formGroup]="attachViewForm">
-        <!-- <div class="row"> -->
-        <!-- <div class="col-md-12 p-10"> -->
         <div class="row">
             <label class="control-label">View
             </label>
             <mat-radio-group aria-label="Select an option">
-                <mat-radio-button style="margin-left: 5px;" value="false">New</mat-radio-button>
-                <mat-radio-button value="true">Existing</mat-radio-button>
+                <mat-radio-button style="margin-right: 15px;" value="false" color="primary">New</mat-radio-button>
+                <mat-radio-button value="true" color="primary">Existing</mat-radio-button>
             </mat-radio-group>
             <!-- <div class="col-sm-8 m-b-10">
                         <div class="input-group">
@@ -29,9 +28,30 @@
                     </div> -->
             <!-- <div class="spacer_1px"></div> -->
         </div>
-        <gs-select [label]="'Space'" [list]="spaceList" [key]="'title'" [value]="'supGuId'" [name]="'space'"
-            [placeholder]="'--Select a Space--'" (onChangeEvent)="spaceChange($event)">
-        </gs-select>
+        <div class="row">
+            <gs-select [label]="'Space'" [list]="spaceList" [key]="'title'" [value]="'supGuId'" [name]="'space'"
+                [placeholder]="'Select a space'" (onChangeEvent)="spaceChange($event)">
+            </gs-select>
+        </div>
+        <div class="row">
+            <gs-select [label]="'View'" [list]="spaceList" [key]="'title'" [value]="'supGuId'" [name]="'space'"
+                [placeholder]="'Select a view'" (onChangeEvent)="spaceChange($event)">
+            </gs-select>
+        </div>
+        <div class="row">
+            <label class="control-label">View title
+            </label>
+            <mat-form-field appearance="fill">
+                <input matInput value="Sushi">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <label class="control-label">View Description
+            </label>
+            <mat-form-field appearance="fill">
+                <textarea matInput></textarea>
+            </mat-form-field>
+        </div>
         <!-- <div ng-show="vm.existView" class="form-group m-b-10">
                     <label class="col-sm-4 control-label"
                         ng-class="(vm.hasError && vm.targetView==null)?'c-red':''">View&nbsp;<span
@@ -90,7 +110,14 @@
 <div style="min-height: 4px">
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 </div>
-<div mat-dialog-actions class="bg-dark">
+<mat-divider></mat-divider>
+<div class="modal-footer">
+    <gs-button [label]="'Cancel'" [type]="'button'" (click)="onDismiss()">
+    </gs-button>
+    <gs-button [label]="'Submit'" [type]="'button'" [color]="'primary'" (click)="onConfirm()">
+    </gs-button>
+</div>
+<!-- <div mat-dialog-actions class="bg-dark">
     <div style="width: 100%;
     height: 60px;
     padding: 0 10px;">
@@ -99,4 +126,4 @@
             <button type="button" class="btn btn-white" ng-click="vm.submitFunction()">Submit</button>
         </div>
     </div>
-</div>
+</div> -->

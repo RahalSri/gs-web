@@ -13,6 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     QueryListComponent,
@@ -31,7 +34,10 @@ import { MatRadioModule } from '@angular/material/radio';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class QueryModule { }

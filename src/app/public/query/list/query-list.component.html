@@ -80,12 +80,10 @@
 <div #fullScreen>
     <mat-card>
         <div class="headerRow">
-            <div class="headerIcon">
-                <mat-icon>view_comfy</mat-icon>
-                <h2 id="page_header" class="headerTitle">
-                    Query List
-                </h2>
-            </div>
+            <mat-icon class="headerIcon">view_comfy</mat-icon>
+            <h2 id="page_header" class="headerTitle">
+                Query List
+            </h2>
         </div>
         <mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="id">

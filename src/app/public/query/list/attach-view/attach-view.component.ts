@@ -47,6 +47,10 @@ export class AttachViewComponent implements OnInit {
 
     spaceChange(event: any) { }
 
+    onConfirm(): void {
+        // this.dialogRef.close();
+    }
+
     onDismiss(): void {
         this.dialogRef.close();
     }
