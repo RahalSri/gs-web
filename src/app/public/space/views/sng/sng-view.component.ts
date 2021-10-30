@@ -6,7 +6,8 @@ import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.se
 import { CatalogueService } from "src/app/core/service/catalogue.service";
 import { AppConfigService } from "src/app/core/service/app-config.service";
 import { SngService } from "src/app/core/service/sng.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AlternateView } from "src/app/shared/model/alternate-view";
 
 @Component({
     selector: 'sng-view',
@@ -52,6 +53,7 @@ export class SngViewComponent implements OnInit {
         private sngService: SngService,
         private catalogueService: CatalogueService,
         private appConfigService: AppConfigService,
+        private router: Router,
         private route: ActivatedRoute) {
     }
 
@@ -192,6 +194,16 @@ export class SngViewComponent implements OnInit {
         }
         else {
             document.exitFullscreen();
+        }
+    }
+
+    navigateToViews(altView: AlternateView) {
+        console.log(altView);
+        if (altView.uniViewFormat == 'Subject Network') {
+            this.router.navigate(['space', altView.spaceSupguid, 'views', altView.supGuid, 'objects', altView.refDatObjectSupGuid, 'sng'], { queryParams: { defaultDatasheetSupguId: altView.refDatObjectSupGuid } });
+        }
+        else {
+            this.router.navigate(['space', altView.spaceSupguid, 'views', altView.supGuid, 'objects', altView.refDatObjectSupGuid], { relativeTo: this.route, queryParams: { defaultDatasheetSupguId: altView.refDatObjectSupGuid } })
         }
     }
 }
