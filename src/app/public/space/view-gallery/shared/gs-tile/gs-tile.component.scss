@@ -1,0 +1,95 @@
+@use '~@angular/material' as mat;
+
+.example-card {
+  transition: all 0.4s;
+  margin: 1rem;
+}
+
+.example-card:hover {
+  transform: scale(1.02) translate(0, 2px);
+  @include mat.elevation(6);
+}
+
+.article{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #ddd !important;
+  position: relative;
+  padding-top: 80% !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.triangle-topleft {
+  width: 0;
+  height: 0;
+  border-top: 50px solid #0C6FA6;
+  border-right: 50px solid transparent;
+}
+
+.article .triangle-topleft {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.triangle-topleft label {
+  position: relative;
+  top: -50px;
+  padding: 5px;
+  color: #F2F3ED;
+  opacity: 1;
+}
+
+.hover-content{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #e5e5ff;
+  opacity: 0;
+  pointer-events: none;
+  color: #000000;
+  z-index: 500;
+}
+
+.artical-title{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  height: 30px;
+  width: 100%;
+  padding: 10px;
+  z-index: 502;
+}
+
+.article:hover .hover-content{
+  opacity: 0.8;
+  pointer-events: auto;
+}
+
+.action-icons-container{
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  right: 10px;
+  transition:0.5s;
+  opacity: 0;
+  transform: translate(0, -50px);
+}
+
+.article:hover .action-icons-container{
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.action-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}

@@ -12,7 +12,7 @@ import { GsViewComponent } from '../gs-view/gs-view.component';
 @Component({
   selector: 'gs-tile',
   templateUrl: './gs-tile.component.html',
-  styleUrls: ['./gs-tile.component.css']
+  styleUrls: ['./gs-tile.component.scss']
 })
 export class GsTileComponent implements OnInit {
   @Input() supguid: string = "";

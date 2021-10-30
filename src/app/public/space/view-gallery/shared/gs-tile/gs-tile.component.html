@@ -1,61 +1,88 @@
-<div (click)="goToDataView()" class="article"
-     style="background: #ffffff url('{{view.viewDownloadLink}}'); background-size: 100% 100%;">
+<!--<div (click)="goToDataView()" class="article"-->
+<!--     style="background: #ffffff url('{{view.viewDownloadLink}}'); background-size: 100% 100%;">-->
+<!--    <div *ngIf="view.viewMaskLabel!=null && !(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)"-->
+<!--         class="triangle-topleft">-->
+<!--        <label>{{view.viewMaskLabel}}</label>-->
+<!--    </div>-->
+<!--    <div *ngIf="!(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)" class="overlay">-->
+<!--        <div [ngClass]="manageviews ? 'cogwheel' : ''" class="home-tile-description">-->
+<!--            <p>{{view.description}}-->
+<!--            <p>-->
+<!--            <div class="truncate_string">....</div>-->
+<!--            <div (click)="editView(); $event.stopPropagation();" *ngIf="manageviews"-->
+<!--                 class="view_uploadimg">-->
+<!--                <mat-icon>edit</mat-icon>-->
+<!--            </div>-->
+<!--            <div (click)="deleteView(); $event.stopPropagation();" *ngIf="manageviews"-->
+<!--                 class="view_dltimg">-->
+<!--                 <mat-icon>delete</mat-icon>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="!(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)" class="p-10 tile-caption"-->
+<!--         style="height:47px;">-->
+<!--        <div class='home-tile-title'>-->
+<!--            <h3 style="margin-top: 0px; font-size: 13px; display: inline-block; white-space: normal;">{{view.title}}</h3>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div *ngIf="manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null" class="disabledOverlay">-->
+<!--        <div class="triangle-topleft" ng-if="view.viewMaskLabel!=null"><label>{{view.viewMaskLabel}}</label>-->
+<!--        </div>-->
+<!--        <div (click)="$event.stopPropagation();" *ngIf="manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null"-->
+<!--             class="overlay">-->
+<!--            <div [ngClass]="manageviews ? 'cogwheel' : ''" class="home-tile-description">-->
+<!--                <p>{{view.description}}-->
+<!--                <p>-->
+<!--                <div class="truncate_string">....</div>-->
+<!--                <div (click)="editView(); $event.stopPropagation();" *ngIf="manageviews"-->
+<!--                     class="view_uploadimg">-->
+<!--                    <i class="fa fa-edit"></i>-->
+<!--                </div>-->
+<!--                <div (click)="deleteView(); $event.stopPropagation();" *ngIf="manageviews"-->
+<!--                     class="view_dltimg">-->
+<!--                    <i class="glyphicon glyphicon-trash"></i>-->
+<!--                </div>-->
+<!--                <div *ngIf="manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null"-->
+<!--                     class="view_construction">-->
+<!--                    <i class="icon-wrench"></i>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div (click)="$event.stopPropagation();" class="p-10 tile-caption" style="height:47px;">-->
+<!--            <div class='home-tile-title'>-->
+<!--                <h3 style="margin-top: 0px; font-size: 13px; display: inline-block; color:#bbbbbb; white-space: normal;">-->
+<!--                    {{view.title}}</h3>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="spacer_1px"></div>-->
+<!--</div>-->
+
+<mat-card class="example-card p-0 article" style="background: #ffffff url('{{view.viewDownloadLink}}'); background-size: cover;">
     <div *ngIf="view.viewMaskLabel!=null && !(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)"
          class="triangle-topleft">
         <label>{{view.viewMaskLabel}}</label>
     </div>
-    <div *ngIf="!(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)" class="overlay">
-        <div [ngClass]="manageviews ? 'cogwheel' : ''" class="home-tile-description">
-            <p>{{view.description}}
-            <p>
-            <div class="truncate_string">....</div>
-            <div (click)="editView(); $event.stopPropagation();" *ngIf="manageviews"
-                 class="view_uploadimg">
-                <mat-icon>edit</mat-icon>
-            </div>
-            <div (click)="deleteView(); $event.stopPropagation();" *ngIf="manageviews"
-                 class="view_dltimg">
-                 <mat-icon>delete</mat-icon>
-            </div>
-        </div>
+    <div class="artical-title">
+        <h3>test</h3>
     </div>
-    <div *ngIf="!(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)" class="p-10 tile-caption"
-         style="height:47px;">
-        <div class='home-tile-title'>
-            <h3 style="margin-top: 0px; font-size: 13px; display: inline-block; white-space: normal;">{{view.title}}</h3>
-        </div>
+    <div class="hover-content">
+        hover text
+                       <div class="action-icons-container">
+                           <div class="action-icon">
+                               <img class="w-100" src="assets/img/trash.svg" alt="">
+                           </div>
+                           <div class="action-icon">
+                               <img class="w-100" src="assets/img/trash.svg" alt="">
+                           </div>
+                           <div class="action-icon">
+                               <img class="w-100" src="assets/img/trash.svg" alt="">
+                           </div>
+                           <div class="action-icon">
+                               <img class="w-100" src="assets/img/trash.svg" alt="">
+                           </div>
+                       </div>
     </div>
-
-    <div *ngIf="manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null" class="disabledOverlay">
-        <div class="triangle-topleft" ng-if="view.viewMaskLabel!=null"><label>{{view.viewMaskLabel}}</label>
-        </div>
-        <div (click)="$event.stopPropagation();" *ngIf="manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null"
-             class="overlay">
-            <div [ngClass]="manageviews ? 'cogwheel' : ''" class="home-tile-description">
-                <p>{{view.description}}
-                <p>
-                <div class="truncate_string">....</div>
-                <div (click)="editView(); $event.stopPropagation();" *ngIf="manageviews"
-                     class="view_uploadimg">
-                    <i class="fa fa-edit"></i>
-                </div>
-                <div (click)="deleteView(); $event.stopPropagation();" *ngIf="manageviews"
-                     class="view_dltimg">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </div>
-                <div *ngIf="manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null"
-                     class="view_construction">
-                    <i class="icon-wrench"></i>
-                </div>
-            </div>
-        </div>
-        <div (click)="$event.stopPropagation();" class="p-10 tile-caption" style="height:47px;">
-            <div class='home-tile-title'>
-                <h3 style="margin-top: 0px; font-size: 13px; display: inline-block; color:#bbbbbb; white-space: normal;">
-                    {{view.title}}</h3>
-            </div>
-        </div>
-    </div>
-
-    <div class="spacer_1px"></div>
-</div>
+</mat-card>
