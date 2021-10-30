@@ -1,75 +1,77 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from "@angular/core";
-import * as go from 'gojs';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
+} from "@angular/core";
+import * as go from "gojs";
 import { Diagram } from "gojs";
-import { ModalService } from "../../../services/modal.service";
-import { PopupService } from "../../../services/popup.service";
-import { QueryBuilderService } from "../../../services/query-builder.service";
+import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 
 const bigfont = "bold 13pt Helvetica, Arial, sans-serif";
 @Component({
-  selector: 'qb-graph',
-  template: require('./qb-graph.component.html'),
-  styles: [
-    require('./qb-graph.component.css').toString()
-  ],
-  encapsulation: ViewEncapsulation.None
+  selector: "qb-graph",
+  template: require("./qb-graph.component.html"),
+  styles: [require("./qb-graph.component.css").toString()],
+  encapsulation: ViewEncapsulation.None,
 })
 export class QBGraphComponent implements AfterViewInit, OnChanges {
-
-  @Input() editableObj;
-  @Input() queryMode;
-  @Input() dataModel;
-  @Input() selectTopicModel;
+  @Input() editableObj: any;
+  @Input() queryMode: any;
+  @Input() dataModel: any;
+  @Input() selectTopicModel: any;
   @Output() onQueryChange = new EventEmitter();
 
- 
   private showPopup = false;
   private state: any;
   private cclass: any;
   private content: any;
-  private diagram: Diagram;
-  private screenSize = $(window).height() - 430;
-  private model;
+  private diagram: Diagram | undefined;
+  private screenSize = window.innerHeight - 430;
+  private model: any;
 
   private selectedNodeData: any;
   private selectedLinkData: any;
 
-  private dataArr;
-  private linkArr;
+  private dataArr: any;
+  private linkArr: any;
 
-  public isEnableQueryPanel;
-  public dislpayQuery;
+  public isEnableQueryPanel: any;
+  public dislpayQuery: any;
 
-  public templateModel;
-  public propertyModel;
-  public linksModel;
-  public linkTypeModel;
+  public templateModel: any;
+  public propertyModel: any;
+  public linksModel: any;
+  public linkTypeModel: any;
 
-  private operation;
-  private localPropertyValueList;
-  private collectedSelectedPropAry = [];
+  private operation: any;
+  private localPropertyValueList: any;
+  private collectedSelectedPropAry: any = [];
   private linkCount = 0;
   public canvasId = `${new Date().getTime()}`;
-  private resultHedaingMapping;
+  private resultHedaingMapping: any;
 
-  public constructor(
-    private popupService: PopupService,
-    private modalService: ModalService,
-    private queryBuilderService: QueryBuilderService
-  ) { }
+  public constructor(private queryBuilderService: QueryBuilderService) {}
 
   ngAfterViewInit(): void {
     if (!this.diagram) {
       this.initialize();
     }
 
-    document.getElementById('graph-container').addEventListener('fullscreenchange', (event) => {
-      if (document.fullscreenElement) {
-        // Do nothing
-      } else {
-        this.exitFullScreen();
-      }
-    });
+    const container = document.getElementById("graph-container");
+    if (container) {
+      container.addEventListener("fullscreenchange", (event: any) => {
+        if (document.fullscreenElement) {
+          // Do nothing
+        } else {
+          this.exitFullScreen();
+        }
+      });
+    }
   }
 
   ngOnChanges() {
@@ -83,19 +85,31 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
         this.linkArr = canvasModel.linkDataArray;
         this.refreshCanvas();
       } else {
-        this.queryBuilderService.getNumberOfMetObj(this.selectTopicModel.topic.metObjSupguId).subscribe((response: any) => {
-          let objCount;
-          if (response?.numOfDatObjects) {
-            objCount = response.numOfDatObjects;
-          }
-          else {
-            objCount = 0;
-          }
-          const nodeTitle = this.selectTopicModel.topic.metObjSupTitle + " - (" + objCount + ")";
+        this.queryBuilderService
+          .getNumberOfMetObj(this.selectTopicModel.topic.metObjSupguId)
+          .subscribe((response: any) => {
+            let objCount;
+            if (response?.numOfDatObjects) {
+              objCount = response.numOfDatObjects;
+            } else {
+              objCount = 0;
+            }
+            const nodeTitle =
+              this.selectTopicModel.topic.metObjSupTitle +
+              " - (" +
+              objCount +
+              ")";
 
-          this.dataArr.push(this.getNode(this.selectTopicModel.topic.metObjSupguId, nodeTitle, "25 152", "right"));
-          this.refreshCanvas();
-        });
+            this.dataArr.push(
+              this.getNode(
+                this.selectTopicModel.topic.metObjSupguId,
+                nodeTitle,
+                "25 152",
+                "right"
+              )
+            );
+            this.refreshCanvas();
+          });
       }
     }
 
@@ -106,9 +120,6 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     //     linkArr: this.linkArr
     //   });
     // }
-
-
-
   }
 
   private refreshCanvas(editedLocalPropertyValueList?: any) {
@@ -116,12 +127,17 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
       this.localPropertyValueList = editedLocalPropertyValueList;
     }
 
-    if (typeof this.selectedNodeData != 'undefined' && this.selectedNodeData != null) {
+    if (
+      typeof this.selectedNodeData != "undefined" &&
+      this.selectedNodeData != null
+    ) {
       if (this.operation == "properties") {
         const selectedNodeWithProp: any = {};
         const prevPropValueList = this.localPropertyValueList;
 
-        const checkExist = this.collectedSelectedPropAry.filter(prop => prop.id === this.selectedNodeData.key);
+        const checkExist: any = this.collectedSelectedPropAry.filter(
+          (prop: any) => prop.id === this.selectedNodeData.key
+        );
         if (checkExist.length > 0) {
           checkExist[0].prevProp = prevPropValueList;
         } else {
@@ -129,28 +145,27 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
           selectedNodeWithProp.prevProp = prevPropValueList;
           this.collectedSelectedPropAry.push(selectedNodeWithProp);
         }
-        const selectedAttributes = [];
-        const appliedFilters = [];
+        const selectedAttributes: any = [];
+        const appliedFilters: any = [];
 
-        this.localPropertyValueList.forEach((property, key1) => {
-          property.keyValue.forEach((obj, key2) => {
+        this.localPropertyValueList.forEach((property: any) => {
+          property.keyValue.forEach((obj: any) => {
             let isIncluded = false; //flag to determine if the obj is already in return string
 
-
-            if (obj.isSelected) {//Those to include in return string (node properties)
+            if (obj.isSelected) {
+              //Those to include in return string (node properties)
               selectedAttributes.push(obj);
               isIncluded = true;
             }
-            if (obj.inputVal) {//Those to include in where clause
-              if (isIncluded)
-                obj.isInReturnString = true;
-              else
-                obj.isInReturnString = false;
+            if (obj.inputVal) {
+              //Those to include in where clause
+              if (isIncluded) obj.isInReturnString = true;
+              else obj.isInReturnString = false;
 
               appliedFilters.push(obj);
             }
-          })
-        })
+          });
+        });
         this.selectedNodeData.cypherAttribs = selectedAttributes;
 
         // If a filter is applied add a * to node title
@@ -158,26 +173,37 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
           if (this.selectedNodeData.name.indexOf("*") == -1) {
             this.selectedNodeData.name = "* " + this.selectedNodeData.name;
           }
-        }
-        else {
+        } else {
           if (this.selectedNodeData.name.indexOf("*") > -1)
-            this.selectedNodeData.name = this.selectedNodeData.name.substring(2, this.selectedNodeData.name.length);
+            this.selectedNodeData.name = this.selectedNodeData.name.substring(
+              2,
+              this.selectedNodeData.name.length
+            );
         }
         this.selectedNodeData.filterAttribs = appliedFilters;
       }
     }
 
     this.model = new go.GraphLinksModel(this.dataArr, this.linkArr);
-    this.diagram.model = this.model;
-    this.buildQuery(this.model);
+
+    if (this.diagram) {
+      this.diagram.model = this.model;
+      this.buildQuery(this.model);
+    }
   }
 
   private initialize() {
     const $ = go.GraphObject.make;
     // const ele = document.getElementById('qb');
-    this.diagram =
-      $(go.Diagram, this.canvasId,  //Diagram refers to its DIV HTML element by id
-        { initialContentAlignment: go.Spot.Center, "undoManager.isEnabled": true, "allowVerticalScroll": false });
+    this.diagram = $(
+      go.Diagram,
+      this.canvasId, //Diagram refers to its DIV HTML element by id
+      {
+        initialContentAlignment: go.Spot.Center,
+        "undoManager.isEnabled": true,
+        allowVerticalScroll: false,
+      }
+    );
 
     this.diagram.addDiagramListener("Modified", function (e) {
       // Disable save button and add ***
@@ -194,20 +220,26 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     this.diagram.addDiagramListener("ChangedSelection", this.updateSelection);
 
     this.diagram.addDiagramListener("SelectionDeleting", (e: any) => {
-      const nodeArray = this.diagram.model.nodeDataArray;
+      const nodeArray = this.diagram?.model.nodeDataArray;
 
-      if (this.selectedNodeData != null && this.selectedNodeData.isStartingObj) {
-
+      if (
+        this.selectedNodeData != null &&
+        this.selectedNodeData.isStartingObj
+      ) {
         if (this.isFullScreen) {
-          this.makePopupDivOnCanvas("Error", "Object for topic can not be deleted. Please change in step 1.");
-        }
-        else {
-          this.popupService.load("error", "Object for topic can not be deleted. Please change in step 1.");
+          this.makePopupDivOnCanvas(
+            "Error",
+            "Object for topic can not be deleted. Please change in step 1."
+          );
+        } else {
+          // this.popupService.load(
+          //   "error",
+          //   "Object for topic can not be deleted. Please change in step 1."
+          // );
         }
 
         e.cancel = true;
-      }
-      else {
+      } else if(nodeArray) {
         const selIndex = nodeArray.indexOf(this.selectedNodeData);
 
         if (selIndex + 1 < nodeArray.length) {
@@ -221,146 +253,212 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
             }
           }
           if (this.isFullScreen) {
-            this.makePopupDivOnCanvas("Error", "Please delete: " + message + " node(s) in order, prior to delete this node!");
-          }
-          else {
-            this.popupService.load("error", "Please delete: " + message + " node(s) in order, prior to delete this node!");
+            this.makePopupDivOnCanvas(
+              "Error",
+              "Please delete: " +
+                message +
+                " node(s) in order, prior to delete this node!"
+            );
+          } else {
+            // this.popupService.load(
+            //   "error",
+            //   "Please delete: " +
+            //     message +
+            //     " node(s) in order, prior to delete this node!"
+            // );
           }
         }
       }
     });
 
     const changequery = this.changequery;
-    const nodeMenu = $(go.Adornment, "Spot",
+    const nodeMenu = $(
+      go.Adornment,
+      "Spot",
 
-      $(go.Placeholder, { padding: 5 }),  // a Placeholder object
-      $(go.Panel, "Horizontal",
+      $(go.Placeholder, { padding: 5 }), // a Placeholder object
+      $(
+        go.Panel,
+        "Horizontal",
         { alignment: go.Spot.Bottom, alignmentFocus: go.Spot.Top },
-        $("ContextMenuButton",
-          { click: function (e, obj) { changequery("properties") } },
-          $(go.Picture,
-            { maxSize: new go.Size(30, 30), source: "./img/propE.png" })
-
-
+        $(
+          "ContextMenuButton",
+          {
+            click: function (e, obj) {
+              changequery("properties");
+            },
+          },
+          $(go.Picture, {
+            maxSize: new go.Size(30, 30),
+            source: "./img/propE.png",
+          })
         ),
-        $("ContextMenuButton",
-          { click: function (e, obj) { changequery("links") } },
-          $(go.Picture,
-            { maxSize: new go.Size(30, 30), source: "./img/linkE.png" })
+        $(
+          "ContextMenuButton",
+          {
+            click: function (e, obj) {
+              changequery("links");
+            },
+          },
+          $(go.Picture, {
+            maxSize: new go.Size(30, 30),
+            source: "./img/linkE.png",
+          })
         )
-
-      ));
+      )
+    );
 
     const changeLinks = this.changeLinks;
-    const linkMenu =
-      $(go.Adornment, "Spot",
-        $(go.Placeholder, { padding: 5 }),  // a Placeholder object
-        $(go.Panel, "Horizontal",
-          /*{ alignment: canvasService.Spot.Bottom, alignmentFocus: canvasService.Spot.Top },*/
-          $("ContextMenuButton",
-            { click: function (e, obj) { changeLinks("linkType") } },
-            $(go.Picture,
-              { maxSize: new go.Size(30, 30), source: "./img/propE.png" })
-          )
-        ));
-
-    const attributeTemplate = $(go.Panel, "Auto",
-      { margin: 1 },
-      $(go.Shape, "RoundedRectangle",
-        { fill: null, stroke: null }),
-      $(go.TextBlock, new go.Binding("text", "key"), { margin: 2, stroke: "whitesmoke" })
-    )  // end;
-
-    this.diagram.nodeTemplate =
-      $(go.Node, "Auto",
-        {
-          locationObjectName: "BODY",
-          locationSpot: go.Spot.Center,
-          selectionObjectName: "BODY",
-          contextMenu: nodeMenu,
-          isShadowed: true,
-          shadowOffset: new go.Point(1, 1)
-
-        },
-        {
-          selectionAdornmentTemplate:
-            $(go.Adornment, "Auto",
-              $(go.Shape, "RoundedRectangle",
-                { fill: null, stroke: "blue", strokeWidth: 2 }),
-              $(go.Placeholder)
-            )  // end Adornment
-        },
-
-        new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-        $(go.Shape, "RoundedRectangle", { stroke: null },
-          new go.Binding("fill", "color")),
-
-        $(go.Panel, "Auto",
+    const linkMenu = $(
+      go.Adornment,
+      "Spot",
+      $(go.Placeholder, { padding: 5 }), // a Placeholder object
+      $(
+        go.Panel,
+        "Horizontal",
+        /*{ alignment: canvasService.Spot.Bottom, alignmentFocus: canvasService.Spot.Top },*/
+        $(
+          "ContextMenuButton",
           {
-            fromSpot: go.Spot.Right,  // coming out from middle-right
-            toSpot: go.Spot.Left
+            click: function (e, obj) {
+              changeLinks("linkType");
+            },
           },
+          $(go.Picture, {
+            maxSize: new go.Size(30, 30),
+            source: "./img/propE.png",
+          })
+        )
+      )
+    );
 
+    const attributeTemplate = $(
+      go.Panel,
+      "Auto",
+      { margin: 1 },
+      $(go.Shape, "RoundedRectangle", { fill: null, stroke: null }),
+      $(go.TextBlock, new go.Binding("text", "key"), {
+        margin: 2,
+        stroke: "whitesmoke",
+      })
+    ); // end;
 
-          $(go.Panel, "Vertical", { defaultAlignment: go.Spot.TopLeft },
+    this.diagram.nodeTemplate = $(
+      go.Node,
+      "Auto",
+      {
+        locationObjectName: "BODY",
+        locationSpot: go.Spot.Center,
+        selectionObjectName: "BODY",
+        contextMenu: nodeMenu,
+        isShadowed: true,
+        shadowOffset: new go.Point(1, 1),
+      },
+      {
+        selectionAdornmentTemplate: $(
+          go.Adornment,
+          "Auto",
+          $(go.Shape, "RoundedRectangle", {
+            fill: null,
+            stroke: "blue",
+            strokeWidth: 2,
+          }),
+          $(go.Placeholder)
+        ), // end Adornment
+      },
 
-            $(go.TextBlock, new go.Binding("text", "name"), {
+      new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        "RoundedRectangle",
+        { stroke: null },
+        new go.Binding("fill", "color")
+      ),
+
+      $(
+        go.Panel,
+        "Auto",
+        {
+          fromSpot: go.Spot.Right, // coming out from middle-right
+          toSpot: go.Spot.Left,
+        },
+
+        $(
+          go.Panel,
+          "Vertical",
+          { defaultAlignment: go.Spot.TopLeft },
+
+          $(
+            go.TextBlock,
+            new go.Binding("text", "name"),
+            {
               margin: 6,
               wrap: go.TextBlock.WrapFit,
               textAlign: "center",
               editable: true,
-              font: bigfont
+              font: bigfont,
             },
-              {
-                stroke: "whitesmoke",
-                minSize: new go.Size(80, NaN)
-              },
-              new go.Binding("text", "text").makeTwoWay()),
+            {
+              stroke: "whitesmoke",
+              minSize: new go.Size(80, NaN),
+            },
+            new go.Binding("text", "text").makeTwoWay()
+          ),
 
-            $(go.Panel, "Vertical",
-              {
-                defaultAlignment: go.Spot.TopLeft,
-                itemTemplate: attributeTemplate
-              },
-              new go.Binding("itemArray", "cypherAttribs").makeTwoWay()
-            )
+          $(
+            go.Panel,
+            "Vertical",
+            {
+              defaultAlignment: go.Spot.TopLeft,
+              itemTemplate: attributeTemplate,
+            },
+            new go.Binding("itemArray", "cypherAttribs").makeTwoWay()
           )
-
         )
+      )
+    ); // end Node
 
-      );  // end Node
+    this.diagram.linkTemplate = $(
+      go.Link,
+      { routing: go.Link.AvoidsNodes }, // link route should avoid nodes
+      $(
+        go.Shape,
+        { toArrow: "Standard" },
+        new go.Binding("strokeDashArray", "type")
+      ),
+      $(
+        go.Shape,
+        { toArrow: "Standard" },
+        new go.Binding("strokeDashArray", "type")
+      ),
+      $(
+        go.Panel,
+        "Auto", // this whole Panel is a link label
+        $(go.Shape, "RoundedRectangle", { fill: "#e6ffff", stroke: "#ebebe0" }),
 
-    this.diagram.linkTemplate = $(go.Link,
-      { routing: go.Link.AvoidsNodes },  // link route should avoid nodes
-      $(go.Shape, { toArrow: "Standard" }, new go.Binding("strokeDashArray", "type")),
-      $(go.Shape, { toArrow: "Standard" }, new go.Binding("strokeDashArray", "type")),
-      $(go.Panel, "Auto",  // this whole Panel is a link label
-        $(go.Shape, "RoundedRectangle",
-          { fill: "#e6ffff", stroke: "#ebebe0" }),
-
-        $(go.TextBlock, { margin: 3 },
-          new go.Binding("text", "text"))
+        $(go.TextBlock, { margin: 3 }, new go.Binding("text", "text"))
       ),
       {
         // the same context menu Adornment is shared by all links
-        contextMenu: linkMenu
+        contextMenu: linkMenu,
       }
     );
 
     return this.diagram;
   }
 
-
-  private getNode(key, name, location, side) {
+  private getNode(key: string, name: string, location: any, side: any) {
     const index = this.dataArr?.length ?? 0;
-    const leftArray = [];
-    const rightArray = [{ "portColor": "#923951", "portId": "right0" }];
+    const leftArray: any = [];
+    const rightArray = [{ portColor: "#923951", portId: "right0" }];
     let color;
 
     if (index == 0) {
-      color = '#AC193D'; //red
+      color = "#AC193D"; //red
     } else {
-      color = '#491389';  // purple
+      color = "#491389"; // purple
     }
 
     return {
@@ -374,43 +472,69 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
       rightArray: rightArray,
       cypherAttribs: [],
       filterAttribs: [],
-      isStartingObj: (index == 0 ? true : false)
+      isStartingObj: index == 0 ? true : false,
     };
   }
 
-  private changequery = (type) => {
-    this.selectedNodeData.changeType = type + '-' + this.selectedNodeData.key;
+  private changequery = (type: any) => {
+    this.selectedNodeData.changeType = type + "-" + this.selectedNodeData.key;
     this.selectedNodeChanged(this.selectedNodeData);
-  }
+  };
 
-  private changeLinks = (type) => {
+  private changeLinks = (type: any) => {
     this.selectedLinkData.changeType = type;
     this.selectedLinkChanged(this.selectedLinkData);
-  }
+  };
 
   public handleZoomIn() {
-    this.diagram.commandHandler.increaseZoom(1.05);
+    this.diagram?.commandHandler.increaseZoom(1.05);
   }
 
   public handleZoomOut() {
-    this.diagram.commandHandler.decreaseZoom(0.95);
+    this.diagram?.commandHandler.decreaseZoom(0.95);
   }
 
-  public selectedLinkChanged(selecetedLink) {
-    if (typeof selecetedLink != "undefined" && selecetedLink != '') {
-      const toNode = this.dataArr.filter(node => node.key === selecetedLink.to)[0];
-      const toNodeName = toNode.name.split('-')[0];
+  public selectedLinkChanged(selecetedLink: any) {
+    if (typeof selecetedLink != "undefined" && selecetedLink != "") {
+      const toNode = this.dataArr.filter(
+        (node: any) => node.key === selecetedLink.to
+      )[0];
+      const toNodeName = toNode.name.split("-")[0];
       const toNodeKey = toNode.key;
-      const fromNode = this.dataArr.filter(node => node.key === selecetedLink.from)[0];
-      const fromNodeName = fromNode.name.split('-')[0];
+      const fromNode = this.dataArr.filter(
+        (node: any) => node.key === selecetedLink.from
+      )[0];
+      const fromNodeName = fromNode.name.split("-")[0];
       const fromNodeKey = fromNode.key;
       let linkDirections, editDirection;
 
       if (selecetedLink.direction === "Start") {
-        linkDirections = [{ id: "End", caption: toNodeName + " to " + fromNodeName, key: toNodeKey }, { id: "Start", caption: fromNodeName + " to " + toNodeName, key: fromNodeKey }];
+        linkDirections = [
+          {
+            id: "End",
+            caption: toNodeName + " to " + fromNodeName,
+            key: toNodeKey,
+          },
+          {
+            id: "Start",
+            caption: fromNodeName + " to " + toNodeName,
+            key: fromNodeKey,
+          },
+        ];
         editDirection = linkDirections[1].id;
       } else {
-        linkDirections = [{ id: "End", caption: fromNodeName + " to " + toNodeName, key: toNodeKey }, { id: "Start", caption: toNodeName + " to " + fromNodeName, key: fromNodeKey }];
+        linkDirections = [
+          {
+            id: "End",
+            caption: fromNodeName + " to " + toNodeName,
+            key: toNodeKey,
+          },
+          {
+            id: "Start",
+            caption: toNodeName + " to " + fromNodeName,
+            key: fromNodeKey,
+          },
+        ];
         editDirection = linkDirections[0].id;
       }
       switch (selecetedLink.changeType) {
@@ -422,8 +546,8 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
             header: "Link Properties",
             linkDirections: linkDirections,
             selecetedLink: selecetedLink,
-            editDirection: editDirection
-          }
+            editDirection: editDirection,
+          };
           break;
       }
     }
@@ -434,98 +558,116 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     this.refreshCanvas();
   }
 
-  private getNodePosition = function (cor_x, cor_y, direction) {
+  private getNodePosition = (cor_x: number, cor_y: number, direction: string) => {
     let nodeCoordinate;
     switch (direction) {
-      case 'top':
+      case "top":
         nodeCoordinate = cor_x + " " + (cor_y + 150);
         break;
-      case 'right':
-        nodeCoordinate = (cor_x + 350) + " " + cor_y;
+      case "right":
+        nodeCoordinate = cor_x + 350 + " " + cor_y;
         break;
-      case 'bottom':
+      case "bottom":
         nodeCoordinate = cor_x + " " + (cor_y + 150);
         break;
-      case 'left':
-        nodeCoordinate = (cor_x - 350) + " " + cor_y;
+      case "left":
+        nodeCoordinate = cor_x - 350 + " " + cor_y;
     }
-    return nodeCoordinate
+    return nodeCoordinate;
+  };
+
+  private checkIfOccupied(location: any) {
+    const isFound = this.model.nodeDataArray.filter(
+      (node: any) => node.loc === location
+    );
+    if (isFound.length > 0) return true;
+    else return false;
   }
 
-  private checkIfOccupied(location) {
-    const isFound = this.model.nodeDataArray.filter(node => node.loc === location);
-    if (isFound.length > 0)
-      return true;
-    else
-      return false;
-  }
-
-  public loadEndNode(endObj) {
+  public loadEndNode(endObj: any) {
     this.linksModel = undefined;
-    let linkType;
+    let linkType: any;
     if (endObj.linktype) {
       linkType = endObj.linktype;
     }
-    if (endObj.isUsedAlready) {// If the relationship is already used, avoid adding relationship again to the canvas
+    if (endObj.isUsedAlready) {
+      // If the relationship is already used, avoid adding relationship again to the canvas
       return false;
     }
 
     const selectedMetlnk = endObj;
-    const availableEndNode = this.dataArr.filter(node => node.key === endObj.endMetObjGuid);
+    const availableEndNode = this.dataArr.filter(
+      (node: any) => node.key === endObj.endMetObjGuid
+    );
 
-    const linkList = this.model.linkDataArray.filter(link => link.$ === this.selectedNodeData.key);
+    const linkList = this.model.linkDataArray.filter(
+      (link: any) => link.$ === this.selectedNodeData.key
+    );
 
     const cordsArr = this.selectedNodeData.loc.split(" ");
     const cor_x = parseInt(cordsArr[0], 10);
     const cor_y = parseInt(cordsArr[1], 10);
-    let nodeCoordinate;
+    let nodeCoordinate: any;
     switch (linkList.length) {
       case 0:
-        nodeCoordinate = this.getNodePosition(cor_x, cor_y, 'right');
+        nodeCoordinate = this.getNodePosition(cor_x, cor_y, "right");
         // vm.firstLink = false;
-        if (this.checkIfOccupied(nodeCoordinate)) //if coordinate is already occupied by another use next direction (going clockwise)
-          nodeCoordinate = this.getNodePosition(cor_x, cor_y, 'bottom');
+        if (this.checkIfOccupied(nodeCoordinate))
+          //if coordinate is already occupied by another use next direction (going clockwise)
+          nodeCoordinate = this.getNodePosition(cor_x, cor_y, "bottom");
         break;
       case 1:
-        nodeCoordinate = this.getNodePosition(cor_x, cor_y, 'bottom');
-        if (this.checkIfOccupied(nodeCoordinate))//if coordinate is already occupied by another use next direction (going clockwise)
-          nodeCoordinate = this.getNodePosition(cor_x, cor_y, 'left');
+        nodeCoordinate = this.getNodePosition(cor_x, cor_y, "bottom");
+        if (this.checkIfOccupied(nodeCoordinate))
+          //if coordinate is already occupied by another use next direction (going clockwise)
+          nodeCoordinate = this.getNodePosition(cor_x, cor_y, "left");
         break;
       case 2:
-        nodeCoordinate = this.getNodePosition(cor_x, cor_y, 'left');
-        if (this.checkIfOccupied(nodeCoordinate))//if coordinate is already occupied by another use next direction (going clockwise)
-          nodeCoordinate = this.getNodePosition(cor_x, cor_y, 'top');
+        nodeCoordinate = this.getNodePosition(cor_x, cor_y, "left");
+        if (this.checkIfOccupied(nodeCoordinate))
+          //if coordinate is already occupied by another use next direction (going clockwise)
+          nodeCoordinate = this.getNodePosition(cor_x, cor_y, "top");
         break;
       case 3:
-        nodeCoordinate = this.getNodePosition(cor_x, cor_y, 'top');
+        nodeCoordinate = this.getNodePosition(cor_x, cor_y, "top");
         break;
     }
 
-    let endMetObjGuid_edited;
+    let endMetObjGuid_edited: any;
     if (availableEndNode.length > 0) {
-      endMetObjGuid_edited = endObj.endMetObjGuid + ":" + availableEndNode.length;
-    }
-    else {
-      endMetObjGuid_edited = endObj.endMetObjGuid
+      endMetObjGuid_edited =
+        endObj.endMetObjGuid + ":" + availableEndNode.length;
+    } else {
+      endMetObjGuid_edited = endObj.endMetObjGuid;
     }
 
     // vm.rightNodeList.push(endObj);
     let objCount;
-    this.queryBuilderService.getNumberOfMetObj(endObj.endMetObjGuid).subscribe((response: any) => {
-      if (response && response.numOfDatObjects)
-        objCount = response.numOfDatObjects;
-      else
-        objCount = 0;
-      const nodeTitle = endObj.endMetObjTitle + " - (" + objCount + ")";
-      this.dataArr.push(this.getNode(endMetObjGuid_edited, nodeTitle, nodeCoordinate, "left"));
-      this.setNodeLink(linkType, endMetObjGuid_edited, endObj.metLinkTitle, endObj.typeMetObj, endObj.metLinkGuId, endObj.metLinkSUPid);
-      this.refreshCanvas();
-    });
-  };
+    this.queryBuilderService
+      .getNumberOfMetObj(endObj.endMetObjGuid)
+      .subscribe((response: any) => {
+        if (response && response.numOfDatObjects)
+          objCount = response.numOfDatObjects;
+        else objCount = 0;
+        const nodeTitle = endObj.endMetObjTitle + " - (" + objCount + ")";
+        this.dataArr.push(
+          this.getNode(endMetObjGuid_edited, nodeTitle, nodeCoordinate, "left")
+        );
+        this.setNodeLink(
+          linkType,
+          endMetObjGuid_edited,
+          endObj.metLinkTitle,
+          endObj.typeMetObj,
+          endObj.metLinkGuId,
+          endObj.metLinkSUPid
+        );
+        this.refreshCanvas();
+      });
+  }
 
-  private setNodeLink(linkType, endNode, linktext, direction, guid, supid) {
-    let fromNode;
-    let toNode;
+  private setNodeLink(linkType: any, endNode: any, linktext: string, direction: any, guid:string, supid:string) {
+    let fromNode: any;
+    let toNode: any;
 
     switch (direction) {
       case "End":
@@ -539,25 +681,39 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     }
 
     let strokeType;
-    if (linkType == "mandatory")
-      strokeType = null;
+    if (linkType == "mandatory") strokeType = null;
     else {
       strokeType = [5, 8];
     }
-    const availableEndNode = this.linkArr.filter(link => link.from === fromNode && link.to === toNode && link.metLinkGuId === guid)
+    const availableEndNode = this.linkArr.filter(
+      (link: any) =>
+        link.from === fromNode &&
+        link.to === toNode &&
+        link.metLinkGuId === guid
+    );
 
     if (availableEndNode.length == 0) {
       this.linkCount++;
-      this.linkArr.push({ "from": fromNode, "to": toNode, "fromPort": "right0", "toPort": "left0", "text": linktext, "type": strokeType, "metLinkGuId": guid, "direction": direction, "linkId": this.linkCount });
+      this.linkArr.push({
+        from: fromNode,
+        to: toNode,
+        fromPort: "right0",
+        toPort: "left0",
+        text: linktext,
+        type: strokeType,
+        metLinkGuId: guid,
+        direction: direction,
+        linkId: this.linkCount,
+      });
     }
   }
 
-  public selectedNodeChanged(selectedNodeData) {
+  public selectedNodeChanged(selectedNodeData: any) {
     // vm.selectedNodeData = selectedNodeData;
     const linktype = "mandatory";
 
     const newValue = selectedNodeData.changeType;
-    if (typeof newValue != "undefined" && newValue != '') {
+    if (typeof newValue != "undefined" && newValue != "") {
       const selectedAttributes = [];
       this.operation = newValue.split("-")[0];
       switch (this.operation) {
@@ -571,37 +727,52 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
             nodeDataArray: this.model.nodeDataArray,
             linkDataArray: this.model.linkDataArray,
           };
-          linkModel.selectedMetlnk = null
-          this.queryBuilderService.getEndMetObjList(selectedNodeData.key).subscribe((response: any) => {
-            linkModel.endObjList = response;
-            this.linksModel = linkModel;
-          });
+          linkModel.selectedMetlnk = null;
+          this.queryBuilderService
+            .getEndMetObjList(selectedNodeData.key)
+            .subscribe((response: any) => {
+              linkModel.endObjList = response;
+              this.linksModel = linkModel;
+            });
           // vm.currentNode = selectedNodeData;
           // vm.templateModal.header = "Select end object";
           break;
-        case "filters"://[Ashan - 2017.08.16] both Filters and properties are displayed on property window
-          this.operation = 'properties';
+        case "filters": //[Ashan - 2017.08.16] both Filters and properties are displayed on property window
+          this.operation = "properties";
+          break;
         case "properties":
-          if (typeof selectedNodeData.inputVal == 'undefined' || selectedNodeData.inputVal == null)
-            selectedNodeData.inputVal = '';
+          if (
+            typeof selectedNodeData.inputVal == "undefined" ||
+            selectedNodeData.inputVal == null
+          )
+            selectedNodeData.inputVal = "";
           const localPropertyValueList = [];
           // vm.templateModal.header = "Select properties";
           // vm.selectedAttributes = [];
-          const result = this.collectedSelectedPropAry.filter(prop => prop.id === selectedNodeData.key)[0];
+          const result = this.collectedSelectedPropAry.filter(
+            (prop: any) => prop.id === selectedNodeData.key
+          )[0];
 
           const propertyModel = {
             header: "Select properties",
-            localPropertyValueList: []
-          }
-          if (result != 'undefined' && result != null) {
+            localPropertyValueList: [],
+          };
+          if (result != "undefined" && result != null) {
             propertyModel.localPropertyValueList = result.prevProp;
             this.propertyModel = propertyModel;
           } else {
-            // typeof vm.edit_qid != 'undefined' ? vm.edit_qid : 
-            this.queryBuilderService.getPropertiesForMetObjEditMode(selectedNodeData.key, this.selectTopicModel.metLanguage.supGuid, "").subscribe((response) => {
-              propertyModel.localPropertyValueList = response.singleData.groupJsonArray;
-              this.propertyModel = propertyModel;
-            });
+            // typeof vm.edit_qid != 'undefined' ? vm.edit_qid :
+            this.queryBuilderService
+              .getPropertiesForMetObjEditMode(
+                selectedNodeData.key,
+                this.selectTopicModel.metLanguage.supGuid,
+                ""
+              )
+              .subscribe((response) => {
+                propertyModel.localPropertyValueList =
+                  response.singleData.groupJsonArray;
+                this.propertyModel = propertyModel;
+              });
           }
           break;
       }
@@ -610,11 +781,11 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  public resetMainDomain = function () {
+  public resetMainDomain =  () => {
     const model = {
       onOk: () => {
         this.templateModel = undefined;
-        window.location.href = '#/admin/querybuilder';
+        window.location.href = "#/admin/querybuilder";
         window.location.reload();
       },
       onCancel: () => {
@@ -622,33 +793,43 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
       },
       id: "warnpopup",
       header: "Warning!",
-      cancelCaption: 'No',
-      okCaption: 'Yes',
-      body: `You will lose ${this.queryMode === 'new' ? 'your configuration' : 'any new addition to previous query'} on canvas. Do you want to continue?`
-    }
+      cancelCaption: "No",
+      okCaption: "Yes",
+      body: `You will lose ${
+        this.queryMode === "new"
+          ? "your configuration"
+          : "any new addition to previous query"
+      } on canvas. Do you want to continue?`,
+    };
     this.templateModel = model;
-  }
+  };
 
   public get isFullScreen(): boolean {
     const div = this?.diagram?.div;
-    return div?.style?.height === '100vh';
+    return div?.style?.height === "100vh";
   }
 
   public enterFullScreen() {
-    const div = this.diagram.div;
-    div.style.height = '100vh';
-    let element = $('#graph-container').get(0);
-    if (element?.requestFullscreen) {
-      element.requestFullscreen();
+    const div = this.diagram?.div;
+    if(div){
+        div.style.height = "100vh";
+        let element = document.getElementById("#graph-container");
+        if (element?.requestFullscreen) {
+          element.requestFullscreen();
+        }
+    
     }
   }
 
   public exitFullScreen() {
-    const div = this.diagram.div;
-    div.style.height = this.screenSize + 'px';
-    try {
-      document.exitFullscreen();
-    } catch (e) { }
+    const div = this.diagram?.div;
+
+    if(div){
+      div.style.height = this.screenSize + "px";
+      try {
+        document.exitFullscreen();
+      } catch (e) {}
+    }
   }
 
   public handleFullScreen() {
@@ -657,38 +838,37 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     } else {
       this.enterFullScreen();
     }
-    this.diagram.requestUpdate();
+    this.diagram?.requestUpdate();
   }
 
   // update the Angular model when the Diagram.selection changes
   private updateSelection = (e: go.DiagramEvent) => {
     this.selectedNodeData = null;
     this.selectedLinkData = null;
-    const it = this.diagram.selection.iterator;
+    const it: any = this.diagram?.selection.iterator;
     while (it.next()) {
       const selnode = it.value;
       // ignore a selected link or a deleted node
       if (selnode instanceof go.Node && selnode.data !== null) {
         this.selectedNodeData = selnode.data;
         break;
-      }
-      else if (selnode instanceof go.Link && selnode.data !== null) {
+      } else if (selnode instanceof go.Link && selnode.data !== null) {
         this.selectedLinkData = selnode.data;
         break;
       }
     }
-  }
+  };
 
-  private makePopupDivOnCanvas(state, content) {
-    ``
+  private makePopupDivOnCanvas(state: any, content: any) {
+    ``;
     this.state = state;
     this.content = content;
-    this.cclass = '';
+    this.cclass = "";
     switch (state) {
-      case 'Error':
+      case "Error":
         this.cclass = "alert alert-danger media fade in";
         break;
-      case 'Success':
+      case "Success":
         this.cclass = "alert alert-success media fade in";
         break;
     }
@@ -698,52 +878,68 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     let timeDuration;
     if (strLength <= 20) {
       timeDuration = 3000;
-    } else
-      if (20 < strLength && strLength <= 50) {
-        timeDuration = 5000;
-      } else
-        if (50 < strLength && strLength <= 100) {
-          timeDuration = 8000;
-        } else {
-          timeDuration = 15000;
-        }
+    } else if (20 < strLength && strLength <= 50) {
+      timeDuration = 5000;
+    } else if (50 < strLength && strLength <= 100) {
+      timeDuration = 8000;
+    } else {
+      timeDuration = 15000;
+    }
 
     setTimeout(() => {
       this.showPopup = false;
     }, timeDuration);
   }
 
-  private setQryProperies(properties, alias) {
-    const targetObj = this.resultHedaingMapping.filter(val => val.alias === "o" + alias)[0];
+  private setQryProperies(properties: any, alias: any) {
+    const targetObj = this.resultHedaingMapping.filter(
+      (val: any) => val.alias === "o" + alias
+    )[0];
     const ObjIndex = this.resultHedaingMapping.indexOf(targetObj);
     this.resultHedaingMapping[ObjIndex].filterAttributes = properties;
   }
 
-  private getWhereStr(filterAttribs, alias) {
-    let retWhereStr = '';
+  private getWhereStr(filterAttribs: any, alias: any) {
+    let retWhereStr = "";
     const operator = "AND";
     const parentheses_open = "";
     const parentheses_close = "";
 
-    filterAttribs.forEach(filterVal => {
-      retWhereStr += " " + operator + " toLower(o" + alias + "." + filterVal.supInternalName + ") CONTAINS toLower('" + filterVal.inputVal + "')";
+    filterAttribs.forEach((filterVal: any) => {
+      retWhereStr +=
+        " " +
+        operator +
+        " toLower(o" +
+        alias +
+        "." +
+        filterVal.supInternalName +
+        ") CONTAINS toLower('" +
+        filterVal.inputVal +
+        "')";
     });
 
     if (parentheses_open.length > 0)
       retWhereStr = retWhereStr.substring(3, retWhereStr.length);
 
     this.setQryProperies(filterAttribs, alias);
-    return parentheses_open + (retWhereStr) + parentheses_close;
+    return parentheses_open + retWhereStr + parentheses_close;
   }
 
-  private getReturnStr(cypherList, alias, metGuid, color, nodeName) {
+  private getReturnStr(cypherList: any, alias: any, metGuid: any, color: any, nodeName: any) {
     let retStr = "";
     nodeName = nodeName.split(" - ")[0];
     //nodeName = nodeName.indexOf(" - ") !== -1?nodeName.split(" - ")[0]:nodeName.split("- ")[0];
-    let tempobj: any = { "alias": "o" + alias, "data": "", "metGuid": metGuid, "userAlias": nodeName, "nodeColor": color, "diaplayAlias": nodeName };
+    let tempobj: any = {
+      alias: "o" + alias,
+      data: "",
+      metGuid: metGuid,
+      userAlias: nodeName,
+      nodeColor: color,
+      diaplayAlias: nodeName,
+    };
     let obj = {};
-    let objMap = [];
-    cypherList.forEach(cypherVal => {
+    let objMap: any = [];
+    cypherList.forEach((cypherVal: any) => {
       retStr += "o" + alias + "." + cypherVal.supInternalName + ",";
       obj[cypherVal.supInternalName] = cypherVal.key;
       objMap.push({
@@ -753,7 +949,10 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
         userAlias: "",
         displayAlias: cypherVal.key,
         dataType: cypherVal.dataType,
-        inputVal: (cypherVal.inputVal != null && typeof cypherVal.inputVal != 'undefined' ? cypherVal.inputVal : '')
+        inputVal:
+          cypherVal.inputVal != null && typeof cypherVal.inputVal != "undefined"
+            ? cypherVal.inputVal
+            : "",
       });
     });
     // angular.forEach(CypherList, function (cypherVal, key) {
@@ -764,62 +963,104 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     if (Object.keys(obj).length > 0) {
       tempobj.data = obj;
       tempobj.objMap = objMap;
-    }
-    else {
+    } else {
       if (alias == "on1") {
-        tempobj.data = { "SUPid": "id" };
-        tempobj.objMap = { "SUPid": "id", "type": "hard", "metId": "" };
+        tempobj.data = { SUPid: "id" };
+        tempobj.objMap = { SUPid: "id", type: "hard", metId: "" };
       }
-
     }
     this.resultHedaingMapping.push(tempobj);
     return retStr;
   }
 
-  private getCypherQuery(isFirstMatch, startNode, startNodeAlias, lnkAlias, endNodeAlias, endNode, linkGuid, direction) {
+  private getCypherQuery(
+    isFirstMatch: any,
+    startNode: any,
+    startNodeAlias: any,
+    lnkAlias: any,
+    endNodeAlias: any,
+    endNode: any,
+    linkGuid: any,
+    direction: any
+  ) {
     let ret;
     let startLink;
     let endLink;
     if (direction == "End") {
       startLink = "-[d" + lnkAlias + "s:LNK]->";
       endLink = "-[d" + lnkAlias + "e:LNK]->";
-    }
-    else {
+    } else {
       startLink = "<-[d" + lnkAlias + "s:LNK]-";
       endLink = "<-[d" + lnkAlias + "e:LNK]-";
     }
 
     if (isFirstMatch) {
-      ret = " MATCH (o" + startNodeAlias + ":DATobject{SUPcustomerId:1})," + "#sec_replace#(o" + startNodeAlias + ")<-[:TOO_CLASSIFIES]-(" + startNodeAlias + ":METtypeOfObject{SUPguId:'" + startNode + "'})";
-    }
-    else {
-      ret = " MATCH (o" + startNodeAlias + ")" + startLink + "(" + lnkAlias + ":DATlink)" + endLink + "(o" + endNodeAlias + ":DATobject)," +
-        "#sec_replace#(o" + endNodeAlias + ")<-[:TOO_CLASSIFIES]-(" + endNodeAlias + ":METtypeOfObject{SUPguId:'" + endNode + "'}), (" + lnkAlias + ")<-[:TOL_CLASSIFIES]-(tol" + lnkAlias + ":METtypeOfLink {SUPguId:'" + linkGuid + "'})";
+      ret =
+        " MATCH (o" +
+        startNodeAlias +
+        ":DATobject{SUPcustomerId:1})," +
+        "#sec_replace#(o" +
+        startNodeAlias +
+        ")<-[:TOO_CLASSIFIES]-(" +
+        startNodeAlias +
+        ":METtypeOfObject{SUPguId:'" +
+        startNode +
+        "'})";
+    } else {
+      ret =
+        " MATCH (o" +
+        startNodeAlias +
+        ")" +
+        startLink +
+        "(" +
+        lnkAlias +
+        ":DATlink)" +
+        endLink +
+        "(o" +
+        endNodeAlias +
+        ":DATobject)," +
+        "#sec_replace#(o" +
+        endNodeAlias +
+        ")<-[:TOO_CLASSIFIES]-(" +
+        endNodeAlias +
+        ":METtypeOfObject{SUPguId:'" +
+        endNode +
+        "'}), (" +
+        lnkAlias +
+        ")<-[:TOL_CLASSIFIES]-(tol" +
+        lnkAlias +
+        ":METtypeOfLink {SUPguId:'" +
+        linkGuid +
+        "'})";
     }
     return ret;
   }
 
   private getWithStr() {
     let returnWhereClause = "";
-    this.resultHedaingMapping.forEach((property, idx) => {
-      returnWhereClause = returnWhereClause + property.alias + (idx != this.resultHedaingMapping.length - 1 ? "," : '');
+    this.resultHedaingMapping.forEach((property: any, idx: any) => {
+      returnWhereClause =
+        returnWhereClause +
+        property.alias +
+        (idx != this.resultHedaingMapping.length - 1 ? "," : "");
     });
     return " WITH " + returnWhereClause + " ";
   }
 
-  private editQueryConfig(mode) {
-    if (this.editableObj) {// set selected spaces in query edit mode
+  private editQueryConfig(mode: string) {
+    if (this.editableObj) {
+      // set selected spaces in query edit mode
       switch (mode) {
-        case 'setSpaces':
+        case "setSpaces":
           // vm.setCanvasProperties();
           break;
-        case 'setEntryObj':
+        case "setEntryObj":
           // vm.selectedObj = $filter('filter')(vm.objectList, { "metObjSupguId": vm.metObjOfentryObj.supGuid /*vm.entryObj.supGuid*/ })[0];
           // vm.selectedObj.metObjSupguId = vm.metObjOfentryObj.supGuid;
           // vm.objSubGuid = vm.selectedObj.metObjSupguId;
           // vm.spcForView = $filter('filter')(vm.selectedSpaces, { "spaceSUPguid": vm.savedSpcId })[0];
           break;
-        case 'setResultHeading':
+        case "setResultHeading":
           //if there is no change to canvas, show display alias - table headings
           // if (vm.operation == null) {
           this.resultHedaingMapping = this.editableObj.savedHeaderMap;
@@ -829,21 +1070,19 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
   }
 
   public enableEditQuery() {
-    if (this.isEnableQueryPanel)
-      this.isEnableQueryPanel = false
-    else
-      this.isEnableQueryPanel = true;
+    if (this.isEnableQueryPanel) this.isEnableQueryPanel = false;
+    else this.isEnableQueryPanel = true;
 
     // this.refreshForm();
   }
 
-  private buildQuery(model) {
+  private buildQuery(model: any) {
     const nodeArr = [...model.nodeDataArray];
     const linkArr = [...model.linkDataArray];
     let nodeCount = 0;
-    const linkConsidered = [];
+    const linkConsidered: any = [];
     const metNodeList = [];
-    let query = '';
+    let query = "";
     let queryRetrun = "";
     let queryWhere = "";
     let innerJoins = "";
@@ -853,79 +1092,127 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
     let lnkCount = 1;
     let filterApplied = false; // check if any filter is applied to display a msg at the bottom of step 3
 
+    nodeArr.forEach((value) => {
+      const linkList = linkArr.filter(
+        (lnk) => lnk.from === value.key || lnk.to === value.key
+      );
 
-    nodeArr.forEach(value => {
-      const linkList = linkArr.filter(lnk => lnk.from === value.key || lnk.to === value.key);
-
-      mainNodeAlias = "n" + (++nodeCount);
+      mainNodeAlias = "n" + ++nodeCount;
 
       let thisNodeAlias = "";
       let isFirstLoop = true;
 
       if (linkList.length > 0) {
         linkList.forEach((linkFound) => {
-          const avoidLink = linkConsidered.filter(lnk => lnk.id === linkFound.linkId);
+          const avoidLink = linkConsidered.filter(
+            (lnk: any) => lnk.id === linkFound.linkId
+          );
 
-          if (avoidLink.length > 0) { //Relationship already considered
+          if (avoidLink.length > 0) {
+            //Relationship already considered
             thisNodeAlias = avoidLink[0].endNodeAlias;
             if (isFirstLoop) {
-              queryRetrun += this.getReturnStr(value.cypherAttribs, thisNodeAlias, value.key, value.color, value.name);
-              queryWhere += this.getWhereStr(value.filterAttribs, thisNodeAlias);
+              queryRetrun += this.getReturnStr(
+                value.cypherAttribs,
+                thisNodeAlias,
+                value.key,
+                value.color,
+                value.name
+              );
+              queryWhere += this.getWhereStr(
+                value.filterAttribs,
+                thisNodeAlias
+              );
               isFirstLoop = false;
             }
             return;
           }
 
-
           const startNode = value.key.split(":")[0];
 
-          const endNode = (linkFound.from == value.key ? linkFound.to : linkFound.from).split(":")[0];
+          const endNode = (
+            linkFound.from == value.key ? linkFound.to : linkFound.from
+          ).split(":")[0];
           let matchQry;
           let innerJoin;
           if (linkFound.type != null && Array.isArray(linkFound.type))
             innerJoin = false;
-          else
-            innerJoin = true;
+          else innerJoin = true;
 
-          const startNodeAlias = (thisNodeAlias == "" ? mainNodeAlias : thisNodeAlias);
-          const endNodeAlias = "n" + (++nodeCount);
+          const startNodeAlias =
+            thisNodeAlias == "" ? mainNodeAlias : thisNodeAlias;
+          const endNodeAlias = "n" + ++nodeCount;
 
           if (isFirstLoop) {
-            queryRetrun += this.getReturnStr(value.cypherAttribs, startNodeAlias, startNode, value.color, value.name);
+            queryRetrun += this.getReturnStr(
+              value.cypherAttribs,
+              startNodeAlias,
+              startNode,
+              value.color,
+              value.name
+            );
             queryWhere += this.getWhereStr(value.filterAttribs, startNodeAlias);
             isFirstLoop = false;
           }
 
           const lnkAlias = "l" + lnkCount;
 
-          matchQry = this.getCypherQuery(false, startNode, startNodeAlias, lnkAlias, endNodeAlias, endNode, linkFound.metLinkGuId, linkFound.direction);
+          matchQry = this.getCypherQuery(
+            false,
+            startNode,
+            startNodeAlias,
+            lnkAlias,
+            endNodeAlias,
+            endNode,
+            linkFound.metLinkGuId,
+            linkFound.direction
+          );
 
-          const firstMatch = this.getCypherQuery(true, startNode, startNodeAlias, lnkAlias, endNodeAlias, endNode, linkFound.metLinkGuId, linkFound.direction);
+          const firstMatch = this.getCypherQuery(
+            true,
+            startNode,
+            startNodeAlias,
+            lnkAlias,
+            endNodeAlias,
+            endNode,
+            linkFound.metLinkGuId,
+            linkFound.direction
+          );
 
           if (innerJoin) {
-            innerJoins += (innerJoins.length == 0 ? firstMatch + matchQry : matchQry);
-          }
-          else {
+            innerJoins +=
+              innerJoins.length == 0 ? firstMatch + matchQry : matchQry;
+          } else {
             if (innerJoins.length == 0 && outerJoins.length == 0)
               outerJoins += firstMatch + " OPTIONAL" + matchQry;
-            else
-              outerJoins += " OPTIONAL" + matchQry;
+            else outerJoins += " OPTIONAL" + matchQry;
           }
 
-          linkConsidered.push({ 'id': linkFound.linkId, 'endNodeAlias': endNodeAlias, 'lnkAlias': lnkAlias, 'lnkType': (innerJoin ? "Mandatory" : "Optional") });
+          linkConsidered.push({
+            id: linkFound.linkId,
+            endNodeAlias: endNodeAlias,
+            lnkAlias: lnkAlias,
+            lnkType: innerJoin ? "Mandatory" : "Optional",
+          });
           lnkCount++;
-
-        })
-      }
-      else {
-        query = "MATCH (on1:DATobject{SUPcustomerId:1})," +
-          "#sec_replace#(on1)<-[:TOO_CLASSIFIES]-(too1:METtypeOfObject{SUPguId:'" + value.key.split(":")[0] + "'})";
-        queryRetrun += this.getReturnStr(value.cypherAttribs, "n1", value.key, value.color, value.name);
+        });
+      } else {
+        query =
+          "MATCH (on1:DATobject{SUPcustomerId:1})," +
+          "#sec_replace#(on1)<-[:TOO_CLASSIFIES]-(too1:METtypeOfObject{SUPguId:'" +
+          value.key.split(":")[0] +
+          "'})";
+        queryRetrun += this.getReturnStr(
+          value.cypherAttribs,
+          "n1",
+          value.key,
+          value.color,
+          value.name
+        );
         queryWhere += this.getWhereStr(value.filterAttribs, "n1");
       }
     });
-    if (query == '')
-      query = innerJoins + outerJoins;
+    if (query == "") query = innerJoins + outerJoins;
 
     query += this.getWithStr(); //appending with cluase to the query
 
@@ -934,22 +1221,30 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
       query += "WHERE " + queryWhere.substring(4, queryWhere.length) + " ";
     }
 
-    query += "RETURN " + (queryRetrun.length == 0 ? "on1.SUPid" : queryRetrun.substring(0, queryRetrun.length - 1));
-    query += " ORDER BY " + query.split("RETURN")[1].trim().split(",")[0] + ((this.selectTopicModel.queryLimit) ? " limit " + this.selectTopicModel.queryLimit : '');
+    query +=
+      "RETURN " +
+      (queryRetrun.length == 0
+        ? "on1.SUPid"
+        : queryRetrun.substring(0, queryRetrun.length - 1));
+    query +=
+      " ORDER BY " +
+      query.split("RETURN")[1].trim().split(",")[0] +
+      (this.selectTopicModel.queryLimit
+        ? " limit " + this.selectTopicModel.queryLimit
+        : "");
 
-    this.editQueryConfig('setResultHeading');
+    this.editQueryConfig("setResultHeading");
 
     const componentModel = {
       query: query,
       resultHedaingMapping: this.resultHedaingMapping,
       model: model,
       collectedSelectedPropAry: this.collectedSelectedPropAry,
-      linkConsidered: linkConsidered
-    }
+      linkConsidered: linkConsidered,
+    };
 
     this.onQueryChange.emit(componentModel);
     // this.onQueryChange.emit({ query, resultHedaingMapping, model, collectedSelectedPropAry: this.collectedSelectedPropAry });
     this.dislpayQuery = query;
   }
-
 }
