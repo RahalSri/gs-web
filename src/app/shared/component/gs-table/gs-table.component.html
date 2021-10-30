@@ -19,8 +19,8 @@
     </mat-paginator>
 </div>
 <ngx-skeleton-loader *ngIf="loading" count="10" appearance="line" [theme]="{height: '30px'}"></ngx-skeleton-loader>
-<mat-table id="print-section" *ngIf="!loading && !initNoContentFound" [style.height]="'59vh'" style="overflow: auto;" #table
-    [dataSource]="_dataSource" matSort matPaginator>
+<mat-table id="print-section" *ngIf="!loading && !initNoContentFound" [style.height]="'59vh'" style="overflow: auto;"
+    #table [dataSource]="_dataSource" matSort matPaginator>
     <ng-container [matColumnDef]="displayedColumn.columnName!!" *ngFor="let displayedColumn of _displayedColumns">
         <mat-header-cell [style.width.%]="displayedColumn.styles.width_percentage" *matHeaderCellDef
             [style.display]="filtersEnabled ? 'flex' : ''" [style.justify-content]="filtersEnabled ? 'flex-end' : ''"
@@ -70,7 +70,7 @@
                 class="fa fa-chevron-right fa-lg pull-right selection-icon"></i> -->
         </mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="_columns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="_columns;  sticky: true"></mat-header-row>
     <mat-row id="{{j}}" (click)="highlight(j)" [ngClass]="{'selected-row': selectedRowIndex == j}"
         *matRowDef="let row; columns: _columns; let j = index"></mat-row>
 </mat-table>
