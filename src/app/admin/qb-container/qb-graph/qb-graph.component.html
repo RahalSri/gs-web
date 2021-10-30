@@ -1,0 +1,58 @@
+<div id="graph-container" class="step">
+    <warn [templateModel]="templateModel"></warn>
+    <!-- TODO: Improve close functionality here -->
+    <properties *ngIf="propertyModel" [model]="propertyModel" (onPropChange)="refreshCanvas($event)"></properties>
+    <links *ngIf="linksModel" [model]="linksModel" (loadEndNode)="loadEndNode($event)"></links>
+    <link-type *ngIf="linkTypeModel" [model]="linkTypeModel" (onLinkTypeChange)="onLinkChanged($event)">
+    </link-type>
+    <div class="col-lg-12">
+        <div class="panel only-hide-btn m-b-0">
+            <div class="panel-header panel-controls only-hide-btn custom-hide-btn">
+                <div style="display: inline" ng-show="vm.showCanvas">
+                    <a href="javascript: void(0);" (click)="resetMainDomain();" class="g_fr m-10"
+                        title="Refresh Query"><i class="icon-reload"></i></a>
+                    <a href="javascript: void(0);" (click)="handleFullScreen()" class="g_fr m-10" title="Full screen"><i
+                            class="icon-size-fullscreen"
+                            [ngClass]="isFullScreen? 'icon-size-actual' : 'icon-size-fullscreen'"></i></a>
+                    <!-- <a href="javascript: void(0);" ng-click="vm.lockCanvas()" class="g_fr m-10"
+                        title="lock scrolling canvas "><i
+                            ng-class="lockScrollCanvas ? 'icon-lock-open' : 'icon-lock'"></i></a> -->
+
+                    <a href="javascript: void(0);" (click)="handleZoomOut()" class="g_fr m-10" title="zoom out"><i
+                            class="icon-magnifier-remove"></i></a>
+                    <a href="javascript: void(0);" (click)="handleZoomIn()" class="g_fr m-10" title="zoom in"><i
+                            class="icon-magnifier-add"></i></a>
+                    <!-- <a href="javascript: void(0);"
+                        ng-click="vm.undoCanvas()" class="g_fr m-10" title="undo"><i class="icon-action-undo"></i></a>
+                    <a href="javascript: void(0);" ng-click="vm.redoCanvas()" class="g_fr m-10" title="redo"><i
+                            class="icon-action-redo"></i></a> -->
+                </div>
+
+            </div>
+            <div class="panel-content p-5 p-l-10">
+                <div class="row">
+                    <div class="col-md-12" id="canvas">
+                        <div class="col-md-12">
+                            <div id="{{ canvasId }}" class="qb"></div>
+
+                            <!-- <div>
+                            <p ng-if="vm.filterApplied" style="font-weight: bold" class="g_fr m-r-10">* - Filter applied
+                                to node</p>
+                        </div> -->
+                            <div class="col-md-12 text-center m-t-20 m-b-20">
+                                <a href="javascript:void(0);"
+                                    (click)="$event.preventDefault(); enableEditQuery()">{{(isEnableQueryPanel
+                                    ? 'Hide ' : 'Edit ')}} Cypher Query (ctrl+q)</a>
+                            </div>
+                            <!-- <div style="width: 1350px; display: block"></div> -->
+                            <div *ngIf="isEnableQueryPanel" class="col-md-12"
+                                style="height: 100px; overflow-y: auto; overflow-x: hidden; ">
+                                {{dislpayQuery}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

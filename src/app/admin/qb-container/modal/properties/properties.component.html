@@ -1,0 +1,71 @@
+<div *ngIf="model" id='qbpopup' class="popup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="handleClose()" aria-hidden="true">
+                    <i class="icons-office-52"></i>
+                </button>
+                <h4 class="modal-title">
+                    <strong>{{model.header}}</strong>
+                </h4>
+            </div>
+            <div class="modal-body p-0">
+                <div class="obj-properties p-10">
+                    <div class="qb-properties panel-group objproperties" style="padding-right: 15px;">
+                        <div class="panel panel-default bg-gray-light shadow bd-6"
+                            *ngFor="let view of model.localPropertyValueList">
+                            <div class="panel-header">
+                                <h3 class="panel-title" style="display:inline"><strong>{{view.group}}</strong></h3>
+                                <input class="m-10 qb-checkbox" [value]="view.isAllSelected" type="checkbox"
+                                    (change)="selectAllProperties(view, view.isAllSelected)"
+                                    data-checkbox="icheckbox_minimal-blue" />
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-hover m-b-0">
+                                    <tbody>
+                                        <tr *ngFor="let keyValView of view.keyValue">
+                                            <td class="accordianChange"
+                                                style="width: 40%; padding-left: 18px; font-weight: bold">
+                                                <div class="icheck-list">
+                                                    <label style="display:inline">
+                                                        <input class="qb-checkbox m-r-5"
+                                                            (change)="selectProperty(keyValView)"
+                                                            [checked]="keyValView.isSelected" type="checkbox"
+                                                            data-checkbox="icheckbox_minimal-blue" />{{keyValView.key}}
+                                                    </label>
+                                                    <span class="g_fr"
+                                                        *ngIf="isPropertyFilterEnabled(keyValView.dataType)"
+                                                        (click)="clickFilterExpand(keyValView)"
+                                                        ng-init="keyValView.filter=(keyValView.inputVal.length>0 ? true : false )"><i
+                                                            class="fa"
+                                                            [ngClass]="keyValView.filter ? 'fa-minus-circle' : 'fa-plus-circle'"></i></span>
+
+                                                    <label class="m-t-5"
+                                                        *ngIf="keyValView.filter && isPropertyFilterEnabled(keyValView.dataType) ">
+                                                        <select style="display:inline; padding: 3px">
+                                                            <option>
+                                                                contains
+                                                            </option>
+                                                        </select>
+                                                        <input style="width: 53%; padding-left: 2px"
+                                                            [value]="keyValView.inputVal" type="text" name="containBox"
+                                                            (change)="changeContainBox($event.target.value, keyValView)" />
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="spacer_1px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-dark p-0 ng-scope">
+                <button type="button" class="btn btn-white ng-binding" (click)="handleOk()"
+                    style="height: 55%; margin:1%">Refresh Canvas</button>
+            </div>
+        </div>
+    </div>
+</div>
