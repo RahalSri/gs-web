@@ -1,1 +1,36 @@
-<p>user works!</p>
+<div class="ng-scope">
+    <div ng-include="template"></div>
+  
+    <div class="panel general-panel">
+      <div class="panel-header">
+        <div class="row">
+          <h2 class="col-xs-10"><i class="icon-user"></i>Users</h2>
+          <div style="float:right; text-align:right;" class="col-xs-2 ph_rhs noprint">
+            <a class="page-scroll m-r-10" title="Add User" (click)="addUser()">
+              <i class="fa fa-plus-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row stationlist">
+        <div class="col-md-12 p-20">
+          <gs-table [loading]="loading" [dataSource]="dataSource" [displayedColumns]="displayedColumns">
+            <ng-template #actionRef let-element="element">
+              <gs-button (onClickEvent)="editUser(element)" [icon]="'fa fa-edit'"
+                 [type]="'button'">
+              </gs-button>
+  
+              <gs-button (onClickEvent)="deleteUser(element)" [icon]="'fa fa-remove'"
+                [type]="'button'">
+              </gs-button>
+            </ng-template>
+          </gs-table>
+        </div>
+      </div>
+  
+      <div class="row" align="right">
+        <div class="col-md-12"></div>
+      </div>
+    </div>
+  </div>

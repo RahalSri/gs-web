@@ -33,6 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 import { GSUnsuccessMsgComponent } from './component/gs-unsuccess-msg/gs-unsuccess-msg.component';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
+import { GSSwitchComponent } from './component/gs-switch/gs-switch.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { PinchZoomModule } from 'ngx-pinch-zoom';
     NoContentBannerComponent,
     GSTableComponent,
     BreadcrumbComponent,
-    GSUnsuccessMsgComponent
+    GSUnsuccessMsgComponent,
+    GSSwitchComponent
   ],
   imports: [
     CommonModule,
@@ -93,7 +95,8 @@ import { PinchZoomModule } from 'ngx-pinch-zoom';
     LoadingSpinnerComponent,
     NoContentBannerComponent,
     BreadcrumbComponent,
-    GSUnsuccessMsgComponent
+    GSUnsuccessMsgComponent,
+    GSSwitchComponent
   ],
   providers: [
     GSDialog

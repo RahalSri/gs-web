@@ -2,7 +2,7 @@
     <div class="panel general-panel">
       <div class="panel-header">
         <div class="row">
-          <h2 class="col-xs-10"><i class="icon-user-follow"></i>Add User</h2>
+          <h2 class="col-xs-10"><i class="icon-pencil"></i>Edit User</h2>
         </div>
       </div>
   
@@ -10,7 +10,7 @@
         <ngx-skeleton-loader count="10" appearance="line"></ngx-skeleton-loader>
       </div>
   
-      <form *ngIf="!loading" [formGroup]="userForm" class="form-validation" (submit)="addUser(userForm.value)">
+      <form *ngIf="!loading" [formGroup]="userForm" class="form-validation" (submit)="editUser(userForm.value)">
         <div class="row stationlist">
           <!---colmd8 start-->
           <div class="col-md-8 p-20">
@@ -20,9 +20,18 @@
             <gs-input-box [label]="'Last Name'" [name]="'lastName'" [placeholder]="'Last Name'" [type]="'text'">
             </gs-input-box>
   
-            <gs-input-box [label]="'Email'" [name]="'email'" [placeholder]="'Email'" [type]="'text'"></gs-input-box>
+            <gs-label [label]="'User ID'" [value]="currentUser.userName">
+            </gs-label>
+  
+            <gs-input-box [label]="'Email'" [name]="'email'" [placeholder]="'Email'" [type]="'email'"></gs-input-box>
   
             <div>
+              <label class="col-sm-3 control-label">Password Reset?</label>
+              <gs-check-box [inputModel]="passwordChange" [styleClass]="'col-sm-9 m-b-10'"
+                (inputModelChange)="onpasswordChangeSelect($event)"></gs-check-box>
+            </div>
+  
+            <div *ngIf="passwordChange">
               <gs-password-box [label]="'Password'" [name]="'password'" [placeholder]="'Password'"></gs-password-box>
   
               <gs-input-box [label]="'Confirm Password'" [name]="'confirmPassword'"
@@ -33,7 +42,11 @@
               [name]="'defaultSpace'" [placeholder]="'Select Space...'"
               (onChangeEvent)="changeDefaultSpace($event.value)"></gs-select>
   
-            <gs-switch [label]="'Status'" [name]="'active'" [id]="'statusswitch'"></gs-switch>
+            <gs-switch [label]="'Status'" [name]="'active'" [id]="'statusswitch'" (change)="onStatusChange($event)">
+            </gs-switch>
+  
+            <gs-switch [label]="'API token'" [name]="'isPublicTokenEnabled'" [id]="'apitokenswitch'"
+              (change)="onApiTokenSelect($event)"></gs-switch>
           </div>
           <!---colmd8 end-->
           <!--colmd4 start-->
@@ -42,9 +55,8 @@
               <i class="icon-users m-r-10" style="font-size: 19px"></i>ROLE LIST
             </h3>
             <!--table start here-->
+  
             <gs-table [dataSource]="dataSource" [displayedColumns]="displayedColumns">
-  
-  
               <ng-template #actionRef let-element="element">
                 <input type="checkbox" data-checkbox="icheckbox_flat-blue" [checked]="element.selected"
                   (click)="onRoleSelect($event, element)" />
@@ -55,7 +67,6 @@
           <!---colmd4 end-->
         </div>
   
-        <!---------------------------->
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
@@ -68,7 +79,6 @@
             </div>
           </div>
         </div>
-        <!---------------------------->
       </form>
     </div>
   </div>

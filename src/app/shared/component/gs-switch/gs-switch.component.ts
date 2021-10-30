@@ -7,7 +7,7 @@ import {
 
 @Component({
   selector: 'gs-switch',
-  template: require('./gs-switch.component.html'),
+  templateUrl: './gs-switch.component.html',
   styleUrls: ['./gs-switch.component.css'],
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective }
@@ -16,7 +16,7 @@ import {
 export class GSSwitchComponent {
   @Input() label?: string;
   @Input() id?: string;
-  formControl?: FormControl;
+  formControl!: FormControl;
 
   constructor(private parentFormGroupDirective: FormGroupDirective) {}
 
