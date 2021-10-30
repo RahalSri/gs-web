@@ -16,6 +16,7 @@ import { SelectTopicComponent } from 'src/app/public/query/qb-container/select-t
 import { QBGraphComponent } from 'src/app/public/query/qb-container/qb-graph/qb-graph.component';
 import { RefineComponent } from 'src/app/public/query/qb-container/refine/refine.component';
 import { QbCompleteComponent } from 'src/app/public/query/qb-container/qb-complete/qb-complete.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { QbCompleteComponent } from 'src/app/public/query/qb-container/qb-comple
     SelectDropDownModule,
     MatTableModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatStepperModule
   ]
 })
 export class QueryModule { }
