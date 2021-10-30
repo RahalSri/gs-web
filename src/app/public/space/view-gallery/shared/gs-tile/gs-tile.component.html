@@ -60,29 +60,24 @@
 <!--    <div class="spacer_1px"></div>-->
 <!--</div>-->
 
-<mat-card class="example-card p-0 article" style="background: #ffffff url('{{view.viewDownloadLink}}'); background-size: cover;">
+<mat-card class="tile-card p-0 article"
+          style="background: #ffffff url('{{view.viewDownloadLink}}'); background-size: cover;">
     <div *ngIf="view.viewMaskLabel!=null && !(manageviews && view.viewMaskLabel=='TB' && view.queryGuid==null)"
          class="triangle-topleft">
         <label>{{view.viewMaskLabel}}</label>
     </div>
     <div class="artical-title">
-        <h3>test</h3>
+        <h3> {{view.title}}</h3>
     </div>
-    <div class="hover-content">
-        hover text
-                       <div class="action-icons-container">
-                           <div class="action-icon">
-                               <img class="w-100" src="assets/img/trash.svg" alt="">
-                           </div>
-                           <div class="action-icon">
-                               <img class="w-100" src="assets/img/trash.svg" alt="">
-                           </div>
-                           <div class="action-icon">
-                               <img class="w-100" src="assets/img/trash.svg" alt="">
-                           </div>
-                           <div class="action-icon">
-                               <img class="w-100" src="assets/img/trash.svg" alt="">
-                           </div>
-                       </div>
+    <div class="hover-content parent">
+        <div class="action-icons-container child-btn">
+            <div class="action-icon">
+                <mat-icon (click)="editView(); $event.stopPropagation();">edit_note</mat-icon>
+            </div>
+            <div class="action-icon">
+                <mat-icon (click)="deleteView(); $event.stopPropagation();">delete</mat-icon>
+            </div>
+        </div>
+        <div class="hover-desc child-desc">{{view.description}}</div>
     </div>
 </mat-card>

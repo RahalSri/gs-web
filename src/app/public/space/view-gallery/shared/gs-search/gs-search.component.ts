@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'gs-search',
   templateUrl: './gs-search.component.html',
-  styleUrls: ['./gs-search.component.css']
+  styleUrls: ['./gs-search.component.scss']
 })
 export class GsSearchComponent implements OnInit {
   @Output() performSearch = new EventEmitter<string>();

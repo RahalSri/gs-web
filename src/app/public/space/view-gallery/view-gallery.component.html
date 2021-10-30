@@ -57,12 +57,28 @@
 <!--</div>-->
 
 <div fxLayout="row stretch">
-    <div *ngFor="let view of views | viewFilter:searchText" fxFlex.xl="20%" fxFlex.lg="25%" fxFlex.md="50%" fxFlex="100%"  fxLayoutAlign="space-evenly center">
-        <gs-tile style="width: 100%; margin: 10px" (reloadViews)="refresh()"
-                 (removeDeleteView)="removeDeleteView($event)"
+    <gs-search (performSearch)="searchText = $event"></gs-search>
+</div>
+
+<!--<div class="right-header-menu col-xs-3" id="display-list" style="padding-right: 50px; text-align: right;">-->
+<!--    <div class="dropdown stay-inline"-->
+<!--         id="language-header">-->
+<!--        <a data-close-others="true" data-hover="dropdown" data-toggle="dropdown"-->
+<!--           style="padding-top: 0; padding-bottom: 0; cursor: pointer" title="Add view">-->
+<!--            <i (click)="createView()" class="fa fa-plus-square"-->
+<!--               style="float: right; font-size: 25px; opacity: 1 !important"></i>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div fxLayout="row stretch">
+    <div *ngFor="let view of views | viewFilter:searchText" fxFlex="100%" fxFlex.lg="25%" fxFlex.md="50%"
+         fxFlex.xl="20%" fxLayoutAlign="space-evenly center">
+        <gs-tile (reloadViews)="refresh()" (removeDeleteView)="removeDeleteView($event)"
                  [manageviews]=manageviews
                  [supguid]="supguid"
-                 [view]="view">
+                 [view]="view"
+                 style="width: 100%; margin: 10px">
         </gs-tile>
     </div>
 </div>
