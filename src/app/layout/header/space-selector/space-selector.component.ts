@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Color } from 'src/app/core/model/app-config';
 import { AppConfigService } from 'src/app/core/service/app-config.service';
 import { CatalogueService } from 'src/app/core/service/catalogue.service';
 import { Space } from '../../../shared/model/space';
@@ -28,6 +29,7 @@ export class SpaceSelectorComponent implements OnInit, OnDestroy {
   hoveredSpace?: Space;
   spaceSubscription?: Subscription;
 
+  @Input() topbarColour?: Color;
   @Output() onSpaceChanged: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(

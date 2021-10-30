@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Layout } from "gojs";
 import { BehaviorSubject, Subject } from "rxjs";
 import { AlternateView } from "src/app/shared/model/alternate-view";
 import { Space } from "src/app/shared/model/space";
@@ -14,13 +13,11 @@ import { ConfigService } from "./config.service";
 export class AppConfigService {
     private currentAltViewsSource = new Subject<AlternateView[]>();
     private currentSpaceSource = new BehaviorSubject<Space>(new Space());
-    private currentGlobalsSource = new BehaviorSubject<any>(null);
     private currentActionMenuSource = new BehaviorSubject<ActionMenu>(new ActionMenu());
     private currentConfigSrouce = new BehaviorSubject<AppConfig>(new AppConfig());
 
     currentSpace = this.currentSpaceSource.asObservable();
     currentAltView = this.currentAltViewsSource.asObservable();
-    globals = this.currentGlobalsSource.asObservable();
     actionMenu = this.currentActionMenuSource.asObservable();
     appConfig = this.currentConfigSrouce.asObservable();
 
@@ -46,10 +43,6 @@ export class AppConfigService {
         this.currentAltViewsSource.next(altViews);
     }
 
-    setGlobals(globals: any) {
-        this.currentGlobalsSource.next(globals);
-    }
-
     setActionMenu(actionMenu: ActionMenu) {
         this.currentActionMenuSource.next(actionMenu);
     }
@@ -61,7 +54,6 @@ export class AppConfigService {
     fetchCurrentAppConfig(spaceGuId: string) {
         this.configService.fetchConfigurations(spaceGuId).subscribe(response => {
             var config = response.body;
-            console.log(config);
             this.currentConfigSrouce.next(config);
         });
     }

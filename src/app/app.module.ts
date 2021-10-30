@@ -40,6 +40,9 @@ import { ContentSearchComponent } from './layout/content-search/content-search.c
 import { MatDividerModule } from '@angular/material/divider';
 import { QueryModule } from './public/query/query.module';
 import { GojsAngularModule } from 'gojs-angular';
+import { AppConfigService } from './core/service/app-config.service';
+import { initializeApplication } from './core/service/app-config.factory';
+import { AuthenticationService } from './core/auth/authentication.service';
 
 @NgModule({
   declarations: [

@@ -13,7 +13,6 @@ import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.se
     showPrint: boolean = false;
     showShare: boolean = false;
 
-
     constructor(private breadcrumbStoreService: BreadcrumbStoreService, private appConfigService: AppConfigService){
         this.appConfigService.actionMenu.subscribe(response => {
             this.showAltView = response.altView;

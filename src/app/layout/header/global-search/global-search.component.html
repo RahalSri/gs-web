@@ -1,15 +1,15 @@
 <button *ngIf="!showGlobalSearch" (click)="onSearchEnabled()" mat-icon-button type="button" title="search">
-    <mat-icon>search</mat-icon>
+    <mat-icon [style.color]="topbarColour?.foregroundColour!">search</mat-icon>
 </button>
 <div *ngIf="showGlobalSearch">
-    <mat-form-field [floatLabel]="'never'" class="input">
+    <mat-form-field [style.color]="topbarColour?.foregroundColour!" [floatLabel]="'never'" class="input">
         <input #searchTextField type="text" matInput name="search" (keyup.enter)="search()" matInput autofocus
             placeholder="Your Search..." [(ngModel)]="searchText" />
         <button matSuffix mat-button (click)="onSearchDisabled()">
-            <mat-icon>close</mat-icon>
+            <mat-icon [style.color]="topbarColour?.foregroundColour!">close</mat-icon>
         </button>
     </mat-form-field>
     <button matSuffix mat-button (click)="search()">
-        <mat-icon>search</mat-icon>
+        <mat-icon [style.color]="topbarColour?.foregroundColour!">search</mat-icon>
     </button>
 </div>

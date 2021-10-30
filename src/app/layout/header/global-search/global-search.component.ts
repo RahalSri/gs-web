@@ -3,6 +3,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Color } from 'src/app/core/model/app-config';
 import { GSSnackBarComponent } from '../../../shared/component/gs-snack-bar/gs-snackbar.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { GSSnackBarComponent } from '../../../shared/component/gs-snack-bar/gs-s
 export class GlobalSearchComponent {
   showGlobalSearch: boolean = false;
   searchText: string = '';
+  @Input() topbarColour?: Color;
   @Output() onSearchInitiated: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('searchTextField', {static: true}) searchInputElement: any;
 
@@ -25,7 +27,6 @@ export class GlobalSearchComponent {
   constructor(private snackBar: MatSnackBar, private router: Router) {}
 
   search() {
-    // this.searchInputElement.nativeElement.focus();
     this.onSearchInitiated.emit();
     if(this.searchText == null || this.searchText == ""){
       this.snackBar.openFromComponent(GSSnackBarComponent, {

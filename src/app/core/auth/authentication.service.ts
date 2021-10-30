@@ -31,7 +31,6 @@ export class AuthenticationService {
   public logout() {
     this.appConfigService.setCurrentAltViews([]);
     this.appConfigService.setCurrentSpace(new Space());
-    this.appConfigService.setGlobals(null);
     this.keycloak.logout();
   }
 

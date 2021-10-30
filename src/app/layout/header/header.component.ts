@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/auth/authentication.service'
 import { SecurityConfigService } from 'src/app/core/service/core.security-config.service';
 import { KeycloakService } from 'keycloak-angular';
 import { Router } from '@angular/router';
+import { AppConfig, Color, CSSConfig } from 'src/app/core/model/app-config';
 
 
 @Component({
@@ -14,10 +15,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  @Input() globalSearch?: boolean = true;
+  @Input() givenName?: String = "";
+  @Output() onAdminModeChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onSpaceChanged: EventEmitter<any> = new EventEmitter<any>();
   @Input() isExpanded: boolean = true;
-
   @Output() leftPanelClosed = new EventEmitter<boolean>();
+
+  cssConfig: CSSConfig = new CSSConfig();
+  topbarColour?: Color;
+
+  private configSubscription?: Subscription;
+
+  isAdminPrivilaged = false;
 
   constructor(private keycloakService: KeycloakService,
     private router: Router,
@@ -30,55 +40,34 @@ export class HeaderComponent implements OnInit {
     this.leftPanelClosed.emit(this.isExpanded);
   }
 
-  @Input() globalSearch?: boolean = true;
-  currentUser: any;
-  @Input() givenName?: String = "";
-  globals: any;
-  @Output() onAdminModeChanged: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onSpaceChanged: EventEmitter<any> = new EventEmitter<any>();
-
-  private globalSubscription?: Subscription;
-
-  isAdminPrivilaged = false;
-
   signOut() {
     this.authenticationService.logout();
   }
 
   ngOnInit() {
     this.givenName = localStorage.getItem("givenName") ?? "";
-    // go.Diagram.licenseKey = "73f942e1b36428a800ca0d2b113f69ed1bb37b339e841ff75d5142f2ef00691c70c9ed2d58878e93c0e848a9492dc0df8e963d2a951f013fee39d6db4ab282aab43073e211004589f70123cacdfa28a8fb2d78a7cae672f08a2c88f2f9b8c5c90ceef38618cb1cab2a7905314976b048b6";
-    this.globalSubscription = this.appConfigService.globals.subscribe((globals) => {
-      if(globals != null){
-        this.globals = globals;
-        this.currentUser = this.globals.currentUser;
-        this.isAdminPriviledged();
-        this.givenName = this.currentUser.givenName;
+    this.configSubscription = this.appConfigService.appConfig.subscribe(response => {
+      if (response.cssConfig != null) {
+        this.cssConfig = response.cssConfig!;
+        this.topbarColour = this.cssConfig[this.cssConfig.topBar!];
       }
-    });
+    })
   }
 
   ngOnDestroy(): void {
-    this.globalSubscription!.unsubscribe();
+    this.configSubscription!.unsubscribe();
   }
 
   spaceChanged(supGuid: any) {
     this.onSpaceChanged.emit({ supGuid: supGuid, redirect: true });
   }
 
-  isAdminPriviledged() {
-    this.isAdminPrivilaged = this.securityService.isPrivileged(
-      this.currentUser,
-      'template', 'adminpanel'
-    );
-  }
-
-  navigateToHome(){
+  navigateToHome() {
     var currentSpaceId = localStorage.getItem('currentSpaceGuid');
     this.router.navigate(['space', currentSpaceId])
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
     this.keycloakService.logout();
   }
