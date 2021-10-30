@@ -1,20 +1,23 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { QueryService } from "src/app/core/service/query.service";
 
 @Component({
     selector: 'attach-view',
-    templateUrl: './attach-view.component.html'
+    templateUrl: './attach-view.component.html',
+    styleUrls: ['./attach-view.component.scss']
 })
 export class AttachViewComponent implements OnInit {
-    query : any;
+    query: any;
+    onClose: any;
     attachViewForm: FormGroup = new FormGroup({});
     spaceList: any[] = [];
     loading: boolean = false;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, private queryService: QueryService) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, private queryService: QueryService, public dialogRef: MatDialogRef<AttachViewComponent>,) {
         this.query = data.query;
+        this.onClose = data.onClose;
     }
 
     ngOnInit(): void {
@@ -38,9 +41,13 @@ export class AttachViewComponent implements OnInit {
         });
     }
 
-    changeViewType(){
+    changeViewType() {
 
     }
 
-    spaceChange(event: any){}
+    spaceChange(event: any) { }
+
+    onDismiss(): void {
+        this.dialogRef.close();
+    }
 }

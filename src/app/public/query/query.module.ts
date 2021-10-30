@@ -11,7 +11,8 @@ import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [
     QueryListComponent,
@@ -28,7 +29,9 @@ import { MatCardModule } from '@angular/material/card';
     SelectDropDownModule,
     MatTableModule,
     MatIconModule,
-    MatCardModule
+    MatButtonModule,
+    MatCardModule,
+    MatRadioModule
   ]
 })
 export class QueryModule { }

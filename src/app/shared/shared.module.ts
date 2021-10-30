@@ -34,6 +34,7 @@ import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component
 import { GSUnsuccessMsgComponent } from './component/gs-unsuccess-msg/gs-unsuccess-msg.component';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
 import { GSSwitchComponent } from './component/gs-switch/gs-switch.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { GSSwitchComponent } from './component/gs-switch/gs-switch.component';
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
-    PinchZoomModule
+    PinchZoomModule,
+    MatDividerModule
   ],
   exports: [
     GSButtonComponent,
