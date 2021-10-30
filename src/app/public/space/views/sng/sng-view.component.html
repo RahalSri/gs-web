@@ -41,30 +41,34 @@
 
         <loading-spinner *ngIf="topologyData == null || topologyData.viewDisplayTitle == ''"></loading-spinner>
         <no-content-banner *ngIf="topologyData == null"></no-content-banner>
-        <div class="row sng-wrapper" id=print-section>
-            <div id="graph-canvas" style="height: 100%" [ngClass]="openRHS ? 'col-sm-8' : 'col-sm-12'" em-height-source>
-                <gs-sng-radial-topology *ngIf="topologyData.topology=='Radial'" [topologyData]="topologyData"
-                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
-                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut" [canvasSize]="canvasHeight">
-                </gs-sng-radial-topology>
-                <gs-sng-network-topology *ngIf="topologyData.topology=='Network'" [topologyData]="topologyData"
-                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
-                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
-                </gs-sng-network-topology>
-                <gs-sng-hierarchy-topology *ngIf="topologyData.topology=='Hierarchy'" [topologyData]="topologyData"
-                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
-                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
-                </gs-sng-hierarchy-topology>
-                <gs-sng-path-topology *ngIf="topologyData.topology=='Path'" [topologyData]="topologyData"
-                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
-                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
-                </gs-sng-path-topology>
+        <div class="flex-container content" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="row sng-wrapper flex-item" [ngClass]="{'rhsOpen' : openRHS, 'rhsClosed':!openRHS }"
+                id=print-section>
+                <div id="graph-canvas" style="height: 100%" [ngClass]="openRHS ? 'col-sm-8' : 'col-sm-12'"
+                    em-height-source>
+                    <gs-sng-radial-topology *ngIf="topologyData.topology=='Radial'" [topologyData]="topologyData"
+                        (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                        [setZoomIn]="zoomIn" [setZoomOut]="zoomOut" [canvasSize]="canvasHeight">
+                    </gs-sng-radial-topology>
+                    <gs-sng-network-topology *ngIf="topologyData.topology=='Network'" [topologyData]="topologyData"
+                        (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                        [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
+                    </gs-sng-network-topology>
+                    <gs-sng-hierarchy-topology *ngIf="topologyData.topology=='Hierarchy'" [topologyData]="topologyData"
+                        (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                        [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
+                    </gs-sng-hierarchy-topology>
+                    <gs-sng-path-topology *ngIf="topologyData.topology=='Path'" [topologyData]="topologyData"
+                        (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                        [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
+                    </gs-sng-path-topology>
+                </div>
             </div>
-        </div>
-        <div *ngIf="openRHS" class="flex-item rhsOpenPanel">
-            <rhs-panel [openRHS]="openRHS" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="viewGuid"
-                [supGuId]="supGuId" (onRHSToggle)="toggleRHS($event)">
-            </rhs-panel>
+            <div *ngIf="openRHS" class="flex-item rhsOpenPanel">
+                <rhs-panel [openRHS]="openRHS" [spcSupGuId]="spcSupGuId" [datViewSupGuId]="viewGuid" [supGuId]="supGuId"
+                    (onRHSToggle)="toggleRHS($event)">
+                </rhs-panel>
+            </div>
         </div>
     </mat-card>
 </div>
