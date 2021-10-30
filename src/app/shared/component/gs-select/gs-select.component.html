@@ -1,26 +1,28 @@
-<div *ngIf="!labelTopPosition" [class.form-group]="isFormGroup" class="container">
-  <label *ngIf="label !== undefined" class="control-label" [ngClass]="required ? 'required' : ''">{{ label }}</label>
-  <div [ngClass]="styleClass == undefined ? 'select' : styleClass">
-    <ngx-select-dropdown (click)="onDropDownClick()" (change)="selectionChanged($event)" (keyup)="onTextChange($event)"
-      (searchChange)="onSearched($event)" [formControl]="formControl" [config]="config" [(ngModel)]="selectedOptions"
-      [options]="list"></ngx-select-dropdown>
-    <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
-      <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+<div class="container" *ngIf="!labelTopPosition" [class.form-group]="isFormGroup">
+  <div class="flex-container content" fxLayout="row" fxLayoutAlign="space-between">
+    <label class="flex-item control-label" *ngIf="label !== undefined" [ngClass]="required ? 'required' : ''">{{ label }}</label>
+    <div class="flex-item" [ngClass]="styleClass == undefined ? 'select' : styleClass">
+      <ngx-select-dropdown (click)="onDropDownClick()" (change)="selectionChanged($event)" (keyup)="onTextChange($event)"
+                           (searchChange)="onSearched($event)" [formControl]="formControl" [config]="config" [(ngModel)]="selectedOptions"
+                           [options]="list"></ngx-select-dropdown>
     </div>
+  </div>
+  <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+    <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
   </div>
 </div>
 
-<div *ngIf="labelTopPosition" class="form-group" class="container">
-  <div class="row">
+<div *ngIf="labelTopPosition" class="form-group container">
+  <div>
     <label *ngIf="label !== undefined" class="control-label" [ngClass]="required ? 'required' : ''">{{ label
       }}</label>
   </div>
-  <div class="row">
+  <div>
     <ngx-select-dropdown (click)="onDropDownClick()" (change)="selectionChanged($event)" (keyup)="onTextChange($event)"
       (searchChange)="onSearched($event)" [formControl]="formControl" [config]="config" [options]="list">
     </ngx-select-dropdown>
-    <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
-      <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
-    </div>
+  </div>
+  <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+    <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
   </div>
 </div>
