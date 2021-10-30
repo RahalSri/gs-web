@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AppConfigService } from "src/app/core/service/app-config.service";
 import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.service";
+import { BreadcrumbComponent } from "src/app/shared/component/breadcrumb/breadcrumb.component";
 
 @Component({
     selector: 'action-bar',
@@ -9,6 +10,9 @@ import { BreadcrumbStoreService } from "src/app/core/service/breadcrumb-store.se
     styleUrls: ['./action-bar.component.scss']
   })
   export class ActionComponent implements OnInit{
+    
+    @ViewChild('breadcrumbComponent') breadcrumb?: BreadcrumbComponent;
+    
     showAltView: boolean = false;
     showPrint: boolean = false;
     showShare: boolean = false;
