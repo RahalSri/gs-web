@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { QueryBuilderService } from "../../../services/query-builder.service";
+import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 @Component({
   selector: 'select-topic',
   template: require('./select-topic.component.html'),
@@ -12,15 +12,15 @@ export class SelectTopicComponent implements OnInit {
 
   metLanguageList: Array<any> = [];
   spaces: Array<any> = [];
-  selectTopicForm: FormGroup;
+  selectTopicForm: FormGroup|undefined;
   showObjList = false;
   topicList = [];
   isLoadingTopics = true;
   selectedSpacesCheckBoxes = {};
 
-  private model = { metLanguage: undefined, spaceList: [], tooType: '', topic: undefined, allSpacesSelected: false, allObjectsSelected: false, queryLimit: 0, isTableView: true, qryGuid: undefined };
+  private model: any = { metLanguage: undefined, spaceList: [], tooType: '', topic: undefined, allSpacesSelected: false, allObjectsSelected: false, queryLimit: 0, isTableView: true, qryGuid: undefined };
 
-  @Input() editableObj;
+  @Input() editableObj: any;
   @Output() onChange = new EventEmitter<any>();
 
   public constructor(
@@ -105,7 +105,7 @@ export class SelectTopicComponent implements OnInit {
   }
 
   private fetchTopics() {
-    const spaceList = this.model.allSpacesSelected ? [...this.spaces] : Object.values(this.selectedSpacesCheckBoxes);
+    const spaceList: any = this.model.allSpacesSelected ? [...this.spaces] : Object.values(this.selectedSpacesCheckBoxes);
     this.isLoadingTopics = true;
     const tooType = this.model.allObjectsSelected ? 'all' : 'used';
 
@@ -113,20 +113,20 @@ export class SelectTopicComponent implements OnInit {
     this.model.tooType = tooType;
 
     this.topicList = [];
-    if (spaceList.length > 0) {
+    if (spaceList.length > 0 && this.model.metLanguage) {
       this.queryBuilderService.getTooList(tooType, this.model.metLanguage.supGuid, spaceList).subscribe(data => {
         this.topicList = data;
         this.isLoadingTopics = false;
 
         if (this.editableObj) {
-          this.model.topic = this.topicList.find(t => t.metObjSupguId === this.editableObj.entryObj.metTypeOfObject.supGuid);
+          this.model.topic = this.topicList.find((t: any) => t.metObjSupguId === this.editableObj.entryObj.metTypeOfObject.supGuid);
           this.emitChanges();
         }
       });
     }
   }
 
-  public handleSpaceChange(checked, space, skipFetchTopics?: boolean) {
+  public handleSpaceChange(checked: boolean, space: any, skipFetchTopics?: boolean) {
     if (checked) {
       this.selectedSpacesCheckBoxes[space.spaceSUPguid] = space;
     } else {
@@ -145,7 +145,7 @@ export class SelectTopicComponent implements OnInit {
     return Object.values(spaceList).length > 0;
   }
 
-  public getSpacesWithMetLanguages(metLan) {
+  public getSpacesWithMetLanguages(metLan: any) {
     this.model.metLanguage = metLan;// lan.supGuid;
     this.emitChanges();
 
@@ -156,7 +156,7 @@ export class SelectTopicComponent implements OnInit {
         this.model.allSpacesSelected = false;
 
         if (this.editableObj) {
-          const selectedSpaces = this.editableObj.selectedSpaces.map(spc => spc.spaceSUPguid);
+          const selectedSpaces = this.editableObj.selectedSpaces.map((spc:any) => spc.spaceSUPguid);
           this.spaces.forEach(spc => {
             if (selectedSpaces.includes(spc.spaceSUPguid)) {
               this.handleSpaceChange(true, spc, true);
