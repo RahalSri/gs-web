@@ -1,6 +1,7 @@
-<div class="flex-container content" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="breadcrumb!.breadcrumbNodes.length > 2">
+<div class="flex-container content" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="showAltView || showShare || nodeLength > 0">
     <div class="flex-item">
-        <breadcrumb #breadcrumbComponent (elementClick)="homeSelected(); popCrumbTrailStack($event)"></breadcrumb>
+        <breadcrumb (nodesPushed)="nodesPushed($event)" (elementClick)="homeSelected(); popCrumbTrailStack($event)">
+        </breadcrumb>
     </div>
     <div class="flex-item">
         <alternative-view *ngIf="showAltView"></alternative-view>

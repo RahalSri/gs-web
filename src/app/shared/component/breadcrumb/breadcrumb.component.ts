@@ -13,6 +13,7 @@ const MIN_BREADCRUMBS_TO_ENABLE_HOME_OPTION = 2;
 export class BreadcrumbComponent implements OnInit, OnDestroy {
 
   @Output() elementClick = new EventEmitter<string>();
+  @Output() nodesPushed = new EventEmitter<number>();
   public breadcrumbNodes: BreadcrumbNode[] = [];
   private subscription: Subscription = new Subscription();
 
@@ -22,6 +23,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.breadcrumbStoreService.eventListener.subscribe((nodes: BreadcrumbNode[]) => {  
       this.breadcrumbNodes = nodes;
+      this.nodesPushed.emit(nodes.length);
     })
   } 
 
