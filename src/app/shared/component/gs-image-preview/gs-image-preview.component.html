@@ -1,5 +1,5 @@
 <div class="overlay-content">
-    <div style="display: flex; grid-gap: 15px; float: right; padding: 10px;">
+    <div style="display: flex; grid-gap: 15px; float: right; padding: 10px; flex-direction: column;">
         <a style="text-decoration: none;" [href]="image" type="button">
             <button mat-icon-button mat-flat-button title="download image">
                 <mat-icon>download</mat-icon>
@@ -9,5 +9,7 @@
             <mat-icon>close</mat-icon>
         </button>
     </div>
-    <ngx-imageviewer [src]="image"></ngx-imageviewer>
+    <pinch-zoom>
+        <img [src]="image" [height]="height" [width]="width" />
+    </pinch-zoom>
 </div>

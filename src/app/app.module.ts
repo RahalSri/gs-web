@@ -31,7 +31,6 @@ import { MatInputModule } from '@angular/material/input';
 import { SpinnersAngularModule } from 'spinners-angular';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
-import { ImageViewerModule } from '@emazv72/ngx-imageviewer';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { SpaceModule } from './public/space/space.module';
 import { ActionComponent } from './layout/action-bar/action-bar.component';
@@ -84,7 +83,6 @@ import { QueryModule } from './public/query/query.module';
     MatProgressBarModule,
     MatTableModule,
     MatFormFieldModule,
-    ImageViewerModule,
     FlexLayoutModule,
     NgxPrintModule,
   ],
