@@ -35,6 +35,8 @@ import { GsTdHierarchyComponent } from './datasheet/shared/gs-td-hierarchy/gs-td
 import { GsTdMediaComponent } from './datasheet/shared/gs-td-media/gs-td-media.component';
 import { GsTdLabelTblComponent } from './datasheet/shared/gs-td-label-tbl/gs-td-label-tbl.component';
 import { DescFilterPipe } from 'src/app/shared/pipes/desc-filter.pipe';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { DescFilterPipe } from 'src/app/shared/pipes/desc-filter.pipe';
     FlexLayoutModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     AlternativeViewComponent
