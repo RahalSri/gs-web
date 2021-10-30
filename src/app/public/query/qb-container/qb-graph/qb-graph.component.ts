@@ -12,6 +12,7 @@ import * as go from "gojs";
 import { Diagram } from "gojs";
 import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 
+
 const bigfont = "bold 13pt Helvetica, Arial, sans-serif";
 @Component({
   selector: "qb-graph",
@@ -290,7 +291,7 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
           },
           $(go.Picture, {
             maxSize: new go.Size(30, 30),
-            source: "./img/propE.png",
+            source: "./propE.png",
           })
         ),
         $(
@@ -302,7 +303,7 @@ export class QBGraphComponent implements AfterViewInit, OnChanges {
           },
           $(go.Picture, {
             maxSize: new go.Size(30, 30),
-            source: "./img/linkE.png",
+            source: "./linkE.png",
           })
         )
       )

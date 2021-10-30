@@ -70,7 +70,9 @@ export class QbTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     ngAfterViewInit() {
+        if(this.matTableRef?.nativeElement){
         (this.colwidths.length > 0) ? this.setTableResize(this.colwidths[0]) : this.setTableResize(this.matTableRef.nativeElement.clientWidth);
+        }
     }
 
     setTableResize(tableWidth: number) {

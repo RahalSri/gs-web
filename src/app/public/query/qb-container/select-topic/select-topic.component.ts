@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 @Component({
@@ -6,11 +6,11 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
   templateUrl: './select-topic.component.html',
   styleUrls: ['./select-topic.component.scss']
 })
-export class SelectTopicComponent implements OnInit {
+export class SelectTopicComponent implements OnInit  {
 
   metLanguageList: Array<any> = [];
   spaces: Array<any> = [];
-  selectTopicForm: FormGroup;
+  selectTopicForm: any;
   showObjList = false;
   topicList = [];
   isLoadingTopics = true;
