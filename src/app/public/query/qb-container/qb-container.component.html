@@ -1,0 +1,57 @@
+<div class="container" class="querybuilder">
+    <div class="col">
+        <div>
+            <mat-stepper linear #stepper>
+                <mat-step>
+                    <form>
+                        <ng-template matStepLabel>Select Topic</ng-template>
+                        <select-topic [editableObj]="editableObj" (onChange)="handleSelectTopicChange($event)">
+                        </select-topic>
+                        <div class="stepper-button-container">
+                            <button mat-button [disabled]="!stepValidity.selectTopic"
+                                mat-raised-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <form>
+                        <ng-template matStepLabel>Configure</ng-template>
+                        <qb-graph [editableObj]="editableObj" [selectTopicModel]="selectTopicModel"
+                            (onQueryChange)="handleQueryChange($event)">
+                        </qb-graph>
+                        <div class="stepper-button-container">
+                            <button  mat-button matStepperPrevious>Back</button>
+                            <button   mat-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <form>
+                        <ng-template matStepLabel>Refine</ng-template>
+                        <refine (onChange)="handleRefineChage($event)" [editableObj]="editableObj"
+                            [resultHedaingMapping]="resultHedaingMapping" [execQuery]="execQuery"
+                            [selectTopicModel]="selectTopicModel"></refine>
+                        <div class="stepper-button-container">
+                            <button class="stepper-button" mat-raised-button matStepperPrevious>Back</button>
+                            <button class="stepper-button" mat-raised-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <form>
+                        <ng-template matStepLabel>Complete</ng-template>
+                        <qb-complete [resultHedaingMapping]="resultHedaingMapping" [execQuery]="execQuery"
+                            [graphModel]="graphModel" [editableObj]="editableObj" [selectTopicModel]="selectTopicModel"
+                            (onChange)="handleCompleteChange($event)"></qb-complete>
+                        <div class="stepper-button-container">
+                            <button type="button" class="stepper-button" mat-raised-button
+                                matStepperPrevious>Back</button>
+                            <button type="button" class="stepper-button" mat-raised-button (click)="saveData()"
+                                [disabled]="isSavingInprogress || !stepValidity.complete">{{buttonLabel}}</button>
+                        </div>
+                    </form>
+                </mat-step>
+            </mat-stepper>
+        </div>
+    </div>
+</div>

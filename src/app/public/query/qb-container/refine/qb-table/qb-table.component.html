@@ -1,0 +1,11 @@
+<mat-table id="result-table" [dataSource]="data" class=" table-hover " cdkDropListGroup>
+        <ng-container *ngFor="let column of columns; let i = index" [matColumnDef]="column.field">
+            <mat-header-cell *matHeaderCellDef (mousedown)="onResizeColumn($event, i)" class="qb-header-cell">
+               <div [hidden]="editlabels"> {{ column.displayLabel }} </div>
+               <div [hidden]="!editlabels"><input class='form-control text-center' [(ngModel)]=" column.displayLabel" /></div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="qb-cell"> {{ formatValue(row[column.qryproperty]) }} </mat-cell>
+        </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="qb-header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="qb-row"></mat-row>
+</mat-table>
