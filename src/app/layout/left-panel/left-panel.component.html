@@ -1,13 +1,27 @@
 <mat-nav-list style="padding: 10px; border: none;">
-  <mat-slide-toggle style="padding-bottom: 20px;
+  <mat-slide-toggle color="primary" style="padding-bottom: 20px;
   padding-top: 20px;
-  padding-left: 20px;" [checked]="true" [disabled]="false">
+  padding-left: 20px; color: white;" [(ngModel)]="isAdminMode" [checked]="isAdminMode" [disabled]="false">
     <span *ngIf="isExpanded">Admin mode</span>
   </mat-slide-toggle>
   <mat-divider style="margin-bottom: 15px;"></mat-divider>
-  <mat-list-item [routerLink]="menuItem.path" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}" style="margin-bottom: 10px;
-  border-radius: 3px;" *ngFor="let menuItem of menuItems">
-    <mat-icon mat-list-icon>{{menuItem.icon}}</mat-icon>
-    <span *ngIf="isExpanded">{{menuItem.title}}</span>
-  </mat-list-item>
+  <!-- Public Sidebar -->
+  <span *ngIf="!isAdminMode">
+    <mat-list-item [routerLink]="menuItem.path" routerLinkActive #rla="routerLinkActive"
+      [ngStyle]="rla.isActive ? {'background-color': '#587A8C', 'color': 'white'} : {'color': 'gray'}" style="margin-bottom: 10px;
+  border-radius: 3px;" *ngFor="let menuItem of publicMenuItems">
+      <mat-icon mat-list-icon>{{menuItem.icon}}</mat-icon>
+      <span *ngIf="isExpanded">{{menuItem.title}}</span>
+    </mat-list-item>
+  </span>
+
+  <!-- Admin Sidebar -->
+  <span *ngIf="isAdminMode">
+    <mat-list-item [routerLink]="menuItem.path" routerLinkActive #rla="routerLinkActive"
+      [ngStyle]="rla.isActive ? {'background-color': '#587A8C', 'color': 'white'} : {'color': 'gray'}" style="margin-bottom: 10px;
+  border-radius: 3px;" *ngFor="let menuItem of adminMenuItems">
+      <mat-icon mat-list-icon>{{menuItem.icon}}</mat-icon>
+      <span *ngIf="isExpanded">{{menuItem.title}}</span>
+    </mat-list-item>
+  </span>
 </mat-nav-list>

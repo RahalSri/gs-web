@@ -15,10 +15,10 @@ export class CSSConfig {
     canvasLevel6?: Color;
     canvasLevel7?: Color;
     canvasLevel8?: Color;
-    font?: Font;
     hyperlink?: Color;
     infocus?: Color;
-
+    font?: Font;
+    
     dialogFooterBar?: string;
     dialogHeaderBar?: string;
     leftPanel?: string;

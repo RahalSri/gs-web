@@ -5,10 +5,18 @@ declare interface RouteInfo {
   icon: string;
   class: string;
 }
-export const ROUTES: RouteInfo[] = [
+export const PUBLIC_ROUTES: RouteInfo[] = [
   { path: '/space/' + localStorage.getItem('currentSpaceGuid'), title: 'Home', icon: 'home', class: '' },
   { path: '/query/list', title: 'Query List', icon: 'view_list', class: '' },
   { path: '/query/builder', title: 'Query Builder', icon: 'view_list', class: '' },
+];
+
+export const ADMIN_ROUTES: RouteInfo[] = [
+  { path: '/users', title: 'Users', icon: 'people', class: '' },
+  { path: '/access-control', title: 'Access Control', icon: 'lock', class: '' },
+  { path: '/configuration', title: 'Configuration', icon: 'build', class: '' },
+  { path: '/integration', title: 'Integration', icon: 'login', class: '' },
+  { path: '/usage', title: 'Usage', icon: 'leaderboard', class: '' },
 ];
 @Component({
   selector: 'app-left-panel',
@@ -16,14 +24,17 @@ export const ROUTES: RouteInfo[] = [
   styleUrls: ['./left-panel.component.scss']
 })
 export class LeftPanelComponent implements OnInit {
-  @Input() isExpanded: Boolean = true;
+  @Input() isExpanded: boolean = true;
+  @Input() isAdminMode: boolean = false;
   @Output() leftPanelOpened = new EventEmitter<boolean>();
-  menuItems: any[] | undefined;
+  publicMenuItems: any[] = [];
+  adminMenuItems: any[] = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.publicMenuItems = PUBLIC_ROUTES.filter(menuItem => menuItem);
+    this.adminMenuItems = ADMIN_ROUTES.filter(menuItem => menuItem);
   }
 
   onLeftPanelExpand() {

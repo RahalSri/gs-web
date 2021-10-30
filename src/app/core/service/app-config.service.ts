@@ -54,6 +54,7 @@ export class AppConfigService {
     fetchCurrentAppConfig(spaceGuId: string) {
         this.configService.fetchConfigurations(spaceGuId).subscribe(response => {
             var config = response.body;
+            console.log(config);
             this.currentConfigSrouce.next(config);
         });
     }

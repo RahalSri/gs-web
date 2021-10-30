@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppConfigService } from 'src/app/core/service/app-config.service';
 import { BreadcrumbStoreService } from 'src/app/core/service/breadcrumb-store.service';
 import { CatalogueService } from 'src/app/core/service/catalogue.service';
@@ -22,7 +22,8 @@ export class ContentSearchComponent implements OnInit {
     private contentSearchService: ContentSearchService,
     private catalogueService: CatalogueService,
     private appConfigService: AppConfigService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -101,23 +102,9 @@ export class ContentSearchComponent implements OnInit {
         .getDefaultDataSheet(result.SUPguId)
         .subscribe((response: any) => {
           if (response != null) {
-            window.location.href =
-              '#/space/' +
-              result.SPCSUPguId +
-              '/contentsearch/' +
-              this.searchText +
-              '/datasheet/' +
-              result.SUPguId +
-              '?defaultDatasheetSupguId=' +
-              response.defaultSupGuid;
+            this.router.navigate(['space', result.SPCSUPguId, 'objects', result.SUPguId], { queryParams: { defaultDatasheetSupguId: response.defaultSupGuid } });
           } else {
-            window.location.href =
-              '#/space/' +
-              result.SPCSUPguId +
-              '/contentsearch/' +
-              this.searchText +
-              '/datasheet/' +
-              result.SUPguId;
+            this.router.navigate(['space', result.SPCSUPguId, 'objects', result.SUPguId]);
           }
         });
     }

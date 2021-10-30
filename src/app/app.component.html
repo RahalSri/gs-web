@@ -2,11 +2,11 @@
 <app-header *ngIf="!loading" [isExpanded]="isLeftPanelExpanded" (leftPanelClosed)="onLeftPanelToggle($event)">
 </app-header>
 <mat-sidenav-container *ngIf="!loading">
-  <mat-sidenav #sidenav mode="side" opened="true" [style.width.px]="isLeftPanelExpanded? 230: 85">
+  <mat-sidenav #sidenav mode="side" opened="true" [style.width.px]="isLeftPanelExpanded? 230: 85" style="background-color: #353534">
     <app-left-panel [isExpanded]="isLeftPanelExpanded" (leftPanelOpened)="onLeftPanelToggle($event)"></app-left-panel>
   </mat-sidenav>
 
-  <mat-sidenav-content [style.marginLeft.px]="isLeftPanelExpanded? 230: 85"
+  <mat-sidenav-content [style.marginLeft.px]="isLeftPanelExpanded? 230: 85" 
     [style.width]="isLeftPanelExpanded? 'calc(100vw - 230px)': 'calc(100vw - 85px)'">
     <action-bar></action-bar>
     <div class="content" #main>

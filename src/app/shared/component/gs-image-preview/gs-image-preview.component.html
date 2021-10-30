@@ -1,13 +1,13 @@
 <div class="overlay-content">
     <div style="display: flex; grid-gap: 15px; float: right; padding: 10px; flex-direction: column;">
+        <button mat-icon-button (click)="dialogRef.close()" mat-flat-button title="close image">
+            <mat-icon>close</mat-icon>
+        </button>
         <a style="text-decoration: none;" [href]="image" type="button">
             <button mat-icon-button mat-flat-button title="download image">
                 <mat-icon>download</mat-icon>
             </button>
         </a>
-        <button mat-icon-button (click)="dialogRef.close()" mat-flat-button title="close image">
-            <mat-icon>close</mat-icon>
-        </button>
     </div>
     <pinch-zoom>
         <img [src]="image" [height]="height" [width]="width" />
