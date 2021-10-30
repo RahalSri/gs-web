@@ -48,7 +48,6 @@ export class GsViewComponent implements OnInit {
   datObjectsList: Array<DataObject> = [];
   queryList: any[] = [];
 
-  globals: any;
   space: any;
   spcSupGuId: any;
   selectedCategory: any;
@@ -84,7 +83,7 @@ export class GsViewComponent implements OnInit {
     private queryService: QueryService,
     private cookieService: CookieService
   ) {
-    this.globals = JSON.parse(cookieService.get('globals'));
+    this.space = localStorage.getItem("defaultSpaceGuid");
   }
 
   ngOnInit(): void {
@@ -105,9 +104,7 @@ export class GsViewComponent implements OnInit {
       });
     });
 
-    this.space = this.globals.currentUser.currentSpace;
     //TODO $routeParams.spcSupGuId ? $routeParams.spcSupGuId : vm.space.supGuid
-    this.spcSupGuId = this.space.supGuid;
     this.selectedCategory = this.view.viewMaskLabel
       ? { supId: this.view.viewMaskLabel }
       : {};

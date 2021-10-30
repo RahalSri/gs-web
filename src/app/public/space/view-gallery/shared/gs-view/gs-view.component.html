@@ -1,15 +1,288 @@
-<div mat-dialog-title style="padding: 12px 24px 0">
-    <button (click)="onDismiss()" aria-hidden="true" class="close" data-dismiss="modal" type="button">
-        <i class="icons-office-52"></i>
-    </button>
-    <h4>
-        <strong class="ng-binding">ADD/EDIT VIEW</strong>
-    </h4>
-    <h5 *ngIf="view.metViewShortTitle">
-        <label>{{view.metViewShortTitle}}</label>
-    </h5>
-</div>
-<div mat-dialog-content style="margin: 0px">
+<!--<div mat-dialog-title style="padding: 12px 24px 0">-->
+<!--    <button (click)="onDismiss()" aria-hidden="true" class="close" data-dismiss="modal" type="button">-->
+<!--        <i class="icons-office-52"></i>-->
+<!--    </button>-->
+<!--    <h4>-->
+<!--        <strong class="ng-binding">ADD/EDIT VIEW</strong>-->
+<!--    </h4>-->
+<!--    <h5 *ngIf="view.metViewShortTitle">-->
+<!--        <label>{{view.metViewShortTitle}}</label>-->
+<!--    </h5>-->
+<!--</div>-->
+<!--<div mat-dialog-content style="margin: 0px">-->
+<!--    <form [formGroup]="viewForm" class="form-validation">-->
+<!--        <div class="row  m-0">-->
+<!--            <div class="row">-->
+<!--                <div *ngIf="!view.metViewShortTitle">-->
+<!--                    <div class="col-sm-6">-->
+<!--                        <gs-select (onChangeEvent)="changeCategory($event.value)"-->
+<!--                                   [key]="'supTitle'"-->
+<!--                                   [labelTopPosition]="true"-->
+<!--                                   [label]="'Category'"-->
+<!--                                   [list]="metViewCategories"-->
+<!--                                   [name]="'typeOfView'"-->
+<!--                                   [placeholder]="'Select Category...'"-->
+<!--                                   [value]="'supId'">-->
+<!--                        </gs-select>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-6">-->
+<!--                        <gs-select (onChangeEvent)="changeMetView($event.value)"-->
+<!--                                   [key]="'supTitle'"-->
+<!--                                   [labelTopPosition]="true"-->
+<!--                                   [label]="'Type Of View'"-->
+<!--                                   [list]="metViews"-->
+<!--                                   [name]="'metViewGuid'"-->
+<!--                                   [placeholder]="'Select Type of View...'"-->
+<!--                                   [value]="'supGuid'">-->
+<!--                        </gs-select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div *ngIf="selectedCategory.supId == 'MM' || selectedCategory.supId == 'HL'" class="row">-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-select (onChangeEvent)="changeTypeOfObject($event.value)"-->
+<!--                               [key]="'supTitle'"-->
+<!--                               [labelTopPosition]="true"-->
+<!--                               [label]="'Type Of Object'"-->
+<!--                               [list]="metObjList"-->
+<!--                               [name]="'metObj'"-->
+<!--                               [placeholder]="'Select Type of Object...'"-->
+<!--                               [value]="'supGuid'">-->
+<!--                    </gs-select>-->
+<!--                </div>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-select (onSearchEvent)="searchObject($event)"-->
+<!--                               [key]="'objDisplayTitle'"-->
+<!--                               [labelTopPosition]="true"-->
+<!--                               [label]="'Object'"-->
+<!--                               [list]="datObjectsList"-->
+<!--                               [name]="'vieSubObj'"-->
+<!--                               [placeholder]="'Choose a object'"-->
+<!--                               [value]="'guid'">-->
+<!--                    </gs-select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div *ngIf="selectedCategory.supId == 'HL'" class="row">-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-select-->
+<!--                            [key]="'ID'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Default level : '"-->
+<!--                            [list]="defaultSizeArray"-->
+<!--                            [name]="'defaultLevel'">-->
+<!--                    </gs-select>-->
+<!--                </div>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-select-->
+<!--                            [key]="'ID'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Maximum level : '"-->
+<!--                            [list]="maximumSizeArray"-->
+<!--                            [name]="'maximumLevel'">-->
+<!--                    </gs-select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-icon-input-box-->
+<!--                            [iconClass]="'icon-note'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Title'"-->
+<!--                            [name]="'title'"-->
+<!--                            [placeholder]="'View Title'"-->
+<!--                            [type]="'text'">-->
+<!--                    </gs-icon-input-box>-->
+<!--                </div>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-icon-input-box-->
+<!--                            [iconClass]="'icon-note'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Short Title'"-->
+<!--                            [name]="'shortTitle'"-->
+<!--                            [placeholder]="'View ShortTitle'"-->
+<!--                            [type]="'text'">-->
+<!--                    </gs-icon-input-box>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-icon-input-box-->
+<!--                            [iconClass]="'icon-note'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'ID'"-->
+<!--                            [name]="'viewId'"-->
+<!--                            [placeholder]="'View Id'"-->
+<!--                            [type]="'text'">-->
+<!--                    </gs-icon-input-box>-->
+<!--                </div>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-select-->
+<!--                            [key]="'ID'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Publication Status'"-->
+<!--                            [list]="pubStatus"-->
+<!--                            [name]="'pubStatus'">-->
+<!--                    </gs-select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div *ngIf="selectedCategory.supId == 'MM'" class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <mat-tab-group animationDuration="500ms" mat-align-tabs="start">-->
+<!--                        <mat-tab>-->
+<!--                            <ng-template mat-tab-label>-->
+<!--                                <i class="icon-target m-r-10"></i>-->
+<!--                                Description-->
+<!--                            </ng-template>-->
+<!--                            <gs-mat-tab-text-area-->
+<!--                                    [name]="'viewDescription'"-->
+<!--                                    [placeholder]="'View Description..'">-->
+<!--                            </gs-mat-tab-text-area>-->
+<!--                        </mat-tab>-->
+<!--                        <mat-tab>-->
+<!--                            <ng-template mat-tab-label>-->
+<!--                                <i class="icon-grid m-r-10"></i>-->
+<!--                                Lead In Narrative-->
+<!--                            </ng-template>-->
+<!--                            <gs-mat-tab-text-area-->
+<!--                                    [name]="'viewLeadInNarrative'"-->
+<!--                                    [placeholder]="'View Lead In Narrative..'">-->
+<!--                            </gs-mat-tab-text-area>-->
+<!--                        </mat-tab>-->
+<!--                        <mat-tab>-->
+<!--                            <ng-template mat-tab-label>-->
+<!--                                <i class="icon-grid m-r-10"></i>-->
+<!--                                Narrative-->
+<!--                            </ng-template>-->
+<!--                            <gs-mat-tab-text-area-->
+<!--                                    [name]="'viewNarrative'"-->
+<!--                                    [placeholder]="'View Narrative..'">-->
+<!--                            </gs-mat-tab-text-area>-->
+<!--                        </mat-tab>-->
+<!--                        <mat-tab>-->
+<!--                            <ng-template mat-tab-label>-->
+<!--                                <i class="icon-grid m-r-10"></i>-->
+<!--                                Lead out Narrative-->
+<!--                            </ng-template>-->
+<!--                            <gs-mat-tab-text-area-->
+<!--                                    [name]="'viewLeadOutNarrative'"-->
+<!--                                    [placeholder]="'View Lead out Narrative..'">-->
+<!--                            </gs-mat-tab-text-area>-->
+<!--                        </mat-tab>-->
+<!--                    </mat-tab-group>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div *ngIf="selectedCategory.supId != 'MM'" class="row">-->
+<!--                <div class="col-sm-12" style="padding-left: 30px; padding-right: 30px;">-->
+<!--                    <gs-text-area-->
+<!--                            [label]="'Description'"-->
+<!--                            [name]="'viewDescription'"-->
+<!--                            [placeholder]="'View Description..'">-->
+<!--                    </gs-text-area>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-icon-input-box-->
+<!--                            [iconClass]="'icon-note'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Group'"-->
+<!--                            [name]="'selectedViewGroup'"-->
+<!--                            [placeholder]="''"-->
+<!--                            [type]="'text'">-->
+<!--                    </gs-icon-input-box>-->
+<!--                </div>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <gs-icon-input-box-->
+<!--                            [iconClass]="'icon-note'"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Sequence Number'"-->
+<!--                            [name]="'viewSequenceNum'"-->
+<!--                            [placeholder]="'Sequence Number'"-->
+<!--                            [type]="'number'">-->
+<!--                    </gs-icon-input-box>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-11">-->
+<!--                    <gs-image-upload-->
+<!--                            (onChangeEvent)="tileImageChange($event)"-->
+<!--                            [labelTopPosition]="true"-->
+<!--                            [label]="'Tile image:'">-->
+<!--                    </gs-image-upload>-->
+<!--                </div>-->
+<!--                <i (click)="showDelConfirmation = true" *ngIf="fileName!= '' && precedence=='DAT'"-->
+<!--                   class="glyphicon glyphicon-trash col-sm-1" style="padding: 25px"></i>-->
+<!--                <div class="col-sm-12">-->
+<!--                    <a *ngIf="precedence=='DAT'" href="{{fullPath}}" style="float: left">{{fileName}}</a>-->
+<!--                </div>-->
+<!--                <div *ngIf="showDelConfirmation" class="col-sm-3">-->
+<!--                    Delete tile image?-->
+<!--                </div>-->
+<!--                <div *ngIf="showDelConfirmation" class="col-sm-9">-->
+<!--                    <gs-button (onClickEvent)="removeImage()"-->
+<!--                               [label]="'Yes'">-->
+<!--                    </gs-button>-->
+<!--                    <gs-button (onClickEvent)="showDelConfirmation = false"-->
+<!--                               [label]="'No'">-->
+<!--                    </gs-button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div *ngIf="selectedCategory.supId == 'MM'" class="row border-top p-t-20">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <gs-image-upload-->
+<!--                            (onChangeEvent)="viewContentImageChange($event)"-->
+<!--                            [label]="'View content:'">>-->
+<!--                    </gs-image-upload>-->
+<!--                </div>-->
+<!--                <div class="col-sm-9" style="float: right">{{mediaFileName}}</div>-->
+<!--            </div>-->
+<!--            <div *ngIf="selectedCategory.supId == 'TB'" class="row border-top p-t-20">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <gs-select [key]="'queryTitle'"-->
+<!--                               [label]="'Select Query'"-->
+<!--                               [list]="queryList"-->
+<!--                               [name]="'queryGuid'"-->
+<!--                               [placeholder]="'Select query...'">-->
+<!--                    </gs-select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div *ngIf="selectedCategory.supId == 'BM'" class="row border-top p-t-20">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <gs-input-box-->
+<!--                            [label]="'URL'"-->
+<!--                            [name]="'bookmarkURL'"-->
+<!--                            [placeholder]="'URL for bookmark view'"-->
+<!--                            [type]="'text'">-->
+<!--                    </gs-input-box>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<!--<div style="min-height: 4px">-->
+<!--    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>-->
+<!--</div>-->
+<!--<div mat-dialog-actions class="bg-dark">-->
+<!--    <div style="width: 100%;-->
+<!--    height: 60px;-->
+<!--    padding: 0 10px;">-->
+<!--    <div style="float: right">-->
+<!--        <gs-button (onClickEvent)="onDecline()" [label]="'Exit'" [styleClass]="'btn-white'" [type]="'button'">-->
+<!--        </gs-button>-->
+<!--        <gs-button (onClickEvent)="onConfirm()" *ngIf="!view.supGuid" [disabled]="!saveEnable || !isSavable()"-->
+<!--                   [label]="'SAVE'" [loading]="loading" [type]="'button'"></gs-button>-->
+<!--        <gs-button (onClickEvent)="onConfirm()" *ngIf="view.supGuid" [disabled]="!saveEnable" [label]="'SAVE'"-->
+<!--                   [loading]="loading" [type]="'button'"></gs-button>-->
+<!--    </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<h1 mat-dialog-title>ADD/EDIT VIEW</h1>
+<h5 *ngIf="view.metViewShortTitle">
+    <label>{{view.metViewShortTitle}}</label>
+</h5>
+<div mat-dialog-content>
     <form [formGroup]="viewForm" class="form-validation">
         <div class="row  m-0">
             <div class="row">
@@ -259,20 +532,11 @@
         </div>
     </form>
 </div>
-<div style="min-height: 4px">
-    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-</div>
-<div mat-dialog-actions class="bg-dark">
-    <div style="width: 100%;
-    height: 60px;
-    padding: 0 10px;">
-    <div style="float: right">
-        <gs-button (onClickEvent)="onDecline()" [label]="'Exit'" [styleClass]="'btn-white'" [type]="'button'">
-        </gs-button>
-        <gs-button (onClickEvent)="onConfirm()" *ngIf="!view.supGuid" [disabled]="!saveEnable || !isSavable()"
-                   [label]="'SAVE'" [loading]="loading" [type]="'button'"></gs-button>
-        <gs-button (onClickEvent)="onConfirm()" *ngIf="view.supGuid" [disabled]="!saveEnable" [label]="'SAVE'"
-                   [loading]="loading" [type]="'button'"></gs-button>
-    </div>
-    </div>
+<div mat-dialog-actions>
+    <gs-button (onClickEvent)="onDecline()" [label]="'Exit'" [styleClass]="'btn-white'" [type]="'button'">
+    </gs-button>
+    <gs-button [color]="'primary'" (onClickEvent)="onConfirm()" *ngIf="!view.supGuid" [disabled]="!saveEnable || !isSavable()"
+               [label]="'SAVE'" [loading]="loading" [type]="'button'"></gs-button>
+    <gs-button (onClickEvent)="onConfirm()" *ngIf="view.supGuid" [disabled]="!saveEnable" [label]="'SAVE'"
+               [loading]="loading" [type]="'button'"></gs-button>
 </div>

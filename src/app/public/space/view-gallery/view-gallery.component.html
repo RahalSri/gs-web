@@ -65,9 +65,14 @@
 <!--        </a>-->
 <!--    </div>-->
 <!--</div>-->
-<div fxLayout="row stretch">
-    <gs-search fxFlex="100%" fxFlex.lg="25%" fxFlex.md="50%" fxFlex.xl="20%" (performSearch)="searchText = $event">
-    </gs-search>
+
+<div class="flex-container content" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="flex-item">
+        <gs-search (performSearch)="searchText = $event"></gs-search>
+    </div>
+    <div class="flex-item">
+        <mat-icon (click)="createView()" class="add-view">add</mat-icon>
+    </div>
 </div>
 
 <div fxLayout="row stretch">
