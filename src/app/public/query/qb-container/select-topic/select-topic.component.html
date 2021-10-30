@@ -1,141 +1,154 @@
-<div class="step">
-    <form [formGroup]="selectTopicForm">
-        <div class="panel-content p-20">
-             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Modelling
-                            Language</label>
-                        <div class="col-sm-9 control-value">
-                            <gs-select style="z-index: 3;" [list]="metLanguageList" [key]="'supShortTitle'"
-                                [selectedOptions]="model.metLanguage" [value]="'supGuid'" [name]="'metLanguage'"
-                                 (onChangeEvent)="getSpacesWithMetLanguages($event.value)"
-                                [placeholder]="'--Select Modelling Language--'" [isFormGroup]="false">
-                            </gs-select>
-                        </div>
-                    </div>
-                </div>
-            </div>  
+<form [formGroup]="selectTopicForm" class="container">
+  <div class="row">
+    <div>Modelling Language</div>
+    <div class="col-sm-9 control-value">
+      <gs-select
+        style="z-index: 3"
+        [list]="metLanguageList"
+        [key]="'supShortTitle'"
+        [selectedOptions]="model.metLanguage"
+        [value]="'supGuid'"
+        [name]="'metLanguage'"
+        (onChangeEvent)="getSpacesWithMetLanguages($event.value)"
+        [placeholder]="'--Select Modelling Language--'"
+        [isFormGroup]="false"
+      >
+      </gs-select>
+    </div>
+  </div>
 
-            <br>
-            <div class="row"> 
-                <div class="col-md-12" *ngIf="model.metLanguage">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Spaces</label>
-                        <div class="col-sm-9 control-value">
-                            <div class="input-group spc_list m-b-10">
-                                <div class="icheck-inline">
-                                    <input type="radio" name="radio3" [checked] = "!isAllSpacesSelected"
-                                        (change)="handleSpaceTypeChange(false);" />
-                                    <label> Specified </label>
-                                    <input type="radio" name="radio3" [checked] = "isAllSpacesSelected" (change)="handleSpaceTypeChange(true)" />
-                                    <label> All </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12" *ngIf="model.metLanguage">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"></label>
-                        <div class="col-sm-9 control-value">
-                            <div class="input-group spc_list" *ngIf="!isAllSpacesSelected">
-                                <div class="icheck-list">
-                                    <label *ngFor="let space of spaces">
-                                        <input [checked]="selectedSpacesCheckBoxes[space.spaceSUPguid]" type="checkbox"
-                                            (change)="handleSpaceChange($event.target.checked, space );" />
-                                        {{space.libTitle}}/{{space.spaceSUPtitle}}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="spacer_1px"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" *ngIf="showTopicSelection">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Select Topic</label>
-                        <div class="col-sm-9 control-value">
-                            <div class="input-group spc_list m-b-10">
-                                <div class="icheck-inline">
-                                    <label>
-                                        <input (change)="handleObjectTypeChange(false)"
-                                            [checked]="!model.allObjectsSelected" type="radio" name="radio2">
-                                        Only objects with data
-                                    </label>
-                                    <label>
-                                        <input (change)="handleObjectTypeChange(true)"
-                                            [checked]="model.allObjectsSelected" type="radio" name="radio2">All
-                                        Objects
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" *ngIf="showTopicSelection">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"> </label>
-                        <div class="col-sm-9 control-value">
+  <div class="row" *ngIf="model.metLanguage">
+    <label class="col-sm-3 control-label">Spaces</label>
+    <div class="">
+      <input
+        type="radio"
+        name="radio3"
+        [checked]="!isAllSpacesSelected"
+        (change)="handleSpaceTypeChange(false)"
+      />
+      <label> Specified </label>
+      <input
+        type="radio"
+        name="radio3"
+        [checked]="isAllSpacesSelected"
+        (change)="handleSpaceTypeChange(true)"
+      />
+      <label> All </label>
+    </div>
+  </div>
+  <div class="row" *ngIf="model.metLanguage">
+    <label class="col-sm-3 control-label"></label>
+    <div class="space-list">
+      <label *ngFor="let space of spaces">
+        <input
+          [checked]="selectedSpacesCheckBoxes[space.spaceSUPguid]"
+          type="checkbox"
+          (change)="handleSpaceChange($event.target.checked, space)"
+        />
+        {{ space.libTitle }}/{{ space.spaceSUPtitle }}
+      </label>
+    </div>
+  </div>
 
-                            <gs-select *ngIf="!isLoadingTopics" style="z-index: 3;" [list]="topicList"
-                                [selectedOptions]="model.topic" [key]="'metObjSupTitle'" [value]="'metObjSupTitle'"
-                                [name]="'topic'"  [placeholder]="'--Select Topic--'"
-                                (onChangeEvent)="handleTopicChange($event.value)" [isFormGroup]="false">
-                            </gs-select>
+  <div class="row" *ngIf="showTopicSelection">
+    <label class="col-sm-3 control-label">Select Topic</label>
+    <div class="col-sm-9 control-value">
+      <label>
+        <input
+          (change)="handleObjectTypeChange(false)"
+          [checked]="!model.allObjectsSelected"
+          type="radio"
+          name="radio2"
+        />
+        Only objects with data
+      </label>
+      <label>
+        <input
+          (change)="handleObjectTypeChange(true)"
+          [checked]="model.allObjectsSelected"
+          type="radio"
+          name="radio2"
+        />All Objects
+      </label>
+    </div>
+  </div>
 
-                            <p *ngIf="isLoadingTopics" class="font-animation" ng-hide="vm.objectList.length>0"
-                                style="display: inline">
-                                <a href="#"> <i class="fa fa-spinner faa-spin animated"></i>
-                                </a>&nbsp;&nbsp;Loading objects..
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div *ngIf="showTopicSelection" class="col-md-12 m-t-10">
-                    <div class="form-group m-b-10">
-                        <label class="col-sm-3 control-label">Type
-                            &nbsp;&nbsp;<i class="icon-info" tooltip-placement="right"
-                                tooltip="Is your view a graph or a table?"></i>
-                        </label>
-                        <div class="col-sm-9 control-value">
-                            <div class="input-group spc_list m-b-10">
-                                <div class="icheck-inline">
-                                    <label><input type="radio" name="isTableView" data-radio="iradio_minimal-blue"
-                                            (change)="handleViewTypeChange(true)" checked />
-                                        Table
-                                    </label>
-                                    <label><input type="radio" name="isTableView" data-radio="iradio_minimal-blue"
-                                            [disabled]="true" (change)="handleViewTypeChange(false)" />
-                                        Graph
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group m-b-10">
-                        <label class="col-sm-3 control-label">Results
-                            Limit&nbsp;&nbsp;<i class="icon-info" tooltip-placement="right"
-                                tooltip="Number of results to be displayed. Default: Unlimited."></i>
-                        </label>
-                        <div class="col-sm-9">
-                            <input class="form-control" id="qryLimit" name="queryLimit" type="number" min="1"
-                                [value]="model.queryLimit" (change)="handleLimitChange($event.target.value)"
-                                style="width: 80px" required />
-                        </div>
+  <div class="row" *ngIf="showTopicSelection">
+    <label class=""> </label>
+    <div class="">
+      <gs-select
+        *ngIf="!isLoadingTopics"
+        style="z-index: 3"
+        [list]="topicList"
+        [selectedOptions]="model.topic"
+        [key]="'metObjSupTitle'"
+        [value]="'metObjSupTitle'"
+        [name]="'topic'"
+        [placeholder]="'--Select Topic--'"
+        (onChangeEvent)="handleTopicChange($event.value)"
+        [isFormGroup]="false"
+      >
+      </gs-select>
 
-                    </div>
-                    <br>
-                </div>
-            </div>
+      <p
+        *ngIf="isLoadingTopics"
+        class="font-animation"
+        ng-hide="vm.objectList.length > 0"
+        style="display: inline"
+      >
+        <a href="#"> <i class="fa fa-spinner faa-spin animated"></i> </a
+        >&nbsp;&nbsp;Loading objects..
+      </p>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showTopicSelection">
+    <label class="col-sm-3 control-label"
+      >Type &nbsp;&nbsp;<i
+        class="icon-info"
+        tooltip-placement="right"
+        tooltip="Is your view a graph or a table?"
+      ></i>
+    </label>
+    <div class="col-sm-9 control-value">
+      <div class="input-group spc_list m-b-10">
+        <div class="icheck-inline">
+          <label
+            ><input
+              type="radio"
+              name="isTableView"
+              data-radio="iradio_minimal-blue"
+              (change)="handleViewTypeChange(true)"
+              checked
+            />
+            Table
+          </label>
+          <label
+            ><input
+              type="radio"
+              name="isTableView"
+              data-radio="iradio_minimal-blue"
+              [disabled]="true"
+              (change)="handleViewTypeChange(false)"
+            />
+            Graph
+          </label>
         </div>
-    </form>
-</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="showTopicSelection">
+    <label class="col-sm-3 control-label"
+      >Results Limit&nbsp;&nbsp;<i
+        class="icon-info"
+        tooltip-placement="right"
+        tooltip="Number of results to be displayed. Default: Unlimited."
+      ></i>
+    </label>
+    <div class="col-sm-9">
+        <gs-input-box [name]="'queryLimit'" [placeholder]="''" [type]="'text'"  (onChangeEvent)="handleLimitChange($event.target.value)">
+        </gs-input-box>
+    </div>
+  </div>
+</form>
