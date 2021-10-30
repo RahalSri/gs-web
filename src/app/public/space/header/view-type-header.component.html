@@ -1,4 +1,4 @@
-<div class="row" *ngIf="viewType!='MM' && viewTitle != ''">
+<div class="row" *ngIf="viewType!='MM' && viewType!= 'SNG' && viewTitle != ''">
     <div class="headerRow">
         <div class="headerIcon">
             <button (click)="showDescription = !showDescription;" mat-icon-button title="Page description">
@@ -13,6 +13,28 @@
         </button>
     </div>
     <h4 id="showdesc" *ngIf="showDescription" class="headerDes">{{description}}
+    </h4>
+</div>
+<div class="row" *ngIf="viewType=='SNG' && viewTitle != ''">
+    <div class="headerRow">
+        <div class="headerIcon">
+            <button (click)="showDescription = !showDescription;" mat-icon-button title="Page description">
+                <mat-icon>{{showDescription ? 'expand_more' : 'chevron_right'}}</mat-icon>
+            </button>
+            <div class="multi-title">
+                <h2 id="page_header" class="headerTitle">
+                    {{viewTitle}}
+                </h2>
+                <h4 id="page_header" class="headerSubTitle">
+                    {{viewSubTitle}}
+                </h4>
+            </div>
+        </div>
+        <button *ngIf="fullScreenIconVisible" (click)="changeFullScreenView()" mat-icon-button title="Full screen">
+            <mat-icon>{{fullScreenEnabled ? 'fullscreen_exit' : 'fullscreen'}}</mat-icon>
+        </button>
+    </div>
+    <h4 id="showdesc" *ngIf="showDescription" class="headerDes" style="font-size: 13px; margin-left: 40px; margin-top: 10px;">{{description}}
     </h4>
 </div>
 <div class="row" *ngIf="viewType=='MM' && viewTitle != ''">

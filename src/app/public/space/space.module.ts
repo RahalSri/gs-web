@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ViewTypeHeaderComponent } from './header/view-type-header.component';
 import { RHSPanelComponent } from './rhs-panel/rhs-panel.component';
 import { ListComponent } from './views/list/list.component';
-import { GeneralViewComponent } from './views/general-veiw.component';
+import { GeneralViewComponent } from './views/general-view.component';
 import { GojsAngularModule } from 'gojs-angular';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,6 +35,11 @@ import { GsTdHierarchyComponent } from './datasheet/shared/gs-td-hierarchy/gs-td
 import { GsTdMediaComponent } from './datasheet/shared/gs-td-media/gs-td-media.component';
 import { GsTdLabelTblComponent } from './datasheet/shared/gs-td-label-tbl/gs-td-label-tbl.component';
 import { DescFilterPipe } from 'src/app/shared/pipes/desc-filter.pipe';
+import { SngViewComponent } from './views/sng/sng-view.component';
+import { GsSngHierarchyTopologyComponent } from './views/sng/shared/gs-sng-hierarchy-topology/gs-sng-hierarchy-topology.component';
+import { GsSngNetworkTopologyComponent } from './views/sng/shared/gs-sng-network-topology/gs-sng-network-topology.component';
+import { GsSngPathTopologyComponent } from './views/sng/shared/gs-sng-path-topology/gs-sng-path-topology.component';
+import { GsSngRadialTopologyComponent } from './views/sng/shared/gs-sng-radial-topology/gs-sng-radial-topology.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +62,12 @@ import { DescFilterPipe } from 'src/app/shared/pipes/desc-filter.pipe';
     GsTdHierarchyComponent,
     GsTdLabelTblComponent,
     GsTdMediaComponent,
-    DescFilterPipe
+    DescFilterPipe,
+    SngViewComponent,
+    GsSngHierarchyTopologyComponent,
+    GsSngNetworkTopologyComponent,
+    GsSngPathTopologyComponent,
+    GsSngRadialTopologyComponent
   ],
   imports: [
     CommonModule,

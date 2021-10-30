@@ -51,7 +51,7 @@ export class DatasheetMainComponent implements OnInit {
             this.datasheetInternalService.cleanInternalState();
             this._fetchDatasheet();
             this._getAlternateViews();
-        })
+        });
     }
 
     _fetchDatasheet(): void {

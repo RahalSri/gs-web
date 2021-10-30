@@ -1,27 +1,78 @@
-<div id="datview_bodypanel" class="elastic-box row p-t-10">
+<div id="contextMenu">
+    <ul style="max-width: 450px !important;">
+        <li *ngFor="let altview of alternateViews" style="width: 100%;">
+            <a href="#/space/{{altview.spaceSupguid}}/dataview/{{altview.supGuid}}{{(altview.refDatObjectSupGuid ? (altview.uniViewFormat=='Subject Network' ? '/sng/' : '/datasheet/') + altview.refDatObjectSupGuid + '/?defaultDatasheetSupguId=' + altview.supGuid : '')}}"
+                style="overflow-wrap:break-word; white-space: normal;  font-weight:normal;"
+                target="_self">{{altview.refDataObjectDisplayTitle?altview.shortTitle+':'+altview.refDataObjectDisplayTitle:altview.shortTitle
+                | descFilter : '120'}}</a>
+        </li>
+    </ul>
+</div>
 
-   <div id="contextMenu">
-       <ul  style="max-width: 450px !important;">
-           <li *ngFor="let altview of alternateViews" style="width: 100%;">
-               <a ng-href="#/space/{{altview.spaceSupguid}}/dataview/{{altview.supGuid}}{{(altview.refDatObjectSupGuid ? (altview.uniViewFormat=='Subject Network' ? '/sng/' : '/datasheet/') + altview.refDatObjectSupGuid + '/?defaultDatasheetSupguId=' + altview.supGuid : '')}}"
-                  style="overflow-wrap:break-word; white-space: normal;  font-weight:normal;"
-                  target="_self">{{altview.refDataObjectDisplayTitle?altview.shortTitle+':'+altview.refDataObjectDisplayTitle:altview.shortTitle | descFilter : '120'}}</a>
-           </li>
-       </ul>
-   </div>
+<div #fullScreen>
+    <mat-card>
+        <div class="action-bar">
+            <view-type-header [viewType]="'SNG'" [viewTitle]="topologyData.objTitle!"
+                [viewSubTitle]="topologyData.viewDisplayTitle!" [description]="topologyData.viewDisplayDesc!"
+                [fullScreenIconVisible]="false">
+            </view-type-header>
 
-   <div class="panel general-panel p-t-10 fullheight" style="overflow-x: auto; overflow-y: hidden;" >
-       <div class="panel-header">
-           <loading-spinner *ngIf="topologyData == null || topologyData.viewDisplayTitle == ''"></loading-spinner>
-           <div class="row" *ngIf="topologyData != null && topologyData.viewDisplayTitle != ''">
+            <div>
+                <button (click)="zoomIn=zoomIn+1" mat-icon-button>
+                    <mat-icon>
+                        zoom_in
+                    </mat-icon>
+                </button>
+                <button (click)="zoomOut=zoomOut+1" mat-icon-button>
+                    <mat-icon>
+                        zoom_out
+                    </mat-icon>
+                </button>
+                <button [disabled]="isPathSupportive" (click)="_setTopology()" mat-icon-button>
+                    <mat-icon>
+                        account_tree
+                    </mat-icon>
+                </button>
+                <button (click)="changeFullScreenView()" mat-icon-button>
+                    <mat-icon>{{fullScreenEnabled ? 'fullscreen_exit' : 'fullscreen'}}</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <loading-spinner *ngIf="topologyData == null || topologyData.viewDisplayTitle == ''"></loading-spinner>
+        <no-content-banner *ngIf="topologyData == null"></no-content-banner>
+        <div class="row sng-wrapper" id=print-section>
+            <div id="graph-canvas" style="height: 100%" [ngClass]="openRHS ? 'col-sm-8' : 'col-sm-12'" em-height-source>
+                <gs-sng-radial-topology *ngIf="topologyData.topology=='Radial'" [topologyData]="topologyData"
+                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut" [canvasSize]="canvasHeight">
+                </gs-sng-radial-topology>
+                <gs-sng-network-topology *ngIf="topologyData.topology=='Network'" [topologyData]="topologyData"
+                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
+                </gs-sng-network-topology>
+                <gs-sng-hierarchy-topology *ngIf="topologyData.topology=='Hierarchy'" [topologyData]="topologyData"
+                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
+                </gs-sng-hierarchy-topology>
+                <gs-sng-path-topology *ngIf="topologyData.topology=='Path'" [topologyData]="topologyData"
+                    (nodeClick)="_loadDatViewDetails($event)" (nodeRightClick)="_getAlternateViewsPerNode($event)"
+                    [setZoomIn]="zoomIn" [setZoomOut]="zoomOut">
+                </gs-sng-path-topology>
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+<!-- <div class="row" *ngIf="topologyData != null && topologyData.viewDisplayTitle != ''">
                <div class="col-sm-12">
                    <h2 id="page_header" style="display:inline">
                        <i class="fa" (click)="showDescription = !showDescription"
                           [ngClass]="showDescription ? 'fa-chevron-circle-down' : 'fa-chevron-circle-right'"></i>{{topologyData.objTitle}}
                        <div style="padding-left: 26px;font-size: 15px;">{{topologyData.viewDisplayTitle}}</div>
                    </h2>
-                   <a href="javascript:void(0)" class="g_fr m-10"
-                      (click)="(vm.fullscreen.isEnabled ? vm.fullscreen.disableFullScreen() : vm.fullscreen.enableFullScreen())">
+                   <a href="javascript:void(0)" class="g_fr m-10">
+                       fullscreen
                        <i [ngClass]="vm.fullscreen.isEnabled ? 'icon-size-actual' : 'icon-size-fullscreen'"
                           class="icon-size-fullscreen" style="font-size: 15px;"></i>
                    </a>
@@ -36,46 +87,4 @@
                <h3 class="p-l-20" id="showdesc" ng-init="showDescription = false" *ngIf="showDescription">
                    {{topologyData.viewDisplayDesc}}</h3>
            </div>
-       </div>
-       <no-content-banner *ngIf="vm.model.nodeDataArray.length == 0 && topologyData != null && topologyData.viewDisplayTitle != ''"></no-content-banner>
-       <div class="row sng-wrapper">
-           <div id="graph-canvas" style="height: 100%" [ngClass]="openRHS ? 'col-sm-8' : 'col-sm-12'" em-height-source>
-               <gs-sng-radial-topology ng-if="vm.model.nodeDataArray.length>0 && topologyData.topology=='Radial'"
-                                       [topology-data]="topologyData"
-                                       (node-click)="_loadDatViewDetails($event)"
-                                       (node-right-click)="_getAlternateViewsPerNode($event)"
-                                       [set-zoom-in]="zoomIn"
-                                       [set-zoom-out]="zoomOut"
-                                       [canvas-size]="canvasHeight">
-               </gs-sng-radial-topology>
-               <gs-sng-network-topology ng-if="vm.model.nodeDataArray.length>0 && (topologyData.topology=='Network')"
-                                        [topology-data]="topologyData"
-                                        (node-click)="_loadDatViewDetails($event)"
-                                        (node-right-click)="_getAlternateViewsPerNode($event)"
-                                        [set-zoom-in]="zoomIn"
-                                        [set-zoom-out]="zoomOut">
-               </gs-sng-network-topology>
-               <gs-sng-hierarchy-topology ng-if="vm.model.nodeDataArray.length>0 && (topologyData.topology=='Hierarchy')"
-                                          [topology-data]="topologyData"
-                                          (node-click)="_loadDatViewDetails($event)"
-                                          (node-right-click)="_getAlternateViewsPerNode($event)"
-                                          [set-zoom-in]="zoomIn"
-                                          [set-zoom-out]="zoomOut">
-               </gs-sng-hierarchy-topology>
-               <gs-sng-path-topology ng-if="vm.model.nodeDataArray.length>0 && (topologyData.topology=='Path')"
-                                     [topology-data]="topologyData"
-                                     (node-click)="_loadDatViewDetails($event)"
-                                     (node-right-click)="_getAlternateViewsPerNode($event)"
-                                     [set-zoom-in]="zoomIn"
-                                     [set-zoom-out]="zoomOut">
-               </gs-sng-path-topology>
-           </div>
-           <rhs-panel icon-u-r-l="vm.iconURL" open-r-h-s="vm.openRHS" rhs-loading="vm.rhsLoading"
-                      local-property-value-list="vm.localPropertyValueList" is-priviledged="vm.isPriviledged"
-                      last-opend-rhs="vm.lastOpendRhs" set-rhs-index="vm.setRhsIndex(cindex)"
-                      load-dat-view-details="vm.loadDatViewDetails" spc-sup-gu-id="vm.spcSupGuId"
-                      dat-view-sup-gu-id="vm.viewSupGuId" is-container-changed="vm.isContainerChanged" view-type="'sng'"
-                      container-size="vm.containerSize"></rhs-panel>
-       </div>
-   </div>
-</div>
+       </div> -->

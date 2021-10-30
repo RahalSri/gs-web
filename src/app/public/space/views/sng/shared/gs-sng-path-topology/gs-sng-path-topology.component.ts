@@ -21,10 +21,6 @@ export class GsSngPathTopologyComponent implements OnInit, AfterViewInit {
     @Output() nodeClick: EventEmitter<any> = new EventEmitter<any>();
     @Output() nodeRightClick: EventEmitter<any> = new EventEmitter<any>();
 
-    //TODO router replacement required
-    spcSupGuId: string = "";
-    viewGuid: string = "";
-    objectGuid: string = "";
 
     public diagramDivClassName: string = 'sngPathDiv';
     // Diagram state props
@@ -56,15 +52,7 @@ export class GsSngPathTopologyComponent implements OnInit, AfterViewInit {
 
     //TODO router replacement required
     ngOnInit(): void {
-        this._loc();
         this._processData();
-    }
-
-    //TODO router replacement required
-    _loc() {
-        this.spcSupGuId = this.document.location.href.split('/')[5];
-        this.viewGuid = this.document.location.href.split('/')[7];
-        this.objectGuid = this.document.location.href.split('/')[9].split('?')[0];
     }
 
     _processData() {
@@ -127,7 +115,6 @@ export class GsSngPathTopologyComponent implements OnInit, AfterViewInit {
         this.tempDiagramLinkDataMap.forEach(linkData => {
             this.state.diagramLinkData.push(linkData);
         })
-            console.log('Path state :', this.topologyData.topology, this.topologyData, this.state);
     }
 
     // initialize diagram / templates

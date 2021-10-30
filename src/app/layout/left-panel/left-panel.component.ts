@@ -6,7 +6,7 @@ declare interface RouteInfo {
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/', title: 'Home', icon: 'home', class: '' },
+  { path: '/space/' + localStorage.getItem('currentSpaceGuid'), title: 'Home', icon: 'home', class: '' },
   { path: '/query/list', title: 'Query List', icon: 'view_list', class: '' },
 ];
 @Component({
