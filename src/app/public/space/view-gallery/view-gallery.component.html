@@ -66,19 +66,15 @@
 <!--    </div>-->
 <!--</div>-->
 <div fxLayout="row stretch">
-    <gs-search fxFlex="100%" fxFlex.lg="25%" fxFlex.md="50%" fxFlex.xl="20%" (performSearch)="searchText = $event"></gs-search>
+    <gs-search fxFlex="100%" fxFlex.lg="25%" fxFlex.md="50%" fxFlex.xl="20%" (performSearch)="searchText = $event">
+    </gs-search>
 </div>
 
 <div fxLayout="row stretch">
-    <div *ngFor="let view of views | viewFilter:searchText" fxFlex="100%" fxFlex.lg="25%" fxFlex.md="50%"
-         fxFlex.xl="20%" fxLayoutAlign="space-evenly center">
-        <gs-tile (reloadViews)="refresh()" (removeDeleteView)="removeDeleteView($event)"
-                 [manageviews]=manageviews
-                 [supguid]="supguid"
-                 [view]="view"
-                 style="width: 100%; margin: 10px">
+    <div *ngFor="let view of views | viewFilter:searchText" fxFlex="100%" fxFlex.lg="20%" fxFlex.md="50%"
+        fxFlex.xl="20%" fxLayoutAlign="space-evenly center">
+        <gs-tile (reloadViews)="refresh()" (removeDeleteView)="removeDeleteView($event)" [manageviews]=manageviews
+            [supguid]="supguid" [view]="view" style="width: 100%; margin: 10px">
         </gs-tile>
     </div>
 </div>
-
-
