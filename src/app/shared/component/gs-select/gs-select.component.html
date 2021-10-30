@@ -20,8 +20,9 @@
   </div>
   <div class="row">
     <div class="col-sm-12 m-b-10">
-      <ngx-select-dropdown (click)="onDropDownClick()" (change)="selectionChanged($event)" (keyup)="onTextChange($event)"
-        (searchChange)="onSearched($event)" [formControl]="formControl" [config]="config" [options]="list">
+      <ngx-select-dropdown (click)="onDropDownClick()" (change)="selectionChanged($event)"
+        (keyup)="onTextChange($event)" (searchChange)="onSearched($event)" [formControl]="formControl" [config]="config"
+        [(ngModel)]="selectedOptions" [options]="list">
       </ngx-select-dropdown>
       <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
         <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
