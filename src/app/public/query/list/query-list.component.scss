@@ -63,13 +63,3 @@ tr:hover {
     display: block;
   }
 }
-
-.dynamic-row {
-  width: 30%;
-}
-
-tr:hover {
-  .dynamic-row {
-    width: 25%;
-  }
-}
