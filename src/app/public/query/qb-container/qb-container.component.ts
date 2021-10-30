@@ -1,12 +1,10 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 
 @Component({
   selector: 'qb-container',
-  template: require('./qb-container.component.html'),
-  styles: [
-    require('./qb-container.component.css').toString()
-  ],
+  templateUrl: './qb-container.component.html',
+  styleUrls: ['./qb-container.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class QBContainerComponent implements OnInit {

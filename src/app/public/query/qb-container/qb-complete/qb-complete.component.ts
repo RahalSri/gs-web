@@ -2,13 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewEnca
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QueryBuilderService } from "src/app/core/service/query-builder.service";
 
-
 @Component({
   selector: 'qb-complete',
-  template: require('./qb-complete.component.html'),
-  styles: [
-    require('./qb-complete.component.css').toString()
-  ]
+  template: './qb-complete.component.html',
+  styles: ['./qb-complete.component.css']
 })
 export class QbCompleteComponent implements OnInit {
 

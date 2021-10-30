@@ -15,8 +15,8 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
 const bigfont = "bold 13pt Helvetica, Arial, sans-serif";
 @Component({
   selector: "qb-graph",
-  template: require("./qb-graph.component.html"),
-  styles: [require("./qb-graph.component.css").toString()],
+  template: "./qb-graph.component.html",
+  styles: ["./qb-graph.component.css"],
   encapsulation: ViewEncapsulation.None,
 })
 export class QBGraphComponent implements AfterViewInit, OnChanges {

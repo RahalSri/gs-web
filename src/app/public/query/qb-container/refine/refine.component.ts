@@ -3,10 +3,8 @@ import { QueryBuilderService } from "src/app/core/service/query-builder.service"
 
 @Component({
   selector: 'refine',
-  template: require('./refine.component.html'),
-  styles: [
-    require('./refine.component.css').toString()
-  ]
+  template: './refine.component.html',
+  styles: ['./refine.component.css']
 })
 export class RefineComponent implements OnInit, OnChanges {
 

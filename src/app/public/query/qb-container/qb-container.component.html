@@ -1,8 +1,8 @@
-<div class="row" class="querybuilder" style="height:100%">
+<!-- <div class="container" class="querybuilder">
     <div ng-include="template"></div>
     <div ng-include="isfullscreen ? null : vm.popupInludepath"></div>
     <div ng-include="vm.exportpopupIncludePath"></div>
-    <div class="col-lg-12" style="height:100%">
+    <div class="col">
         <div>
             <mat-stepper linear #stepper>
                 <mat-step>
@@ -12,7 +12,6 @@
                         </select-topic>
                         <div class="stepper-button-container">
                             <button type="button" [disabled]="!stepValidity.selectTopic"
-                                [ngClass]="stepValidity.selectTopic ? 'stepper-button' : 'stepper-button-disabled'"
                                 mat-raised-button matStepperNext>Next</button>
                         </div>
                     </form>
@@ -51,7 +50,6 @@
                             <button type="button" class="stepper-button" mat-raised-button
                                 matStepperPrevious>Back</button>
                             <button type="button" class="stepper-button" mat-raised-button (click)="saveData()"
-                                [ngClass]="stepValidity.complete ? 'stepper-button' : 'stepper-button-disabled'"
                                 [disabled]="isSavingInprogress || !stepValidity.complete">{{buttonLabel}}</button>
                         </div>
                     </form>
@@ -59,4 +57,4 @@
             </mat-stepper>
         </div>
     </div>
-</div>
+</div> -->

@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from 'src/app/shared/model/http-response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,7 @@ export class QueryBuilderService {
 
   public getQbListAttributes() {
     if (this.qbListAttrs) {
-      const att = { ...this.qbListAttrs as object };
+      const att = { ...this.qbListAttrs as any };
       this.qbListAttrs = undefined;
       return att;
     }
