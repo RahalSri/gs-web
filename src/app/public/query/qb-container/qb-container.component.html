@@ -5,8 +5,8 @@
                 <mat-step>
                     <form>
                         <ng-template matStepLabel>Select Topic</ng-template>
-                        <!-- <select-topic [editableObj]="editableObj" (onChange)="handleSelectTopicChange($event)">
-                        </select-topic> -->
+                        <select-topic [editableObj]="editableObj" (onChange)="handleSelectTopicChange($event)">
+                        </select-topic>
                         <div class="stepper-button-container">
                             <button mat-button [disabled]="!stepValidity.selectTopic"
                                 mat-raised-button matStepperNext>Next</button>
