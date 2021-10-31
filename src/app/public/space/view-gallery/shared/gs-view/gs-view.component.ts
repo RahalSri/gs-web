@@ -18,7 +18,7 @@ import { Subscription } from "rxjs";
 @Component({
   selector: '[gs-view]',
   templateUrl: './gs-view.component.html',
-  styleUrls: ['./gs-view.component.css']
+  styleUrls: ['./gs-view.component.scss']
 })
 export class GsViewComponent implements OnInit, OnDestroy {
   defaultSizeArray = [
