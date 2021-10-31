@@ -11,7 +11,7 @@ import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'gs-icon-input-box',
   templateUrl: './gs-icon-input-box.component.html',
-  styleUrls: ['./gs-icon-input-box.component.css'],
+  styleUrls: ['./gs-icon-input-box.component.scss'],
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective }
   ]

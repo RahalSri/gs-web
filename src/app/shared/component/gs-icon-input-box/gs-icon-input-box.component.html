@@ -1,39 +1,30 @@
-<div *ngIf="!labelTopPosition" class="form-group">
-  <label *ngIf="label !== undefined" class="col-sm-3 control-label" [ngClass]="required ? 'required' : ''">{{ label
-    }}</label>
-  <div class="col-sm-9 m-b-10">
-    <div class="input-group stylish-input-group">
-      <input class="form-control input-sm" type="{{ type }}" (keyup)="onTextChange($event)" [formControl]="formControl"
-        placeholder="{{ placeholder }}" />
-      <span class="input-group-addon">
+<div class="container" *ngIf="!labelTopPosition" class="form-group">
+    <div class="flex-container content" fxLayout="row" fxLayoutAlign="space-between">
+        <label *ngIf="label !== undefined" class="col-sm-3 control-label" [ngClass]="required ? 'required' : ''">{{
+            label
+            }}</label>
+        <input matInput type="{{ type }}" (keyup)="onTextChange($event)" [formControl]="formControl"
+               placeholder="{{ placeholder }}"/>
+        <span>
         <span class={{iconClass}}></span>
       </span>
     </div>
     <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
-      <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
+        <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
     </div>
-  </div>
 </div>
 
-<div *ngIf="labelTopPosition" class="form-group">
-  <div class="row">
-    <div class="col-sm-12">
-      <label *ngIf="label !== undefined" class="control-label" [ngClass]="required ? 'required' : ''">{{ label
-        }}</label>
+<div *ngIf="labelTopPosition" class="form-group container">
+    <div>
+        <label *ngIf="label !== undefined" class="control-label" [ngClass]="required ? 'required' : ''">{{ label
+            }}</label>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 m-b-10">
-      <div class="input-group stylish-input-group">
-        <input class="form-control input-sm" type="{{ type }}" (keyup)="onTextChange($event)" [formControl]="formControl"
-               placeholder="{{ placeholder }}" />
-        <span class="input-group-addon">
-        <span class={{iconClass}}></span>
-      </span>
-      </div>
-      <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+    <div>
+        <input matInput type="{{ type }}" (keyup)="onTextChange($event)" [formControl]="formControl"
+               placeholder="{{ placeholder }}"/>
+        <span><span class={{iconClass}}></span></span>
+    </div>
+    <div class="validation-alert" *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
         <div *ngIf="formControl.errors?.required">{{ label }} is required.</div>
-      </div>
     </div>
-  </div>
 </div>

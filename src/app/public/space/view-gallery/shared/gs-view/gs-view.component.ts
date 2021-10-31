@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
@@ -12,13 +12,15 @@ import { CatalogueService } from 'src/app/core/service/catalogue.service';
 import { GSSnackBarComponent } from 'src/app/shared/component/gs-snack-bar/gs-snackbar.component';
 import { DashboardService } from 'src/app/core/service/dashboard.service';
 import { QueryService } from 'src/app/core/service/query.service';
+import { AppConfigService } from 'src/app/core/service/app-config.service';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: '[gs-view]',
   templateUrl: './gs-view.component.html',
   styleUrls: ['./gs-view.component.css']
 })
-export class GsViewComponent implements OnInit {
+export class GsViewComponent implements OnInit, OnDestroy {
   defaultSizeArray = [
     { ID: 1 },
     { ID: 2 },
@@ -67,6 +69,7 @@ export class GsViewComponent implements OnInit {
   fileType?: string;
   mediaFileName?: string;
 
+  subscription: Subscription = new Subscription();
   formControl: FormControl = new FormControl();
   viewForm: FormGroup = new FormGroup({});
   formData: any = new FormData();
@@ -81,12 +84,16 @@ export class GsViewComponent implements OnInit {
     private dashboardService: DashboardService,
     private catalogueService: CatalogueService,
     private queryService: QueryService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private appConfigService: AppConfigService
   ) {
-    this.space = localStorage.getItem("defaultSpaceGuid");
   }
 
   ngOnInit(): void {
+    this.subscription = this.appConfigService.currentSpace.subscribe(space => {
+      this.space = space;
+    });
+
     this.dialogRef.updatePosition({ top: '1%' });
     this.saveEnable = true;
     this.viewForm! = this.createForm(this.view);
@@ -116,6 +123,10 @@ export class GsViewComponent implements OnInit {
     this.selectedMetObj = {};
 
     this._updatableView(this.view);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   _updatableView(view: View) {

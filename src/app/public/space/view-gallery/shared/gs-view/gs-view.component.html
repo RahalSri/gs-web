@@ -278,7 +278,7 @@
 <!--</div>-->
 
 
-<h1 mat-dialog-title>ADD/EDIT VIEW</h1>
+<h4 mat-dialog-title>ADD/EDIT VIEW</h4>
 <h5 *ngIf="view.metViewShortTitle">
     <label>{{view.metViewShortTitle}}</label>
 </h5>
@@ -403,7 +403,7 @@
             </div>
             <div *ngIf="selectedCategory.supId == 'MM'" class="flex-container content" fxLayout="row"
                  fxLayoutAlign="space-between">
-                <div class="col-sm-12">
+                <div class="flex-item">
                     <mat-tab-group animationDuration="500ms" mat-align-tabs="start">
                         <mat-tab>
                             <ng-template mat-tab-label>
@@ -450,7 +450,7 @@
             </div>
             <div *ngIf="selectedCategory.supId != 'MM'" class="flex-container content" fxLayout="row"
                  fxLayoutAlign="space-between">
-                <div class="col-sm-12" style="padding-left: 30px; padding-right: 30px;">
+                <div class="flex-item" style="padding-left: 30px; padding-right: 30px;">
                     <gs-text-area
                             [label]="'Description'"
                             [name]="'viewDescription'"
